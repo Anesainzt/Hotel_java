@@ -28,7 +28,7 @@ public class VentanaInicio extends JFrame{
 		registro.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				//VentanaRegistro vr = new VentanaRegistro(cliente);
+				VentanaRegistro vr = new VentanaRegistro(cliente);
 			}
 		});
 		
@@ -50,6 +50,11 @@ public class VentanaInicio extends JFrame{
 		setTitle("Identificación del cliente");
 		setSize(800, 200);
 		setVisible(true);
+		
+	}
+	
+	public static void main(String[] args) {
+		VentanaInicio vi = new VentanaInicio();
 		
 	}
 

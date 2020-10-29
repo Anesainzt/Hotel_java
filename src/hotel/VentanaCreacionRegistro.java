@@ -32,7 +32,7 @@ public class VentanaCreacionRegistro extends JFrame{
 		continuar.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				//VentanaEleccionHabitacion veh = new VentanaEleccionHabitacion(cliente);
+				VentanaEleccionHabitacion veh = new VentanaEleccionHabitacion(cliente);
 				
 				Cliente nuevo;
 				

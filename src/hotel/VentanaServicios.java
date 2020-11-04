@@ -10,7 +10,7 @@ import javax.swing.JRadioButton;
 
 public class VentanaServicios extends JFrame {
 	
-	JRadioButton SPA, buffet, deportes, miniBar;
+	JRadioButton spa, buffet, deportes, miniBar;
 	ButtonGroup bg;
 	JButton contratar;
 	
@@ -20,12 +20,12 @@ public class VentanaServicios extends JFrame {
 		
 		bg = new ButtonGroup();
 		
-		SPA = new JRadioButton("SPA ---> 100€");
+		spa = new JRadioButton("SPA ---> 100€");
 		buffet = new JRadioButton("Buffet ---> 30€"); 
 		deportes = new JRadioButton("Deportes ---> 20€");
 		miniBar = new JRadioButton("Minibar ---> 80€"); 
 		
-		bg.add(SPA);
+		bg.add(spa);
 		bg.add(buffet);
 		bg.add(deportes);
 		bg.add(miniBar);
@@ -35,7 +35,7 @@ public class VentanaServicios extends JFrame {
 		contratar.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				if(SPA.isSelected()) {
+				if(spa.isSelected()) {
 					String s = "SPA";
 					//VentanaHoraServicio vhs = new VentanaHoraServicio(cliente, s);
 				}else if(buffet.isSelected()) {
@@ -53,7 +53,7 @@ public class VentanaServicios extends JFrame {
 			}
 		});
 		
-		add(SPA);
+		add(spa);
 		add(buffet);
 		add(deportes);
 		add(miniBar);

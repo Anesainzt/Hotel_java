@@ -1,22 +1,20 @@
 package hotel;
 
-import java.io.*;
-
 public class Cliente {
-	protected String nombre;
-	protected String apellido;
-	protected String DNI;
-	protected String edad;
-	protected String tarjeta;
-	protected String login;
-	protected String password;
-	protected String newPassword;
+	protected static String nombre;
+	protected static String apellido;
+	protected static String dni;
+	protected static int edad;
+	protected static String tarjeta;
+	protected static String login;
+	protected static String password;
+	protected static String newPassword;
 	
-	public Cliente(String nombre, String apellido, String DNI, String edad, String tarjeta, String login, String password, String newPassword) {
+	public Cliente(String nombre, String apellido, String dni, int edad, String tarjeta, String login, String password, String newPassword) {
 		super();
 		this.nombre = nombre;
 		this.apellido = apellido;
-		this.DNI = DNI;
+		this.dni = dni;
 		this.edad = edad;
 		this.tarjeta = tarjeta;
 		this.login = login;
@@ -28,8 +26,8 @@ public class Cliente {
 		super();
 		this.nombre = "";
 		this.apellido = "";
-		this.DNI = "";
-		this.edad = "";
+		this.dni = "";
+		this.edad = 0;
 		this.tarjeta = "";
 		this.login = "";
 		this.password = "";
@@ -37,18 +35,17 @@ public class Cliente {
 	}
 	
 	public Cliente(Cliente c) {
-		super();
 		this.nombre = c.nombre;
 		this.apellido = c.apellido;
-		this.DNI = c.DNI;
-		this.edad = c.edad;
+		this.dni = c.dni;
+		Cliente.edad = c.edad;
 		this.tarjeta = c.tarjeta;
 		this.login = c.login;
 		this.password = c.password;
 		this.newPassword = c.newPassword;
 	}
 
-	public String getNombre() {
+	public static String getNombre() {
 		return nombre;
 	}
 
@@ -56,7 +53,7 @@ public class Cliente {
 		this.nombre = nombre;
 	}
 
-	public String getApellido() {
+	public static String getApellido() {
 		return apellido;
 	}
 
@@ -64,39 +61,39 @@ public class Cliente {
 		this.apellido = apellido;
 	}
 	
-	public String getDNI() {
-		return DNI;
+	public static String getDni() {
+		return dni;
 	}
 	
-	public void setDNI(String DNI) {
-		this.DNI = DNI;
+	public void setDni(String xni) {
+		this.dni = dni;
 	}
 	
-	public String getEdad() {
+	public static int getEdad() {
 		return edad;
 	}
 	
-	public void setEdad(String edad) {
+	public void setEdad(int edad) {
 		this.edad = edad;
 	}
 	
-	public String getTarjeta() {
+	public static String getTarjeta() {
 		return tarjeta;
 	}
 	
 	public void setTarjeta(String tarjeta) {
-		this.tarjeta = tarjeta;
+		Cliente.tarjeta = tarjeta;
 	}
 	
-	public String getLogin() {
-		return tarjeta;
+	public static String getLogin() {
+		return login;
 	}
 	
 	public void setLogin(String login) {
 		this.login = login;
 	}
 	
-	public String getPassword() {
+	public static String getPassword() {
 		return password;
 	}
 	
@@ -104,7 +101,7 @@ public class Cliente {
 		this.password = password;
 	}
 	
-	public String getNewPassword() {
+	public static String getNewPassword() {
 		return newPassword;
 	}
 	
@@ -112,4 +109,3 @@ public class Cliente {
 		this.newPassword = newPassword;
 	}
 }
-	

@@ -11,8 +11,8 @@ public class VentanaRegistro extends JFrame{
 	JTextField n;
 	JLabel apellidos;
 	JTextField a;
-	JLabel DNI;
-	JTextField D;
+	JLabel dni;
+	JTextField d;
 	JLabel edad;
 	JTextField e;
 	JLabel tarjeta;
@@ -27,8 +27,8 @@ public class VentanaRegistro extends JFrame{
 		n = new JTextField();
 		apellidos = new JLabel("APELLIDOS");
 		a = new JTextField();
-		DNI = new JLabel("DNI");
-		D = new JTextField();
+		dni = new JLabel("DNI");
+		d = new JTextField();
 		edad = new JLabel("EDAD");
 		e = new JTextField();
 		tarjeta = new JLabel("TARJETA");
@@ -49,7 +49,7 @@ public class VentanaRegistro extends JFrame{
 				
 				nuevo.setNombre(n.getText());
 				nuevo.setApellido(a.getText());
-				nuevo.setDNI(D.getText());
+				nuevo.setDni(d.getText());
 				nuevo.setTarjeta(t.getText());
 				
 				int contador = 1;
@@ -68,7 +68,7 @@ public class VentanaRegistro extends JFrame{
 				try {
 				    pw = new PrintWriter(new BufferedWriter(new FileWriter("datos", true)));
 				    pw.print("");
-				    pw.println(contador + ";" + nuevo.getNombre() + ";" + nuevo.getApellido() + ";" + nuevo.getDNI() + ";" + nuevo.getTarjeta());
+				    pw.println(contador + ";" + nuevo.getNombre() + ";" + nuevo.getApellido() + ";" + nuevo.getDni() + ";" + nuevo.getTarjeta());
 				} catch (IOException e1) {
 				    System.err.println(e1);
 				} finally {
@@ -85,8 +85,8 @@ public class VentanaRegistro extends JFrame{
 		add(n);
 		add(apellidos);
 		add(a);
-		add(DNI);
-		add(D);
+		add(dni);
+		add(d);
 		add(edad);
 		add(e);
 		add(tarjeta);

@@ -23,6 +23,7 @@ public class VentanaEleccionHabitacion extends JFrame{
 		
 		setLayout(new GridLayout(3, 1));
 		
+		//TE DAN UNA SERIE DE HABITACIONES ENTRE LAS QUE PUEDES ELEGIR
 		comboHabitaciones = new JComboBox<String>();
 		
 		habitaciones = new JLabel("HABITACIONES: ");
@@ -33,12 +34,12 @@ public class VentanaEleccionHabitacion extends JFrame{
 		comboHabitaciones.addItem("INDIVIDUAL ---> 80€/noche");
 		comboHabitaciones.addItem("FAMILIAR ---> 130€/noche");
 		
-		
+		//AL ELEGIRLA SE GUARDARÁ EN UN FICHERO PARA UTILIZAR LA INFORMACION MAS ADELANTE
 		elegir.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				
-				VentanaServicios vs = new VentanaServicios(cliente);
+				//DESPUES DE ELEGIR LA HABITACION, NOS LLEVA A LA VENTANA CALENDARIO PARA ELEGIR LOS DIAS DE ESTANCIA
+				VentanaCalendario vc = new VentanaCalendario(cliente);
 				
 				Cliente nuevo;
 				
@@ -64,7 +65,17 @@ public class VentanaEleccionHabitacion extends JFrame{
 				try {
 				    pw = new PrintWriter(new BufferedWriter(new FileWriter("Habitacion", true)));
 				    pw.print("");
-				    pw.println(contador + ";" + comboHabitaciones.getSelectedItem());
+				    //DEPENDIENDO DE LA HABITACION QUE SELECCIONES, SE COBRARÁ MAS O MENOS POR NOCHE
+				    if(comboHabitaciones.getSelectedItem().equals("VIP ---> 200€/noche")) {
+				    	pw.println(contador + ";" + "VIP" + ";" + 200);
+				    }else if(comboHabitaciones.getSelectedItem().equals("DOBLE ---> 100€/noche")) {
+				    	pw.println(contador + ";" + "DOBLE" + ";" + 100);
+				    }else if(comboHabitaciones.getSelectedItem().equals("INDIVIDUAL ---> 80€/noche")) {
+				    	pw.println(contador + ";" + "INDIVIDUAL" + ";" + 80);
+				    }else {
+				    	pw.println(contador + ";" + "FAMILIAR" + ";" + 130);
+				    }
+				    
 				} catch (IOException e1) {
 				    System.err.println(e1);
 				} finally {
@@ -72,6 +83,8 @@ public class VentanaEleccionHabitacion extends JFrame{
 				        pw.close();
 				    }
 				}
+				
+				dispose();
 				
 			}
 		});
@@ -88,4 +101,3 @@ public class VentanaEleccionHabitacion extends JFrame{
 	}
 	
 }
-

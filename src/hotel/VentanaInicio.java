@@ -3,13 +3,16 @@ package hotel;
 import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
+import javax.swing.JButton;
+
+import com.toedter.calendar.JCalendar;
 
 public class VentanaInicio extends JFrame{
 	
 	JLabel usuario;
 	JTextField u;
-	JTextField p;
 	JLabel password;
+	JTextField p;
 	JButton registro;
 	JButton continuar;
 	Cliente cliente;
@@ -25,17 +28,20 @@ public class VentanaInicio extends JFrame{
 		registro = new JButton("REGISTRARSE");
 		continuar = new JButton("CONTINUAR");
 		
+		//EL BOTON REGISTRO TE LLEVA A LA VENTANA REGISTRO PARA RECOGER TUS DATOS DE REGISTRO
 		registro.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				VentanaRegistro vr = new VentanaRegistro(cliente);
+				dispose();
 			}
 		});
 		
+		//CUANDO LE DES A CONTINUAR, LA BASE DE DATOS SABRA SI ERES CLIENTE O EMPLEADO.
 		continuar.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				//VentanaEmpleado ve = new VentanaEmpleado();
+				//CON LA BASE DE DATOS SABREMOS SI ES UN EMPLEADO O UN CLIENTE
 			}
 		});
 		

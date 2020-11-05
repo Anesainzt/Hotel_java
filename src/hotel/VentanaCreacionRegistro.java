@@ -29,10 +29,10 @@ public class VentanaCreacionRegistro extends JFrame{
 		
 		continuar = new JButton("CONTINUAR");
 		
+		//EL USUARIO INTRODUCE UN USUARIO Y UNA CONTRASEÑA PARA LA PROXIMA VEZ
 		continuar.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				VentanaEleccionHabitacion veh = new VentanaEleccionHabitacion(cliente);
 				
 				Cliente nuevo;
 				
@@ -42,10 +42,30 @@ public class VentanaCreacionRegistro extends JFrame{
 					nuevo = new Cliente();
 				}
 				
-				nuevo.setLogin(l.getText());
-				nuevo.setPassword(p.getText());
-				nuevo.setNewPassword(np.getText());
+				//SI LOS DATOS ESTAN VACIOS NO SE PODRÁ CONTINUAR
+				if(l.getText().length() == 0 || p.getText().length() == 0 || np.getText().length() == 0) {
+					JOptionPane.showMessageDialog(null, "DEBES RELLENAR TODOS LOS DATOS");
+					VentanaCreacionRegistro vcr = new VentanaCreacionRegistro(cliente);
+					dispose();
+				}else {
+					//SI LAS CONTRASEÑAS SON IGUALES...
+					if(p.getText().equals(np.getText())) {
+						//CUANDO RELLENE LOS DATOS LE LLEVARA A LA ELECCION DE LA HABITACION QUE DESEA RESERVAR
+						VentanaEleccionHabitacion veh = new VentanaEleccionHabitacion(cliente);
+						nuevo.setLogin(l.getText());
+						nuevo.setPassword(p.getText());
+						nuevo.setNewPassword(np.getText());
+						dispose();
+				    }else {
+				    	//EN CASO CONTRARIO DEBERA REPETIRLAS
+				    	JOptionPane.showMessageDialog(null, "LAS CONTRASEÑAS NO COINCIDEN");
+				    	dispose();
+				    	VentanaCreacionRegistro vcr = new VentanaCreacionRegistro(cliente);
+				    }
+					
+				}
 				
+				//FICHERO IGUAL QUE EL DE DATOS
 				int contador = 1;
 				try {
 					Scanner sc = new Scanner(new FileInputStream("LoginPassword"));
@@ -62,12 +82,7 @@ public class VentanaCreacionRegistro extends JFrame{
 				try {
 				    pw = new PrintWriter(new BufferedWriter(new FileWriter("LoginPassword", true)));
 				    pw.print("");
-				    if(nuevo.getPassword().equals(nuevo.getNewPassword())) {
-				    	pw.println(contador + ";" + nuevo.getLogin() + ";" + nuevo.getPassword());
-				    }else {
-				    	System.err.println("LAS CONREASEÑAS NO COINCIDEN");
-				    	VentanaCreacionRegistro vcr = new VentanaCreacionRegistro(cliente);
-				    }
+				    pw.println(contador + ";" + nuevo.getLogin() + ";" + nuevo.getPassword());
 				    
 				} catch (IOException e1) {
 				    System.err.println(e1);

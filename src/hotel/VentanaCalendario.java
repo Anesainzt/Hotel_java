@@ -19,6 +19,8 @@ public class VentanaCalendario extends JFrame{
 	JButton fechaFin;
 	Date d1;
 	Date d2;
+	Date hoy;
+	
 	
 	public VentanaCalendario(Cliente cliente) {
 		
@@ -28,6 +30,11 @@ public class VentanaCalendario extends JFrame{
 		fecha=new JTextField(30);
 		fechaInicio = new JButton("Fecha Inicio");
 		fechaFin = new JButton("Fecha Fin");
+		
+		//IMPEDIMOS QUE SE PUEDAN HACER RESERVAS ANTERIORES AL DIA DE HOY
+		hoy = calendario.getDate();
+		calendario.setMinSelectableDate(hoy);
+		
 		
 		//PRIMERO SELECCIONAS UN DIA, Y CLICAS EL BOTON FECHA INICIO PARA GUARDAR ESA FECHA COMO EL DIA DE ENTRADA
 		fechaInicio.addActionListener(new ActionListener(){
@@ -41,6 +48,8 @@ public class VentanaCalendario extends JFrame{
 		    	 d1 = calendario.getDate();
 		     }
 		});
+		
+		
 		
 		//A CONTINUACION SELECCIONAS OTRA FECHA PARA SELECCIONAR EL DIA DE SALIDA DEL HOTEL
 		fechaFin.addActionListener(new ActionListener(){

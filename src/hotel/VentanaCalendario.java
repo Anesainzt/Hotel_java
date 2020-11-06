@@ -46,6 +46,18 @@ public class VentanaCalendario extends JFrame{
 		    	 String dia = Integer.toString(calendario.getCalendar().get(java.util.Calendar.DATE));
 		    	 fecha.setText(dia + "-" + mes + "-" + year);
 		    	 d1 = calendario.getDate();
+		    	 
+		    	 //CREAMOS LA RESTRICCION DE NO PODER VOLVER A ESCOGER LA FECHA INICIO PARA LA FECHA FINAL
+		    	 int minYear = Integer.parseInt(year);
+		    	 int minMes = Integer.parseInt(mes);
+		    	 int minDia = Integer.parseInt(dia);
+		    	 
+		    	 //SE RESTA 1900 PORQUE LA LIBRERÍA EMPIEZA A CONTAR DESDE 1900
+		    	 //SE RESTA 1 AL MES PORQUE EMPIEZA A CONTAR DESDE 0 Y ANTES LE HEMOS SUMADO 1 PARA ESCRIBIR BIEN LA FECHA
+		    	 Date minNoche = new Date(Date.UTC(minYear-1900, minMes-1, minDia +1, 0, 0, 0));
+		    	 
+		    	 calendario.setMinSelectableDate(minNoche);
+		    	 
 		     }
 		});
 		

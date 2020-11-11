@@ -9,6 +9,7 @@ public class Habitacion {
 			return false;
 		}else {
 			return true;
+			
 		}
 	}
 

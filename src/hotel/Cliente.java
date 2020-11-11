@@ -11,38 +11,38 @@ public class Cliente {
 	protected static String newPassword;
 	
 	public Cliente(String nombre, String apellido, String dni, int edad, String tarjeta, String login, String password, String newPassword) {
-		super();
-		this.nombre = nombre;
-		this.apellido = apellido;
-		this.dni = dni;
-		this.edad = edad;
-		this.tarjeta = tarjeta;
-		this.login = login;
-		this.password = password;
-		this.newPassword = newPassword;
+		
+		Cliente.nombre = nombre;
+		Cliente.apellido = apellido;
+		Cliente.dni = dni;
+		Cliente.edad = edad;
+		Cliente.tarjeta = tarjeta;
+		Cliente.login = login;
+		Cliente.password = password;
+		Cliente.newPassword = newPassword;
 	}
 	
 	public Cliente() {
-		super();
-		this.nombre = "";
-		this.apellido = "";
-		this.dni = "";
-		this.edad = 0;
-		this.tarjeta = "";
-		this.login = "";
-		this.password = "";
-		this.newPassword = "";
+		
+		Cliente.nombre = "";
+		Cliente.apellido = "";
+		Cliente.dni = "";
+		Cliente.edad = 0;
+		Cliente.tarjeta = "";
+		Cliente.login = "";
+		Cliente.password = "";
+		Cliente.newPassword = "";
 	}
 	
 	public Cliente(Cliente c) {
-		this.nombre = c.nombre;
-		this.apellido = c.apellido;
-		this.dni = c.dni;
+		Cliente.nombre = c.nombre;
+		Cliente.apellido = c.apellido;
+		Cliente.dni = c.dni;
 		Cliente.edad = c.edad;
-		this.tarjeta = c.tarjeta;
-		this.login = c.login;
-		this.password = c.password;
-		this.newPassword = c.newPassword;
+		Cliente.tarjeta = c.tarjeta;
+		Cliente.login = c.login;
+		Cliente.password = c.password;
+		Cliente.newPassword = c.newPassword;
 	}
 
 	public static String getNombre() {
@@ -50,7 +50,7 @@ public class Cliente {
 	}
 
 	public void setNombre(String nombre) {
-		this.nombre = nombre;
+		Cliente.nombre = nombre;
 	}
 
 	public static String getApellido() {
@@ -58,15 +58,15 @@ public class Cliente {
 	}
 
 	public void setApellido(String apellido) {
-		this.apellido = apellido;
+		Cliente.apellido = apellido;
 	}
 	
 	public static String getDni() {
 		return dni;
 	}
 	
-	public void setDni(String xni) {
-		this.dni = dni;
+	public void setDni(String dni) {
+		Cliente.dni = dni;
 	}
 	
 	public static int getEdad() {
@@ -74,7 +74,7 @@ public class Cliente {
 	}
 	
 	public void setEdad(int edad) {
-		this.edad = edad;
+		Cliente.edad = edad;
 	}
 	
 	public static String getTarjeta() {
@@ -90,7 +90,7 @@ public class Cliente {
 	}
 	
 	public void setLogin(String login) {
-		this.login = login;
+		Cliente.login = login;
 	}
 	
 	public static String getPassword() {
@@ -98,7 +98,7 @@ public class Cliente {
 	}
 	
 	public void setPassword(String password) {
-		this.password = password;
+		Cliente.password = password;
 	}
 	
 	public static String getNewPassword() {
@@ -106,6 +106,6 @@ public class Cliente {
 	}
 	
 	public void setNewPassword(String newPassword) {
-		this.newPassword = newPassword;
+		Cliente.newPassword = newPassword;
 	}
 }

@@ -1,4 +1,4 @@
-package hotel;
+package ventanas;
 
 import java.awt.*;
 import java.awt.event.*;
@@ -6,6 +6,8 @@ import javax.swing.*;
 import javax.swing.JButton;
 
 import com.toedter.calendar.JCalendar;
+
+import hotel.Cliente;
 
 public class VentanaInicio extends JFrame{
 	

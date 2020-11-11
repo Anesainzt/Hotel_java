@@ -1,7 +1,10 @@
-package hotel;
+package ventanas;
 import javax.swing.*;
 
 import com.toedter.calendar.JCalendar;
+
+import hotel.Cliente;
+
 import java.awt.Color;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;

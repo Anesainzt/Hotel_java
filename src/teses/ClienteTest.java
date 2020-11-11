@@ -1,8 +1,10 @@
-package hotel;
+package teses;
 
 import static org.junit.Assert.assertEquals;
 
 import org.junit.jupiter.api.Test;
+
+import hotel.Cliente;
 
 class ClienteTest {
 

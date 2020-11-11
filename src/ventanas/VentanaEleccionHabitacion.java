@@ -1,4 +1,4 @@
-package hotel;
+package ventanas;
 
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
@@ -12,6 +12,8 @@ import java.io.PrintWriter;
 import java.util.Scanner;
 
 import javax.swing.*;
+
+import hotel.Cliente;
 
 public class VentanaEleccionHabitacion extends JFrame{
 

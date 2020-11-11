@@ -1,10 +1,12 @@
-package hotel;
+package ventanas;
 
 import java.awt.*;
 import java.awt.event.*;
 import java.io.*;
 import java.util.*;
 import javax.swing.*;
+
+import hotel.Cliente;
 
 public class VentanaRegistro extends JFrame{
 	JLabel nombre;

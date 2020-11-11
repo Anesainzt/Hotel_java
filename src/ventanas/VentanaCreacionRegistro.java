@@ -1,4 +1,4 @@
-package hotel;
+package ventanas;
 
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
@@ -6,6 +6,8 @@ import java.awt.event.ActionListener;
 import java.io.*;
 import java.util.Scanner;
 import javax.swing.*;
+
+import hotel.Cliente;
 
 public class VentanaCreacionRegistro extends JFrame{
 	JLabel login;

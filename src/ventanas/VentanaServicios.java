@@ -1,4 +1,4 @@
-package hotel;
+package ventanas;
 
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
@@ -7,6 +7,8 @@ import javax.swing.ButtonGroup;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JRadioButton;
+
+import hotel.Cliente;
 
 public class VentanaServicios extends JFrame {
 	

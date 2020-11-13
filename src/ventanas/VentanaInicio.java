@@ -50,7 +50,7 @@ public class VentanaInicio extends JFrame{
 			public void actionPerformed(ActionEvent e) {
 				try {
 					Class.forName("org.sqlite.JDBC");
-					String url = "jdbc:sqlite:hotelPrueba.db";
+					String url = "jdbc:sqlite:hotel.db";
 					Connection conn = DriverManager.getConnection(url);
 					Statement stmt = (Statement) conn.createStatement();
 					

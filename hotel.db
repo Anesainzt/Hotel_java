@@ -1,0 +1,5 @@
+CREATE TABLE empleado(
+usuario varchar(40) not null,
+contraseya varchar(20) not null,
+PRIMARY KEY (usuario, contraseya)
+);

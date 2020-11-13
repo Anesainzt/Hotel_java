@@ -2,6 +2,11 @@ package ventanas;
 
 import java.awt.*;
 import java.awt.event.*;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.SQLException;
+import java.sql.Statement;
+
 import javax.swing.*;
 import javax.swing.JButton;
 
@@ -44,10 +49,16 @@ public class VentanaInicio extends JFrame{
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				try {
-					 Class.forName("org.sqlite.JDBC");
-					} catch (ClassNotFoundException u) {
+					Class.forName("org.sqlite.JDBC");
+					String url = "jdbc:sqlite:hotelPrueba.db";
+					Connection conn = DriverManager.getConnection(url);
+					Statement stmt = (Statement) conn.createStatement();
+					
+				} catch (ClassNotFoundException e2) {
 					 System.out.println("No se ha podido cargar el driver de la base de datos");
-					}
+				} catch (SQLException e3) {
+					System.out.println(e3.getMessage());;
+				}
 			}
 		});
 		

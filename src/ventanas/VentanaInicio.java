@@ -39,11 +39,15 @@ public class VentanaInicio extends JFrame{
 			}
 		});
 		
-		//CUANDO LE DES A CONTINUAR, LA BASE DE DATOS SABRA SI ERES CLIENTE O EMPLEADO.
+		//Cargamos los drivers de la base de datos
 		continuar.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				//CON LA BASE DE DATOS SABREMOS SI ES UN EMPLEADO O UN CLIENTE
+				try {
+					 Class.forName("org.sqlite.JDBC");
+					} catch (ClassNotFoundException u) {
+					 System.out.println("No se ha podido cargar el driver de la base de datos");
+					}
 			}
 		});
 		

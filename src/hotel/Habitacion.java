@@ -2,6 +2,7 @@ package hotel;
 
 public class Habitacion {
 	
+	protected int cantHabTot;
 	boolean ocupado = false;
 	
 	public boolean isEmpty() {

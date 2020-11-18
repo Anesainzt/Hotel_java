@@ -22,11 +22,11 @@ public class HabitacionVip extends Habitacion{
 		this.camas = 0;
 	}
 	
-	public HabitacionVip(HabitacionDoble d) {
-		this.numHab = d.numHab;
-		this.piso = d.piso;
-		this.cantidad = d.cantidad;
-		this.camas = d.camas;
+	public HabitacionVip(HabitacionVip v) {
+		this.numHab = v.numHab;
+		this.piso = v.piso;
+		this.cantidad = v.cantidad;
+		this.camas = v.camas;
 	}
 
 	public int getNumHab() {

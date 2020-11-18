@@ -22,11 +22,11 @@ public class HabitacionFamiliar extends Habitacion{
 		this.camas = 0;
 	}
 	
-	public HabitacionFamiliar(HabitacionFamiliar d) {
-		this.numHab = d.numHab;
-		this.piso = d.piso;
-		this.cantidad = d.cantidad;
-		this.camas = d.camas;
+	public HabitacionFamiliar(HabitacionFamiliar f) {
+		this.numHab = f.numHab;
+		this.piso = f.piso;
+		this.cantidad = f.cantidad;
+		this.camas = f.camas;
 	}
 
 	public int getNumHab() {

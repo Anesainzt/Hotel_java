@@ -1,41 +1,41 @@
 package ventanas;
 
-import java.awt.GridLayout;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
+import java.awt.*;
+import java.awt.event.*;
 import java.io.*;
-import java.util.Scanner;
+import java.util.*;
 import javax.swing.*;
 
 import hotel.Cliente;
 
 public class VentanaCreacionRegistro extends JFrame{
-	JLabel login;
-	JTextField l;
-	JLabel password;
-	JTextField p;
-	JLabel newPassword;
-	JTextField np;
+	JLabel nombre;
+	JTextField n;
+	JLabel apellidos;
+	JTextField a;
+	JLabel dni;
+	JTextField d;
+	JLabel tarjeta;
+	JTextField t;
 	JButton continuar;
 	
 	public VentanaCreacionRegistro(Cliente cliente) {
 		
-		setLayout(new GridLayout(4, 2));
+		setLayout(new GridLayout(5, 2));
 		
-		login = new JLabel("USUARIO (Introducir e-mail)");
-		l = new JTextField();
-		password = new JLabel("CONREASEÑA");
-		p = new JTextField();
-		newPassword = new JLabel("REPETIR CONTRASEÑA");
-		np = new JTextField();
-		
+		nombre = new JLabel("NOMBRE");
+		n = new JTextField();
+		apellidos = new JLabel("APELLIDOS");
+		a = new JTextField();
+		dni = new JLabel("DNI");
+		d = new JTextField();
+		tarjeta = new JLabel("TARJETA");
+		t = new JTextField();
 		continuar = new JButton("CONTINUAR");
 		
-		//EL USUARIO INTRODUCE UN USUARIO Y UNA CONTRASEÑA PARA LA PROXIMA VEZ
 		continuar.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				
 				Cliente nuevo;
 				
 				if (cliente != null) {
@@ -43,65 +43,63 @@ public class VentanaCreacionRegistro extends JFrame{
 				} else {
 					nuevo = new Cliente();
 				}
-				
-				//SI LOS DATOS ESTAN VACIOS NO SE PODRÁ CONTINUAR
-				if(l.getText().length() == 0 || p.getText().length() == 0 || np.getText().length() == 0) {
+
+				//SI LOS DATOS ESTAN VACIOS, NO TE DEJA CONTINUAR, DEBES RELLENAR TODOS LOS DATOS
+				if(n.getText().length() == 0 || a.getText().length() == 0 || d.getText().length() == 0 || t.getText().length() == 0) {
 					JOptionPane.showMessageDialog(null, "DEBES RELLENAR TODOS LOS DATOS");
-					VentanaCreacionRegistro vcr = new VentanaCreacionRegistro(cliente);
+					VentanaCreacionRegistro vr = new VentanaCreacionRegistro(cliente);
 					dispose();
 				}else {
-					//SI LAS CONTRASEÑAS SON IGUALES...
-					if(p.getText().equals(np.getText())) {
-						//CUANDO RELLENE LOS DATOS LE LLEVARA A LA ELECCION DE LA HABITACION QUE DESEA RESERVAR
-						VentanaEleccionHabitacion veh = new VentanaEleccionHabitacion(cliente);
-						nuevo.setLogin(l.getText());
-						nuevo.setPassword(p.getText());
-						nuevo.setNewPassword(np.getText());
-						dispose();
-				    }else {
-				    	//EN CASO CONTRARIO DEBERA REPETIRLAS
-				    	JOptionPane.showMessageDialog(null, "LAS CONTRASEÑAS NO COINCIDEN");
-				    	dispose();
-				    	VentanaCreacionRegistro vcr = new VentanaCreacionRegistro(cliente);
-				    }
-					
+				
+					VentanaEleccionHabitacion vcr = new VentanaEleccionHabitacion(cliente);
+					nuevo.setNombre(n.getText());
+					nuevo.setApellido(a.getText());
+					nuevo.setDni(d.getText());
+					nuevo.setTarjeta(t.getText());
+					dispose();
 				}
 				
-				//FICHERO IGUAL QUE EL DE DATOS
-				int contador = 1;
+				//GUARDAMOS EN UN FICHERO LOS DATOS DEL CLIENTE
 				try {
-					Scanner sc = new Scanner(new FileInputStream("LoginPassword"));
+					//FICHERO DATOS, MIRAMOS SI HAY UNA LINEA SIGUIENTE PARA ESCRIBIR Y AÑADIMOS UN CONTADOR
+					Scanner sc = new Scanner(new FileInputStream("datos"));
 					while(sc.hasNext()) {
-						contador = contador + 1;
 						String linea = sc.nextLine();
 					}
-					
+				//SI NO ENCUENTRA EL FICHERO DATOS ENTRA EN LA EXCEPCION
 				}catch(FileNotFoundException e1) {
 					System.err.println("ERROR");
 				}
 				
+				//UNA VEZ ENCONTRADO EL FICHERO ESCRIBIMOS LOS DATOS
 				PrintWriter pw = null;
 				try {
-				    pw = new PrintWriter(new BufferedWriter(new FileWriter("LoginPassword", true)));
+				    pw = new PrintWriter(new BufferedWriter(new FileWriter("datos", true)));
 				    pw.print("");
-				    pw.println(contador + ";" + nuevo.getLogin() + ";" + nuevo.getPassword());
-				    
+				    pw.println(nuevo.getNombre() + ";" + nuevo.getApellido() + ";" + nuevo.getDni() + ";" + nuevo.getTarjeta());
+				
+				//SI NO SE PUEDE ESCRIBIR ENTRA EN LA EXCEPCION
 				} catch (IOException e1) {
 				    System.err.println(e1);
+				    
+				//SIEMPRE HAY QUE CERRAR EL FICHERO DESPUES DE ESCRIBIR
 				} finally {
 				    if (pw != null) {
 				        pw.close();
 				    }
 				}
+				
 			}
 		});
 		
-		add(login);
-		add(l);
-		add(password);
-		add(p);
-		add(newPassword);
-		add(np);
+		add(nombre);
+		add(n);
+		add(apellidos);
+		add(a);
+		add(dni);
+		add(d);
+		add(tarjeta);
+		add(t);
 		add(continuar);
 		
 		setDefaultCloseOperation(EXIT_ON_CLOSE);

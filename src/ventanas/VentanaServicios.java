@@ -18,7 +18,7 @@ public class VentanaServicios extends JFrame {
 	
 	public VentanaServicios(Cliente cliente, int dinero) {
 		
-		setLayout(new GridLayout(6, 1));
+		setLayout(new GridLayout(7, 1));
 		
 		bg = new ButtonGroup();
 		
@@ -42,32 +42,32 @@ public class VentanaServicios extends JFrame {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				if(spa.isSelected()) {
-					String s = "SPA";
-					//VentanaHoraServicio vhs = new VentanaHoraServicio(cliente, s);
+				
 				}else if(buffet.isSelected()) {
-					String b = "Buffet";
-					//VentanaHoraServicio vhs = new VentanaHoraServicio(cliente, b);
+					
 				}else if(deportes.isSelected()) {
-					String d = "Deportes";
-					//VentanaHoraServicio vhs = new VentanaHoraServicio(cliente, d);
+					
 				}else if(miniBar.isSelected()) {
-					String mb = "MiniBar";
-					//VentanaHoraServicio vhs = new VentanaHoraServicio(cliente, mb);
+					
 				}else if(salaReunion.isSelected()) {
-					String mb = "Sala de reunion";
+					
 				}else if(sinServicioExtra.isSelected()) {
-					String mb = "Sin Servicio extra";
+					
 				}
+				
+				dispose();
+				
 			}
+			
 		});
 		
 		add(spa);
 		add(buffet);
 		add(deportes);
-		add(miniBar);
-		add(contratar);	
+		add(miniBar);	
 		add(salaReunion);
-		add(sinServicioExtra);	
+		add(sinServicioExtra);
+		add(contratar);
 		
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
 		setTitle("Registro del cliente");

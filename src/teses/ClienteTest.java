@@ -10,7 +10,7 @@ import hotel.Cliente;
 class ClienteTest {
 
 	
-	Cliente c = new Cliente("Alazne", "Parra", "22764839Z", 21, "1234567890", "alazne.parra", "Armagedom", "Armagedom", null);
+	Cliente c = new Cliente("Alazne", "Parra", "22764839Z", "1999-03-17", "1234567890", "alazne.parra", "Armagedom", "Armagedom", null);
 	
 	
 	@Test
@@ -29,8 +29,8 @@ class ClienteTest {
 	}
 	
 	@Test
-	void getEdad() {
-		assertEquals(21, Cliente.getEdad());
+	void getFechaNcto() {
+		assertEquals("1999-03-17", Cliente.getFechaNcto());
 	}
 	
 	@Test

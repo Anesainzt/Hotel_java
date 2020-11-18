@@ -6,19 +6,19 @@ public class Cliente extends Ticket{
 	protected static String nombre;
 	protected static String apellido;
 	protected static String dni;
-	protected static int edad;
+	protected static String fecha_ncto;
 	protected static String tarjeta;
 	protected static String login;
 	protected static String password;
 	protected static String newPassword;
 	protected static ArrayList<String> ticket = new ArrayList();
 	
-	public Cliente(String nombre, String apellido, String dni, int edad, String tarjeta, String login, String password, String newPassword, ArrayList<String> ticket) {
+	public Cliente(String nombre, String apellido, String dni, String fecha_ncto, String tarjeta, String login, String password, String newPassword, ArrayList<String> ticket) {
 		
 		Cliente.nombre = nombre;
 		Cliente.apellido = apellido;
 		Cliente.dni = dni;
-		Cliente.edad = edad;
+		Cliente.fecha_ncto = fecha_ncto;
 		Cliente.tarjeta = tarjeta;
 		Cliente.login = login;
 		Cliente.password = password;
@@ -33,7 +33,7 @@ public class Cliente extends Ticket{
 		Cliente.nombre = "";
 		Cliente.apellido = "";
 		Cliente.dni = "";
-		Cliente.edad = 0;
+		Cliente.fecha_ncto = "";
 		Cliente.tarjeta = "";
 		Cliente.login = "";
 		Cliente.password = "";
@@ -45,7 +45,7 @@ public class Cliente extends Ticket{
 		Cliente.nombre = c.nombre;
 		Cliente.apellido = c.apellido;
 		Cliente.dni = c.dni;
-		Cliente.edad = c.edad;
+		Cliente.fecha_ncto = c.fecha_ncto;
 		Cliente.tarjeta = c.tarjeta;
 		Cliente.login = c.login;
 		Cliente.password = c.password;
@@ -77,12 +77,12 @@ public class Cliente extends Ticket{
 		Cliente.dni = dni;
 	}
 	
-	public static int getEdad() {
-		return edad;
+	public static String getFechaNcto() {
+		return fecha_ncto;
 	}
 	
-	public void setEdad(int edad) {
-		Cliente.edad = edad;
+	public void setFechaNcto(String fecha_ncto) {
+		Cliente.fecha_ncto = fecha_ncto;
 	}
 	
 	public static String getTarjeta() {

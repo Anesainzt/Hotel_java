@@ -49,17 +49,39 @@ public class VentanaInicio extends JFrame{
 		continuar.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				try {
+				try {	
 					Class.forName("org.sqlite.JDBC");
 					String url = "jdbc:sqlite:hotelJava.db";
 					Connection conn = DriverManager.getConnection(url);
 					Statement stmt = (Statement) conn.createStatement();
-
-				} catch (ClassNotFoundException e2) {
+		
+					ResultSet emp = stmt.executeQuery("SELECT * FROM empleado WHERE (usuario = '" + u.getText() + "' AND contraseya = '"+ p.getText() +"');");
+					//Detectamos si la persona que ha accedido a su cuenta es un cliente con cuenta o un empleado
+					//Aparte también obtenemos su nombre y apellido
+					while(emp.next()) {
+						String nombreBD = emp.getString("nombre");
+						String apellidoBD = emp.getString("apellido");
+						String tipo = emp.getString("tipo");
+						System.out.println(nombreBD);
+						System.out.println(apellidoBD);
+						System.out.println(tipo);
+					}
+					ResultSet cl = stmt.executeQuery("SELECT * FROM cliente WHERE (usuario = '" + u.getText() + "' AND contraseya = '"+ p.getText() +"');");
+					while(cl.next()) {
+						String nombreBD = cl.getString("nombre");
+						String apellidoBD = cl.getString("apellido");
+						String tipo = cl.getString("tipo");
+						System.out.println(nombreBD);
+						System.out.println(apellidoBD);
+						System.out.println(tipo);
+					}
+					conn.close();
+					} catch (ClassNotFoundException e2) {
 					 System.out.println("No se ha podido cargar el driver de la base de datos");
-				} catch (SQLException e3) {
-					System.out.println(e3.getMessage());;
-				}
+					} catch (SQLException e2) {
+						System.out.println(e2.getMessage());
+					}	
+				dispose();
 			}
 		});
 		

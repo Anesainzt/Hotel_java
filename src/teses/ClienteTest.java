@@ -1,6 +1,7 @@
 package teses;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertArrayEquals;
 
 import org.junit.jupiter.api.Test;
 
@@ -8,7 +9,9 @@ import hotel.Cliente;
 
 class ClienteTest {
 
-	Cliente c = new Cliente("Alazne", "Parra", "22764839Z", 21, "1234567890", "alazne.parra", "Armagedom", "Armagedom");
+	
+	Cliente c = new Cliente("Alazne", "Parra", "22764839Z", 21, "1234567890", "alazne.parra", "Armagedom", "Armagedom", null);
+	
 	
 	@Test
 	void getNombre() {
@@ -50,5 +53,11 @@ class ClienteTest {
 		assertEquals("Armagedom", Cliente.getNewPassword());
 	}
 
+	@Test
+	void getTicket() {
+		assertEquals( null , Cliente.getTicket());
+		
+	}
+	
 }
 

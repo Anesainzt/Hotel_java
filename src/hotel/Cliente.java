@@ -1,6 +1,8 @@
 package hotel;
 
-public class Cliente {
+import java.util.ArrayList;
+
+public class Cliente extends Ticket{
 	protected static String nombre;
 	protected static String apellido;
 	protected static String dni;
@@ -9,8 +11,9 @@ public class Cliente {
 	protected static String login;
 	protected static String password;
 	protected static String newPassword;
+	protected static ArrayList<String> ticket = new ArrayList();
 	
-	public Cliente(String nombre, String apellido, String dni, int edad, String tarjeta, String login, String password, String newPassword) {
+	public Cliente(String nombre, String apellido, String dni, int edad, String tarjeta, String login, String password, String newPassword, ArrayList<String> ticket) {
 		
 		Cliente.nombre = nombre;
 		Cliente.apellido = apellido;
@@ -20,8 +23,11 @@ public class Cliente {
 		Cliente.login = login;
 		Cliente.password = password;
 		Cliente.newPassword = newPassword;
+		Cliente.ticket = ticket;
+		
 	}
-	
+
+
 	public Cliente() {
 		
 		Cliente.nombre = "";
@@ -32,6 +38,7 @@ public class Cliente {
 		Cliente.login = "";
 		Cliente.password = "";
 		Cliente.newPassword = "";
+		Cliente.ticket = null;
 	}
 	
 	public Cliente(Cliente c) {
@@ -43,6 +50,7 @@ public class Cliente {
 		Cliente.login = c.login;
 		Cliente.password = c.password;
 		Cliente.newPassword = c.newPassword;
+		Cliente.ticket = c.ticket;
 	}
 
 	public static String getNombre() {
@@ -108,4 +116,16 @@ public class Cliente {
 	public void setNewPassword(String newPassword) {
 		Cliente.newPassword = newPassword;
 	}
+
+
+	public static ArrayList<String> getTicket() {
+		return ticket;
+	}
+
+
+	public static void setTicket(ArrayList<String> ticket) {
+		Cliente.ticket = ticket;
+	}
+	
+	
 }

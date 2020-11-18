@@ -12,25 +12,29 @@ import hotel.Cliente;
 
 public class VentanaServicios extends JFrame {
 	
-	JRadioButton spa, buffet, deportes, miniBar;
+	JRadioButton spa, buffet, deportes, miniBar, salaReunion, sinServicioExtra;
 	ButtonGroup bg;
 	JButton contratar;
 	
-	public VentanaServicios(Cliente cliente) {
+	public VentanaServicios(Cliente cliente, int dinero) {
 		
-		setLayout(new GridLayout(5, 1));
+		setLayout(new GridLayout(6, 1));
 		
 		bg = new ButtonGroup();
 		
-		spa = new JRadioButton("SPA ---> 100€");
-		buffet = new JRadioButton("Buffet ---> 30€"); 
-		deportes = new JRadioButton("Deportes ---> 20€");
-		miniBar = new JRadioButton("Minibar ---> 80€"); 
+		spa = new JRadioButton("SPA");
+		buffet = new JRadioButton("Buffet"); 
+		deportes = new JRadioButton("Deportes");
+		miniBar = new JRadioButton("Minibar"); 
+		salaReunion = new JRadioButton("Sala de reunion");
+		sinServicioExtra = new JRadioButton("Sin Servicio Extra");
 		
 		bg.add(spa);
 		bg.add(buffet);
 		bg.add(deportes);
 		bg.add(miniBar);
+		bg.add(salaReunion);
+		bg.add(sinServicioExtra);
 		
 		contratar = new JButton("CONTINUAR");
 		
@@ -49,8 +53,10 @@ public class VentanaServicios extends JFrame {
 				}else if(miniBar.isSelected()) {
 					String mb = "MiniBar";
 					//VentanaHoraServicio vhs = new VentanaHoraServicio(cliente, mb);
-				}else {
-					
+				}else if(salaReunion.isSelected()) {
+					String mb = "Sala de reunion";
+				}else if(sinServicioExtra.isSelected()) {
+					String mb = "Sin Servicio extra";
 				}
 			}
 		});
@@ -59,7 +65,9 @@ public class VentanaServicios extends JFrame {
 		add(buffet);
 		add(deportes);
 		add(miniBar);
-		add(contratar);		
+		add(contratar);	
+		add(salaReunion);
+		add(sinServicioExtra);	
 		
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
 		setTitle("Registro del cliente");

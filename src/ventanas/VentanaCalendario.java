@@ -122,7 +122,7 @@ public class VentanaCalendario extends JFrame{
 				JOptionPane.showMessageDialog(null, "PAGO HABITACION: " + pago + " DIAS " + " = " + pagoHabitacion + "€");
 				
 				//A CONTINUACION LE LLEVAMOS A LA VENTANA SERVICIOS PARA QUE PUEDA CONTRATAR SERVICIOS COMPLEMENTARIOS
-				VentanaServicios vs = new VentanaServicios(cliente);
+				VentanaServicios vs = new VentanaServicios(cliente, pagoHabitacion);
 		        
 		        dispose();		       
 			}

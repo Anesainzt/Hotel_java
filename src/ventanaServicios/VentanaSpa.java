@@ -35,7 +35,15 @@ public class VentanaSpa extends JFrame{
 		continuar.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
+				Cliente nuevo;
 				
+				if (cliente != null) {
+					nuevo = cliente;
+				} else {
+					nuevo = new Cliente();
+				}
+				
+				int contador = 1;
 			}
 		});
 		

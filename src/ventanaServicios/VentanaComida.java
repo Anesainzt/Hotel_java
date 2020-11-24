@@ -3,6 +3,10 @@ package ventanaServicios;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.util.Scanner;
+
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
@@ -36,7 +40,25 @@ public class VentanaComida extends JFrame{
 		continuar.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
+				Cliente nuevo;
 				
+				if (cliente != null) {
+					nuevo = cliente;
+				} else {
+					nuevo = new Cliente();
+				}
+				
+				int contador = 1;
+				try {
+					Scanner sc = new Scanner(new FileInputStream("Servicios"));
+					while(sc.hasNext()) {
+						contador = contador + 1;
+						String linea = sc.nextLine();
+					}
+					
+				}catch(FileNotFoundException e1) {
+					System.err.println("ERROR");
+				}
 			}
 		});
 		

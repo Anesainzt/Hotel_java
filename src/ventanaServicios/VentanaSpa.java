@@ -46,6 +46,7 @@ public class VentanaSpa extends JFrame{
 				} else {
 					nuevo = new Cliente();
 				}
+				
 				int contador = 1;
 				try {
 					Scanner sc = new Scanner(new FileInputStream("Servicios"));

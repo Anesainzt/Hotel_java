@@ -11,8 +11,10 @@ import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 
 import hotel.Cliente;
+import ventanas.VentanaReservaServicio;
 
 public class VentanaComida extends JFrame{
 
@@ -40,25 +42,33 @@ public class VentanaComida extends JFrame{
 		continuar.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				Cliente nuevo;
-				
-				if (cliente != null) {
-					nuevo = cliente;
-				} else {
-					nuevo = new Cliente();
+				if(comboComida.getSelectedItem().equals("MCDONALDS ---> 30€")) {
+			    	JOptionPane.showMessageDialog(null, pago + 30);
+			    	VentanaReservaServicio vrs = new VentanaReservaServicio(cliente, pago + 30);
+				}else if (comboComida.getSelectedItem().equals("BURGER KING ---> 30€")){
+					JOptionPane.showMessageDialog(null, pago + 30);
+			    	VentanaReservaServicio vrs = new VentanaReservaServicio(cliente, pago + 30);
+				} else if (comboComida.getSelectedItem().equals("FOSTERS HOLLYWOOD ---> 40€")) {
+					JOptionPane.showMessageDialog(null, pago + 40);
+			    	VentanaReservaServicio vrs = new VentanaReservaServicio(cliente, pago + 40);
+				}else if (comboComida.getSelectedItem().equals("POMODORO ---> 45€")) {
+					JOptionPane.showMessageDialog(null, pago + 45);
+			    	VentanaReservaServicio vrs = new VentanaReservaServicio(cliente, pago + 45);
+				}else if (comboComida.getSelectedItem().equals("FOODOO ---> 50€")) {
+					JOptionPane.showMessageDialog(null, pago + 50);
+			    	VentanaReservaServicio vrs = new VentanaReservaServicio(cliente, pago + 50);
+				}else if (comboComida.getSelectedItem().equals("DONGA ---> 60€")) {
+					JOptionPane.showMessageDialog(null, pago + 60);
+			    	VentanaReservaServicio vrs = new VentanaReservaServicio(cliente, pago + 60);
+				}else if (comboComida.getSelectedItem().equals("MENU DEL DIA HOTEL ---> 150€")) {
+					JOptionPane.showMessageDialog(null, pago + 150);
+			    	VentanaReservaServicio vrs = new VentanaReservaServicio(cliente, pago + 150);
+				}else {
+					JOptionPane.showMessageDialog(null, pago + 110);
+			    	VentanaReservaServicio vrs = new VentanaReservaServicio(cliente, pago + 110);
 				}
 				
-				int contador = 1;
-				try {
-					Scanner sc = new Scanner(new FileInputStream("Servicios"));
-					while(sc.hasNext()) {
-						contador = contador + 1;
-						String linea = sc.nextLine();
-					}
-					
-				}catch(FileNotFoundException e1) {
-					System.err.println("ERROR");
-				}
+				dispose();
 			}
 		});
 		

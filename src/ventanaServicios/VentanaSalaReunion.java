@@ -11,8 +11,10 @@ import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 
 import hotel.Cliente;
+import ventanas.VentanaReservaServicio;
 
 public class VentanaSalaReunion extends JFrame{
 
@@ -38,25 +40,26 @@ public class VentanaSalaReunion extends JFrame{
 		continuar.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				Cliente nuevo;
-				
-				if (cliente != null) {
-					nuevo = cliente;
-				} else {
-					nuevo = new Cliente();
+				if(comboSalaReunion.getSelectedItem().equals("SALA CONVENCION (100 personas) ---> 80€")) {
+				    JOptionPane.showMessageDialog(null, pago + 80);
+				    VentanaReservaServicio vrs = new VentanaReservaServicio(cliente, pago + 80);
+				}else if(comboSalaReunion.getSelectedItem().equals("SALA JUNTA (15 personas) ---> 50€")) {
+				    JOptionPane.showMessageDialog(null, pago + 50);
+				    VentanaReservaServicio vrs = new VentanaReservaServicio(cliente, pago + 50);
+				}else if(comboSalaReunion.getSelectedItem().equals("SALA PETIT COMITÉ (3 personas) ---> 30€")) {
+				    JOptionPane.showMessageDialog(null, pago + 30);
+				    VentanaReservaServicio vrs = new VentanaReservaServicio(cliente, pago + 30);
+				}else if(comboSalaReunion.getSelectedItem().equals("SALA CONVENCION EQUIPADA ---> 120€")) {
+				    JOptionPane.showMessageDialog(null, pago + 120);
+				    VentanaReservaServicio vrs = new VentanaReservaServicio(cliente, pago + 120);
+				}else if(comboSalaReunion.getSelectedItem().equals("SALA JUNTA EQUIPADA ---> 70€")) {
+				    JOptionPane.showMessageDialog(null, pago + 70);
+				    VentanaReservaServicio vrs = new VentanaReservaServicio(cliente, pago + 70);
+				}else {
+				    JOptionPane.showMessageDialog(null, pago + 50);
+				    VentanaReservaServicio vrs = new VentanaReservaServicio(cliente, pago + 50);
 				}
-				
-				int contador = 1;
-				try {
-					Scanner sc = new Scanner(new FileInputStream("Servicios"));
-					while(sc.hasNext()) {
-						contador = contador + 1;
-						String linea = sc.nextLine();
-					}
-					
-				}catch(FileNotFoundException e1) {
-					System.err.println("ERROR");
-				}
+				dispose();
 			}
 		});
 		

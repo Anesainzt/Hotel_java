@@ -13,6 +13,7 @@ import ventanaServicios.VentanaComida;
 import ventanaServicios.VentanaDeporte;
 import ventanaServicios.VentanaMiniBar;
 import ventanaServicios.VentanaSalaReunion;
+import ventanaServicios.VentanaSpa;
 
 public class VentanaServicios extends JFrame {
 	
@@ -46,7 +47,7 @@ public class VentanaServicios extends JFrame {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				if(spa.isSelected()) {
-				
+					VentanaSpa vc = new VentanaSpa(cliente, pago);
 				}else if(buffet.isSelected()) {
 					VentanaComida vc = new VentanaComida(cliente, pago);
 				}else if(deportes.isSelected()) {
@@ -56,11 +57,9 @@ public class VentanaServicios extends JFrame {
 				}else if(salaReunion.isSelected()) {
 					VentanaSalaReunion vc = new VentanaSalaReunion(cliente, pago);
 				}else if(sinServicioExtra.isSelected()) {
-					
+					//VentanaContinuacion vc = new VentanaContinuacion(cliente, pago);
 				}
-				
 				dispose();
-				
 			}
 			
 		});

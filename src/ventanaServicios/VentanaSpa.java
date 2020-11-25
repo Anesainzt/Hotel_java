@@ -54,60 +54,29 @@ public class VentanaSpa extends JFrame{
 					nuevo = new Cliente();
 				}
 				
-				int contador = 1;
-				try {
-					Scanner sc = new Scanner(new FileInputStream("Servicios"));
-					while(sc.hasNext()) {
-						contador = contador + 1;
-						String linea = sc.nextLine();
-					}
-					
-				}catch(FileNotFoundException e1) {
-					System.err.println("ERROR");
-				}
+				if(comboSpa.getSelectedItem().equals("MASAJE FACIAL ---> 50€")) {
+				    JOptionPane.showMessageDialog(null, pago + 50);
+				    VentanaReservaServicio vrs = new VentanaReservaServicio(cliente, pago + 50);
+				}else if(comboSpa.getSelectedItem().equals("MASAJE CORPORAL ---> 90€")) {
+				    JOptionPane.showMessageDialog(null, pago + 90);
+				    VentanaReservaServicio vrs = new VentanaReservaServicio(cliente, pago + 90);
+				}else if(comboSpa.getSelectedItem().equals("MASAJE TOTAL ---> 130€")) {
+				    JOptionPane.showMessageDialog(null, pago + 130);
+				    VentanaReservaServicio vrs = new VentanaReservaServicio(cliente, pago + 130);
+				}else if(comboSpa.getSelectedItem().equals("JACUZZI ---> 150€")) {
+				    JOptionPane.showMessageDialog(null, pago + 150);
+				    VentanaReservaServicio vrs = new VentanaReservaServicio(cliente, pago + 150);
+				}else if(comboSpa.getSelectedItem().equals("SALES MINERALES ---> 60€")) {
+				    JOptionPane.showMessageDialog(null, pago + 60);
+				    VentanaReservaServicio vrs = new VentanaReservaServicio(cliente, pago + 60);
+				}else if(comboSpa.getSelectedItem().equals("MASAJE PIEDRAS ---> 80€")) {
+				    JOptionPane.showMessageDialog(null, pago + 80);
+				    VentanaReservaServicio vrs = new VentanaReservaServicio(cliente, pago + 80);
+				}else{
+				    JOptionPane.showMessageDialog(null, pago + 90);
+				    VentanaReservaServicio vrs = new VentanaReservaServicio(cliente, pago + 90);
+				    }
 				
-				PrintWriter pw = null;
-				try {
-				    pw = new PrintWriter(new BufferedWriter(new FileWriter("Servicios", true)));
-				    pw.print("");
-				    
-				    if(comboSpa.getSelectedItem().equals("MASAJE FACIAL ---> 50€")) {
-				    	pw.println(contador + ";" + "MASAJE FACIAL" + ";" + 50);
-				    	JOptionPane.showMessageDialog(null, pago + 50);
-				    	VentanaReservaServicio vrs = new VentanaReservaServicio(cliente, pago);
-				    }else if(comboSpa.getSelectedItem().equals("MASAJE CORPORAL ---> 90€")) {
-				    	pw.println(contador + ";" + "MASAJE CORPORAL" + ";" + 90);
-				    	JOptionPane.showMessageDialog(null, pago + 90);
-				    	VentanaReservaServicio vrs = new VentanaReservaServicio(cliente, pago);
-				    }else if(comboSpa.getSelectedItem().equals("MASAJE TOTAL ---> 130€")) {
-				    	pw.println(contador + ";" + "MASAJE TOTAL" + ";" + 130);
-				    	JOptionPane.showMessageDialog(null, pago + 130);
-				    	VentanaReservaServicio vrs = new VentanaReservaServicio(cliente, pago);
-				    }else if(comboSpa.getSelectedItem().equals("JACUZZI ---> 150€")) {
-				    	pw.println(contador + ";" + "JACUZZI" + ";" + 150);
-				    	JOptionPane.showMessageDialog(null, pago + 150);
-				    	VentanaReservaServicio vrs = new VentanaReservaServicio(cliente, pago);
-				    }else if(comboSpa.getSelectedItem().equals("SALES MINERALES ---> 60€")) {
-				    	pw.println(contador + ";" + "SALES MINERALES" + ";" + 60);
-				    	JOptionPane.showMessageDialog(null, pago + 60);
-				    	VentanaReservaServicio vrs = new VentanaReservaServicio(cliente, pago);
-				    }else if(comboSpa.getSelectedItem().equals("MASAJE PIEDRAS ---> 80€")) {
-				    	pw.println(contador + ";" + "MASAJE PIEDRAS" + ";" + 80);
-				    	JOptionPane.showMessageDialog(null, pago + 80);
-				    	VentanaReservaServicio vrs = new VentanaReservaServicio(cliente, pago);
-				    }else{
-				    	pw.println(contador + ";" + "TRATAMIENTO ESTETICO" + ";" + 90);
-				    	JOptionPane.showMessageDialog(null, pago + 90);
-				    	VentanaReservaServicio vrs = new VentanaReservaServicio(cliente, pago);
-				    }
-				    
-				} catch (IOException e1) {
-				    System.err.println(e1);
-				} finally {
-				    if (pw != null) {
-				        pw.close();
-				    }
-				}
 				
 				dispose();
 			}

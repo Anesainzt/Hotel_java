@@ -16,7 +16,7 @@ public class VentanaServicios extends JFrame {
 	ButtonGroup bg;
 	JButton contratar;
 	
-	public VentanaServicios(Cliente cliente, int dinero) {
+	public VentanaServicios(Cliente cliente, int pago) {
 		
 		setLayout(new GridLayout(7, 1));
 		

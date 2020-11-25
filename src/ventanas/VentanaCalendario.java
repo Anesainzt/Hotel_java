@@ -23,12 +23,15 @@ public class VentanaCalendario extends JFrame{
 	Date d1;
 	Date d2;
 	Date hoy;
-	
+	JPanel p;
+	JPanel pfecha;
 	
 	public VentanaCalendario(Cliente cliente) {
 		
 		setLayout(new GridLayout(2, 1));
 		
+		p = new JPanel();
+		pfecha = new JPanel();
 		calendario = new JCalendar();
 		fecha=new JTextField(30);
 		fechaInicio = new JButton("Fecha Inicio");
@@ -48,7 +51,13 @@ public class VentanaCalendario extends JFrame{
 		    	 String mes = Integer.toString(calendario.getCalendar().get(java.util.Calendar.MONTH) + 1);
 		    	 String dia = Integer.toString(calendario.getCalendar().get(java.util.Calendar.DATE));
 		    	 fecha.setText(dia + "-" + mes + "-" + year);
+		    	 
+		    	 pfecha.add(fechaFin);
+		    	 pfecha.remove(fechaInicio);
+		    	 setVisible(true);
+		    	 
 		    	 d1 = calendario.getDate();
+		    	 
 		    	 
 		    	 //CREAMOS LA RESTRICCION DE NO PODER VOLVER A ESCOGER LA FECHA INICIO PARA LA FECHA FINAL
 		    	 int minYear = Integer.parseInt(year);
@@ -60,6 +69,7 @@ public class VentanaCalendario extends JFrame{
 		    	 Date minNoche = new Date(Date.UTC(minYear-1900, minMes-1, minDia +1, 0, 0, 0));
 		    	 
 		    	 calendario.setMinSelectableDate(minNoche);
+		    	 
 		    	 
 		     }
 		});
@@ -123,19 +133,17 @@ public class VentanaCalendario extends JFrame{
 				
 				//A CONTINUACION LE LLEVAMOS A LA VENTANA SERVICIOS PARA QUE PUEDA CONTRATAR SERVICIOS COMPLEMENTARIOS
 				VentanaServicios vs = new VentanaServicios(cliente, pagoHabitacion);
-		        
+				
 		        dispose();		       
 			}
 		});
 		
-		JPanel p = new JPanel();
 		
-		JPanel pfecha = new JPanel();
 		pfecha.add(new JLabel("Fecha Seleccionada"));
 		pfecha.add(fecha);
 		
 		pfecha.add(fechaInicio);
-		pfecha.add(fechaFin);
+	
 		
 		p.add(pfecha);
 		p.add(calendario);
@@ -159,6 +167,7 @@ public class VentanaCalendario extends JFrame{
 		setTitle("Calendario");
 		setSize(800, 600);
 		setVisible(true);
+		
 		
 	}
 }

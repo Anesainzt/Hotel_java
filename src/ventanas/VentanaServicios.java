@@ -9,6 +9,10 @@ import javax.swing.JFrame;
 import javax.swing.JRadioButton;
 
 import hotel.Cliente;
+import ventanaServicios.VentanaComida;
+import ventanaServicios.VentanaDeporte;
+import ventanaServicios.VentanaMiniBar;
+import ventanaServicios.VentanaSalaReunion;
 
 public class VentanaServicios extends JFrame {
 	
@@ -44,13 +48,13 @@ public class VentanaServicios extends JFrame {
 				if(spa.isSelected()) {
 				
 				}else if(buffet.isSelected()) {
-					
+					VentanaComida vc = new VentanaComida(cliente, pago);
 				}else if(deportes.isSelected()) {
-					
+					VentanaDeporte vc = new VentanaDeporte(cliente, pago);
 				}else if(miniBar.isSelected()) {
-					
+					VentanaMiniBar vc = new VentanaMiniBar(cliente, pago);
 				}else if(salaReunion.isSelected()) {
-					
+					VentanaSalaReunion vc = new VentanaSalaReunion(cliente, pago);
 				}else if(sinServicioExtra.isSelected()) {
 					
 				}

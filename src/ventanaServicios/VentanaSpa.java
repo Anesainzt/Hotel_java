@@ -46,13 +46,7 @@ public class VentanaSpa extends JFrame{
 		continuar.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				Cliente nuevo;
 				
-				if (cliente != null) {
-					nuevo = cliente;
-				} else {
-					nuevo = new Cliente();
-				}
 				
 				if(comboSpa.getSelectedItem().equals("MASAJE FACIAL ---> 50€")) {
 				    JOptionPane.showMessageDialog(null, pago + 50);

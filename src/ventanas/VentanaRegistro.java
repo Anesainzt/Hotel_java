@@ -4,6 +4,11 @@ import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.*;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.Scanner;
 import javax.swing.*;
 
@@ -53,11 +58,29 @@ public class VentanaRegistro extends JFrame{
 					//SI LAS CONTRASEÑAS SON IGUALES...
 					if(p.getText().equals(np.getText())) {
 						
-						VentanaCreacionRegistro veh = new VentanaCreacionRegistro(cliente);
+						
 						nuevo.setLogin(l.getText());
 						nuevo.setPassword(p.getText());
 						nuevo.setNewPassword(np.getText());
-						dispose();
+						
+						//AÑADIMOS LOS DATOS QUE HA METIDO EL USUARIO EN LA BASE DE DATOS
+						try {	
+							Class.forName("org.sqlite.JDBC");
+							String url = "jdbc:sqlite:hotelJava.db";
+							Connection conn = DriverManager.getConnection(url);
+							Statement stmt = (Statement) conn.createStatement();
+							int rows = stmt.executeUpdate("INSERT INTO cliente VALUES('', '', '"+ nuevo.getPassword() +"', '"+ nuevo.getLogin() +"', 'cliente', '');");
+							conn.close();
+							VentanaCreacionRegistro veh = new VentanaCreacionRegistro(nuevo);
+							dispose();
+						} catch (ClassNotFoundException e2) {
+						 System.out.println("No se ha podido cargar el driver de la base de datos");
+						} catch (SQLException e2) {
+							JOptionPane.showMessageDialog(null, "EL USUARIO YA EXISTE");
+							VentanaRegistro vcr = new VentanaRegistro(cliente);
+							dispose();
+						}
+						
 				    }else {
 				    	//EN CASO CONTRARIO DEBERA REPETIRLAS
 				    	JOptionPane.showMessageDialog(null, "LAS CONTRASEÑAS NO COINCIDEN");

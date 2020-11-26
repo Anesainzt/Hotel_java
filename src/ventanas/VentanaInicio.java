@@ -20,7 +20,7 @@ public class VentanaInicio extends JFrame{
 	JLabel usuario;
 	JTextField u;
 	JLabel password;
-	JTextField p;
+	JPasswordField p;
 	JButton registro;
 	JButton continuar;
 	Cliente cliente;
@@ -32,7 +32,7 @@ public class VentanaInicio extends JFrame{
 		usuario = new JLabel("USUARIO");
 		u = new JTextField();
 		password = new JLabel("CONTRASEÑA");
-		p = new JTextField();
+		p = new JPasswordField();
 		registro = new JButton("REGISTRARSE");
 		continuar = new JButton("CONTINUAR");
 		

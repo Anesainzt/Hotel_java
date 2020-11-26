@@ -57,7 +57,7 @@ public class VentanaServicios extends JFrame {
 				}else if(salaReunion.isSelected()) {
 					VentanaSalaReunion vc = new VentanaSalaReunion(cliente, pago);
 				}else if(sinServicioExtra.isSelected()) {
-					//VentanaContinuacion vc = new VentanaContinuacion(cliente, pago);
+					VentanaContinuacion vc = new VentanaContinuacion(cliente, pago);
 				}
 				dispose();
 			}

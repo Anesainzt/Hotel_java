@@ -1,7 +1,11 @@
 package ventanas;
 
-import java.awt.*;
+import java.awt.*; 
 import java.awt.event.*;
+import java.io.BufferedWriter;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.PrintWriter;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
@@ -9,18 +13,17 @@ import java.sql.SQLException;
 import java.sql.Statement;
 
 import javax.swing.*;
-import javax.swing.JButton;
 
 import com.toedter.calendar.JCalendar;
 
-import hotel.Cliente;
+import hotel.*;
 
 public class VentanaInicio extends JFrame{
 	
 	JLabel usuario;
 	JTextField u;
 	JLabel password;
-	JPasswordField p;
+	JTextField p;
 	JButton registro;
 	JButton continuar;
 	Cliente cliente;
@@ -32,7 +35,7 @@ public class VentanaInicio extends JFrame{
 		usuario = new JLabel("USUARIO");
 		u = new JTextField();
 		password = new JLabel("CONTRASEÑA");
-		p = new JPasswordField();
+		p = new JTextField();
 		registro = new JButton("REGISTRARSE");
 		continuar = new JButton("CONTINUAR");
 		
@@ -49,38 +52,66 @@ public class VentanaInicio extends JFrame{
 		continuar.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
+				
+				
 				try {	
 					Class.forName("org.sqlite.JDBC");
 					String url = "jdbc:sqlite:hotelJava.db";
 					Connection conn = DriverManager.getConnection(url);
 					Statement stmt = (Statement) conn.createStatement();
-		
-					ResultSet emp = stmt.executeQuery("SELECT * FROM empleado WHERE (usuario = '" + u.getText() + "' AND contraseya = '"+ p.getText() +"');");
-					//Detectamos si la persona que ha accedido a su cuenta es un cliente con cuenta o un empleado
-					//Aparte también obtenemos su nombre y apellido
+					
+					Cliente cliente = new Cliente();
+					Empleado empleado = new Empleado();
+					Cliente clienteVacio = new Cliente();
+					Empleado empleadoVacio = new Empleado();
+					
+					//EN CASO DE QUE EL USUARIO CORRESPONDA A UN EMPLEADO
+					ResultSet emp = stmt.executeQuery("SELECT nombre, apellido, contraseya, usuario FROM empleado WHERE (usuario = '" + u.getText() + "' AND contraseya = '"+ p.getText() +"');");
+					
 					while(emp.next()) {
 						String nombreBD = emp.getString("nombre");
 						String apellidoBD = emp.getString("apellido");
-						String tipo = emp.getString("tipo");
-						System.out.println(nombreBD);
-						System.out.println(apellidoBD);
-						System.out.println(tipo);
+						String contraseya = emp.getString("contraseya");
+						String usuario = emp.getString("usuario");
+						
+						empleado.setNombre(nombreBD);
+						empleado.setApellido(apellidoBD);
+						empleado.setPassword(contraseya);
+						empleado.setUsuario(usuario);
+						
 					}
-					ResultSet cl = stmt.executeQuery("SELECT * FROM cliente WHERE (usuario = '" + u.getText() + "' AND contraseya = '"+ p.getText() +"');");
+					
+					//EN CASO DE QUE EL USUARIO CORRESPONDA A UN CLIENTE QUE HAYA VENIDO ANTERIOR MENTE
+					ResultSet cl = stmt.executeQuery("SELECT nombre, apellido, contraseya, usuario FROM cliente WHERE (usuario = '" + u.getText() + "' AND contraseya = '"+ p.getText() +"');");
 					while(cl.next()) {
 						String nombreBD = cl.getString("nombre");
 						String apellidoBD = cl.getString("apellido");
-						String tipo = cl.getString("tipo");
-						System.out.println(nombreBD);
-						System.out.println(apellidoBD);
-						System.out.println(tipo);
+						String contraseya = emp.getString("contraseya");
+						String usuario = emp.getString("usuario");
+						
+						cliente.setNombre(nombreBD);
+						cliente.setApellido(apellidoBD);
+						cliente.setPassword(contraseya);
+						cliente.setLogin(usuario);
 					}
+										
+					if(cliente.getLogin() != "") {
+						VentanaCliente vnc = new VentanaCliente(cliente);
+						System.out.println("5");
+					} else if (empleado.getUsuario() != "") {
+						VentanaEmpleado vnm = new VentanaEmpleado(empleado);
+						System.out.println("empleado");
+					} else {
+						JOptionPane.showMessageDialog(null, "USUARIO O CONTRASEÑA INCORRECTO, PRUEBE OTRA VEZ");
+						VentanaInicio vn = new VentanaInicio();
+					}
+					
 					conn.close();
 					} catch (ClassNotFoundException e2) {
 					 System.out.println("No se ha podido cargar el driver de la base de datos");
 					} catch (SQLException e2) {
 						System.out.println(e2.getMessage());
-					}	
+					} 	
 				dispose();
 			}
 		});
@@ -91,7 +122,7 @@ public class VentanaInicio extends JFrame{
 		add(p);
 		add(registro);
 		add(continuar);
-					
+		
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
 		setTitle("Identificación del cliente");
 		setSize(800, 200);

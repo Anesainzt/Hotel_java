@@ -30,7 +30,7 @@ public class VentanaContinuacion extends JFrame{
 		continuar.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				
+				VentanaFactura vf = new VentanaFactura();
 				dispose();
 			}
 		});

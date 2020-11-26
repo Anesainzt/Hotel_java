@@ -3,14 +3,6 @@ package ventanaServicios;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.io.BufferedWriter;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.FileWriter;
-import java.io.IOException;
-import java.io.PrintWriter;
-import java.util.Scanner;
-
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
@@ -18,7 +10,6 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 
 import hotel.Cliente;
-import ventanas.VentanaCalendario;
 import ventanas.VentanaReservaServicio;
 
 public class VentanaSpa extends JFrame{
@@ -46,31 +37,29 @@ public class VentanaSpa extends JFrame{
 		continuar.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				
-				
-				if(comboSpa.getSelectedItem().equals("MASAJE FACIAL ---> 50€")) {
-				    JOptionPane.showMessageDialog(null, pago + 50);
-				    VentanaReservaServicio vrs = new VentanaReservaServicio(cliente, pago + 50);
-				}else if(comboSpa.getSelectedItem().equals("MASAJE CORPORAL ---> 90€")) {
-				    JOptionPane.showMessageDialog(null, pago + 90);
-				    VentanaReservaServicio vrs = new VentanaReservaServicio(cliente, pago + 90);
-				}else if(comboSpa.getSelectedItem().equals("MASAJE TOTAL ---> 130€")) {
-				    JOptionPane.showMessageDialog(null, pago + 130);
-				    VentanaReservaServicio vrs = new VentanaReservaServicio(cliente, pago + 130);
-				}else if(comboSpa.getSelectedItem().equals("JACUZZI ---> 150€")) {
-				    JOptionPane.showMessageDialog(null, pago + 150);
-				    VentanaReservaServicio vrs = new VentanaReservaServicio(cliente, pago + 150);
-				}else if(comboSpa.getSelectedItem().equals("SALES MINERALES ---> 60€")) {
-				    JOptionPane.showMessageDialog(null, pago + 60);
-				    VentanaReservaServicio vrs = new VentanaReservaServicio(cliente, pago + 60);
-				}else if(comboSpa.getSelectedItem().equals("MASAJE PIEDRAS ---> 80€")) {
-				    JOptionPane.showMessageDialog(null, pago + 80);
-				    VentanaReservaServicio vrs = new VentanaReservaServicio(cliente, pago + 80);
-				}else{
-				    JOptionPane.showMessageDialog(null, pago + 90);
-				    VentanaReservaServicio vrs = new VentanaReservaServicio(cliente, pago + 90);
-				    }
-				
+
+			    if(comboSpa.getSelectedItem().equals("MASAJE FACIAL ---> 50€")) {
+			    	JOptionPane.showMessageDialog(null, pago + 50);
+			    	VentanaReservaServicio vrs = new VentanaReservaServicio(cliente, pago + 50);
+			    }else if(comboSpa.getSelectedItem().equals("MASAJE CORPORAL ---> 90€")) {
+			    	JOptionPane.showMessageDialog(null, pago + 90);
+			    	VentanaReservaServicio vrs = new VentanaReservaServicio(cliente, pago + 90);
+			    }else if(comboSpa.getSelectedItem().equals("MASAJE TOTAL ---> 130€")) {
+			    	JOptionPane.showMessageDialog(null, pago + 130);
+			    	VentanaReservaServicio vrs = new VentanaReservaServicio(cliente, pago + 130);
+			    }else if(comboSpa.getSelectedItem().equals("JACUZZI ---> 150€")) {
+			    	JOptionPane.showMessageDialog(null, pago + 150);
+			    	VentanaReservaServicio vrs = new VentanaReservaServicio(cliente, pago + 150);
+			    }else if(comboSpa.getSelectedItem().equals("SALES MINERALES ---> 60€")) {
+			    	JOptionPane.showMessageDialog(null, pago + 60);
+			    	VentanaReservaServicio vrs = new VentanaReservaServicio(cliente, pago + 60);
+			    }else if(comboSpa.getSelectedItem().equals("MASAJE PIEDRAS ---> 80€")) {
+			    	JOptionPane.showMessageDialog(null, pago + 80);
+			    	VentanaReservaServicio vrs = new VentanaReservaServicio(cliente, pago + 80);
+			    }else{
+			    	JOptionPane.showMessageDialog(null, pago + 90);
+			    	VentanaReservaServicio vrs = new VentanaReservaServicio(cliente, pago + 90);
+			    }
 				
 				dispose();
 			}

@@ -9,8 +9,13 @@ import java.awt.Color;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.BufferedWriter;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.PrintWriter;
+import java.text.SimpleDateFormat;
 import java.util.*;
 
 
@@ -26,7 +31,7 @@ public class VentanaCalendario extends JFrame{
 	JPanel p;
 	JPanel pfecha;
 	
-	public VentanaCalendario(Cliente cliente) {
+	public VentanaCalendario(Cliente cliente, int precioHab) {
 		
 		setLayout(new GridLayout(2, 1));
 		
@@ -94,39 +99,26 @@ public class VentanaCalendario extends JFrame{
 		        
 		        //VentanaServicios vs = new VentanaServicios(cliente);
 		        
-		        //LEEMOS EL FICHERO HABITACION DONDE ANTERIORMENTE HABIAMOS GUARDADO LOS DATOS DE LA HABITACION ESCOGIDA
-		        ArrayList<String> nuevosDatos = new ArrayList<String>();
-				ArrayList<String> datosFicheros = new ArrayList<String>();
-				String linea = null;
-				String[] campos = null;
-				String dinero = null;
-				
+		        PrintWriter pw = null;
 				try {
-					Scanner sc1 = new Scanner(new FileInputStream("Habitacion"));
-					
-					while(sc1.hasNext()) {
-						linea = sc1.nextLine();
-						campos = linea.split(";");
-						nuevosDatos.add(linea);
-						//IMPORTANTE LA VARIABLE DINERO PARA GUARDAR EL DINERO DE LA HABITACION POR NOCHE
-						dinero = campos[2];
-					}
-					
-				}catch(FileNotFoundException e1) {
-					System.err.println("ERROR");
-				}finally{
-					//borrar fichero
+				    pw = new PrintWriter(new BufferedWriter(new FileWriter("Habitacion", true)));
+				    pw.print("");
+				    pw.println(new SimpleDateFormat("dd/MM/yyyy").format(startDate1) + ";" + new SimpleDateFormat("dd/MM/yyyy").format(endDate1));
+				    
+				} catch (IOException e1) {
+				    System.err.println(e1);
+				} finally {
+				    if (pw != null) {
+				        pw.close();
+				    }
 				}
 				
 				//EL DINERO DE LA VARIABLE ANTERIOR LA CONVERTIMOS A INT PARA PODER TRABAJAR CON ELLA
-				int d = Integer.parseInt(dinero);
-				
-				//CON LA VARIABLE PAGO CONVIERTES LA DIFERENCIA DE FECHAS DE LONG A STRING
 				String pago = Long.toString((diff / (1000L*60L*60L*24L)));
 				
 				//LA VARIABLE STRING PAGO ANTERIOR LA CONVIERTES A INT Y LA MULTIPLICAS POR EL PAGO POR NOCHE DE HABITACION
 				//Y YA TENEMOS LO QUE PAGA POR LA HABITACION TOTAL DE TODOS LOS DIAS
-				int pagoHabitacion = (Integer.parseInt(pago)*d);
+				int pagoHabitacion = (Integer.parseInt(pago)*precioHab);
 				
 				//LE MOSTRAMOS UNA VENTANA INFORMATIVA PARA QUE SEPA EL DINERO QUE GASTARA POR ESOS DIAS DE LA HABITACION
 				JOptionPane.showMessageDialog(null, "PAGO HABITACION: " + pago + " DIAS " + " = " + pagoHabitacion + "€");

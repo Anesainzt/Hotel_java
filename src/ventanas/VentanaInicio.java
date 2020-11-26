@@ -97,10 +97,10 @@ public class VentanaInicio extends JFrame{
 										
 					if(cliente.getLogin() != "") {
 						VentanaCliente vnc = new VentanaCliente(cliente);
-						System.out.println("5");
+
 					} else if (empleado.getUsuario() != "") {
 						VentanaEmpleado vnm = new VentanaEmpleado(empleado);
-						System.out.println("empleado");
+
 					} else {
 						JOptionPane.showMessageDialog(null, "USUARIO O CONTRASEÑA INCORRECTO, PRUEBE OTRA VEZ");
 						VentanaInicio vn = new VentanaInicio();

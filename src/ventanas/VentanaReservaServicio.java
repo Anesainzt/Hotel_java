@@ -94,6 +94,8 @@ public class VentanaReservaServicio extends JFrame{
 		    	//SE RESTA 1 AL MES PORQUE EMPIEZA A CONTAR DESDE 0 Y ANTES LE HEMOS SUMADO 1 PARA ESCRIBIR BIEN LA FECHA
 		    	Date minNoche = new Date(Date.UTC(minYear-1900, minMes-1, minDia +1, 0, 0, 0));
 		    	
+		    	VentanaContinuacion vc = new VentanaContinuacion(cliente, precioHab);
+		    	
 		    	dispose();
 			}
 		});

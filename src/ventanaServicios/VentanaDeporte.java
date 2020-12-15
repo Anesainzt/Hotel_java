@@ -51,46 +51,46 @@ public class VentanaDeporte extends JFrame{
 			public void actionPerformed(ActionEvent e) {
 				if(comboDeporte.getSelectedItem().equals("PISTA TENNIS ---> 15€/hora")) {
 			    	JOptionPane.showMessageDialog(null, pago + 15);
-			    	VentanaReservaServicio vrs = new VentanaReservaServicio(cliente, pago + 15);
+			    	VentanaReservaServicio vrs = new VentanaReservaServicio(cliente, pago + 15, "PISTA TENNIS");
 				}else if (comboDeporte.getSelectedItem().equals("PISTA PADDLE ---> 15€/hora")){
 					JOptionPane.showMessageDialog(null, pago + 15);
-			    	VentanaReservaServicio vrs = new VentanaReservaServicio(cliente, pago + 15);
+			    	VentanaReservaServicio vrs = new VentanaReservaServicio(cliente, pago + 15, "PISTA PADDLE");
 				} else if (comboDeporte.getSelectedItem().equals("PISCINA NATACION ---> 10€/hora")) {
 					JOptionPane.showMessageDialog(null, pago + 10);
-			    	VentanaReservaServicio vrs = new VentanaReservaServicio(cliente, pago + 10);
+			    	VentanaReservaServicio vrs = new VentanaReservaServicio(cliente, pago + 10, "PISCINA NATACION");
 				}else if (comboDeporte.getSelectedItem().equals("CAMPO FUTBOL ---> 20€/hora")) {
 					JOptionPane.showMessageDialog(null, pago + 20);
-			    	VentanaReservaServicio vrs = new VentanaReservaServicio(cliente, pago + 20);
+			    	VentanaReservaServicio vrs = new VentanaReservaServicio(cliente, pago + 20, "CAMPO FUTBOL");
 				}else if (comboDeporte.getSelectedItem().equals("CAMPO BALONCESTO ---> 20€/hora")) {
 					JOptionPane.showMessageDialog(null, pago + 20);
-			    	VentanaReservaServicio vrs = new VentanaReservaServicio(cliente, pago + 20);
+			    	VentanaReservaServicio vrs = new VentanaReservaServicio(cliente, pago + 20, "CAMPO BALONCESTO");
 				}else if (comboDeporte.getSelectedItem().equals("PISTA ATLETISMO ---> 10€/hora")) {
 					JOptionPane.showMessageDialog(null, pago + 10);
-			    	VentanaReservaServicio vrs = new VentanaReservaServicio(cliente, pago + 10);
+			    	VentanaReservaServicio vrs = new VentanaReservaServicio(cliente, pago + 10, "PISTA ATLETISMO");
 				}else if (comboDeporte.getSelectedItem().equals("CAMPO FUTBOL-SALA ---> 15€/hora")) {
 					JOptionPane.showMessageDialog(null, pago + 15);
-			    	VentanaReservaServicio vrs = new VentanaReservaServicio(cliente, pago + 15);
+			    	VentanaReservaServicio vrs = new VentanaReservaServicio(cliente, pago + 15, "CAMPO FUTBOL-SALA");
 				}else if (comboDeporte.getSelectedItem().equals("CLASE TENNIS ---> 30€/hora")) {
 					JOptionPane.showMessageDialog(null, pago + 30);
-			    	VentanaReservaServicio vrs = new VentanaReservaServicio(cliente, pago + 30);
+			    	VentanaReservaServicio vrs = new VentanaReservaServicio(cliente, pago + 30, "CLASE TENNIS");
 				}else if (comboDeporte.getSelectedItem().equals("CLASE PADDLE ---> 30€/hora")) {
 					JOptionPane.showMessageDialog(null, pago + 30);
-			    	VentanaReservaServicio vrs = new VentanaReservaServicio(cliente, pago + 30);
+			    	VentanaReservaServicio vrs = new VentanaReservaServicio(cliente, pago + 30, "CLASE PADDLE");
 				}else if (comboDeporte.getSelectedItem().equals("CLASE NATACION ---> 15€/hora")) {
 					JOptionPane.showMessageDialog(null, pago + 15);
-			    	VentanaReservaServicio vrs = new VentanaReservaServicio(cliente, pago + 15);
+			    	VentanaReservaServicio vrs = new VentanaReservaServicio(cliente, pago + 15, "CLASE NATACION");
 				}else if (comboDeporte.getSelectedItem().equals("CLASE FUTBOL ---> 30€/hora")) {
 					JOptionPane.showMessageDialog(null, pago + 30);
-			    	VentanaReservaServicio vrs = new VentanaReservaServicio(cliente, pago + 30);
+			    	VentanaReservaServicio vrs = new VentanaReservaServicio(cliente, pago + 30, "CLASE FUTBOL");
 				}else if (comboDeporte.getSelectedItem().equals("CLASE BALONCESTO ---> 30€/hora")) {
 					JOptionPane.showMessageDialog(null, pago + 30);
-			    	VentanaReservaServicio vrs = new VentanaReservaServicio(cliente, pago + 30);
+			    	VentanaReservaServicio vrs = new VentanaReservaServicio(cliente, pago + 30, "CLASE BALONCESTO");
 				}else if (comboDeporte.getSelectedItem().equals("CLASE ATLETISMO ---> 15€/hora")) {
 					JOptionPane.showMessageDialog(null, pago + 15);
-			    	VentanaReservaServicio vrs = new VentanaReservaServicio(cliente, pago + 15);
+			    	VentanaReservaServicio vrs = new VentanaReservaServicio(cliente, pago + 15, "CLASE ATLETISMO");
 				}else {
 					JOptionPane.showMessageDialog(null, pago + 20);
-			    	VentanaReservaServicio vrs = new VentanaReservaServicio(cliente, pago + 20);
+			    	VentanaReservaServicio vrs = new VentanaReservaServicio(cliente, pago + 20, "CLASE FUTBOL-SALA");
 				}
 				
 				dispose();

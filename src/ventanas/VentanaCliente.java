@@ -12,6 +12,7 @@ public class VentanaCliente extends JFrame{
 	JButton historial;
 	JButton nuevaReserva;
 	JPanel inicio;
+	JButton salir;
 	JPanel reservas;
 	
 	
@@ -20,6 +21,7 @@ public class VentanaCliente extends JFrame{
 		inicio = new JPanel();
 		reservas = new JPanel();
 		historial = new JButton("HISTORAIL DE RESERVA");
+		salir = new JButton("SALIR");
 		nuevaReserva = new JButton("NUEVA RESERVA");
 		
 		historial.addActionListener(new ActionListener() {
@@ -43,7 +45,9 @@ public class VentanaCliente extends JFrame{
 		
 		inicio.add(historial);
 		inicio.add(nuevaReserva);
+		inicio.add(salir);
 		
+		add(inicio);
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
 		setTitle("Identificación del cliente");
 		inicio.setSize(800, 200);

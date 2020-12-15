@@ -32,7 +32,7 @@ public class VentanaSpa extends JFrame{
 		comboSpa.addItem("JACUZZI ---> 150€");
 		comboSpa.addItem("SALES MINERALES ---> 60€");
 		comboSpa.addItem("MASAJE PIEDRAS ---> 80€");
-		comboSpa.addItem("TRATAMIENTO ESTETICO ---> 90€");
+		comboSpa.addItem("TRATAMIENTO ESTÉTICO ---> 90€");
 		
 		continuar.addActionListener(new ActionListener() {
 			@Override
@@ -40,25 +40,25 @@ public class VentanaSpa extends JFrame{
 
 			    if(comboSpa.getSelectedItem().equals("MASAJE FACIAL ---> 50€")) {
 			    	JOptionPane.showMessageDialog(null, pago + 50);
-			    	VentanaReservaServicio vrs = new VentanaReservaServicio(cliente, pago + 50);
+			    	VentanaReservaServicio vrs = new VentanaReservaServicio(cliente, pago + 50, "MASAJE FACIAL");
 			    }else if(comboSpa.getSelectedItem().equals("MASAJE CORPORAL ---> 90€")) {
 			    	JOptionPane.showMessageDialog(null, pago + 90);
-			    	VentanaReservaServicio vrs = new VentanaReservaServicio(cliente, pago + 90);
+			    	VentanaReservaServicio vrs = new VentanaReservaServicio(cliente, pago + 90, "MASAJE CORPORAL");
 			    }else if(comboSpa.getSelectedItem().equals("MASAJE TOTAL ---> 130€")) {
 			    	JOptionPane.showMessageDialog(null, pago + 130);
-			    	VentanaReservaServicio vrs = new VentanaReservaServicio(cliente, pago + 130);
+			    	VentanaReservaServicio vrs = new VentanaReservaServicio(cliente, pago + 130, "MASAJE TOTAL");
 			    }else if(comboSpa.getSelectedItem().equals("JACUZZI ---> 150€")) {
 			    	JOptionPane.showMessageDialog(null, pago + 150);
-			    	VentanaReservaServicio vrs = new VentanaReservaServicio(cliente, pago + 150);
+			    	VentanaReservaServicio vrs = new VentanaReservaServicio(cliente, pago + 150, "JACUZZI");
 			    }else if(comboSpa.getSelectedItem().equals("SALES MINERALES ---> 60€")) {
 			    	JOptionPane.showMessageDialog(null, pago + 60);
-			    	VentanaReservaServicio vrs = new VentanaReservaServicio(cliente, pago + 60);
+			    	VentanaReservaServicio vrs = new VentanaReservaServicio(cliente, pago + 60, "SALES MINERALES");
 			    }else if(comboSpa.getSelectedItem().equals("MASAJE PIEDRAS ---> 80€")) {
 			    	JOptionPane.showMessageDialog(null, pago + 80);
-			    	VentanaReservaServicio vrs = new VentanaReservaServicio(cliente, pago + 80);
+			    	VentanaReservaServicio vrs = new VentanaReservaServicio(cliente, pago + 80, "MASAJE PIEDRAS");
 			    }else{
 			    	JOptionPane.showMessageDialog(null, pago + 90);
-			    	VentanaReservaServicio vrs = new VentanaReservaServicio(cliente, pago + 90);
+			    	VentanaReservaServicio vrs = new VentanaReservaServicio(cliente, pago + 90, "TRATAMIENTO ESTÉTICO");
 			    }
 				
 				dispose();

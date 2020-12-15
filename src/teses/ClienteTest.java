@@ -10,7 +10,7 @@ import hotel.Cliente;
 class ClienteTest {
 
 	
-	Cliente c = new Cliente("Alazne", "Parra", "22764839Z", "1999-03-17", "1234567890", "alazne.parra", "Armagedom", "Armagedom", null);
+	Cliente c = new Cliente("Alazne", "Parra", "22764839Z", "1999-03-17", "1234567890", "alazne.parra", "Armagedom", "Armagedom", null, null);
 	
 	
 	@Test

@@ -42,22 +42,22 @@ public class VentanaSalaReunion extends JFrame{
 			public void actionPerformed(ActionEvent e) {
 				if(comboSalaReunion.getSelectedItem().equals("SALA CONVENCION (100 personas) ---> 80€")) {
 				    JOptionPane.showMessageDialog(null, pago + 80);
-				    VentanaReservaServicio vrs = new VentanaReservaServicio(cliente, pago + 80);
+				    VentanaReservaServicio vrs = new VentanaReservaServicio(cliente, pago + 80, "SALA CONVENCION");
 				}else if(comboSalaReunion.getSelectedItem().equals("SALA JUNTA (15 personas) ---> 50€")) {
 				    JOptionPane.showMessageDialog(null, pago + 50);
-				    VentanaReservaServicio vrs = new VentanaReservaServicio(cliente, pago + 50);
+				    VentanaReservaServicio vrs = new VentanaReservaServicio(cliente, pago + 50, "SALA JUNTA (15 personas)");
 				}else if(comboSalaReunion.getSelectedItem().equals("SALA PETIT COMITÉ (3 personas) ---> 30€")) {
 				    JOptionPane.showMessageDialog(null, pago + 30);
-				    VentanaReservaServicio vrs = new VentanaReservaServicio(cliente, pago + 30);
+				    VentanaReservaServicio vrs = new VentanaReservaServicio(cliente, pago + 30, "SALA PETIT COMITÉ (3 personas)");
 				}else if(comboSalaReunion.getSelectedItem().equals("SALA CONVENCION EQUIPADA ---> 120€")) {
 				    JOptionPane.showMessageDialog(null, pago + 120);
-				    VentanaReservaServicio vrs = new VentanaReservaServicio(cliente, pago + 120);
+				    VentanaReservaServicio vrs = new VentanaReservaServicio(cliente, pago + 120, "SALA CONVENCION EQUIPADA");
 				}else if(comboSalaReunion.getSelectedItem().equals("SALA JUNTA EQUIPADA ---> 70€")) {
 				    JOptionPane.showMessageDialog(null, pago + 70);
-				    VentanaReservaServicio vrs = new VentanaReservaServicio(cliente, pago + 70);
+				    VentanaReservaServicio vrs = new VentanaReservaServicio(cliente, pago + 70, "SALA JUNTA EQUIPADA");
 				}else {
 				    JOptionPane.showMessageDialog(null, pago + 50);
-				    VentanaReservaServicio vrs = new VentanaReservaServicio(cliente, pago + 50);
+				    VentanaReservaServicio vrs = new VentanaReservaServicio(cliente, pago + 50, "SALA PETIT COMITÉ EQUIPADA");
 				}
 				dispose();
 			}

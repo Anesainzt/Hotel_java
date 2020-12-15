@@ -1,6 +1,7 @@
 package hotel;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 public class Cliente extends Ticket{
 	protected static String nombre;
@@ -12,8 +13,9 @@ public class Cliente extends Ticket{
 	protected static String password;
 	protected static String newPassword;
 	protected static ArrayList<String> ticket = new ArrayList();
+	protected static HashMap<String, ArrayList<String>> hashmap = new HashMap<String, ArrayList<String>>();
 	
-	public Cliente(String nombre, String apellido, String dni, String fecha_ncto, String tarjeta, String login, String password, String newPassword, ArrayList<String> ticket) {
+	public Cliente(String nombre, String apellido, String dni, String fecha_ncto, String tarjeta, String login, String password, String newPassword, ArrayList<String> ticket, HashMap<String, ArrayList<String>> hashmap) {
 		
 		Cliente.nombre = nombre;
 		Cliente.apellido = apellido;
@@ -24,7 +26,7 @@ public class Cliente extends Ticket{
 		Cliente.password = password;
 		Cliente.newPassword = newPassword;
 		Cliente.ticket = ticket;
-		
+		Cliente.hashmap = hashmap;
 	}
 
 
@@ -39,6 +41,7 @@ public class Cliente extends Ticket{
 		Cliente.password = "";
 		Cliente.newPassword = "";
 		Cliente.ticket = null;
+		Cliente.hashmap = null;
 	}
 	
 	public Cliente(Cliente c) {
@@ -51,6 +54,7 @@ public class Cliente extends Ticket{
 		Cliente.password = c.password;
 		Cliente.newPassword = c.newPassword;
 		Cliente.ticket = c.ticket;
+		Cliente.hashmap = c.hashmap;
 	}
 
 	public static String getNombre() {
@@ -126,6 +130,18 @@ public class Cliente extends Ticket{
 	public static void setTicket(ArrayList<String> ticket) {
 		Cliente.ticket = ticket;
 	}
+
+
+	public static HashMap<String, ArrayList<String>> getHashmap() {
+		return hashmap;
+	}
+
+
+	public static void setHashmap(HashMap<String, ArrayList<String>> hashmap) {
+		Cliente.hashmap = hashmap;
+	}
+	
+	
 	
 	
 }

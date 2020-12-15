@@ -44,28 +44,28 @@ public class VentanaMiniBar extends JFrame{
 			public void actionPerformed(ActionEvent e) {
 				if(comboMiniBar.getSelectedItem().equals("VODKA ---> 30€")) {
 			    	JOptionPane.showMessageDialog(null, pago + 30);
-			    	VentanaReservaServicio vrs = new VentanaReservaServicio(cliente, pago + 30);
+			    	VentanaReservaServicio vrs = new VentanaReservaServicio(cliente, pago + 30, "VODKA");
 				}else if (comboMiniBar.getSelectedItem().equals("GINEBRA ---> 30€")){
 					JOptionPane.showMessageDialog(null, pago + 30);
-			    	VentanaReservaServicio vrs = new VentanaReservaServicio(cliente, pago + 30);
+			    	VentanaReservaServicio vrs = new VentanaReservaServicio(cliente, pago + 30,"GINEBRA");
 				}else if (comboMiniBar.getSelectedItem().equals("WHISKEY ---> 50€")){
 					JOptionPane.showMessageDialog(null, pago + 50);
-			    	VentanaReservaServicio vrs = new VentanaReservaServicio(cliente, pago + 50);
+			    	VentanaReservaServicio vrs = new VentanaReservaServicio(cliente, pago + 50, "WHISKEY");
 				}else if (comboMiniBar.getSelectedItem().equals("TEQUILA ---> 45€")){
 					JOptionPane.showMessageDialog(null, pago + 45);
-			    	VentanaReservaServicio vrs = new VentanaReservaServicio(cliente, pago + 45);
+			    	VentanaReservaServicio vrs = new VentanaReservaServicio(cliente, pago + 45, "TEQUILA");
 				}else if (comboMiniBar.getSelectedItem().equals("RON ---> 30€")){
 					JOptionPane.showMessageDialog(null, pago + 30);
-			    	VentanaReservaServicio vrs = new VentanaReservaServicio(cliente, pago + 30);
+			    	VentanaReservaServicio vrs = new VentanaReservaServicio(cliente, pago + 30, "RON");
 				}else if (comboMiniBar.getSelectedItem().equals("ELECCION DE DOS (DIFERENTES) ---> 90€")){
 					JOptionPane.showMessageDialog(null, pago + 90);
-			    	VentanaReservaServicio vrs = new VentanaReservaServicio(cliente, pago + 90);
+			    	VentanaReservaServicio vrs = new VentanaReservaServicio(cliente, pago + 90, "ELECCION DE DOS (DIFERENTES)");
 				}else if (comboMiniBar.getSelectedItem().equals("ELECCION DE TRES (DIFERENTES) ---> 140€")){
 					JOptionPane.showMessageDialog(null, pago + 140);
-			    	VentanaReservaServicio vrs = new VentanaReservaServicio(cliente, pago + 140);
+			    	VentanaReservaServicio vrs = new VentanaReservaServicio(cliente, pago + 140, "ELECCION DE TRES (DIFERENTES)");
 				}else {
 					JOptionPane.showMessageDialog(null, pago + 180);
-			    	VentanaReservaServicio vrs = new VentanaReservaServicio(cliente, pago + 180);
+			    	VentanaReservaServicio vrs = new VentanaReservaServicio(cliente, pago + 180, "TODOS");
 				}
 				
 				dispose();

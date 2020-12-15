@@ -24,7 +24,9 @@ public class VentanaReservaServicio extends JFrame{
 	Date hoy;
 	
 	
-	public VentanaReservaServicio(Cliente cliente, int precioHab) {
+	public VentanaReservaServicio(Cliente cliente, int precioHab, String tipo) {
+		
+		HashMap<String, ArrayList<String>> hashmap = new HashMap<String, ArrayList<String>>();
 		
 		setLayout(new GridLayout(2, 1));
 		

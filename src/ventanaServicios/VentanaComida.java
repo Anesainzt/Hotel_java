@@ -44,28 +44,28 @@ public class VentanaComida extends JFrame{
 			public void actionPerformed(ActionEvent e) {
 				if(comboComida.getSelectedItem().equals("MCDONALDS ---> 30€")) {
 			    	JOptionPane.showMessageDialog(null, pago + 30);
-			    	VentanaReservaServicio vrs = new VentanaReservaServicio(cliente, pago + 30);
+			    	VentanaReservaServicio vrs = new VentanaReservaServicio(cliente, pago + 30, "MCDONALDS");
 				}else if (comboComida.getSelectedItem().equals("BURGER KING ---> 30€")){
 					JOptionPane.showMessageDialog(null, pago + 30);
-			    	VentanaReservaServicio vrs = new VentanaReservaServicio(cliente, pago + 30);
+			    	VentanaReservaServicio vrs = new VentanaReservaServicio(cliente, pago + 30, "BURGER KING");
 				} else if (comboComida.getSelectedItem().equals("FOSTERS HOLLYWOOD ---> 40€")) {
 					JOptionPane.showMessageDialog(null, pago + 40);
-			    	VentanaReservaServicio vrs = new VentanaReservaServicio(cliente, pago + 40);
+			    	VentanaReservaServicio vrs = new VentanaReservaServicio(cliente, pago + 40, "FOSTERS HOLLYWOOD");
 				}else if (comboComida.getSelectedItem().equals("POMODORO ---> 45€")) {
 					JOptionPane.showMessageDialog(null, pago + 45);
-			    	VentanaReservaServicio vrs = new VentanaReservaServicio(cliente, pago + 45);
+			    	VentanaReservaServicio vrs = new VentanaReservaServicio(cliente, pago + 45, "POMODORO");
 				}else if (comboComida.getSelectedItem().equals("FOODOO ---> 50€")) {
 					JOptionPane.showMessageDialog(null, pago + 50);
-			    	VentanaReservaServicio vrs = new VentanaReservaServicio(cliente, pago + 50);
+			    	VentanaReservaServicio vrs = new VentanaReservaServicio(cliente, pago + 50, "FOODOO");
 				}else if (comboComida.getSelectedItem().equals("DONGA ---> 60€")) {
 					JOptionPane.showMessageDialog(null, pago + 60);
-			    	VentanaReservaServicio vrs = new VentanaReservaServicio(cliente, pago + 60);
+			    	VentanaReservaServicio vrs = new VentanaReservaServicio(cliente, pago + 60, "DONGA");
 				}else if (comboComida.getSelectedItem().equals("MENU DEL DIA HOTEL ---> 150€")) {
 					JOptionPane.showMessageDialog(null, pago + 150);
-			    	VentanaReservaServicio vrs = new VentanaReservaServicio(cliente, pago + 150);
+			    	VentanaReservaServicio vrs = new VentanaReservaServicio(cliente, pago + 150, "MENU DEL DIA HOTEL");
 				}else {
 					JOptionPane.showMessageDialog(null, pago + 110);
-			    	VentanaReservaServicio vrs = new VentanaReservaServicio(cliente, pago + 110);
+			    	VentanaReservaServicio vrs = new VentanaReservaServicio(cliente, pago + 110, "BUFFET HOTEL");
 				}
 				
 				dispose();

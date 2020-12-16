@@ -3,6 +3,11 @@ package ventanas;
 import java.awt.*;
 import java.awt.event.*;
 import java.io.*;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.*;
 import javax.swing.*;
 
@@ -50,43 +55,34 @@ public class VentanaCreacionRegistro extends JFrame{
 					VentanaCreacionRegistro vr = new VentanaCreacionRegistro(cliente);
 					dispose();
 				}else {
-				
-					VentanaEleccionHabitacion vcr = new VentanaEleccionHabitacion(cliente);
+					
 					nuevo.setNombre(n.getText());
 					nuevo.setApellido(a.getText());
 					nuevo.setDni(d.getText());
 					nuevo.setTarjeta(t.getText());
+					VentanaEleccionHabitacion vcr = new VentanaEleccionHabitacion(nuevo);
+					
+					try {	
+						Class.forName("org.sqlite.JDBC");
+						String url = "jdbc:sqlite:hotelJava.db";
+						Connection conn = DriverManager.getConnection(url);
+						
+						PreparedStatement pstmt = conn.prepareStatement("UPDATE cliente SET nombre = ?, apellido = ?, dni = ?, tarjeta = ? WHERE usuario = '"+ nuevo.getLogin() +"' AND contraseya = '"+ nuevo.getPassword() +"';");
+						
+						pstmt.setString(1, nuevo.getNombre());
+						pstmt.setString(2, nuevo.getApellido());
+						pstmt.setString(3, nuevo.getDni());
+						pstmt.setString(4, nuevo.getTarjeta());
+						pstmt.executeUpdate();
+						conn.close();
+					} catch (ClassNotFoundException e2) {
+					 System.out.println("No se ha podido cargar el driver de la base de datos");
+					} catch (SQLException e2) {
+						System.out.println(e2.getMessage());
+					} 	
+						
 					dispose();
-				}
-				
-				//GUARDAMOS EN UN FICHERO LOS DATOS DEL CLIENTE
-				try {
-					//FICHERO DATOS, MIRAMOS SI HAY UNA LINEA SIGUIENTE PARA ESCRIBIR Y AÑADIMOS UN CONTADOR
-					Scanner sc = new Scanner(new FileInputStream("datos"));
-					while(sc.hasNext()) {
-						String linea = sc.nextLine();
-					}
-				//SI NO ENCUENTRA EL FICHERO DATOS ENTRA EN LA EXCEPCION
-				}catch(FileNotFoundException e1) {
-					System.err.println("ERROR");
-				}
-				
-				//UNA VEZ ENCONTRADO EL FICHERO ESCRIBIMOS LOS DATOS
-				PrintWriter pw = null;
-				try {
-				    pw = new PrintWriter(new BufferedWriter(new FileWriter("datos", true)));
-				    pw.print("");
-				    pw.println(nuevo.getNombre() + ";" + nuevo.getApellido() + ";" + nuevo.getDni() + ";" + nuevo.getTarjeta());
-				
-				//SI NO SE PUEDE ESCRIBIR ENTRA EN LA EXCEPCION
-				} catch (IOException e1) {
-				    System.err.println(e1);
-				    
-				//SIEMPRE HAY QUE CERRAR EL FICHERO DESPUES DE ESCRIBIR
-				} finally {
-				    if (pw != null) {
-				        pw.close();
-				    }
+					
 				}
 				
 			}

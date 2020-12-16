@@ -36,13 +36,13 @@ public class VentanaEleccionHabitacion extends JFrame{
 			public void actionPerformed(ActionEvent e) {
 			    
 				if(comboHabitaciones.getSelectedItem().equals("VIP ---> 200€/noche")){
-					VentanaCalendario vc = new VentanaCalendario(cliente, 200);
+					VentanaCalendario vc = new VentanaCalendario(cliente, 200, "VIP");
 				}else if(comboHabitaciones.getSelectedItem().equals("DOBLE ---> 100€/noche")){
-					VentanaCalendario vc = new VentanaCalendario(cliente, 100);
+					VentanaCalendario vc = new VentanaCalendario(cliente, 100, "DOBLE");
 				}else if(comboHabitaciones.getSelectedItem().equals("INDIVIDUAL ---> 80€/noche")){
-					VentanaCalendario vc = new VentanaCalendario(cliente, 80);
+					VentanaCalendario vc = new VentanaCalendario(cliente, 80, "INDIVIDUAL");
 				}else{
-					VentanaCalendario vc = new VentanaCalendario(cliente, 130);
+					VentanaCalendario vc = new VentanaCalendario(cliente, 130, "FAMILIAR");
 				}
 				
 				dispose();

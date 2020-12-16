@@ -15,6 +15,10 @@ import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.SQLException;
+import java.sql.Statement;
 import java.text.SimpleDateFormat;
 import java.util.*;
 
@@ -31,7 +35,9 @@ public class VentanaCalendario extends JFrame{
 	JPanel p;
 	JPanel pfecha;
 	
-	public VentanaCalendario(Cliente cliente, int precioHab) {
+	static  String fechaIncBD;
+	
+	public VentanaCalendario(Cliente cliente, int precioHab, String type) {
 		
 		setLayout(new GridLayout(2, 1));
 		
@@ -56,7 +62,7 @@ public class VentanaCalendario extends JFrame{
 		    	 String mes = Integer.toString(calendario.getCalendar().get(java.util.Calendar.MONTH) + 1);
 		    	 String dia = Integer.toString(calendario.getCalendar().get(java.util.Calendar.DATE));
 		    	 fecha.setText(dia + "-" + mes + "-" + year);
-		    	 
+		    	 fechaIncBD = year + "-" + mes + "-" + dia;
 		    	 pfecha.add(fechaFin);
 		    	 pfecha.remove(fechaInicio);
 		    	 setVisible(true);
@@ -75,7 +81,24 @@ public class VentanaCalendario extends JFrame{
 		    	 
 		    	 calendario.setMinSelectableDate(minNoche);
 		    	 
-		    	 
+		    	 try {	
+						Class.forName("org.sqlite.JDBC");
+						String url = "jdbc:sqlite:hotelJava.db";
+						Connection conn = DriverManager.getConnection(url);
+						Statement stmt = (Statement) conn.createStatement();
+						SimpleDateFormat formatter= new SimpleDateFormat("yyyy-MM-dd 'at' HH:mm:ss z");
+						Date date = new Date(System.currentTimeMillis());
+						String fechaHoy = date.getYear() + "-" + date.getMonth() + "-" + date.getDay();
+						int row1 = stmt.executeUpdate("UPDATE habitacion SET libre = 0 WHERE usuario = '"+ cliente.getLogin() +"' AND fechaSalida > '"+ fechaHoy +"' AND libre = 1;");
+						
+						int row2 = stmt.executeUpdate("INSERT INTO habitacion VALUES('"+ fechaIncBD +"', '', '"+ type +"', '"+ cliente.getLogin() +"', 1);");
+						
+						conn.close();
+					} catch (ClassNotFoundException e2) {
+					 System.out.println("No se ha podido cargar el driver de la base de datos");
+					} catch (SQLException e2) {
+						System.out.println(e2.getMessage());
+					} 	
 		     }
 		});
 		
@@ -90,6 +113,7 @@ public class VentanaCalendario extends JFrame{
 				String mes = Integer.toString(calendario.getCalendar().get(java.util.Calendar.MONTH) + 1);
 				String dia = Integer.toString(calendario.getCalendar().get(java.util.Calendar.DATE));
 				fecha.setText(dia + "-" + mes + "-" + year);
+				String fechaEndBD = year + "-" + mes + "-" + dia;
 				d2 = calendario.getDate();
 				
 				//CON LAS FECHAS DE ENTRADA Y SALIDA, CALCULAMOS LA DIFERENCIA PARA SABER LOS DIAS TOTALES DE ESTANCIA EN EL HOTEL
@@ -125,6 +149,21 @@ public class VentanaCalendario extends JFrame{
 				
 				//A CONTINUACION LE LLEVAMOS A LA VENTANA SERVICIOS PARA QUE PUEDA CONTRATAR SERVICIOS COMPLEMENTARIOS
 				VentanaServicios vs = new VentanaServicios(cliente, pagoHabitacion);
+				
+				try {	
+					Class.forName("org.sqlite.JDBC");
+					String url = "jdbc:sqlite:hotelJava.db";
+					Connection conn = DriverManager.getConnection(url);
+					Statement stmt = (Statement) conn.createStatement();
+					
+					int row = stmt.executeUpdate("UPDATE habitacion SET fechaSalida = '"+ fechaEndBD +"' WHERE usuario = '"+ cliente.getLogin() +"' AND fechaEntrada = '"+ fechaIncBD +"'");
+					
+					conn.close();
+				} catch (ClassNotFoundException e2) {
+				 System.out.println("No se ha podido cargar el driver de la base de datos");
+				} catch (SQLException e2) {
+					System.out.println(e2.getMessage());
+				}
 				
 		        dispose();		       
 			}

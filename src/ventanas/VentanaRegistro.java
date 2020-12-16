@@ -69,7 +69,7 @@ public class VentanaRegistro extends JFrame{
 							String url = "jdbc:sqlite:hotelJava.db";
 							Connection conn = DriverManager.getConnection(url);
 							Statement stmt = (Statement) conn.createStatement();
-							int rows = stmt.executeUpdate("INSERT INTO cliente VALUES('', '', '"+ nuevo.getPassword() +"', '"+ nuevo.getLogin() +"', 'cliente', '');");
+							int rows = stmt.executeUpdate("INSERT INTO cliente VALUES('', '', '"+ nuevo.getPassword() +"', '"+ nuevo.getLogin() +"', 'cliente', '', '');");
 							conn.close();
 							VentanaCreacionRegistro veh = new VentanaCreacionRegistro(nuevo);
 							dispose();
@@ -88,32 +88,6 @@ public class VentanaRegistro extends JFrame{
 				    	VentanaRegistro vcr = new VentanaRegistro(cliente);
 				    }
 					
-				}
-				
-				//FICHERO IGUAL QUE EL DE DATOS
-				
-				try {
-					Scanner sc = new Scanner(new FileInputStream("LoginPassword"));
-					while(sc.hasNext()) {
-						String linea = sc.nextLine();
-					}
-					
-				}catch(FileNotFoundException e1) {
-					System.err.println("ERROR");
-				}
-				
-				PrintWriter pw = null;
-				try {
-				    pw = new PrintWriter(new BufferedWriter(new FileWriter("LoginPassword", true)));
-				    pw.print("");
-				    pw.println(nuevo.getLogin() + ";" + nuevo.getPassword());
-				    
-				} catch (IOException e1) {
-				    System.err.println(e1);
-				} finally {
-				    if (pw != null) {
-				        pw.close();
-				    }
 				}
 			}
 		});

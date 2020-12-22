@@ -2,6 +2,8 @@ package teses;
 
 import static org.junit.Assert.assertEquals;
 
+import java.util.HashMap;
+
 import org.junit.jupiter.api.Test;
 
 import hotel.Cliente;
@@ -50,6 +52,20 @@ class ClienteTest {
 	@Test
 	void getNewPassword() {
 		assertEquals("Armagedom", Cliente.getNewPassword());
+	}
+	
+	@Test public void testHashMap() {
+		HashMap<String,Integer> hashmap = new HashMap<String,Integer>();
+		assertEquals(null, hashmap.put("COMIDA", 30));
+		assertEquals(null, hashmap.put("MASAJE CORPORAL", 90));
+		assertEquals(null, hashmap.put("SALA PETIT COMITÉ EQUIPADA", 50));
+		assertEquals(null, hashmap.put("ELECCION DE TRES (DIFERENTES)", 140));
+	
+		assertEquals((Integer)30, hashmap.put("COMIDA", 30));
+		assertEquals((Integer)90, hashmap.put("MASAJE CORPORAL", 90));
+		assertEquals((Integer)50, hashmap.put("SALA PETIT COMITÉ EQUIPADA", 50));
+		assertEquals((Integer)140, hashmap.put("ELECCION DE TRES (DIFERENTES)", 140));
+		
 	}
 	
 }

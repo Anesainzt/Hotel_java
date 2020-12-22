@@ -12,10 +12,7 @@ public class VentanaCliente extends JFrame{
 	
 	JButton historial;
 	JButton nuevaReserva;
-
 	JButton salir;
-
-	
 	
 	public VentanaCliente(Cliente cliente) {
 		
@@ -29,7 +26,6 @@ public class VentanaCliente extends JFrame{
 			
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
-				
 				
 				
 			}

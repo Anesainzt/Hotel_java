@@ -120,6 +120,22 @@ public class VentanaCalendario extends JFrame{
 				Date startDate1 = d1;
 		        Date endDate1 = d2;
 		        long diff = endDate1.getTime() - startDate1.getTime();
+		        
+		        //VentanaServicios vs = new VentanaServicios(cliente);
+		        
+		        PrintWriter pw = null;
+				try {
+				    pw = new PrintWriter(new BufferedWriter(new FileWriter("fechas", true)));
+				    pw.print("");
+				    pw.println(new SimpleDateFormat("dd/MM/yyyy").format(startDate1) + ";" + new SimpleDateFormat("dd/MM/yyyy").format(endDate1));
+				    
+				} catch (IOException e1) {
+				    System.err.println(e1);
+				} finally {
+				    if (pw != null) {
+				        pw.close();
+				    }
+				}
 				
 				//EL DINERO DE LA VARIABLE ANTERIOR LA CONVERTIMOS A INT PARA PODER TRABAJAR CON ELLA
 				String pago = Long.toString((diff / (1000L*60L*60L*24L)));

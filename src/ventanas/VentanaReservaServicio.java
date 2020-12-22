@@ -7,6 +7,8 @@ import java.awt.Color;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.*;
@@ -22,10 +24,7 @@ public class VentanaReservaServicio extends JFrame{
 	Date hoy;
 	
 	
-	public VentanaReservaServicio(Cliente cliente, int precio, String tipo) {
-		
-		HashMap<String, ArrayList<String>> hashmap = new HashMap<String, ArrayList<String>>();
-		
+	public VentanaReservaServicio(Cliente cliente, int precioHab, String tipo) {
 		
 		setLayout(new GridLayout(2, 1));
 		
@@ -33,10 +32,28 @@ public class VentanaReservaServicio extends JFrame{
 		fecha = new JTextField(30);
 		fechaSeleccion = new JButton("Fecha eleccion");
 		
+		ArrayList<String> nuevosDatos = new ArrayList<String>();
+		String linea = null;
+		String[] campos = null;
 		String fechaInicio = null;
 		String fechaFin = null;
     	
-    	
+    	try {
+			Scanner sc1 = new Scanner(new FileInputStream("fechas"));
+			
+			while(sc1.hasNext()) {
+				linea = sc1.nextLine();
+				campos = linea.split(";");
+				nuevosDatos.add(linea);
+				fechaInicio = campos[0];
+				fechaFin = campos[1];
+			}
+			
+		}catch(FileNotFoundException e1) {
+			System.err.println("ERROR");
+		}finally{
+			//borrar fichero
+		}
     	
     	Date fi = null;
 		try {
@@ -110,7 +127,7 @@ public class VentanaReservaServicio extends JFrame{
 		add(calendario);
 					
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
-		setTitle("Reserva Servicio");
+		setTitle("Calendario");
 		setSize(800, 600);
 		setVisible(true);
 		

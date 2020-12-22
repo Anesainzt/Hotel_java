@@ -27,8 +27,9 @@ public class VentanaReservaServicio extends JFrame{
 	public VentanaReservaServicio(Cliente cliente, int precio, String tipo) {			
 		Cliente nuevo = cliente;
 			
-		HashMap<String, Integer> hashmap = cliente.getHashmap();
-			
+		HashMap<String, Integer> hashmap = new HashMap<String, Integer>();
+		hashmap = cliente.getHashmap();
+			System.out.println(tipo +"" + precio);
 		hashmap.put(tipo, precio);
 			
 		nuevo.setHashmap(hashmap);

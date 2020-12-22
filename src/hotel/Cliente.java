@@ -37,7 +37,7 @@ public class Cliente extends Ticket{
 		Cliente.login = "";
 		Cliente.password = "";
 		Cliente.newPassword = "";
-		Cliente.hashmap = null;
+		Cliente.hashmap = new HashMap <String, Integer>();
 	}
 	
 	public Cliente(Cliente c) {

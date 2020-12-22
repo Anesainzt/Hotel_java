@@ -12,7 +12,7 @@ public class VentanaContinuacion extends JFrame{
 	JButton elegirNuevoServicio;
 	JButton continuar;
 	
-	public VentanaContinuacion(Cliente cliente, int pago) {
+	public VentanaContinuacion(Cliente cliente) {
 		
 		setLayout(new GridLayout(2, 1));
 		
@@ -22,7 +22,7 @@ public class VentanaContinuacion extends JFrame{
 		elegirNuevoServicio.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				VentanaServicios vs = new VentanaServicios(cliente, pago);				
+				VentanaServicios vs = new VentanaServicios(cliente);				
 				dispose();
 			}
 		});
@@ -30,7 +30,7 @@ public class VentanaContinuacion extends JFrame{
 		continuar.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				VentanaFactura vf = new VentanaFactura();
+				VentanaFactura vf = new VentanaFactura(cliente);
 				dispose();
 			}
 		});

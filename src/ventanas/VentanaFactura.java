@@ -1,14 +1,19 @@
 package ventanas;
 
-import java.awt.GridLayout;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import javax.swing.JButton;
 import javax.swing.JFrame;
-import javax.swing.JLabel;
+
+import hotel.Cliente;
 
 public class VentanaFactura extends JFrame {
 	
+	public VentanaFactura(Cliente cliente) {
+		setDefaultCloseOperation(EXIT_ON_CLOSE);
+		setTitle("Factura");
+		pack();
+		setVisible(true);
+	}
+	
+	/*
 	JLabel factura;
 	JLabel nombre;
 	JLabel apellidos;
@@ -163,4 +168,5 @@ public class VentanaFactura extends JFrame {
 		setVisible(true);
 		
 	}
+	*/
 }

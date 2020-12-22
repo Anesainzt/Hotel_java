@@ -38,8 +38,7 @@ public class VentanaCliente extends JFrame{
 			
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
-
-				
+				VentanaEleccionHabitacion veh = new VentanaEleccionHabitacion(cliente);			
 			}
 		});
 		
@@ -51,8 +50,9 @@ public class VentanaCliente extends JFrame{
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
 		setTitle("Identificación del cliente");
 		inicio.setSize(800, 200);
-		inicio.setVisible(true);
-		reservas.setVisible(false);
+		setVisible(true);
+		reservas.setVisible(true);
+		
 		
 	}
 	

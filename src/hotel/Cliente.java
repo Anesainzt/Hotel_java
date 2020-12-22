@@ -1,6 +1,5 @@
 package hotel;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 
 public class Cliente extends Ticket{
@@ -12,10 +11,9 @@ public class Cliente extends Ticket{
 	protected static String login;
 	protected static String password;
 	protected static String newPassword;
-	protected static ArrayList<String> ticket = new ArrayList();
-	protected static HashMap<String, ArrayList<String>> hashmap = new HashMap<String, ArrayList<String>>();
+	protected static HashMap<String, Integer> hashmap = new HashMap<String, Integer>();
 	
-	public Cliente(String nombre, String apellido, String dni, String fecha_ncto, String tarjeta, String login, String password, String newPassword, ArrayList<String> ticket, HashMap<String, ArrayList<String>> hashmap) {
+	public Cliente(String nombre, String apellido, String dni, String fecha_ncto, String tarjeta, String login, String password, String newPassword, HashMap<String, Integer> hashmap) {
 		
 		Cliente.nombre = nombre;
 		Cliente.apellido = apellido;
@@ -25,7 +23,6 @@ public class Cliente extends Ticket{
 		Cliente.login = login;
 		Cliente.password = password;
 		Cliente.newPassword = newPassword;
-		Cliente.ticket = ticket;
 		Cliente.hashmap = hashmap;
 	}
 
@@ -40,7 +37,6 @@ public class Cliente extends Ticket{
 		Cliente.login = "";
 		Cliente.password = "";
 		Cliente.newPassword = "";
-		Cliente.ticket = null;
 		Cliente.hashmap = null;
 	}
 	
@@ -53,7 +49,6 @@ public class Cliente extends Ticket{
 		Cliente.login = c.login;
 		Cliente.password = c.password;
 		Cliente.newPassword = c.newPassword;
-		Cliente.ticket = c.ticket;
 		Cliente.hashmap = c.hashmap;
 	}
 
@@ -121,27 +116,13 @@ public class Cliente extends Ticket{
 		Cliente.newPassword = newPassword;
 	}
 
-
-	public static ArrayList<String> getTicket() {
-		return ticket;
-	}
-
-
-	public static void setTicket(ArrayList<String> ticket) {
-		Cliente.ticket = ticket;
-	}
-
-
-	public static HashMap<String, ArrayList<String>> getHashmap() {
+	public static HashMap<String, Integer> getHashmap() {
 		return hashmap;
 	}
 
 
-	public static void setHashmap(HashMap<String, ArrayList<String>> hashmap) {
+	public static void setHashmap(HashMap<String, Integer> hashmap) {
 		Cliente.hashmap = hashmap;
 	}
-	
-	
-	
-	
+		
 }

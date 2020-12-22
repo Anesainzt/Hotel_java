@@ -3,16 +3,10 @@ package ventanaServicios;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.util.Scanner;
-
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
-import javax.swing.JOptionPane;
-
 import hotel.Cliente;
 import ventanas.VentanaReservaServicio;
 
@@ -22,7 +16,7 @@ public class VentanaComida extends JFrame{
 	JLabel comida;
 	JButton continuar;
 	
-	public VentanaComida(Cliente cliente, int pago) {
+	public VentanaComida(Cliente cliente) {
 		setLayout(new GridLayout(3, 1));
 		
 		comboComida = new JComboBox<String>();
@@ -43,29 +37,24 @@ public class VentanaComida extends JFrame{
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				if(comboComida.getSelectedItem().equals("MCDONALDS ---> 30€")) {
-			    	JOptionPane.showMessageDialog(null, pago + 30);
-			    	VentanaReservaServicio vrs = new VentanaReservaServicio(cliente, pago + 30, "MCDONALDS");
+			    	VentanaReservaServicio vrs = new VentanaReservaServicio(cliente, 30, "MCDONALDS");
 				}else if (comboComida.getSelectedItem().equals("BURGER KING ---> 30€")){
-					JOptionPane.showMessageDialog(null, pago + 30);
-			    	VentanaReservaServicio vrs = new VentanaReservaServicio(cliente, pago + 30, "BURGER KING");
+			    	VentanaReservaServicio vrs = new VentanaReservaServicio(cliente, 30, "BURGER KING");
 				} else if (comboComida.getSelectedItem().equals("FOSTERS HOLLYWOOD ---> 40€")) {
-					JOptionPane.showMessageDialog(null, pago + 40);
-			    	VentanaReservaServicio vrs = new VentanaReservaServicio(cliente, pago + 40, "FOSTERS HOLLYWOOD");
+			    	VentanaReservaServicio vrs = new VentanaReservaServicio(cliente, 40, "FOSTERS HOLLYWOOD");
 				}else if (comboComida.getSelectedItem().equals("POMODORO ---> 45€")) {
-					JOptionPane.showMessageDialog(null, pago + 45);
-			    	VentanaReservaServicio vrs = new VentanaReservaServicio(cliente, pago + 45, "POMODORO");
+					VentanaReservaServicio vrs = new VentanaReservaServicio(cliente, 45, "POMODORO");
 				}else if (comboComida.getSelectedItem().equals("FOODOO ---> 50€")) {
-					JOptionPane.showMessageDialog(null, pago + 50);
-			    	VentanaReservaServicio vrs = new VentanaReservaServicio(cliente, pago + 50, "FOODOO");
+			    	VentanaReservaServicio vrs = new VentanaReservaServicio(cliente, 50, "FOODOO");
 				}else if (comboComida.getSelectedItem().equals("DONGA ---> 60€")) {
-					JOptionPane.showMessageDialog(null, pago + 60);
-			    	VentanaReservaServicio vrs = new VentanaReservaServicio(cliente, pago + 60, "DONGA");
+			    	VentanaReservaServicio vrs = new VentanaReservaServicio(cliente, 60, "DONGA");
 				}else if (comboComida.getSelectedItem().equals("MENU DEL DIA HOTEL ---> 150€")) {
-					JOptionPane.showMessageDialog(null, pago + 150);
-			    	VentanaReservaServicio vrs = new VentanaReservaServicio(cliente, pago + 150, "MENU DEL DIA HOTEL");
+			    	VentanaReservaServicio vrs = new VentanaReservaServicio(cliente, 150, "MENU DEL DIA HOTEL");
+				}else if(comboComida.getSelectedItem().equals("BUFFET HOTEL ---> 110€")){
+			    	VentanaReservaServicio vrs = new VentanaReservaServicio(cliente, 110, "BUFFET HOTEL");
 				}else {
-					JOptionPane.showMessageDialog(null, pago + 110);
-			    	VentanaReservaServicio vrs = new VentanaReservaServicio(cliente, pago + 110, "BUFFET HOTEL");
+					System.out.println("TIENES QUE ELEGIR UN SERVICIO");
+					VentanaComida vc = new VentanaComida(cliente);
 				}
 				
 				dispose();

@@ -21,7 +21,6 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.text.SimpleDateFormat;
 import java.util.*;
-import java.util.logging.Logger;
 
 
 public class VentanaCalendario extends JFrame{
@@ -35,8 +34,8 @@ public class VentanaCalendario extends JFrame{
 	Date hoy;
 	JPanel p;
 	JPanel pfecha;
+	
 	static  String fechaIncBD;
-	private static Logger logger = Logger.getLogger(VentanaCalendario.class.getName());
 	
 	public VentanaCalendario(Cliente cliente, int precioHab, String type) {
 		
@@ -96,9 +95,9 @@ public class VentanaCalendario extends JFrame{
 						
 						conn.close();
 					} catch (ClassNotFoundException e2) {
-						logger.warning("No se ha podido cargar el driver de la base de datos");
+					 System.out.println("No se ha podido cargar el driver de la base de datos");
 					} catch (SQLException e2) {
-						logger.warning(e2.getMessage());
+						System.out.println(e2.getMessage());
 					} 	
 		     }
 		});
@@ -121,22 +120,6 @@ public class VentanaCalendario extends JFrame{
 				Date startDate1 = d1;
 		        Date endDate1 = d2;
 		        long diff = endDate1.getTime() - startDate1.getTime();
-		        
-		        //VentanaServicios vs = new VentanaServicios(cliente);
-		        
-		        PrintWriter pw = null;
-				try {
-				    pw = new PrintWriter(new BufferedWriter(new FileWriter("Habitacion", true)));
-				    pw.print("");
-				    pw.println(new SimpleDateFormat("dd/MM/yyyy").format(startDate1) + ";" + new SimpleDateFormat("dd/MM/yyyy").format(endDate1));
-				    
-				} catch (IOException e1) {
-					logger.warning(e1 + "");
-				} finally {
-				    if (pw != null) {
-				        pw.close();
-				    }
-				}
 				
 				//EL DINERO DE LA VARIABLE ANTERIOR LA CONVERTIMOS A INT PARA PODER TRABAJAR CON ELLA
 				String pago = Long.toString((diff / (1000L*60L*60L*24L)));
@@ -149,7 +132,7 @@ public class VentanaCalendario extends JFrame{
 				JOptionPane.showMessageDialog(null, "PAGO HABITACION: " + pago + " DIAS " + " = " + pagoHabitacion + "€");
 				
 				//A CONTINUACION LE LLEVAMOS A LA VENTANA SERVICIOS PARA QUE PUEDA CONTRATAR SERVICIOS COMPLEMENTARIOS
-				VentanaServicios vs = new VentanaServicios(cliente, pagoHabitacion);
+				VentanaServicios vs = new VentanaServicios(cliente);
 				
 				try {	
 					Class.forName("org.sqlite.JDBC");
@@ -161,9 +144,9 @@ public class VentanaCalendario extends JFrame{
 					
 					conn.close();
 				} catch (ClassNotFoundException e2) {
-					logger.warning("No se ha podido cargar el driver de la base de datos");
+				 System.out.println("No se ha podido cargar el driver de la base de datos");
 				} catch (SQLException e2) {
-					logger.warning(e2.getMessage());
+					System.out.println(e2.getMessage());
 				}
 				
 		        dispose();		       

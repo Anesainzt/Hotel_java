@@ -21,7 +21,7 @@ public class VentanaServicios extends JFrame {
 	ButtonGroup bg;
 	JButton contratar;
 	
-	public VentanaServicios(Cliente cliente, int pago) {
+	public VentanaServicios(Cliente cliente) {
 		
 		setLayout(new GridLayout(7, 1));
 		
@@ -47,17 +47,20 @@ public class VentanaServicios extends JFrame {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				if(spa.isSelected()) {
-					VentanaSpa vc = new VentanaSpa(cliente, pago);
+					VentanaSpa vc = new VentanaSpa(cliente);
 				}else if(buffet.isSelected()) {
-					VentanaComida vc = new VentanaComida(cliente, pago);
+					VentanaComida vc = new VentanaComida(cliente);
 				}else if(deportes.isSelected()) {
-					VentanaDeporte vc = new VentanaDeporte(cliente, pago);
+					VentanaDeporte vc = new VentanaDeporte(cliente);
 				}else if(miniBar.isSelected()) {
-					VentanaMiniBar vc = new VentanaMiniBar(cliente, pago);
+					VentanaMiniBar vc = new VentanaMiniBar(cliente);
 				}else if(salaReunion.isSelected()) {
-					VentanaSalaReunion vc = new VentanaSalaReunion(cliente, pago);
+					VentanaSalaReunion vc = new VentanaSalaReunion(cliente);
 				}else if(sinServicioExtra.isSelected()) {
-					VentanaContinuacion vc = new VentanaContinuacion(cliente, pago);
+					VentanaContinuacion vc = new VentanaContinuacion(cliente);
+				}else {
+					System.out.println("TIENES QUE ELEGIR");
+					VentanaServicios vs = new VentanaServicios(cliente);
 				}
 				dispose();
 			}

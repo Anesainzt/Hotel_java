@@ -3,16 +3,10 @@ package ventanaServicios;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.util.Scanner;
-
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
-import javax.swing.JOptionPane;
-
 import hotel.Cliente;
 import ventanas.VentanaReservaServicio;
 
@@ -22,7 +16,7 @@ public class VentanaMiniBar extends JFrame{
 	JLabel miniBar;
 	JButton continuar;
 	
-	public VentanaMiniBar(Cliente cliente, int pago) {
+	public VentanaMiniBar(Cliente cliente) {
 		setLayout(new GridLayout(3, 1));
 		
 		comboMiniBar = new JComboBox<String>();
@@ -43,29 +37,24 @@ public class VentanaMiniBar extends JFrame{
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				if(comboMiniBar.getSelectedItem().equals("VODKA ---> 30€")) {
-			    	JOptionPane.showMessageDialog(null, pago + 30);
-			    	VentanaReservaServicio vrs = new VentanaReservaServicio(cliente, pago + 30, "VODKA");
+			    	VentanaReservaServicio vrs = new VentanaReservaServicio(cliente, 30, "VODKA");
 				}else if (comboMiniBar.getSelectedItem().equals("GINEBRA ---> 30€")){
-					JOptionPane.showMessageDialog(null, pago + 30);
-			    	VentanaReservaServicio vrs = new VentanaReservaServicio(cliente, pago + 30,"GINEBRA");
+			    	VentanaReservaServicio vrs = new VentanaReservaServicio(cliente, 30,"GINEBRA");
 				}else if (comboMiniBar.getSelectedItem().equals("WHISKEY ---> 50€")){
-					JOptionPane.showMessageDialog(null, pago + 50);
-			    	VentanaReservaServicio vrs = new VentanaReservaServicio(cliente, pago + 50, "WHISKEY");
+			    	VentanaReservaServicio vrs = new VentanaReservaServicio(cliente, 50, "WHISKEY");
 				}else if (comboMiniBar.getSelectedItem().equals("TEQUILA ---> 45€")){
-					JOptionPane.showMessageDialog(null, pago + 45);
-			    	VentanaReservaServicio vrs = new VentanaReservaServicio(cliente, pago + 45, "TEQUILA");
+			    	VentanaReservaServicio vrs = new VentanaReservaServicio(cliente, 45, "TEQUILA");
 				}else if (comboMiniBar.getSelectedItem().equals("RON ---> 30€")){
-					JOptionPane.showMessageDialog(null, pago + 30);
-			    	VentanaReservaServicio vrs = new VentanaReservaServicio(cliente, pago + 30, "RON");
+			    	VentanaReservaServicio vrs = new VentanaReservaServicio(cliente, 30, "RON");
 				}else if (comboMiniBar.getSelectedItem().equals("ELECCION DE DOS (DIFERENTES) ---> 90€")){
-					JOptionPane.showMessageDialog(null, pago + 90);
-			    	VentanaReservaServicio vrs = new VentanaReservaServicio(cliente, pago + 90, "ELECCION DE DOS (DIFERENTES)");
+			    	VentanaReservaServicio vrs = new VentanaReservaServicio(cliente, 90, "ELECCION DE DOS (DIFERENTES)");
 				}else if (comboMiniBar.getSelectedItem().equals("ELECCION DE TRES (DIFERENTES) ---> 140€")){
-					JOptionPane.showMessageDialog(null, pago + 140);
-			    	VentanaReservaServicio vrs = new VentanaReservaServicio(cliente, pago + 140, "ELECCION DE TRES (DIFERENTES)");
+			    	VentanaReservaServicio vrs = new VentanaReservaServicio(cliente, 140, "ELECCION DE TRES (DIFERENTES)");
+				}else if (comboMiniBar.getSelectedItem().equals("TODOS ---> 180€")){
+			    	VentanaReservaServicio vrs = new VentanaReservaServicio(cliente, 180, "TODOS");
 				}else {
-					JOptionPane.showMessageDialog(null, pago + 180);
-			    	VentanaReservaServicio vrs = new VentanaReservaServicio(cliente, pago + 180, "TODOS");
+					System.out.println("TIENES QUE ELEGIR UN SERVICIO");
+					VentanaDeporte vd = new VentanaDeporte(cliente);
 				}
 				
 				dispose();

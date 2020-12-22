@@ -28,8 +28,6 @@ public class VentanaEleccionHabitacion extends JFrame{
 		comboHabitaciones.addItem("INDIVIDUAL ---> 80€/noche");
 		comboHabitaciones.addItem("FAMILIAR ---> 130€/noche");
 		
-		
-		
 		//AL ELEGIRLA SE GUARDARÁ EN UN FICHERO PARA UTILIZAR LA INFORMACION MAS ADELANTE
 		elegir.addActionListener(new ActionListener() {
 			@Override

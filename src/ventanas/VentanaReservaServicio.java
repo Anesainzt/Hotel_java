@@ -24,7 +24,14 @@ public class VentanaReservaServicio extends JFrame{
 	Date hoy;
 	
 	
-	public VentanaReservaServicio(Cliente cliente, int precioHab, String tipo) {
+	public VentanaReservaServicio(Cliente cliente, int precio, String tipo) {			
+		Cliente nuevo = cliente;
+			
+		HashMap<String, Integer> hashmap = cliente.getHashmap();
+			
+		hashmap.put(tipo, precio);
+			
+		nuevo.setHashmap(hashmap);
 		
 		setLayout(new GridLayout(2, 1));
 		
@@ -94,7 +101,7 @@ public class VentanaReservaServicio extends JFrame{
 		    	//SE RESTA 1 AL MES PORQUE EMPIEZA A CONTAR DESDE 0 Y ANTES LE HEMOS SUMADO 1 PARA ESCRIBIR BIEN LA FECHA
 		    	Date minNoche = new Date(Date.UTC(minYear-1900, minMes-1, minDia +1, 0, 0, 0));
 		    	
-		    	VentanaContinuacion vc = new VentanaContinuacion(cliente);
+		    	VentanaContinuacion vc = new VentanaContinuacion(nuevo);
 		    	
 		    	dispose();
 			}

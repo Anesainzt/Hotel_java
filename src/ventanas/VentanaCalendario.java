@@ -21,6 +21,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.text.SimpleDateFormat;
 import java.util.*;
+import java.util.logging.Logger;
 
 
 public class VentanaCalendario extends JFrame{
@@ -34,8 +35,8 @@ public class VentanaCalendario extends JFrame{
 	Date hoy;
 	JPanel p;
 	JPanel pfecha;
-	
 	static  String fechaIncBD;
+	private static Logger logger = Logger.getLogger(VentanaCalendario.class.getName());
 	
 	public VentanaCalendario(Cliente cliente, int precioHab, String type) {
 		
@@ -95,9 +96,9 @@ public class VentanaCalendario extends JFrame{
 						
 						conn.close();
 					} catch (ClassNotFoundException e2) {
-					 System.out.println("No se ha podido cargar el driver de la base de datos");
+						logger.warning("No se ha podido cargar el driver de la base de datos");
 					} catch (SQLException e2) {
-						System.out.println(e2.getMessage());
+						logger.warning(e2.getMessage());
 					} 	
 		     }
 		});
@@ -130,7 +131,7 @@ public class VentanaCalendario extends JFrame{
 				    pw.println(new SimpleDateFormat("dd/MM/yyyy").format(startDate1) + ";" + new SimpleDateFormat("dd/MM/yyyy").format(endDate1));
 				    
 				} catch (IOException e1) {
-				    System.err.println(e1);
+					logger.warning(e1 + "");
 				} finally {
 				    if (pw != null) {
 				        pw.close();
@@ -160,9 +161,9 @@ public class VentanaCalendario extends JFrame{
 					
 					conn.close();
 				} catch (ClassNotFoundException e2) {
-				 System.out.println("No se ha podido cargar el driver de la base de datos");
+					logger.warning("No se ha podido cargar el driver de la base de datos");
 				} catch (SQLException e2) {
-					System.out.println(e2.getMessage());
+					logger.warning(e2.getMessage());
 				}
 				
 		        dispose();		       

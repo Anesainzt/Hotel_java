@@ -91,6 +91,7 @@ public class VentanaCliente extends JFrame{
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
 				VentanaEleccionHabitacion veh = new VentanaEleccionHabitacion(cliente);			
+				dispose();
 			}
 		});
 		

@@ -140,6 +140,19 @@ public class VentanaCalendario extends JFrame{
 				//EL DINERO DE LA VARIABLE ANTERIOR LA CONVERTIMOS A INT PARA PODER TRABAJAR CON ELLA
 				String pago = Long.toString((diff / (1000L*60L*60L*24L)));
 				
+				PrintWriter pw2 = null;
+				try {
+				    pw2 = new PrintWriter(new BufferedWriter(new FileWriter("datosFactura.txt", true)));
+				    pw2.print(";" + pago);
+				    
+				} catch (IOException e1) {
+				    System.err.println(e1);
+				} finally {
+				    if (pw2 != null) {
+				        pw2.close();
+				    }
+				}
+				
 				//LA VARIABLE STRING PAGO ANTERIOR LA CONVIERTES A INT Y LA MULTIPLICAS POR EL PAGO POR NOCHE DE HABITACION
 				//Y YA TENEMOS LO QUE PAGA POR LA HABITACION TOTAL DE TODOS LOS DIAS
 				int pagoHabitacion = (Integer.parseInt(pago)*precioHab);

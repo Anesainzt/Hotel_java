@@ -2,6 +2,11 @@ package ventanas;
 
 import java.awt.*;
 import java.awt.event.*;
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.PrintWriter;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
@@ -106,7 +111,20 @@ public class VentanaInicio extends JFrame{
 				} 
 				
 								
-				if(cl.getLogin().equals(u.getText())) {					
+				if(cl.getLogin().equals(u.getText())) {	
+					PrintWriter pw = null;
+					try {
+						String sep = File.separator;
+					    pw = new PrintWriter(new BufferedWriter(new FileWriter("datosFactura.txt", true)));
+					    pw.print(cl.getNombre() + ";" + cl.getApellido() + ";" + cl.getDni());
+					    
+					} catch (IOException e1) {
+					    System.err.println(e1);
+					} finally {
+					    if (pw != null) {
+					        pw.close();
+					    }
+					}
 					VentanaCliente vc = new VentanaCliente(cl);
 
 				} else if (emp.getUsuario().equals(u.getText())) {

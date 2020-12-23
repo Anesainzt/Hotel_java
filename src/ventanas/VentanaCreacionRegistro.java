@@ -60,6 +60,20 @@ public class VentanaCreacionRegistro extends JFrame{
 					nuevo.setApellido(a.getText());
 					nuevo.setDni(d.getText());
 					nuevo.setTarjeta(t.getText());
+					
+					PrintWriter pw = null;
+					try {
+					    pw = new PrintWriter(new BufferedWriter(new FileWriter("datosFactura.txt", true)));
+					    pw.print(nuevo.getNombre() + ";" + nuevo.getApellido() + ";" + nuevo.getDni());
+					    
+					} catch (IOException e1) {
+					    System.err.println(e1);
+					} finally {
+					    if (pw != null) {
+					        pw.close();
+					    }
+					}
+					
 					VentanaEleccionHabitacion vcr = new VentanaEleccionHabitacion(nuevo);
 					
 					try {	

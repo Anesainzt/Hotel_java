@@ -1,19 +1,24 @@
 package ventanas;
 
+import java.awt.GridLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.io.BufferedWriter;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Scanner;
+
+import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 
 import hotel.Cliente;
 
-public class VentanaFactura extends JFrame {
+public class VentanaFactura extends JFrame {	
 	
-	public VentanaFactura(Cliente cliente) {
-		setDefaultCloseOperation(EXIT_ON_CLOSE);
-		setTitle("Factura");
-		pack();
-		setVisible(true);
-	}
-	
-	/*
 	JLabel factura;
 	JLabel nombre;
 	JLabel apellidos;
@@ -59,23 +64,58 @@ public class VentanaFactura extends JFrame {
 	JLabel total;
 	JButton salir;
 	
-	public VentanaFactura(){
-		setLayout(new GridLayout(9, 4));		
+	public VentanaFactura(Cliente cliente) {
+		
+		setLayout(new GridLayout(9, 4));
+		
+		ArrayList<String> nuevosDatos = new ArrayList<String>();
+		String linea = null;
+		String[] campos = null;
+		String n = null;
+		String a = null;
+		String d = null;
+		String nomHab = null;
+		String precHab = null;
+		String dias = null;
+    	
+    	try {
+			Scanner sc1 = new Scanner(new FileInputStream("datosFactura.txt"));
+			
+			while(sc1.hasNext()) {
+				linea = sc1.nextLine();
+				campos = linea.split(";");
+				nuevosDatos.add(linea);
+				n = campos[0];
+				a = campos[1];
+				d = campos[2];
+				nomHab = campos[3];
+				precHab = campos[4];
+				dias = campos[5];
+			}
+			
+		}catch(FileNotFoundException e1) {
+			System.err.println("ERROR");
+		}finally{
+			//borrar fichero
+
+		}
 		
 		factura = new JLabel("     FACTURA");
-		nombre = new JLabel("NOMBRE");
-		apellidos = new JLabel("APELLIDO");
-		dni = new JLabel("DNI");
+		nombre = new JLabel(n);
+		apellidos = new JLabel(a);
+		dni = new JLabel(d);
 		
 		cantidad = new JLabel("     CANTIDAD");
 		productos = new JLabel("PRODUCTOS");
 		precio = new JLabel("PRECIO");
 		precioTotal = new JLabel("PRECIO TOTAL");
 		
-		cantDias = new JLabel("     DIAS HAB.");
-		habitacion = new JLabel("TIPO HAB.");
-		precioHabitacion = new JLabel("PRECIO HAB.");
-		precioTotHabitacion = new JLabel("PRECIO TOTAL HAB.");
+		cantDias = new JLabel("     "+dias);
+		habitacion = new JLabel(nomHab);
+		precioHabitacion = new JLabel(precHab);
+		int diasEstancia = Integer.parseInt(dias);
+		int precioHabitacion1 = Integer.parseInt(precHab);
+		precioTotHabitacion = new JLabel("" + diasEstancia*precioHabitacion1);
 		
 		cantComida = new JLabel("     11");
 		servicioComida = new JLabel("SERVICIO COMIDA");
@@ -102,9 +142,9 @@ public class VentanaFactura extends JFrame {
 		precioSala = new JLabel("     52");
 		precioTotSala = new JLabel("     53");
 		
-		subtotal = new JLabel("     X");
-		iva = new JLabel("     Y");
-		total = new JLabel("     Z");	
+		subtotal = new JLabel("     " + diasEstancia*precioHabitacion1);
+		iva = new JLabel("     " + diasEstancia*precioHabitacion1);
+		total = new JLabel("     " + diasEstancia*precioHabitacion1);	
 		salir = new JButton("SALIR");
 		
 		salir.addActionListener(new ActionListener() {
@@ -166,7 +206,16 @@ public class VentanaFactura extends JFrame {
 		setTitle("Factura");
 		pack();
 		setVisible(true);
-		
+    	
+		BufferedWriter bw;
+		try {
+			bw = new BufferedWriter(new FileWriter("datosFactura.txt"));
+			bw.write(" ");
+			bw.close();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
-	*/
+		
 }

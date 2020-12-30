@@ -1,5 +1,6 @@
 package ventanas;
 
+import java.awt.BorderLayout;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -21,19 +22,20 @@ public class VentanaCliente extends JFrame{
 	JButton historial;
 	JButton nuevaReserva;
 	JButton salir;
-	JTable tabla;
+	JTable historia;
 	DefaultTableModel modelo;
+	JPanel panel;
 	
-	
-	public VentanaCliente(Cliente cliente) {
+	public VentanaCliente(Cliente cliente) { 
 		
-		setLayout(new GridLayout(3, 2));
+		setLayout(new GridLayout(2,2));
 		
+		panel = new JPanel();
 		historial = new JButton("HISTORAIL DE RESERVA");
 		salir = new JButton("SALIR");
 		nuevaReserva = new JButton("NUEVA RESERVA");
-		tabla = new JTable();
-		modelo = (DefaultTableModel)tabla.getModel();
+		historia = new JTable();
+		modelo = (DefaultTableModel)historia.getModel();
 		modelo.addColumn("Entrada");
 		modelo.addColumn("Salida");
 		modelo.addColumn("Tipo de habitacion");
@@ -57,22 +59,29 @@ public class VentanaCliente extends JFrame{
 						numFilas = res1.getInt("numero");
 					}
 					
-					String [][] fila = new String[numFilas][3];
+					String [] tabla = new String[3];
 					
 					
-					
+					int i = 0;
 					ResultSet res2 = stmt.executeQuery("SELECT fechaEntrada, fechaSalida, tipo FROM habitacion WHERE usuario = '"+ cliente.getLogin() +"'");
 					while(res2.next()) {
-						for (int i = 0; i < fila.length; i++) {
-							DateFormat dateFormat = new SimpleDateFormat("yyyy-mm-dd");
-							fila[i][0] = dateFormat.format(res2.getDate("fechaEntrada"));
-							fila[i][1] = dateFormat.format(res2.getDate("fechaSalida"));
-							fila[i][2] = res2.getString("tipo");
-							modelo.addRow(fila);
-						}
 						
+						String fila = res2.getString("fechaEntrada");
+						tabla[0] = fila;
+						fila = res2.getString("fechaSalida");
+						tabla[1] = fila;
+						fila = res2.getString("tipo");
+						tabla[2] = fila;
+						modelo.addRow(tabla);
+						if (i != numFilas) {
+							i = i + 1;
+						}
 					}
-					tabla.setVisible(true);
+					
+					
+					historia.setVisible(true);
+					
+					historial.setVisible(false);
 					
 					conn.close();
 				} catch (ClassNotFoundException e2) {
@@ -105,15 +114,16 @@ public class VentanaCliente extends JFrame{
 			}
 		});
 		
+		
 		add(historial);
 		add(nuevaReserva);
 		add(salir);
-		add(tabla);
+		add(historia);
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
 		setTitle("Identificación del cliente");
 		setSize(800, 200);
 		setVisible(true);
-		tabla.setVisible(false);
+		historia.setVisible(false);
 		
 		
 		

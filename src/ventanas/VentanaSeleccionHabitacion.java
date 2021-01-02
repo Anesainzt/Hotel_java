@@ -3,6 +3,9 @@ package ventanas;
 import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.BufferedWriter;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
@@ -57,6 +60,15 @@ public class VentanaSeleccionHabitacion extends JFrame{
 			// TODO: handle exception
 		}
 		
+		BufferedWriter bw;
+		try {
+			bw = new BufferedWriter(new FileWriter("fechas"));
+			bw.write(" ");
+			bw.close();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		
 	}
 	

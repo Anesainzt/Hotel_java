@@ -139,8 +139,8 @@ public class VentanaCalendario extends JFrame{
 				//LE MOSTRAMOS UNA VENTANA INFORMATIVA PARA QUE SEPA EL DINERO QUE GASTARA POR ESOS DIAS DE LA HABITACION
 				JOptionPane.showMessageDialog(null, "PAGO HABITACION: " + pago + " DIAS " + " = " + pagoHabitacion + "€");
 				
-				//A CONTINUACION LE LLEVAMOS A LA VENTANA SERVICIOS PARA QUE PUEDA CONTRATAR SERVICIOS COMPLEMENTARIOS
-				VentanaServicios vs = new VentanaServicios(cliente);
+				//A CONTINUACION LE LLEVAMOS A LA VENTANA SELECCION HABITACION PARA QUE ELIGA EL NUMERO DE HABITACION EN LA QUE SE ALOJARA ESOS DIAS
+				VentanaSeleccionHabitacion vsh = new VentanaSeleccionHabitacion(cliente, precioHab, type);
 				
 				
 		        dispose();		       

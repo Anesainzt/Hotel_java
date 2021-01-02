@@ -7,12 +7,14 @@ public class HabitacionVip extends Habitacion{
 	protected int piso;
 	protected int cantidad;
 	protected int camas;
+	protected boolean balcon;
 	
-	public HabitacionVip(int numHab, int piso, int cantidad, int camas) {
+	public HabitacionVip(int numHab, int piso, int cantidad, int camas, boolean balcon) {
 		this.numHab = numHab;
 		this.piso = piso;
 		this.cantidad = cantidad;
 		this.camas = camas;
+		this.balcon = balcon;
 	}
 	
 	public HabitacionVip() {
@@ -20,6 +22,7 @@ public class HabitacionVip extends Habitacion{
 		this.piso = 0;
 		this.cantidad = 0;
 		this.camas = 0;
+		this.balcon = false;
 	}
 	
 	public HabitacionVip(HabitacionVip v) {
@@ -27,6 +30,7 @@ public class HabitacionVip extends Habitacion{
 		this.piso = v.piso;
 		this.cantidad = v.cantidad;
 		this.camas = v.camas;
+		this.balcon = v.balcon;
 	}
 
 	public int getNumHab() {
@@ -61,10 +65,18 @@ public class HabitacionVip extends Habitacion{
 		this.camas = camas;
 	}
 
+	public boolean isBalcon() {
+		return balcon;
+	}
+
+	public void setBalcon(boolean balcon) {
+		this.balcon = balcon;
+	}
+
 	@Override
 	public String toString() {
 		return "HabitacionVip [numHab=" + numHab + ", piso=" + piso + ", cantidad=" + cantidad + ", camas=" + camas
-				+ ", cantHabTot=" + cantHabTot + "]";
+				+ ", balcon=" + balcon + ", cantHabTot=" + cantHabTot + ", ocupado=" + ocupado + "]";
 	}
 	
 }

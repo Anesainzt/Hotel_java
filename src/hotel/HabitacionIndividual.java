@@ -6,27 +6,24 @@ public class HabitacionIndividual extends Habitacion {
 	protected int numHab;
 	protected int piso;
 	protected int cantidad;
-	protected int camas = 1;
 	
-	public HabitacionIndividual(int numHab, int piso, int cantidad, int camas) {
+	
+	public HabitacionIndividual(int numHab, int piso, int cantidad) {
 		this.numHab = numHab;
 		this.piso = piso;
 		this.cantidad = cantidad;
-		this.camas = camas;
 	}
 	
 	public HabitacionIndividual() {
 		this.numHab = 0;
 		this.piso = 0;
 		this.cantidad = 0;
-		this.camas = 1;
 	}
 	
 	public HabitacionIndividual(HabitacionIndividual i) {
 		this.numHab = i.numHab;
 		this.piso = i.piso;
 		this.cantidad = i.cantidad;
-		this.camas = i.camas;
 	}
 
 	public int getNumHab() {
@@ -53,18 +50,9 @@ public class HabitacionIndividual extends Habitacion {
 		this.cantidad = cantidad;
 	}
 
-	public int getCamas() {
-		return camas;
-	}
-
-	public void setCamas(int camas) {
-		this.camas = camas;
-	}
-
 	@Override
 	public String toString() {
-		return "HabitacionIndividual [numHab=" + numHab + ", piso=" + piso + ", cantidad=" + cantidad + ", camas=" + camas
-				+ ", cantHabTot=" + cantHabTot + "]";
+		return "HabitacionIndividual [numHab=" + numHab + ", piso=" + piso + ", cantidad=" + cantidad + ", cantHabTot=" + cantHabTot + "]";
 	}
 	
 }

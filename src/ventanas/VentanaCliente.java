@@ -53,7 +53,7 @@ public class VentanaCliente extends JFrame{
 					Connection conn = DriverManager.getConnection(url);
 					Statement stmt = (Statement) conn.createStatement();
 					Integer numFilas = 0 ;
-					ResultSet res1 = stmt.executeQuery("SELECT COUNT(usuario) numero FROM habitacion WHERE usuario = '"+ cliente.getLogin() +"'");
+					ResultSet res1 = stmt.executeQuery("SELECT COUNT(usuario) numero FROM historialregistros WHERE usuario = '"+ cliente.getLogin() +"'");
 					
 					while (res1.next()) {
 						numFilas = res1.getInt("numero");
@@ -63,7 +63,7 @@ public class VentanaCliente extends JFrame{
 					
 					
 					int i = 0;
-					ResultSet res2 = stmt.executeQuery("SELECT fechaEntrada, fechaSalida, tipo FROM habitacion WHERE usuario = '"+ cliente.getLogin() +"'");
+					ResultSet res2 = stmt.executeQuery("SELECT fechaEntrada, fechaSalida, tipo FROM historialregistros WHERE usuario = '"+ cliente.getLogin() +"'");
 					while(res2.next()) {
 						
 						String fila = res2.getString("fechaEntrada");

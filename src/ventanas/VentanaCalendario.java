@@ -86,7 +86,7 @@ public class VentanaCalendario extends JFrame{
 						SimpleDateFormat formatter= new SimpleDateFormat("yyyy-MM-dd 'at' HH:mm:ss z");
 						Date date = new Date(System.currentTimeMillis());
 						String fechaHoy = date.getYear() + "-" + date.getMonth() + "-" + date.getDay();
-						int row1 = stmt.executeUpdate("UPDATE habitacion SET libre = 0 WHERE usuario = '"+ cliente.getLogin() +"' AND fechaSalida > '"+ fechaHoy +"' AND libre = 1;");
+						int row1 = stmt.executeUpdate("UPDATE habitacion SET libre = 0 WHERE fechaSalida < '"+ fechaHoy +"' AND libre = 1;");
 						
 						int row2 = stmt.executeUpdate("INSERT INTO habitacion VALUES('"+ fechaIncBD +"', '', '"+ type +"', '"+ cliente.getLogin() +"', 1);");
 						

@@ -21,7 +21,7 @@ class HabitacionDobleTest{
 
 	@Test
 	void getCamaMatrimonio() {
-		assertEquals("false", "" + HabitacionDoble.getCamaMatrimonio());
+		assertEquals("false", "" + HabitacionDoble.isCamaMatrimonio());
 	}
 	
 }

@@ -27,13 +27,6 @@ public class HabitacionFamiliar extends Habitacion{
 		HabitacionFamiliar.cuna = false;
 	}
 	
-	public HabitacionFamiliar(HabitacionFamiliar f) {
-		HabitacionFamiliar.numHab = f.numHab;
-		HabitacionFamiliar.cantidad = f.cantidad;
-		HabitacionFamiliar.camaIndividual = f.camaIndividual;
-		HabitacionFamiliar.camaMatrimonio = f.camaMatrimonio;
-		HabitacionFamiliar.cuna = f.cuna;
-	}
 
 	public static int getNumHab() {
 		return numHab;

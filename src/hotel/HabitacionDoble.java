@@ -19,12 +19,6 @@ public class HabitacionDoble extends Habitacion{
 		HabitacionDoble.cantidad = 0;
 		HabitacionDoble.camaMatrimonio = false;
 	}
-	
-	public HabitacionDoble(HabitacionDoble d) {
-		HabitacionDoble.numHab = d.numHab;
-		HabitacionDoble.cantidad = d.cantidad;
-		HabitacionDoble.camaMatrimonio = d.camaMatrimonio;
-	}
 
 	public static int getNumHab() {
 		return numHab;
@@ -42,11 +36,12 @@ public class HabitacionDoble extends Habitacion{
 		HabitacionDoble.cantidad = cantidad;
 	}
 
-	public static boolean getCamaMatrimonio() {
+
+	public static boolean isCamaMatrimonio() {
 		return camaMatrimonio;
 	}
 
-	public void setCamaMatrimonio(boolean camaMatrimonio) {
+	public static void setCamaMatrimonio(boolean camaMatrimonio) {
 		HabitacionDoble.camaMatrimonio = camaMatrimonio;
 	}
 

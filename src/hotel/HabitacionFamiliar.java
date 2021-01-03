@@ -18,6 +18,8 @@ public class HabitacionFamiliar extends Habitacion{
 		HabitacionFamiliar.camaMatrimonio = camaMatrimonio;
 		HabitacionFamiliar.cuna = cuna;
 	}
+	
+	
 
 	public HabitacionFamiliar() {
 		HabitacionFamiliar.numHab = 0;

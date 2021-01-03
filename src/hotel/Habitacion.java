@@ -2,16 +2,20 @@ package hotel;
 
 public class Habitacion {
 	
-	protected int cantHabTot;
-	boolean ocupado = false;
-	
-	public boolean isEmpty() {
+	protected static int cantHabTot;
+	protected static boolean ocupado = false;
+
+	public static boolean isEmpty() {
 		if (ocupado = true) {
 			return false;
 		}else {
 			return true;
 			
 		}
+	}
+	
+	public static int getCantHabTot() {
+		return cantHabTot;
 	}
 
 }

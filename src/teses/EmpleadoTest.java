@@ -25,7 +25,7 @@ class EmpleadoTest {
 	
 	@Test
 	void getSalario() {
-		assertEquals(987,04, Empleado.getSalario());
+		assertEquals("987.04", "" + Empleado.getSalario());
 	}
 	
 	@Test

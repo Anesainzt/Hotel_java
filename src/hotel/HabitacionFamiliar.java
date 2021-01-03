@@ -3,94 +3,82 @@ package hotel;
 
 public class HabitacionFamiliar extends Habitacion{
 
-	protected int numHab;
-	protected int piso;
-	protected int cantidad;
-	protected int camaIndividual;
-	protected int camaMatrimonio;
-	protected boolean cuna;
+	protected static int numHab;
+	protected static int cantidad;
+	protected static int camaIndividual;
+	protected static int camaMatrimonio;
+	protected static boolean cuna;
 	
 	
-	
-	public HabitacionFamiliar(int numHab, int piso, int cantidad, int camaIndividual, int camaMatrimonio,
+	public HabitacionFamiliar(int numHab, int cantidad, int camaIndividual, int camaMatrimonio,
 			boolean cuna) {
-		this.numHab = numHab;
-		this.piso = piso;
-		this.cantidad = cantidad;
-		this.camaIndividual = camaIndividual;
-		this.camaMatrimonio = camaMatrimonio;
-		this.cuna = cuna;
+		HabitacionFamiliar.numHab = numHab;
+		HabitacionFamiliar.cantidad = cantidad;
+		HabitacionFamiliar.camaIndividual = camaIndividual;
+		HabitacionFamiliar.camaMatrimonio = camaMatrimonio;
+		HabitacionFamiliar.cuna = cuna;
 	}
 
 	public HabitacionFamiliar() {
-		this.numHab = 0;
-		this.piso = 0;
-		this.cantidad = 0;
-		this.camaIndividual = 0;
-		this.camaMatrimonio = 0;
-		this.cuna = false;
+		HabitacionFamiliar.numHab = 0;
+		HabitacionFamiliar.cantidad = 0;
+		HabitacionFamiliar.camaIndividual = 0;
+		HabitacionFamiliar.camaMatrimonio = 0;
+		HabitacionFamiliar.cuna = false;
 	}
 	
 	public HabitacionFamiliar(HabitacionFamiliar f) {
-		this.numHab = f.numHab;
-		this.piso = f.piso;
-		this.cantidad = f.cantidad;
-		this.camaIndividual = f.camaIndividual;
-		this.camaMatrimonio = f.camaMatrimonio;
-		this.cuna = f.cuna;
+		HabitacionFamiliar.numHab = f.numHab;
+		HabitacionFamiliar.cantidad = f.cantidad;
+		HabitacionFamiliar.camaIndividual = f.camaIndividual;
+		HabitacionFamiliar.camaMatrimonio = f.camaMatrimonio;
+		HabitacionFamiliar.cuna = f.cuna;
 	}
 
-	public int getNumHab() {
+	public static int getNumHab() {
 		return numHab;
 	}
 
 	public void setNumHab(int numHab) {
-		this.numHab = numHab;
+		HabitacionFamiliar.numHab = numHab;
 	}
 
-	public int getPiso() {
-		return piso;
-	}
-
-	public void setPiso(int piso) {
-		this.piso = piso;
-	}
-
-	public int getCantidad() {
+	public static int getCantidad() {
 		return cantidad;
 	}
 
 	public void setCantidad(int cantidad) {
-		this.cantidad = cantidad;
+		HabitacionFamiliar.cantidad = cantidad;
 	}
 
-	public int getCamaIndividual() {
+	public static int getCamaIndividual() {
 		return camaIndividual;
 	}
 
 	public void setCamaIndividual(int camaIndividual) {
-		this.camaIndividual = camaIndividual;
+		HabitacionFamiliar.camaIndividual = camaIndividual;
 	}
 
-	public int getCamaMatrimonio() {
+	public static int getCamaMatrimonio() {
 		return camaMatrimonio;
 	}
 
 	public void setCamaMatrimonio(int camaMatrimonio) {
-		this.camaMatrimonio = camaMatrimonio;
+		HabitacionFamiliar.camaMatrimonio = camaMatrimonio;
 	}
 
-	public boolean isCuna() {
+	
+	public static boolean getCuna() {
 		return cuna;
 	}
 
-	public void setCuna(boolean cuna) {
-		this.cuna = cuna;
+	public static void setCuna(boolean cuna) {
+		HabitacionFamiliar.cuna = cuna;
 	}
 
 	@Override
 	public String toString() {
-		return "HabitacionFamiliar [numHab=" + numHab + ", piso=" + piso + ", cantidad=" + cantidad
+		return "HabitacionFamiliar [numHab=" + numHab + ", cantidad=" + cantidad
 				+ ", camaIndividual=" + camaIndividual + ", camaMatrimonio=" + camaMatrimonio + ", cuna=" + cuna
 				+ ", cantHabTot=" + cantHabTot + ", ocupado=" + ocupado + "]";
 	}

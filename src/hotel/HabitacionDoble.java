@@ -3,72 +3,58 @@ package hotel;
 
 public class HabitacionDoble extends Habitacion{
 	
-	protected int numHab;
-	protected int piso;
-	protected int cantidad;
-	protected boolean camaMatrimonio;
+	protected static int numHab;
+	protected static int cantidad;
+	protected static boolean camaMatrimonio;
+
 	
-	public HabitacionDoble(int numHab, int piso, int cantidad, boolean camaMatrimonio) {
-		this.numHab = numHab;
-		this.piso = piso;
-		this.cantidad = cantidad;
-		this.camaMatrimonio = camaMatrimonio;
+	public HabitacionDoble(int numHab, int cantidad, boolean camaMatrimonio) {
+		HabitacionDoble.numHab = numHab;
+		HabitacionDoble.cantidad = cantidad;
+		HabitacionDoble.camaMatrimonio = camaMatrimonio;
 	}
 	
 	public HabitacionDoble() {
-		this.numHab = 0;
-		this.piso = 0;
-		this.cantidad = 0;
-		this.camaMatrimonio = false;
+		HabitacionDoble.numHab = 0;
+		HabitacionDoble.cantidad = 0;
+		HabitacionDoble.camaMatrimonio = false;
 	}
 	
 	public HabitacionDoble(HabitacionDoble d) {
-		this.numHab = d.numHab;
-		this.piso = d.piso;
-		this.cantidad = d.cantidad;
-		this.camaMatrimonio = d.camaMatrimonio;
+		HabitacionDoble.numHab = d.numHab;
+		HabitacionDoble.cantidad = d.cantidad;
+		HabitacionDoble.camaMatrimonio = d.camaMatrimonio;
 	}
 
-	public int getNumHab() {
+	public static int getNumHab() {
 		return numHab;
 	}
 
 	public void setNumHab(int numHab) {
-		this.numHab = numHab;
+		HabitacionDoble.numHab = numHab;
 	}
 
-	public int getPiso() {
-		return piso;
-	}
-
-	public void setPiso(int piso) {
-		this.piso = piso;
-	}
-
-	public int getCantidad() {
+	public static int getCantidad() {
 		return cantidad;
 	}
 
 	public void setCantidad(int cantidad) {
-		this.cantidad = cantidad;
+		HabitacionDoble.cantidad = cantidad;
 	}
 
-	public boolean getCamaMatrimonio() {
+	public static boolean getCamaMatrimonio() {
 		return camaMatrimonio;
 	}
 
 	public void setCamaMatrimonio(boolean camaMatrimonio) {
-		this.camaMatrimonio = camaMatrimonio;
+		HabitacionDoble.camaMatrimonio = camaMatrimonio;
 	}
 
 	@Override
 	public String toString() {
-		return "HabitacionDoble [numHab=" + numHab + ", piso=" + piso + ", cantidad=" + cantidad + ", camaMatrimonio=" + camaMatrimonio
-				+ ", cantHabTot=" + cantHabTot + "]";
+		return "HabitacionDoble [numHab=" + numHab + ", cantidad=" + cantidad + ", camaMatrimonio="
+				+ camaMatrimonio + ", cantHabTot=" + cantHabTot + ", ocupado=" + ocupado + "]";
 	}
 	
-	
-
-
 
 }

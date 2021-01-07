@@ -59,7 +59,7 @@ public class VentanaInicio extends JFrame{
 					Connection conn = DriverManager.getConnection(url);
 					Statement stmt = (Statement) conn.createStatement();
 					
-					ResultSet empleado = stmt.executeQuery("SELECT nombre, apellido, contraseya, usuario FROM empleado WHERE (usuario = '" + u.getText() + "' AND contraseya = '"+ p.getText() +"');");
+					ResultSet empleado = stmt.executeQuery("SELECT nombre, apellido, contraseya, usuario FROM empleado WHERE (usuario = '" + u.getText() + "' AND contraseya = '"+ p.getPassword() +"');");
 					
 					while(empleado.next()) {						
 						String nombreBD = empleado.getString("nombre");
@@ -111,7 +111,7 @@ public class VentanaInicio extends JFrame{
 				} 
 				
 								
-				if(cl.getLogin().equals(u.getText())) {	
+				if(cl.getLogin().equals(u.getText()) && cl.getPassword().equals(p.getPassword())) {	
 					PrintWriter pw = null;
 					try {
 						String sep = File.separator;
@@ -127,7 +127,7 @@ public class VentanaInicio extends JFrame{
 					}
 					VentanaCliente vc = new VentanaCliente(cl);
 
-				} else if (emp.getUsuario().equals(u.getText())) {
+				} else if (emp.getUsuario().equals(u.getText()) && emp.getPassword().equals(p.getPassword())) {
 					VentanaEmpleado ve = new VentanaEmpleado(emp);
 
 				} else {

@@ -51,6 +51,8 @@ public class VentanaInicio extends JFrame{
 			public void actionPerformed(ActionEvent e) {
 				Cliente cl = new Cliente();
 				Empleado emp = new Empleado();
+				char[] arrayC = p.getPassword();
+				String password = new String(arrayC);
 				
 		        //EN CASO DE QUE SEA EMPLEADO
 				try {	
@@ -59,7 +61,7 @@ public class VentanaInicio extends JFrame{
 					Connection conn = DriverManager.getConnection(url);
 					Statement stmt = (Statement) conn.createStatement();
 					
-					ResultSet empleado = stmt.executeQuery("SELECT nombre, apellido, contraseya, usuario FROM empleado WHERE (usuario = '" + u.getText() + "' AND contraseya = '"+ p.getPassword() +"');");
+					ResultSet empleado = stmt.executeQuery("SELECT nombre, apellido, contraseya, usuario FROM empleado WHERE (usuario = '" + u.getText() + "' AND contraseya = '"+ password +"');");
 					
 					while(empleado.next()) {						
 						String nombreBD = empleado.getString("nombre");
@@ -88,7 +90,7 @@ public class VentanaInicio extends JFrame{
 					Connection conn = DriverManager.getConnection(url);
 					Statement stmt = (Statement) conn.createStatement();
 					
-					ResultSet cliente = stmt.executeQuery("SELECT nombre, apellido, dni, contraseya, usuario FROM cliente WHERE (usuario = '" + u.getText() + "' AND contraseya = '"+ p.getText() +"');");
+					ResultSet cliente = stmt.executeQuery("SELECT nombre, apellido, dni, contraseya, usuario FROM cliente WHERE (usuario = '" + u.getText() + "' AND contraseya = '"+ password +"');");
 					while(cliente.next()) {
 						String nombreBD = cliente.getString("nombre");
 						String apellidoBD = cliente.getString("apellido");
@@ -101,6 +103,7 @@ public class VentanaInicio extends JFrame{
 						cl.setDni(dniBD);
 						cl.setPassword(contraseya);
 						cl.setLogin(usuario);
+						
 					}
 
 				conn.close();
@@ -110,8 +113,9 @@ public class VentanaInicio extends JFrame{
 					System.out.println(e2.getMessage());
 				} 
 				
-								
-				if(cl.getLogin().equals(u.getText()) && cl.getPassword().equals(p.getPassword())) {	
+				
+				
+				if(cl.getLogin().equals(u.getText())) {	
 					PrintWriter pw = null;
 					try {
 						String sep = File.separator;
@@ -127,7 +131,7 @@ public class VentanaInicio extends JFrame{
 					}
 					VentanaCliente vc = new VentanaCliente(cl);
 
-				} else if (emp.getUsuario().equals(u.getText()) && emp.getPassword().equals(p.getPassword())) {
+				} else if (emp.getUsuario().equals(u.getText())) {
 					VentanaEmpleado ve = new VentanaEmpleado(emp);
 
 				} else {

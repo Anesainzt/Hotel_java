@@ -12,6 +12,8 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.text.SimpleDateFormat;
@@ -31,7 +33,8 @@ public class VentanaCalendario extends JFrame{
 	JPanel p;
 	JPanel pfecha;
 	
-	static  String fechaIncBD;
+	
+	static  String fechaInc;
 	private static Logger logger = Logger.getLogger(VentanaCalendario.class.getName());
 	
 	public VentanaCalendario(Cliente cliente, int precioHab, String type) {
@@ -59,7 +62,16 @@ public class VentanaCalendario extends JFrame{
 		    	 String mes = Integer.toString(calendario.getCalendar().get(java.util.Calendar.MONTH) + 1);
 		    	 String dia = Integer.toString(calendario.getCalendar().get(java.util.Calendar.DATE));
 		    	 fecha.setText(dia + "-" + mes + "-" + year);
-		    	 fechaIncBD = year + "-" + mes + "-" + dia;
+		    	 if (Integer.parseInt(mes) < 10 && Integer.parseInt(dia) < 10) {
+		    		 fechaInc = year + "-0" + mes + "-0" + dia;
+		    	 } else if (Integer.parseInt(mes) < 10 && Integer.parseInt(dia) >= 10) {
+					 fechaInc = year + "-0" + mes + "-" + dia;
+		    	 } else if (Integer.parseInt(mes) >= 10 && Integer.parseInt(dia) < 10) {
+					 fechaInc = year + "-" + mes + "-0" + dia;
+		    	 } else {
+					 fechaInc = year + "-" + mes + "-" + dia;
+		    	 }
+		    	 
 		    	 pfecha.add(fechaFin);
 		    	 pfecha.remove(fechaInicio);
 		    	 setVisible(true);
@@ -94,6 +106,7 @@ public class VentanaCalendario extends JFrame{
 				fecha.setText(dia + "-" + mes + "-" + year);
 				String fechaEndBD = year + "-" + mes + "-" + dia;
 				d2 = calendario.getDate();
+				
 				
 				//CON LAS FECHAS DE ENTRADA Y SALIDA, CALCULAMOS LA DIFERENCIA PARA SABER LOS DIAS TOTALES DE ESTANCIA EN EL HOTEL
 				Date startDate1 = d1;
@@ -138,6 +151,69 @@ public class VentanaCalendario extends JFrame{
 				
 				//LE MOSTRAMOS UNA VENTANA INFORMATIVA PARA QUE SEPA EL DINERO QUE GASTARA POR ESOS DIAS DE LA HABITACION
 				JOptionPane.showMessageDialog(null, "PAGO HABITACION: " + pago + " DIAS " + " = " + pagoHabitacion + "€");
+				
+				try {
+					Class.forName("org.sqlite.JDBC");
+					String url = "jdbc:sqlite:hotelJava.db";
+					Connection conn = DriverManager.getConnection(url);
+					Statement stmt = (Statement) conn.createStatement();
+					String tipo = type;
+					
+					
+					ResultSet res = stmt.executeQuery("SELECT fechaSalida, fechaEntrada, num_habitacion FROM historialregistros WHERE tipo = '"+ tipo +"' AND libre = 1");
+					while(res.next()) {
+						String fechaSalidaBD = res.getString("fechaSalida");
+						String fechaEntradaBD = res.getString("fechaEntrada");
+						int numero = res.getInt("num_habitacion");
+						
+						String[] partSalidaBD = fechaSalidaBD.split("-");
+						
+						String salidaBD = partSalidaBD[0] +partSalidaBD[1] +partSalidaBD[2];
+						int compSalidaBD = Integer.parseInt(salidaBD);
+						
+						String salidaSelect = "";
+						if (Integer.parseInt(mes) < 10 && Integer.parseInt(dia) < 10) {
+							salidaSelect = year + "0" + mes + "0" + dia;
+				    	 } else if (Integer.parseInt(mes) < 10 && Integer.parseInt(dia) >= 10) {
+				    		 salidaSelect = year + "-0" + mes + "-" + dia;
+				    	 } else if (Integer.parseInt(mes) >= 10 && Integer.parseInt(dia) < 10) {
+				    		 salidaSelect = year + "-" + mes + "-0" + dia;
+				    	 } else {
+				    		 salidaSelect = year + "-" + mes + "-" + dia;
+				    	 }
+						
+						int compSalidaSelect = Integer.parseInt(salidaSelect);
+						
+						String[] partEntradaBD = fechaEntradaBD.split("-");
+						
+						String entradaBD = partEntradaBD[0] +partEntradaBD[1] +partEntradaBD[2];
+						int compEntradaBD = Integer.parseInt(entradaBD);
+						
+						String[] partEntrada = fechaInc.split("-");
+						
+						String entradaSelect = partEntrada[0] +partEntrada[1] +partEntrada[2];
+						int compEntradaSelect = Integer.parseInt(entradaSelect);
+						
+						if (compEntradaSelect >= compEntradaBD && compEntradaSelect < compSalidaBD){
+							if (compSalidaSelect >= compEntradaBD && compSalidaSelect < compSalidaBD) {
+								PreparedStatement pstmt = conn.prepareStatement("UPDATE habitacion SET fechaSalida = ?, fechaEntrada = ?, libre = ? WHERE num_habitacion = ?");
+								
+								pstmt.setString(1, fechaSalidaBD);
+								pstmt.setString(2, fechaEntradaBD);
+								pstmt.setInt(3, 1);
+								pstmt.setInt(4, numero);
+								pstmt.executeUpdate();
+							}
+						}
+					}
+					String[] partEntrada = fechaInc.split("-");
+					
+					String entradaSelect = partEntrada[0] +partEntrada[1] +partEntrada[2];
+					System.out.println(entradaSelect);
+					conn.close();
+				} catch (Exception e2) {
+					// TODO: handle exception
+				}
 				
 				//A CONTINUACION LE LLEVAMOS A LA VENTANA SELECCION HABITACION PARA QUE ELIGA EL NUMERO DE HABITACION EN LA QUE SE ALOJARA ESOS DIAS
 				VentanaSeleccionHabitacion vsh = new VentanaSeleccionHabitacion(cliente, precioHab, type);

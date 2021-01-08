@@ -13,6 +13,7 @@ import java.io.PrintWriter;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.Scanner;
@@ -31,14 +32,35 @@ public class VentanaSeleccionHabitacion extends JFrame{
 	JButton boton;
 	JButton vueltaHabitacion;
 	JButton vueltaCalendario;
-	
+
+	static String fechaEntrada = null;
+	static String fechaSalida = null;
 	public VentanaSeleccionHabitacion(Cliente cliente, int dinero, String tipo) {
 		
 		JPanel habitaciones = new JPanel();
     	Border habitacionesBorder = BorderFactory.createTitledBorder("HABITACIONES");
     	habitaciones.setBorder(habitacionesBorder);
     	habitaciones.setLayout(new GridLayout(5, 5));
-		
+    	
+    	Scanner sc2;
+    	String linea1 = null;
+    	String[] campos1 = null;
+    	
+		try {
+			sc2 = new Scanner(new FileInputStream("fechas.txt"));
+			while(sc2.hasNext()) {
+				 
+				 linea1 = sc2.nextLine();
+				 campos1 = linea1.split(";");
+				 fechaSalida = campos1[1];
+				 fechaEntrada = campos1[0];
+				 
+			 }
+		} catch (FileNotFoundException e2) {
+			// TODO Auto-generated catch block
+			e2.printStackTrace();
+		}
+		 
 		try {
 			Class.forName("org.sqlite.JDBC");
 			String url = "jdbc:sqlite:hotelJava.db";
@@ -59,7 +81,14 @@ public class VentanaSeleccionHabitacion extends JFrame{
 						public void actionPerformed(ActionEvent arg0) {
 							// TODO 
 							
+							try {
+								int res2 = stmt.executeUpdate("INSERT INTO historialregistros VALUES('"+ fechaEntrada +"', '"+ fechaSalida +"', '"+ tipo +"', "+ Integer.parseInt(numero) +", '"+ cliente.getLogin() +"', 1);");
+							} catch (SQLException e) {
+								// TODO Auto-generated catch block
+								e.printStackTrace();
+							}
 							VentanaServicios vs = new VentanaServicios(cliente);
+							dispose();
 						}
 						
 					});

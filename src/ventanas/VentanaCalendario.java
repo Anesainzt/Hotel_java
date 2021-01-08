@@ -119,7 +119,7 @@ public class VentanaCalendario extends JFrame{
 				try {
 				    pw = new PrintWriter(new BufferedWriter(new FileWriter("fechas", true)));
 				    pw.print("");
-				    pw.println(new SimpleDateFormat("dd/MM/yyyy").format(startDate1) + ";" + new SimpleDateFormat("dd/MM/yyyy").format(endDate1));
+				    pw.println(new SimpleDateFormat("yyyy-MM-dd").format(startDate1) + ";" + new SimpleDateFormat("yyyy-MM-dd").format(endDate1));
 				    
 				} catch (IOException e1) {
 					logger.warning(e1 + "");

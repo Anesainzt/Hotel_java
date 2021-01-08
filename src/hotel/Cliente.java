@@ -2,7 +2,7 @@ package hotel;
 
 import java.util.HashMap;
 
-public class Cliente extends Ticket{
+public class Cliente{
 	protected static String nombre;
 	protected static String apellido;
 	protected static String dni;

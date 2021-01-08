@@ -1,1 +1,1 @@
- z;z;z;DOBLE;100;2 z;z;z;DOBLE;100;2
+ d;d;d;DOBLE;100;1

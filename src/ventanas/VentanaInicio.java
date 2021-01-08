@@ -82,7 +82,7 @@ public class VentanaInicio extends JFrame{
 				} catch (SQLException e2) {
 					System.out.println(e2.getMessage());
 				} 
-			
+				
 				//EN CASO DE QUE SEA CLIENTE
 				try {	
 					Class.forName("org.sqlite.JDBC");
@@ -105,7 +105,7 @@ public class VentanaInicio extends JFrame{
 						cl.setLogin(usuario);
 						
 					}
-
+					
 				conn.close();
 				} catch (ClassNotFoundException e2) {
 				 System.out.println("No se ha podido cargar el driver de la base de datos");
@@ -115,7 +115,7 @@ public class VentanaInicio extends JFrame{
 				
 				
 				
-				if(cl.getLogin().equals(u.getText())) {	
+				if(cl.getLogin().equals(u.getText()) && cl.getLogin() != "") {	
 					PrintWriter pw = null;
 					try {
 						String sep = File.separator;
@@ -131,7 +131,7 @@ public class VentanaInicio extends JFrame{
 					}
 					VentanaCliente vc = new VentanaCliente(cl);
 
-				} else if (emp.getUsuario().equals(u.getText())) {
+				} else if (emp.getUsuario().equals(u.getText()) && emp.getUsuario() != "") {
 					VentanaEmpleado ve = new VentanaEmpleado(emp);
 
 				} else {

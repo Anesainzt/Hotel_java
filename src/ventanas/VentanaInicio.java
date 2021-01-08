@@ -36,6 +36,26 @@ public class VentanaInicio extends JFrame{
 		registro = new JButton("REGISTRARSE");
 		continuar = new JButton("CONTINUAR");
 		
+		BufferedWriter bw;
+		try {
+			bw = new BufferedWriter(new FileWriter("fechas"));
+			bw.write(" ");
+			bw.close();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		BufferedWriter bw1;
+		try {
+			bw1 = new BufferedWriter(new FileWriter("datosFactura.txt"));
+			bw1.write(" ");
+			bw1.close();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
 		//EL BOTON REGISTRO TE LLEVA A LA VENTANA REGISTRO PARA RECOGER TUS DATOS DE REGISTRO
 		registro.addActionListener(new ActionListener() {
 			@Override

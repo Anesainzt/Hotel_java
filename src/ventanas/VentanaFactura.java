@@ -194,16 +194,6 @@ public class VentanaFactura extends JFrame {
     	datosServiciosExtra.add(cantidadSpa);
     	datosServiciosExtra.add(descripcionSpa);
     	datosServiciosExtra.add(pSpa);
-		
-    	BufferedWriter bw;
-		try {
-			bw = new BufferedWriter(new FileWriter("datosFactura.txt"));
-			bw.write(" ");
-			bw.close();
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
     	
 		int precioSalida = precioHabitacion1* diasEstancia + precComida + precDeporte + precMiniBar + precSalaReunion + precSpa;
     	JLabel total = new JLabel("PRECIO TOTAL: " + precioSalida);

@@ -184,16 +184,6 @@ public class VentanaSeleccionHabitacion extends JFrame{
 			
 		});
 		
-		BufferedWriter bw;
-		try {
-			bw = new BufferedWriter(new FileWriter("fechas"));
-			bw.write(" ");
-			bw.close();
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		
 		add(vueltaHabitacion);
 		add(vueltaCalendario);
 		add(continuarServicios);

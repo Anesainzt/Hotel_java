@@ -188,11 +188,4 @@ public class VentanaSeleccionHabitacion extends JFrame{
 		
 	}
 	
-	public static void main (String args[]) {
-		Cliente cliente = null;
-		int dinero = 100;
-		String tipo = "INDIVIDUAL";
-		VentanaSeleccionHabitacion vsh = new VentanaSeleccionHabitacion(cliente, dinero, tipo);
-	}
-	
 }

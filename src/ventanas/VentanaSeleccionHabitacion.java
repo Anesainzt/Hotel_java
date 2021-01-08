@@ -17,8 +17,12 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+import javax.swing.BorderFactory;
+import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.JPanel;
+import javax.swing.border.Border;
 
 import hotel.Cliente;
 
@@ -27,11 +31,13 @@ public class VentanaSeleccionHabitacion extends JFrame{
 	JButton boton;
 	JButton vueltaHabitacion;
 	JButton vueltaCalendario;
-	JButton continuarServicios;
 	
 	public VentanaSeleccionHabitacion(Cliente cliente, int dinero, String tipo) {
 		
-		setLayout(new GridLayout(3, 1));
+		JPanel habitaciones = new JPanel();
+    	Border habitacionesBorder = BorderFactory.createTitledBorder("HABITACIONES");
+    	habitaciones.setBorder(habitacionesBorder);
+    	habitaciones.setLayout(new GridLayout(5, 5));
 		
 		try {
 			Class.forName("org.sqlite.JDBC");
@@ -51,8 +57,9 @@ public class VentanaSeleccionHabitacion extends JFrame{
 						
 						@Override
 						public void actionPerformed(ActionEvent arg0) {
-							// TODO Auto-generated method stub
+							// TODO 
 							
+							VentanaServicios vs = new VentanaServicios(cliente);
 						}
 						
 					});
@@ -62,7 +69,7 @@ public class VentanaSeleccionHabitacion extends JFrame{
 					
 				}
 				
-				add(boton);
+				habitaciones.add(boton);
 				
 			}
 			
@@ -101,6 +108,13 @@ public class VentanaSeleccionHabitacion extends JFrame{
 			//borrar fichero
 
 		}
+		
+		
+		JPanel cambioEleccion = new JPanel();
+    	Border cambioEleccionBorder = BorderFactory.createTitledBorder("CAMBIO ELECCION");
+    	cambioEleccion.setBorder(cambioEleccionBorder);
+    	cambioEleccion.setLayout(new GridLayout(2, 1));
+		
 		
 		String textoHabitacion = n + ";" + a + ";" + d;
 		
@@ -157,43 +171,28 @@ public class VentanaSeleccionHabitacion extends JFrame{
 			
 		});
 		
-		String textoFichero = textoCalendario + ";" + dias;
+		cambioEleccion.add(vueltaHabitacion);
+		cambioEleccion.add(vueltaCalendario);
 		
-		continuarServicios = new JButton("CONTINUAR");
+		JPanel main = new JPanel();
+		main.setLayout(new BoxLayout(main, BoxLayout.Y_AXIS));
+		main.add(habitaciones);
+		main.add(cambioEleccion);
 		
-		continuarServicios.addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				
-				PrintWriter pw = null;
-				try {
-				    pw = new PrintWriter(new BufferedWriter(new FileWriter("datosFactura.txt", true)));
-				    pw.print(textoFichero);
-				    
-				} catch (IOException e1) {
-				    System.err.println(e1);
-				} finally {
-				    if (pw != null) {
-				        pw.close();
-				    }
-				}
-				
-				VentanaServicios vs = new VentanaServicios(cliente);
-				dispose();
-			}
-			
-		});
-		
-		add(vueltaHabitacion);
-		add(vueltaCalendario);
-		add(continuarServicios);
-		
+		add(main);
 		
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
 		setTitle("Registro del cliente");
-		setSize(800, 200);
+		setSize(1200, 500);
 		setVisible(true);
 		
+	}
+	
+	public static void main (String args[]) {
+		Cliente cliente = null;
+		int dinero = 100;
+		String tipo = "INDIVIDUAL";
+		VentanaSeleccionHabitacion vsh = new VentanaSeleccionHabitacion(cliente, dinero, tipo);
 	}
 	
 }

@@ -1,1 +1,1 @@
- d;d;d;DOBLE;100;1
+ usuario3;usuario3;usuario3;DOBLE;100;10

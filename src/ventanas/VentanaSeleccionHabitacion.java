@@ -47,7 +47,7 @@ public class VentanaSeleccionHabitacion extends JFrame{
     	String[] campos1 = null;
     	
 		try {
-			sc2 = new Scanner(new FileInputStream("fechas.txt"));
+			sc2 = new Scanner(new FileInputStream("fechas"));
 			while(sc2.hasNext()) {
 				 
 				 linea1 = sc2.nextLine();

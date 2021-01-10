@@ -46,6 +46,16 @@ public class VentanaInicio extends JFrame{
 			e.printStackTrace();
 		}
 		
+		BufferedWriter bw0;
+		try {
+			bw0 = new BufferedWriter(new FileWriter("baseDeDatos"));
+			bw0.write(" ");
+			bw0.close();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
 		BufferedWriter bw1;
 		try {
 			bw1 = new BufferedWriter(new FileWriter("datosFactura.txt"));

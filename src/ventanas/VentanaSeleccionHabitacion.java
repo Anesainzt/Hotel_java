@@ -81,12 +81,19 @@ public class VentanaSeleccionHabitacion extends JFrame{
 						public void actionPerformed(ActionEvent arg0) {
 							// TODO 
 							
+							PrintWriter pw2 = null;
 							try {
-								int res2 = stmt.executeUpdate("INSERT INTO historialregistros VALUES('"+ fechaEntrada +"', '"+ fechaSalida +"', '"+ tipo +"', "+ Integer.parseInt(numero) +", '"+ cliente.getLogin() +"', 1);");
-							} catch (SQLException e) {
-								// TODO Auto-generated catch block
-								e.printStackTrace();
+							    pw2 = new PrintWriter(new BufferedWriter(new FileWriter("baseDeDatos", true)));
+							    pw2.print(fechaEntrada + ";" + fechaSalida + ";" + tipo + ";" + numero);
+							    
+							} catch (IOException e1) {
+							    System.err.println(e1);
+							} finally {
+							    if (pw2 != null) {
+							        pw2.close();
+							    }
 							}
+							
 							VentanaServicios vs = new VentanaServicios(cliente);
 							dispose();
 						}

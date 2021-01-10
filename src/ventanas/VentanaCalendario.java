@@ -209,7 +209,7 @@ public class VentanaCalendario extends JFrame{
 					String[] partEntrada = fechaInc.split("-");
 					
 					String entradaSelect = partEntrada[0] +partEntrada[1] +partEntrada[2];
-					System.out.println(entradaSelect);
+					
 					conn.close();
 				} catch (Exception e2) {
 					// TODO: handle exception

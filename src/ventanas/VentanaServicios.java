@@ -3,9 +3,19 @@ package ventanas;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.Scanner;
+
 import javax.swing.ButtonGroup;
 import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 import javax.swing.JRadioButton;
 
 import hotel.Cliente;
@@ -40,6 +50,49 @@ public class VentanaServicios extends JFrame {
 		bg.add(miniBar);
 		bg.add(salaReunion);
 		bg.add(sinServicioExtra);
+		
+		ArrayList<String> nuevosDatos = new ArrayList<String>();
+		String linea = null;
+		String[] campos = null;
+		String fechaEntrada = null;
+		String fechaSalida = null;
+		String tipo = null;
+		String numero = null;
+    	
+    	try {
+			Scanner sc1 = new Scanner(new FileInputStream("baseDeDatos"));
+			
+			while(sc1.hasNext()) {
+				linea = sc1.nextLine();
+				campos = linea.split(";");
+				nuevosDatos.add(linea);
+				fechaEntrada = campos[0];
+				fechaSalida = campos[1];
+				tipo = campos[2];
+				numero = campos[3];
+			}
+			
+		}catch(FileNotFoundException e1) {
+			System.err.println("ERROR");
+		}finally{
+			//borrar fichero
+
+		}
+		
+		try {	
+			Class.forName("org.sqlite.JDBC");
+			String url = "jdbc:sqlite:hotelJava.db";
+			Connection conn = DriverManager.getConnection(url);
+			Statement stmt = (Statement) conn.createStatement();
+			int res2 = stmt.executeUpdate("INSERT INTO historialregistros VALUES('"+ fechaEntrada +"', '"+ fechaSalida +"', '"+ tipo +"', "+ Integer.parseInt(numero) +", '"+ cliente.getLogin() +"', 1);");
+			conn.close();
+			
+		} catch (ClassNotFoundException e2) {
+		 System.out.println("No se ha podido cargar el driver de la base de datos");
+		} catch (SQLException e2) {
+			
+		}
+		
 		
 		contratar = new JButton("CONTINUAR");
 		

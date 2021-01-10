@@ -8,6 +8,8 @@ import javax.swing.JPanel;
 
 public class VentanaLogo extends javax.swing.JFrame{
 	
+	//HACER UN HILO JOIN PARA QUE EMPIECE LA FOTO, LUEGO EL AUDIO Y LUEGO SE TERMINEN LOS 2
+	
 	FondoPanel fondo = new FondoPanel();
 	
 	public VentanaLogo() {

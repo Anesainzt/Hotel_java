@@ -8,9 +8,12 @@ public class Empleado {
 	protected static String horaEntrada;
 	protected static String horaSalida;
 	protected static String usuario;
-	protected static String password;	
+	protected static String password;
+	protected static String departamento;
+	protected static boolean jefe;
+	protected static String usuarioJefe;
 	
-	public Empleado(String nombre, String apellido, String dni, double salario, String horaEntrada, String horaSalida, String usuario, String password) {
+	public Empleado(String nombre, String apellido, String dni, double salario, String horaEntrada, String horaSalida, String usuario, String password, String departamento, boolean jefe, String usuarioJefe) {
 		
 		Empleado.nombre = nombre;
 		Empleado.apellido = apellido;
@@ -20,6 +23,9 @@ public class Empleado {
 		Empleado.horaSalida = horaSalida;
 		Empleado.usuario = usuario;
 		Empleado.password = password;
+		Empleado.departamento = departamento;
+		Empleado.jefe = jefe;
+		Empleado.usuarioJefe = usuarioJefe;
 	}
 	
 	public Empleado() {
@@ -32,6 +38,9 @@ public class Empleado {
 		Empleado.horaSalida = "";
 		Empleado.usuario = "";
 		Empleado.password = "";
+		Empleado.departamento = "";
+		Empleado.jefe = false;
+		Empleado.usuarioJefe = "";
 	}
 	
 	public Empleado(Empleado e) {
@@ -44,6 +53,9 @@ public class Empleado {
 		Empleado.horaSalida = e.horaSalida;
 		Empleado.usuario = e.usuario;
 		Empleado.password = e.password;
+		Empleado.departamento = e.departamento;
+		Empleado.jefe = e.jefe;
+		Empleado.usuarioJefe = e.usuarioJefe;
 	}
 
 	public static String getNombre() {
@@ -109,5 +121,30 @@ public class Empleado {
 	public void setPassword(String password) {
 		Empleado.password = password;
 	}
+
+	public static String getDepartamento() {
+		return departamento;
+	}
+
+	public void setDepartamento(String departamento) {
+		Empleado.departamento = departamento;
+	}
+
+	public static boolean isJefe() {
+		return jefe;
+	}
+
+	public void setJefe(boolean jefe) {
+		Empleado.jefe = jefe;
+	}
+
+	public static String getUsuarioJefe() {
+		return usuarioJefe;
+	}
+
+	public void setUsuarioJefe(String usuarioJefe) {
+		Empleado.usuarioJefe = usuarioJefe;
+	}
+	
 	
 }

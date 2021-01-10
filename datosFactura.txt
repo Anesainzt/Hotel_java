@@ -1,1 +1,1 @@
- usuario3;usuario3;usuario3;VIP;200
+ usuario3;usuario3;usuario3;VIP;200;1

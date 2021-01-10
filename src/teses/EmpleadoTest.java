@@ -6,7 +6,7 @@ import hotel.Empleado;
 
 class EmpleadoTest {
 
-	Empleado empleado = new Empleado("Asier", "Martinez", "12345678S", 987.04, "10:00", "17:00", "asier.mm@opendeusto.es", "Asierm27");
+	Empleado empleado = new Empleado("Asier", "Martinez", "12345678S", 987.04, "10:00", "17:00", "asier.mm@opendeusto.es", "Asierm27", "", false, "");
 	
 	@Test
 	void getNombre() {

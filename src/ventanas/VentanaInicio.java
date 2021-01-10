@@ -77,18 +77,29 @@ public class VentanaInicio extends JFrame{
 					Connection conn = DriverManager.getConnection(url);
 					Statement stmt = (Statement) conn.createStatement();
 					
-					ResultSet empleado = stmt.executeQuery("SELECT nombre, apellido, contraseya, usuario FROM empleado WHERE (usuario = '" + u.getText() + "' AND contraseya = '"+ password +"');");
+					ResultSet empleado = stmt.executeQuery("SELECT nombre, apellido, contraseya, usuario, departamento, salario, usuario_jefe, jefeBit FROM empleado WHERE (usuario = '" + u.getText() + "' AND contraseya = '"+ password +"');");
 					
 					while(empleado.next()) {						
 						String nombreBD = empleado.getString("nombre");
 						String apellidoBD = empleado.getString("apellido");
 						String contraseya = empleado.getString("contraseya");
 						String usuario = empleado.getString("usuario");
+						String departamento = empleado.getString("departamento");
+						double salario = Double.parseDouble(empleado.getString("salario"));
+						boolean jefe = false;
+						if (empleado.getString("jefeBit") == "1") {
+							jefe = true;
+						}
+						String usuarioJefe = empleado.getString("usuario_jefe");
 						
 						emp.setNombre(nombreBD);
 						emp.setApellido(apellidoBD);
 						emp.setPassword(contraseya);
 						emp.setUsuario(usuario);
+						emp.setDepartamento(departamento);
+						emp.setSalario(salario);
+						emp.setJefe(jefe);
+						emp.setUsuarioJefe(usuarioJefe);
 						
 					}
 

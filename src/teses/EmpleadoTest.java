@@ -6,7 +6,7 @@ import hotel.Empleado;
 
 class EmpleadoTest {
 
-	Empleado empleado = new Empleado("Asier", "Martinez", "12345678S", 987.04, "10:00", "17:00", "asier.mm@opendeusto.es", "Asierm27", "", false, "");
+	Empleado empleado = new Empleado("Asier", "Martinez", "12345678S", 987.04, "10:00", "17:00", "asier.mm@opendeusto.es", "Asierm27", "Cocina", false, "Ander");
 	
 	@Test
 	void getNombre() {
@@ -48,7 +48,20 @@ class EmpleadoTest {
 		assertEquals("Asierm27", Empleado.getPassword());
 	}
 	
+	@Test
+	void getDepartamento() {
+		assertEquals("Cocina", Empleado.getDepartamento());
+	}
 	
+	@Test
+	void isJefe() {
+		assertEquals(false, Empleado.isJefe());
+	}
 
+	@Test
+	void getUsuarioJefe() {
+		assertEquals("Ander", Empleado.getUsuarioJefe());
+	}
+	
 }
 

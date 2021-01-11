@@ -43,21 +43,7 @@ public class Empleado {
 		Empleado.usuarioJefe = "";
 	}
 	
-	public Empleado(Empleado e) {
-		
-		Empleado.nombre = e.nombre;
-		Empleado.apellido = e.apellido;
-		Empleado.dni = e.dni;
-		Empleado.salario = e.salario;
-		Empleado.horaEntrada = e.horaEntrada;
-		Empleado.horaSalida = e.horaSalida;
-		Empleado.usuario = e.usuario;
-		Empleado.password = e.password;
-		Empleado.departamento = e.departamento;
-		Empleado.jefe = e.jefe;
-		Empleado.usuarioJefe = e.usuarioJefe;
-	}
-
+	
 	public static String getNombre() {
 		return nombre;
 	}
@@ -102,7 +88,7 @@ public class Empleado {
 		return horaSalida;
 	}
 
-	public void setHora_salida(String horaSalida) {
+	public void setHoraSalida(String horaSalida) {
 		Empleado.horaSalida = horaSalida;
 	}
 

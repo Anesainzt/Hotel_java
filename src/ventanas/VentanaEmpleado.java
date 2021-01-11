@@ -120,9 +120,5 @@ public class VentanaEmpleado extends JFrame{
 		setVisible(true);
 	}
 	
-	public static void main (String args[]) {
-		Empleado e = new Empleado();
-		VentanaEmpleado ve = new VentanaEmpleado(e);
-	}
 	
 }

@@ -1,7 +1,9 @@
 package teses;
 
 import static org.junit.Assert.assertEquals;
-import org.junit.Test;
+
+import org.junit.jupiter.api.Test;
+
 import hotel.HabitacionFamiliar;
 
 class HabitacionFamiliarTest {
@@ -11,34 +13,58 @@ class HabitacionFamiliarTest {
 
 	@Test
 	void getNumHab() {
-		assertEquals(409, "" + HabitacionFamiliar.getNumHab());
+		assertEquals(409, HabitacionFamiliar.getNumHab());
 	}
 	
 	@Test
 	void setNumHab() {
-	    int numhab = 201;
+	    int numhab = 409;
 	    f1.setNumHab(f2.getNumHab());
 	    assertEquals(f1.getNumHab(), numhab);
 	}
 	
 	@Test
-	void getCant() {
-		assertEquals(2, "" + HabitacionFamiliar.getCantidad());
+	void getCantidad() {
+		assertEquals(2, HabitacionFamiliar.getCantidad());
+	}
+	@Test
+	void setCantidad() {
+	    int numhab = 2;
+	    f1.setCantidad(f2.getCantidad());
+	    assertEquals(f1.getCantidad(), numhab);
 	}
 
 	@Test
 	void getCamaIndividual() {
-		assertEquals(1, "" + HabitacionFamiliar.getCamaIndividual());
+		assertEquals(1, HabitacionFamiliar.getCamaIndividual());
+	}
+	@Test
+	void setCamaIndividual() {
+	    int camaindividual = 1;
+	    f1.setCamaIndividual(f2.getCamaIndividual());
+	    assertEquals(f1.getCamaIndividual(), camaindividual);
 	}
 	
 	@Test
 	void getCamaMatrimonio() {
-		assertEquals(1, "" + HabitacionFamiliar.getCamaMatrimonio());
+		assertEquals(1, HabitacionFamiliar.getCamaMatrimonio());
+	}
+	@Test
+	void setCamaMatrimonio() {
+	    int camamatrimonio = 1;
+	    f1.setCamaMatrimonio(f2.getCamaMatrimonio());
+	    assertEquals(f1.getCamaMatrimonio(), camamatrimonio);
 	}
 	
 	@Test
 	void getCuna() {
-		assertEquals(false, "" + HabitacionFamiliar.getCuna());
+		assertEquals(true, HabitacionFamiliar.getCuna());
+	}
+	@Test
+	void setCuna() {
+	    boolean cuna = true;
+	    f1.setCuna(f2.getCuna());
+	    assertEquals(f1.getCuna(), cuna);
 	}
 	
 }

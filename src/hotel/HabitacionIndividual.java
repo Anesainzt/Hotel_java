@@ -33,9 +33,4 @@ public class HabitacionIndividual extends Habitacion {
 		HabitacionIndividual.cantidad = cantidad;
 	}
 
-	@Override
-	public String toString() {
-		return "HabitacionIndividual [numHab=" + numHab + ", cantidad=" + cantidad + ", cantHabTot=" + cantHabTot + "]";
-	}
-	
 }

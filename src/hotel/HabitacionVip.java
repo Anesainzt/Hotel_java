@@ -55,10 +55,4 @@ public class HabitacionVip extends Habitacion{
 		HabitacionVip.balcon = balcon;
 	}
 
-	@Override
-	public String toString() {
-		return "HabitacionVip [numHab=" + numHab + ", cantidad=" + cantidad + ", camas=" + camas
-				+ ", balcon=" + balcon + ", cantHabTot=" + cantHabTot + ", ocupado=" + ocupado + "]";
-	}
-	
 }

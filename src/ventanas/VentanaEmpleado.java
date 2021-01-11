@@ -85,6 +85,8 @@ public class VentanaEmpleado extends JFrame{
     	informacion.setBorder(informacionBorder);
     	informacion.setLayout(new GridLayout(1, 5));
     	
+    	//ASIER
+    	
     	JLabel nombre = new JLabel("NOMBRE");
     	
     	informacion.add(nombre);
@@ -93,6 +95,8 @@ public class VentanaEmpleado extends JFrame{
     	Border trabajoBorder = BorderFactory.createTitledBorder("DOCUMENTOS");
     	trabajo.setBorder(trabajoBorder);
     	trabajo.setLayout(new GridLayout(1, 5));
+    	
+    	//ASIER
     	
     	JLabel algoRelevante = new JLabel("trabajo");
     	

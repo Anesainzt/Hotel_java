@@ -64,14 +64,14 @@ public class VentanaReservaServicio extends JFrame{
     	
     	Date fi = null;
 		try {
-			fi = new SimpleDateFormat("dd/MM/yyyy").parse(fechaInicio);
+			fi = new SimpleDateFormat("yyyy-MM-dd").parse(fechaInicio);
 		} catch (ParseException e1) {
 			// TODO Auto-generated catch block
 			e1.printStackTrace();
 		}
     	Date ff = null;
 		try {
-			ff = new SimpleDateFormat("dd/MM/yyyy").parse(fechaFin);
+			ff = new SimpleDateFormat("yyyy-MM-dd").parse(fechaFin);
 		} catch (ParseException e1) {
 			// TODO Auto-generated catch block
 			e1.printStackTrace();
@@ -89,7 +89,7 @@ public class VentanaReservaServicio extends JFrame{
 				String year = Integer.toString(calendario.getCalendar().get(java.util.Calendar.YEAR));
 		    	String mes = Integer.toString(calendario.getCalendar().get(java.util.Calendar.MONTH) + 1);
 		    	String dia = Integer.toString(calendario.getCalendar().get(java.util.Calendar.DATE));
-		    	fecha.setText(dia + "-" + mes + "-" + year);
+		    	fecha.setText(year + "-" + mes + "-" + dia);
 		    	d1 = calendario.getDate();
 		    	
 		    	//CREAMOS LA RESTRICCION DE NO PODER VOLVER A ESCOGER LA FECHA INICIO PARA LA FECHA FINAL

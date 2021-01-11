@@ -40,17 +40,6 @@ public class Cliente{
 		Cliente.hashmap = new HashMap <String, Integer>();
 	}
 	
-	public Cliente(Cliente c) {
-		Cliente.nombre = c.nombre;
-		Cliente.apellido = c.apellido;
-		Cliente.dni = c.dni;
-		Cliente.fecha_ncto = c.fecha_ncto;
-		Cliente.tarjeta = c.tarjeta;
-		Cliente.login = c.login;
-		Cliente.password = c.password;
-		Cliente.newPassword = c.newPassword;
-		Cliente.hashmap = c.hashmap;
-	}
 
 	public static String getNombre() {
 		return nombre;

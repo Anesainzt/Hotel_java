@@ -44,12 +44,4 @@ public class HabitacionDoble extends Habitacion{
 	public static void setCamaMatrimonio(boolean camaMatrimonio) {
 		HabitacionDoble.camaMatrimonio = camaMatrimonio;
 	}
-
-	@Override
-	public String toString() {
-		return "HabitacionDoble [numHab=" + numHab + ", cantidad=" + cantidad + ", camaMatrimonio="
-				+ camaMatrimonio + ", cantHabTot=" + cantHabTot + ", ocupado=" + ocupado + "]";
-	}
-	
-
 }

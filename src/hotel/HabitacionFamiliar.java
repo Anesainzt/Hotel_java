@@ -71,11 +71,5 @@ public class HabitacionFamiliar extends Habitacion{
 		HabitacionFamiliar.cuna = cuna;
 	}
 
-	@Override
-	public String toString() {
-		return "HabitacionFamiliar [numHab=" + numHab + ", cantidad=" + cantidad
-				+ ", camaIndividual=" + camaIndividual + ", camaMatrimonio=" + camaMatrimonio + ", cuna=" + cuna
-				+ ", cantHabTot=" + cantHabTot + ", ocupado=" + ocupado + "]";
-	}
 	
 }

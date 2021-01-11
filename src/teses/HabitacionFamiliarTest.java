@@ -4,13 +4,21 @@ import static org.junit.Assert.assertEquals;
 import org.junit.Test;
 import hotel.HabitacionFamiliar;
 
-public class HabitacionFamiliarTest {
+class HabitacionFamiliarTest {
 
-	HabitacionFamiliar d = new HabitacionFamiliar(409, 2, 1, 1, true);
+	HabitacionFamiliar f1 = new HabitacionFamiliar();
+	HabitacionFamiliar f2 = new HabitacionFamiliar(409, 2, 1, 1, true);
 
 	@Test
 	void getNumHab() {
 		assertEquals(409, "" + HabitacionFamiliar.getNumHab());
+	}
+	
+	@Test
+	void setNumHab() {
+	    int numhab = 201;
+	    f1.setNumHab(f2.getNumHab());
+	    assertEquals(f1.getNumHab(), numhab);
 	}
 	
 	@Test
@@ -34,3 +42,4 @@ public class HabitacionFamiliarTest {
 	}
 	
 }
+

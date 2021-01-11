@@ -1,0 +1,21 @@
+		MENÚ DEL DÍA
+PRIMER PLATO:
+	-Ensaladilla rusa
+	-Alubias con chorizo
+	-Revuelto de la casa
+	-Macarrones/Spaguettis a la boloñesa
+SEGUNDO PLATO:
+	-Lasaña de carne
+	-Merluza en salsa de marisco
+	-Cordero a la brasa
+POSTRES:
+	-Flan de temporada
+	-Arroz con leche
+	-Helado
+	-Pastel vasco
+BEBIDAS:
+	-Vino tinto
+	-Cerveza
+	-Agua
+	-Refresco
+(PAN INCLUIDO)

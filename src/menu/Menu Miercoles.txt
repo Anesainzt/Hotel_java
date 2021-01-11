@@ -1,0 +1,21 @@
+		MENÚ DEL DÍA
+PRIMER PLATO:
+	-Guiso de garbanzos con callos
+	-Ensalada de pasta de colores
+	-Gazpacho andaluz
+	-Macarrones/Spaguettis a la boloñesa
+SEGUNDO PLATO:
+	-Churrasco a la parrilla con patatas
+	-Pincho moruno adobado a la plancha
+	-Huevos fritos con torreznos y patatas
+POSTRES:
+	-Flan de temporada
+	-Arroz con leche
+	-Helado
+	-Pastel vasco
+BEBIDAS:
+	-Vino tinto
+	-Cerveza
+	-Agua
+	-Refresco
+(PAN INCLUIDO)

@@ -1,0 +1,21 @@
+		MENÚ DEL DÍA
+PRIMER PLATO:
+	-Paella valenciana
+	-Ensalada cesar
+	-Sopa de pescado
+	-Macarrones/Spaguettis a la boloñesa
+SEGUNDO PLATO:
+	-Bacalao con tomate
+	-Chuleton con patatas
+	-Pollo a la plancha con patatas
+POSTRES:
+	-Flan de temporada
+	-Arroz con leche
+	-Helado
+	-Pastel vasco
+BEBIDAS:
+	-Vino tinto
+	-Cerveza
+	-Agua
+	-Refresco
+(PAN INCLUIDO)

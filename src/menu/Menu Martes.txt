@@ -1,0 +1,21 @@
+		MENÚ DEL DÍA
+PRIMER PLATO:
+	-Arroz con tinta de calamar
+	-Ensalada mixta
+	-Sopa azteca
+	-Macarrones/Spaguettis a la boloñesa
+SEGUNDO PLATO:
+	-Burrito de pollo o ternera
+	-Bacalao al pilpil
+	-Manitas de cerdo con tomate
+POSTRES:
+	-Flan de temporada
+	-Arroz con leche
+	-Helado
+	-Pastel vasco
+BEBIDAS:
+	-Vino tinto
+	-Cerveza
+	-Agua
+	-Refresco
+(PAN INCLUIDO)

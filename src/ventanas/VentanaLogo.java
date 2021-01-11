@@ -2,7 +2,10 @@ package ventanas;
 
 import java.awt.Graphics;
 import java.awt.Image;
+import java.io.File;
 
+import javax.sound.sampled.AudioSystem;
+import javax.sound.sampled.Clip;
 import javax.swing.ImageIcon;
 import javax.swing.JPanel;
 
@@ -13,7 +16,39 @@ public class VentanaLogo extends javax.swing.JFrame{
 	FondoPanel fondo = new FondoPanel();
 	
 	public VentanaLogo() {
-		this.setContentPane(fondo);
+		
+		Thread t = new Thread(new Runnable() {
+			
+            @Override
+            public void run() {
+            	 try {
+            		 Clip sonido = AudioSystem.getClip();
+         		    
+            		 sonido.open(AudioSystem.getAudioInputStream(new File("hotelJava.wav")));
+         		    
+            		 sonido.start();
+         		    
+            		 sonido.loop(0);
+         		    
+            		 Thread.sleep(1);
+            		 
+            		 while (sonido.isRunning())
+            			 Thread.sleep(1000);
+                   
+            		 
+            		 dispose();
+            		 VentanaInicio vi = new VentanaInicio();
+                     		    
+         		} catch (Exception e) {
+         		    System.out.println("" + e);
+         		}
+            }
+            
+        });
+
+        t.start();
+        
+        this.setContentPane(fondo);
 		
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
 		setTitle("Identificación del cliente");
@@ -41,4 +76,3 @@ public class VentanaLogo extends javax.swing.JFrame{
 		VentanaLogo vg = new VentanaLogo();
 	}
 }
-

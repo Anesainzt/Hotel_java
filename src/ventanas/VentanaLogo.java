@@ -21,39 +21,37 @@ public class VentanaLogo extends javax.swing.JFrame{
 			
             @Override
             public void run() {
-            	 try {
-            		 Clip sonido = AudioSystem.getClip();
-         		    
-            		 sonido.open(AudioSystem.getAudioInputStream(new File("hotelJava.wav")));
-         		    
-            		 sonido.start();
-         		    
-            		 sonido.loop(0);
-         		    
-            		 Thread.sleep(1);
-            		 
-            		 while (sonido.isRunning())
-            			 Thread.sleep(1000);
-                   
-            		 
-            		 dispose();
-            		 VentanaInicio vi = new VentanaInicio();
-                     		    
-         		} catch (Exception e) {
-         		    System.out.println("" + e);
-         		}
+            	 VentanaInicio vi = new VentanaInicio();
+            	 dispose();
             }
             
         });
 
-        t.start();
+		try {
+   		 Clip sonido = AudioSystem.getClip();
+   		 sonido.open(AudioSystem.getAudioInputStream(new File("hotelJava.wav")));
+   		 sonido.start();
+   		 sonido.loop(0);
+            		    
+		} catch (Exception e) {
+		    System.out.println("" + e);
+		}
         
-        this.setContentPane(fondo);
-		
+        
+        setContentPane(fondo);
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
 		setTitle("Identificación del cliente");
 		setSize(850, 700);
 		setVisible(true);
+		
+		try {
+           
+            Thread.sleep(10*1000);
+         } catch (Exception e) {
+            System.out.println(e);
+         }
+		
+		t.start();
 	}
 	
 	class FondoPanel extends JPanel{

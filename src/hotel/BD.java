@@ -18,6 +18,8 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.table.DefaultTableModel;
 
+import com.toedter.calendar.JCalendar;
+
 public class BD extends JFrame{
 	private Connection conn = null; 
 	
@@ -52,6 +54,51 @@ public class BD extends JFrame{
 			conn.close();
 		} catch (SQLException e) {
 			throw new BDException("Error cerrando la conexión con la BD", e);
+		}
+	}
+	
+	public void ponerAlDiaBD() {
+		
+		try(Statement stmt = (Statement) conn.createStatement();){
+			JCalendar calendario = new JCalendar();
+			String year = Integer.toString(calendario.getCalendar().get(java.util.Calendar.YEAR));
+	    	String mes = Integer.toString(calendario.getCalendar().get(java.util.Calendar.MONTH) + 1);
+	    	String dia = Integer.toString(calendario.getCalendar().get(java.util.Calendar.DATE));
+	    	String hoy = "";
+			System.out.println(mes);
+			if (Integer.parseInt(mes) < 10 && Integer.parseInt(dia) < 10) {
+				hoy = year + "0" + mes + "0" + dia;
+	    	} else if (Integer.parseInt(mes) < 10 && Integer.parseInt(dia) >= 10) {
+	    		hoy = year + "0" + mes + "" + dia;
+	    	} else if (Integer.parseInt(mes) >= 10 && Integer.parseInt(dia) < 10) {
+	    		hoy = year + "" + mes + "0" + dia;
+	    	} else {
+	    		hoy = year + "" + mes + "" + dia;
+	    	}
+			
+			
+			ResultSet rs = stmt.executeQuery("SELECT fechaSalida FROM historialregistros WHERE libre = 1;");
+			while(rs.next()) {
+				
+				String fechaBDtext = rs.getString("fechaSalida");
+				String[] campos = fechaBDtext.split("-");
+				Integer fechaBD = Integer.parseInt(campos[0] + "" + campos[1] + "" +  campos[2]);
+				Integer fechaHoy = Integer.parseInt(hoy);
+				System.out.println(fechaBD);
+				System.out.println(fechaHoy);
+				if (fechaBD < fechaHoy) {
+					PreparedStatement pstmt = conn.prepareStatement("UPDATE historialregistros SET libre = ? WHERE fechaSalida = ?");
+					
+					pstmt.setInt(1, 0);
+					pstmt.setString(2, fechaBDtext);
+					pstmt.executeUpdate();
+				}
+				
+			}
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+			// TODO: handle exception
 		}
 	}
 	
@@ -170,7 +217,7 @@ public class BD extends JFrame{
 				
 				String salidaSelect = "";
 				if (Integer.parseInt(mes) < 10 && Integer.parseInt(dia) < 10) {
-					salidaSelect = year + "0" + mes + "0" + dia;
+					salidaSelect = year + "-0" + mes + "-0" + dia;
 		    	 } else if (Integer.parseInt(mes) < 10 && Integer.parseInt(dia) >= 10) {
 		    		 salidaSelect = year + "-0" + mes + "-" + dia;
 		    	 } else if (Integer.parseInt(mes) >= 10 && Integer.parseInt(dia) < 10) {
@@ -198,19 +245,15 @@ public class BD extends JFrame{
 				
 				if (compEntradaSelect >= compEntradaBD && compEntradaSelect < compSalidaBD){
 					if (compSalidaSelect >= compEntradaBD && compSalidaSelect < compSalidaBD) {
-						PreparedStatement pstmt = conn.prepareStatement("UPDATE habitacion SET fechaSalida = ?, fechaEntrada = ?, libre = ? WHERE num_habitacion = ?");
+						PreparedStatement pstmt = conn.prepareStatement("UPDATE habitacion SET libre = ? WHERE num_habitacion = ?");
 						
-						pstmt.setString(1, fechaSalidaBD);
-						pstmt.setString(2, fechaEntradaBD);
-						pstmt.setInt(3, 1);
-						pstmt.setInt(4, numero);
+						pstmt.setInt(1, 1);
+						pstmt.setInt(2, numero);
 						pstmt.executeUpdate();
 					}
 				}
 			}
-			String[] partEntrada = fechaInc.split("-");
 			
-			String entradaSelect = partEntrada[0] +partEntrada[1] +partEntrada[2];
 			
 		} catch (Exception e2) {
 			e2.printStackTrace();

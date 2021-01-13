@@ -9,18 +9,29 @@ import javax.sound.sampled.Clip;
 import javax.swing.ImageIcon;
 import javax.swing.JPanel;
 
+import hotel.BD;
+import hotel.BDException;
+
 public class VentanaLogo extends javax.swing.JFrame{
 	//FONDO QUE PONEMOS CON LA IMAGEN
 	FondoPanel fondo = new FondoPanel();
-	
+	BD bd;
 	public VentanaLogo() {
 		
 		//HACEMOS UN HILO PARA PASAR A LA SIGUIENTE VENTANA TRAS ACABAR LA BIENVENIDA
-		
+		bd = new BD();
+		try {
+			bd.connect();
+		} catch (BDException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+		bd.ponerAlDiaBD();
 		Thread t = new Thread(new Runnable() {
 			
             @Override
             public void run() {
+            	
             	 VentanaInicio vi = new VentanaInicio();
             	 dispose();
             }
@@ -39,7 +50,7 @@ public class VentanaLogo extends javax.swing.JFrame{
 		} catch (Exception e) {
 		    System.out.println("" + e);
 		}
-        
+		
         setContentPane(fondo);
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
 		setTitle("Identificación del cliente");
@@ -47,7 +58,7 @@ public class VentanaLogo extends javax.swing.JFrame{
 		setVisible(true);
 		
 		try {
-			//DEJAMOS AL HILO DORMIDO, CUANDO "DEPIERTE", LA BIENVENIDA HABRÁ ACABADO Y PASAMOS A LA SIGUIENTE VENTANA
+			//DEJAMOS AL HILO DORMIDO, CUANDO "DESPIERTE", LA BIENVENIDA HABRÁ ACABADO Y PASAMOS A LA SIGUIENTE VENTANA
 			Thread.sleep(10*1000);
          } catch (Exception e) {
             System.out.println(e);

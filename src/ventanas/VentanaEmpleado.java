@@ -5,14 +5,51 @@ import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.Scanner;
+
 import javax.swing.*;
 import javax.swing.border.Border;
+import javax.swing.table.DefaultTableModel;
+
+import com.toedter.calendar.JCalendar;
 
 import hotel.*;
 
 public class VentanaEmpleado extends JFrame{
 	
+	public enum DiaSemana {
+        Lunes,
+        Martes,
+        Miercoles,
+        Jueves,
+        Viernes,
+        Sabado,
+        Domingo
+    }
+	
+	JCalendar calendario;
+	
+	JLabel lunes;
+	JLabel lunesMenu;
+	JLabel martes;
+	JLabel martesMenu;
+	JLabel miercoles;
+	JLabel miercolesMenu;
+	JLabel jueves;
+	JLabel juevesMenu;
+	JLabel viernes;
+	JLabel viernesMenu;
+	JLabel sabado;
+	JLabel sabadoMenu;
+	JLabel domingo;
+	JLabel domingoMenu;
+	JTextArea menuDia;
+	DiaSemana dia;
 	public VentanaEmpleado(Empleado empleado) {
 		
 		JPanel documentos = new JPanel();
@@ -92,16 +129,214 @@ public class VentanaEmpleado extends JFrame{
     	informacion.add(nombre);
     	
     	JPanel trabajo = new JPanel();
-    	Border trabajoBorder = BorderFactory.createTitledBorder("DOCUMENTOS");
+    	Border trabajoBorder = BorderFactory.createTitledBorder("DEPARTAMENTO");
     	trabajo.setBorder(trabajoBorder);
-    	trabajo.setLayout(new GridLayout(1, 5));
     	
-    	//ASIER
     	
-    	JLabel algoRelevante = new JLabel("trabajo");
+    	//Departamento = Cocina
     	
-    	trabajo.add(algoRelevante);
     	
+    	
+    	
+    	lunes = new JLabel("MENU LUNES: ");
+    	martes = new JLabel("MENU MARTES: ");
+    	miercoles = new JLabel("MENU MIERCOLES: ");
+    	jueves = new JLabel("MENU JUEVES : ");
+    	viernes = new JLabel("MENU VIERNES : ");
+    	sabado = new JLabel("MENU SABADO : ");
+    	domingo = new JLabel("MENU DOMINGO : ");
+    	menuDia = new JTextArea();
+    	
+    	String[] dias={"Domingo","Lunes","Martes", "Miércoles","Jueves","Viernes","Sábado"};
+        Date hoy=new Date();
+        int numeroDia=0;
+        Calendar cal= Calendar.getInstance();
+        cal.setTime(hoy);
+        numeroDia=cal.get(Calendar.DAY_OF_WEEK);
+        dia = DiaSemana.valueOf(dias[numeroDia -1]);
+        String menu = "";
+        switch(dia) {
+        
+        	case Lunes:
+        		trabajo.add(lunes);
+        		try {
+        			Scanner sc2;
+    			
+        			sc2 = new Scanner(new FileInputStream("menus/Menu " + dias[numeroDia -1] + ".txt"));
+        			while(sc2.hasNext()) {
+    				 
+        				menu = menu + sc2.nextLine();
+        				menu = menu + "\r\n";
+    				 
+        			}
+        			menuDia = new JTextArea(menu);
+        			trabajo.add(menuDia);
+        			if (empleado.isJefe() == false) {
+        				menuDia.setEditable(false);
+        			} else {
+        				menuDia.setEditable(true);
+        			}
+        		} catch (FileNotFoundException e2) {
+        			// 	TODO Auto-generated catch block
+        			e2.printStackTrace();
+        		}
+        		break;
+        
+        	case Martes:
+        		trabajo.add(martes);
+        		try {
+        			Scanner sc2;
+        			
+        			sc2 = new Scanner(new FileInputStream("menus/Menu " + dias[numeroDia -1] + ".txt"));
+        			while(sc2.hasNext()) {
+        				 
+        				 menu = menu + sc2.nextLine();
+        				 menu = menu + "\r\n";
+        				 
+        			}
+        			menuDia = new JTextArea(menu);
+        			trabajo.add(menuDia);
+        			if (empleado.isJefe() == false) {
+						menuDia.setEditable(false);
+					} else {
+						menuDia.setEditable(true);
+					}
+        		} catch (FileNotFoundException e2) {
+        			// TODO Auto-generated catch block
+        			e2.printStackTrace();
+        		}
+        		break;
+        		
+        	case Miercoles:
+        		trabajo.add(miercoles);
+        		try {
+        			Scanner sc2;
+        			
+        			sc2 = new Scanner(new FileInputStream("menus/Menu " + dias[numeroDia -1] + ".txt"));
+        			while(sc2.hasNext()) {
+        				 
+        				 menu = menu + sc2.nextLine();
+        				 menu = menu + "\r\n";
+        				 
+        			}
+        			menuDia = new JTextArea(menu);
+        			trabajo.add(menuDia);
+        			if (empleado.isJefe() == false) {
+						menuDia.setEditable(false);
+					} else {
+						menuDia.setEditable(true);
+					}
+        		} catch (FileNotFoundException e2) {
+        			// TODO Auto-generated catch block
+        			e2.printStackTrace();
+        		}
+        		break;
+        		
+        	case Jueves:
+        		trabajo.add(jueves);
+        		try {
+        			Scanner sc2;
+        			
+        			sc2 = new Scanner(new FileInputStream("menus/Menu " + dias[numeroDia -1] + ".txt"));
+        			while(sc2.hasNext()) {
+        				 
+        				 menu = menu + sc2.nextLine();
+        				 menu = menu + "\r\n";
+        				 
+        			}
+        			menuDia = new JTextArea(menu);
+        			trabajo.add(menuDia);
+        			if (empleado.isJefe() == false) {
+						menuDia.setEditable(false);
+					} else {
+						menuDia.setEditable(true);
+					}
+        		} catch (FileNotFoundException e2) {
+        			// TODO Auto-generated catch block
+        			e2.printStackTrace();
+        		}
+        		break;
+        		
+        	case Viernes:
+        		trabajo.add(viernes);
+        		try {
+        			Scanner sc2;
+        			
+        			sc2 = new Scanner(new FileInputStream("menus/Menu " + dias[numeroDia -1] + ".txt"));
+        			while(sc2.hasNext()) {
+        				 
+        				 menu = menu + sc2.nextLine();
+        				 menu = menu + "\r\n";
+        				 
+        			}
+        			menuDia = new JTextArea(menu);
+        			trabajo.add(menuDia);
+        			if (empleado.isJefe() == false) {
+						menuDia.setEditable(false);
+					} else {
+						menuDia.setEditable(true);
+					}
+        		} catch (FileNotFoundException e2) {
+        			// TODO Auto-generated catch block
+        			e2.printStackTrace();
+        		}
+        		break;
+        		
+        	case Sabado:
+        		trabajo.add(sabado);
+        		try {
+        			Scanner sc2;
+        			
+        			sc2 = new Scanner(new FileInputStream("menus/Menu " + dias[numeroDia -1] + ".txt"));
+        			while(sc2.hasNext()) {
+        				 
+        				 menu = menu + sc2.nextLine();
+        				 menu = menu + "\r\n";
+        				 
+        			}
+        			menuDia = new JTextArea(menu);
+        			trabajo.add(menuDia);
+        			if (empleado.isJefe() == false) {
+						menuDia.setEditable(false);
+					} else {
+						menuDia.setEditable(true);
+					}
+        		} catch (FileNotFoundException e2) {
+        			// TODO Auto-generated catch block
+        			e2.printStackTrace();
+        		}
+        		break;
+        		
+        	case Domingo:
+        		trabajo.add(domingo);
+        		try {
+        			Scanner sc2;
+        			
+        			sc2 = new Scanner(new FileInputStream("menus/Menu " + dias[numeroDia -1] + ".txt"));
+        			while(sc2.hasNext()) {
+        				 
+        				 menu = menu + sc2.nextLine();
+        				 menu = menu + "\r\n";
+        				 
+        			}
+        			menuDia = new JTextArea(menu);
+        			trabajo.add(menuDia);
+        			if (empleado.isJefe() == false) {
+						menuDia.setEditable(false);
+					} else {
+						menuDia.setEditable(true);
+					}
+        		} catch (FileNotFoundException e2) {
+        			// TODO Auto-generated catch block
+        			e2.printStackTrace();
+        		}
+        		break;
+        	
+        	default:
+        		
+        		break;
+        }
+        
     	JPanel main = new JPanel();
     	main.setLayout(new BoxLayout(main, BoxLayout.Y_AXIS));
 		main.add(documentos);
@@ -116,9 +351,13 @@ public class VentanaEmpleado extends JFrame{
 		
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
 		setTitle("Ventana para empleados");
-		setSize(800, 200);
+		setSize(800, 1000);
 		setVisible(true);
 	}
 	
+	public static void main (String args[]) {
+		Empleado e = new Empleado();
+		VentanaEmpleado ve = new VentanaEmpleado(e);
+	}
 	
 }

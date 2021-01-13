@@ -65,7 +65,7 @@ public class BD extends JFrame{
 	    	String mes = Integer.toString(calendario.getCalendar().get(java.util.Calendar.MONTH) + 1);
 	    	String dia = Integer.toString(calendario.getCalendar().get(java.util.Calendar.DATE));
 	    	String hoy = "";
-			System.out.println(mes);
+			
 			if (Integer.parseInt(mes) < 10 && Integer.parseInt(dia) < 10) {
 				hoy = year + "0" + mes + "0" + dia;
 	    	} else if (Integer.parseInt(mes) < 10 && Integer.parseInt(dia) >= 10) {
@@ -84,8 +84,7 @@ public class BD extends JFrame{
 				String[] campos = fechaBDtext.split("-");
 				Integer fechaBD = Integer.parseInt(campos[0] + "" + campos[1] + "" +  campos[2]);
 				Integer fechaHoy = Integer.parseInt(hoy);
-				System.out.println(fechaBD);
-				System.out.println(fechaHoy);
+
 				if (fechaBD < fechaHoy) {
 					PreparedStatement pstmt = conn.prepareStatement("UPDATE historialregistros SET libre = ? WHERE fechaSalida = ?");
 					

@@ -40,32 +40,6 @@ public class VentanaContinuacion extends JFrame{
 		});
 		
 		
-		barra = new JProgressBar(0,50);
-		
-		Thread hilo = new Thread(new Runnable() {
-
-			@Override
-			public void run() {
-				barra.setVisible(true);
-				
-				for (int i = 0; i <= 75; i++) {
-					barra.setValue(i);
-					try {
-						Thread.sleep(100);
-					} catch (InterruptedException e1) {
-						e1.printStackTrace();
-					}
-				}
-				continuar.setVisible(true);
-				
-			}
-			
-			
-		});
-		hilo.start();
-		
-		
-		
 		add(elegirNuevoServicio);
 		add(continuar);
 		add(barra);
@@ -74,7 +48,6 @@ public class VentanaContinuacion extends JFrame{
 		setTitle("Continuacion");
 		setSize(800, 200);
 		setVisible(true);
-		continuar.setVisible(false);
 		
 	}
 

@@ -30,7 +30,7 @@ public class VentanaInicio extends JFrame{
 		BufferedWriter bw;
 		try {
 			bw = new BufferedWriter(new FileWriter(fichero));
-			bw.write(" ");
+			bw.write("");
 			bw.close();
 		} catch (IOException e) {
 			// TODO Auto-generated catch block

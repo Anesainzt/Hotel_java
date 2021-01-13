@@ -164,11 +164,16 @@ public class BD extends JFrame{
 		    		 salidaSelect = year + "-" + mes + "-" + dia;
 		    	 }
 				
-				int compSalidaSelect = Integer.parseInt(salidaSelect);
+				String[] camposSalidaSelect = salidaSelect.split("-");
+				
+				String numSalidaSelect = camposSalidaSelect[0] + camposSalidaSelect[1] + camposSalidaSelect[2];
+				
+				int compSalidaSelect = Integer.parseInt(numSalidaSelect);
 				
 				String[] partEntradaBD = fechaEntradaBD.split("-");
 				
 				String entradaBD = partEntradaBD[0] +partEntradaBD[1] +partEntradaBD[2];
+				
 				int compEntradaBD = Integer.parseInt(entradaBD);
 				
 				String[] partEntrada = fechaInc.split("-");
@@ -229,7 +234,7 @@ public class BD extends JFrame{
 		try(Statement stmt = (Statement) conn.createStatement()) {	
 			
 			int res2 = stmt.executeUpdate("INSERT INTO historialregistros VALUES('"+ fechaEntrada +"', '"+ fechaSalida +"', '"+ tipo +"', "+ Integer.parseInt(numero) +", '"+ cliente.getLogin() +"', 1);");
-			conn.close();
+			
 			
 		} catch (SQLException e2) {
 			e2.printStackTrace();;

@@ -1,15 +1,23 @@
 package hotel;
-
+import java.awt.Color;
+import java.io.BufferedWriter;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.PrintWriter;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-
+import java.util.ArrayList;
+import java.util.List;
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JPanel;
 import javax.swing.table.DefaultTableModel;
 
-public class BD {
+public class BD extends JFrame{
 	private Connection conn = null; 
 	
 	public void connect() throws BDException {
@@ -121,6 +129,7 @@ public class BD {
 					i = i + 1;
 				}
 			}
+			//JScrollPane historial = new JScrollPane(tabla);
 			
 		} catch (SQLException e2) {
 			System.out.println(e2.getMessage());
@@ -184,6 +193,43 @@ public class BD {
 			
 		} catch (Exception e2) {
 			// TODO: handle exception
+		}
+	}
+	
+	public List<JButton> habitacion(JButton boton, String fechaEntrada, String fechaSalida, String tipo, JPanel habitaciones, Cliente cliente) {
+		List<JButton> b = new ArrayList<JButton>();
+		try(Statement stmt = (Statement) conn.createStatement()) {
+			
+			ResultSet res1 = stmt.executeQuery("SELECT num_habitacion, libre FROM habitacion WHERE tipo = '"+ tipo +"'");
+			while (res1.next()) {
+				String numero = res1.getString("num_habitacion");
+				int libre = res1.getInt("libre");
+				boton = new JButton(numero);
+				if (libre == 0) {
+					boton.setBackground(Color.GREEN);
+					boton.setEnabled(true);
+					
+				} else {
+					boton.setBackground(Color.RED);
+					boton.setEnabled(false);	
+				}
+				b.add(boton);
+			}
+			
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
+		return b;
+	}
+	
+	public void servicio(String fechaEntrada, String fechaSalida, String tipo, String numero, Cliente cliente) {
+		try(Statement stmt = (Statement) conn.createStatement()) {	
+			
+			int res2 = stmt.executeUpdate("INSERT INTO historialregistros VALUES('"+ fechaEntrada +"', '"+ fechaSalida +"', '"+ tipo +"', "+ Integer.parseInt(numero) +", '"+ cliente.getLogin() +"', 1);");
+			conn.close();
+			
+		} catch (SQLException e2) {
+			
 		}
 	}
 	

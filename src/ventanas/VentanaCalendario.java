@@ -52,7 +52,7 @@ public class VentanaCalendario extends JFrame{
 		fecha=new JTextField(30);
 		fechaInicio = new JButton("Fecha Inicio");
 		fechaFin = new JButton("Fecha Fin");
-		
+		bd = new BD();
 		//IMPEDIMOS QUE SE PUEDAN HACER RESERVAS ANTERIORES AL DIA DE HOY
 		hoy = calendario.getDate();
 		calendario.setMinSelectableDate(hoy);
@@ -83,7 +83,6 @@ public class VentanaCalendario extends JFrame{
 		    	 
 		    	 d1 = calendario.getDate();
 		    	 
-		    	 
 		    	 //CREAMOS LA RESTRICCION DE NO PODER VOLVER A ESCOGER LA FECHA INICIO PARA LA FECHA FINAL
 		    	 int minYear = Integer.parseInt(year);
 		    	 int minMes = Integer.parseInt(mes);
@@ -94,11 +93,8 @@ public class VentanaCalendario extends JFrame{
 		    	 Date minNoche = new Date(Date.UTC(minYear-1900, minMes-1, minDia +1, 0, 0, 0));
 		    	 
 		    	 calendario.setMinSelectableDate(minNoche);
-		    	 
 		     }
 		});
-		
-		
 		
 		//A CONTINUACION SELECCIONAS OTRA FECHA PARA SELECCIONAR EL DIA DE SALIDA DEL HOTEL
 		fechaFin.addActionListener(new ActionListener(){
@@ -119,6 +115,7 @@ public class VentanaCalendario extends JFrame{
 		        long diff = endDate1.getTime() - startDate1.getTime();
 		        
 		        //ESCRIBIMOS LAS FECHAS ENN UN FICHERO
+		        
 		        PrintWriter pw = null;
 				try {
 				    pw = new PrintWriter(new BufferedWriter(new FileWriter("fechas", true)));
@@ -136,6 +133,7 @@ public class VentanaCalendario extends JFrame{
 				//EL DINERO DE LA VARIABLE ANTERIOR LA CONVERTIMOS A INT PARA PODER TRABAJAR CON ELLA
 				String pago = Long.toString((diff / (1000L*60L*60L*24L)));
 				//ESCRIBIMOS LOS DATOS EN UN FICHERO
+				
 				PrintWriter pw2 = null;
 				try {
 				    pw2 = new PrintWriter(new BufferedWriter(new FileWriter("datosFactura.txt", true)));
@@ -156,7 +154,6 @@ public class VentanaCalendario extends JFrame{
 				//LE MOSTRAMOS UNA VENTANA INFORMATIVA PARA QUE SEPA EL DINERO QUE GASTARA POR ESOS DIAS DE LA HABITACION
 				JOptionPane.showMessageDialog(null, "PAGO HABITACION: " + pago + " DIAS " + " = " + pagoHabitacion + "€");
 				
-				BD bd = new BD();
 				try {
 					bd.connect();
 				} catch (BDException e1) {

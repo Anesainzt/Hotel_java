@@ -85,6 +85,7 @@ public class VentanaInicio extends JFrame{
 				
 				//EN CASO DE QUE SEA CLIENTE, ESCRIBIMOS SUS DATOS EN EL FICHERO PARA UTILIZARLOS MAS TARDE
 				if(cl.getLogin().equals(u.getText()) && cl.getLogin() != "") {	
+					
 					PrintWriter pw = null;
 					try {
 						String sep = File.separator;
@@ -98,6 +99,7 @@ public class VentanaInicio extends JFrame{
 					        pw.close();
 					    }
 					}
+					
 					//LE LLEVAMOS A VENTANA CLIENTE
 					VentanaCliente vc = new VentanaCliente(cl);
 				//EN CASO DE SER EMPLEADO LE LLEVAMOS A VENTANA EMPLEADO

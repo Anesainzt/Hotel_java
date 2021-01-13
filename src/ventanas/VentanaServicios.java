@@ -18,6 +18,8 @@ import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JRadioButton;
 
+import hotel.BD;
+import hotel.BDException;
 import hotel.Cliente;
 import ventanaServicios.VentanaComida;
 import ventanaServicios.VentanaDeporte;
@@ -30,6 +32,7 @@ public class VentanaServicios extends JFrame {
 	JRadioButton spa, buffet, deportes, miniBar, salaReunion, sinServicioExtra;
 	ButtonGroup bg;
 	JButton contratar;
+	BD bd;
 	
 	public VentanaServicios(Cliente cliente) {
 		
@@ -79,21 +82,15 @@ public class VentanaServicios extends JFrame {
 
 		}
 		
-		try {	
-			Class.forName("org.sqlite.JDBC");
-			String url = "jdbc:sqlite:hotelJava.db";
-			Connection conn = DriverManager.getConnection(url);
-			Statement stmt = (Statement) conn.createStatement();
-			int res2 = stmt.executeUpdate("INSERT INTO historialregistros VALUES('"+ fechaEntrada +"', '"+ fechaSalida +"', '"+ tipo +"', "+ Integer.parseInt(numero) +", '"+ cliente.getLogin() +"', 1);");
-			conn.close();
-			
-		} catch (ClassNotFoundException e2) {
-		 System.out.println("No se ha podido cargar el driver de la base de datos");
-		} catch (SQLException e2) {
-			
+    	bd = new BD();
+    	try {
+			bd.connect();
+		} catch (BDException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
 		}
-		
-		
+    	bd.servicio(fechaEntrada, fechaSalida, tipo, numero, cliente);
+    	
 		contratar = new JButton("CONTINUAR");
 		
 		contratar.addActionListener(new ActionListener() {

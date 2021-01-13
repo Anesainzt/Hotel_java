@@ -36,7 +36,7 @@ public class VentanaCliente extends JFrame{
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
 				//NOS CONECTAMOS A LA BASE DE DATOS
-				BD bd = new BD();
+				bd = new BD();
 				try {
 					bd.connect();
 				} catch (BDException e) {

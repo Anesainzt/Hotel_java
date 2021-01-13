@@ -10,6 +10,7 @@ import java.io.PrintWriter;
 
 import javax.swing.*;
 
+import hotel.BD;
 import hotel.Cliente;
 
 public class VentanaEleccionHabitacion extends JFrame{
@@ -17,8 +18,10 @@ public class VentanaEleccionHabitacion extends JFrame{
 	JComboBox<String> comboHabitaciones;
 	JLabel habitaciones;
 	JButton elegir;
+	
 	//METODO QUE ESCRIBE LOS DATOS EN EL FICHERO PARA UTILIZARLOS MAS TARDE
 	public static void fichero(String tipo, int precio) {
+		
 		PrintWriter pw = null;
 		try {
 		    pw = new PrintWriter(new BufferedWriter(new FileWriter("datosFactura.txt", true)));
@@ -31,6 +34,7 @@ public class VentanaEleccionHabitacion extends JFrame{
 		        pw.close();
 		    }
 		}
+		
 	}
 	
 	public VentanaEleccionHabitacion(Cliente cliente) {

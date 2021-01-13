@@ -10,21 +10,17 @@ import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
-
 import javax.swing.BorderFactory;
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.Border;
-
+import hotel.BD;
+import hotel.BDException;
 import hotel.Cliente;
 
 public class VentanaSeleccionHabitacion extends JFrame{
@@ -32,9 +28,27 @@ public class VentanaSeleccionHabitacion extends JFrame{
 	JButton boton;
 	JButton vueltaHabitacion;
 	JButton vueltaCalendario;
+	
+	BD bd;
 
 	static String fechaEntrada = null;
 	static String fechaSalida = null;
+	//METODO PARA ESCRIBIR EN EL FICHERO
+	public void pw(String texto) {
+		PrintWriter pw = null;
+		try {
+		    pw = new PrintWriter(new BufferedWriter(new FileWriter("datosFactura.txt", true)));
+		    pw.print(texto);
+		    
+		} catch (IOException e1) {
+		    System.err.println(e1);
+		} finally {
+		    if (pw != null) {
+		        pw.close();
+		    }
+		}
+	}
+	
 	public VentanaSeleccionHabitacion(Cliente cliente, int dinero, String tipo) {
 		
 		JPanel habitaciones = new JPanel();
@@ -45,7 +59,7 @@ public class VentanaSeleccionHabitacion extends JFrame{
     	Scanner sc2;
     	String linea1 = null;
     	String[] campos1 = null;
-    	
+    	//LEEMOS LAS FECHAS OBTENIDAS EN LA VENTANA CALENDARIO
 		try {
 			sc2 = new Scanner(new FileInputStream("fechas"));
 			while(sc2.hasNext()) {
@@ -60,59 +74,44 @@ public class VentanaSeleccionHabitacion extends JFrame{
 			// TODO Auto-generated catch block
 			e2.printStackTrace();
 		}
-		 
+		//CONECTAMOS LA BASE DE DATOS
+		bd = new BD();
 		try {
-			Class.forName("org.sqlite.JDBC");
-			String url = "jdbc:sqlite:hotelJava.db";
-			Connection conn = DriverManager.getConnection(url);
-			Statement stmt = (Statement) conn.createStatement();
-			
-			ResultSet res1 = stmt.executeQuery("SELECT num_habitacion, libre FROM habitacion WHERE tipo = '"+ tipo +"'");
-			while (res1.next()) {
-				String numero = res1.getString("num_habitacion");
-				int libre = res1.getInt("libre");
-				boton = new JButton(numero);
-				if (libre == 0) {
-					boton.setBackground(Color.GREEN);
-					boton.setEnabled(true);
-					boton.addActionListener(new ActionListener() {
-						
-						@Override
-						public void actionPerformed(ActionEvent arg0) {
-							// TODO 
-							
-							PrintWriter pw2 = null;
-							try {
-							    pw2 = new PrintWriter(new BufferedWriter(new FileWriter("baseDeDatos", true)));
-							    pw2.print(fechaEntrada + ";" + fechaSalida + ";" + tipo + ";" + numero);
-							    
-							} catch (IOException e1) {
-							    System.err.println(e1);
-							} finally {
-							    if (pw2 != null) {
-							        pw2.close();
-							    }
-							}
-							
-							VentanaServicios vs = new VentanaServicios(cliente);
-							dispose();
-						}
-						
-					});
-				} else {
-					boton.setBackground(Color.RED);
-					boton.setEnabled(false);
-					
-				}
-				
-				habitaciones.add(boton);
-				
-			}
-			
-		} catch (Exception e) {
-			// TODO: handle exception
+			bd.connect();
+		} catch (BDException e2) {
+			// TODO Auto-generated catch block
+			e2.printStackTrace();
 		}
-		
+		//ELEGIMOS LA HABITACION QUE QUEREMOS Y LA GUARDAMOS
+		List <JButton> b = bd.habitacion(boton, fechaEntrada, fechaSalida, tipo, habitaciones, cliente);
+		for(JButton bu: b ) {
+			if(bu.getBackground() == Color.GREEN) {
+				bu.addActionListener(new ActionListener() {
+					
+					@Override
+					public void actionPerformed(ActionEvent arg0) {
+						//ESCRIBIMOS EL NUMERO DE HABITACION EN EL FICHERO
+						PrintWriter pw2 = null;
+						try {
+						    pw2 = new PrintWriter(new BufferedWriter(new FileWriter("baseDeDatos", true)));
+						    pw2.print(fechaEntrada + ";" + fechaSalida + ";" + tipo + ";" + bu.getText());
+						    
+						} catch (IOException e1) {
+						    System.err.println(e1);
+						} finally {
+						    if (pw2 != null) {
+						        pw2.close();
+						    }
+						}
+						VentanaServicios vs = new VentanaServicios(cliente);
+						dispose();
+					}
+				});
+			}
+			boton = bu;
+			habitaciones.add(boton);
+		}
+		//LEEMOS EL FICHERO CON LOS DATOS
 		ArrayList<String> nuevosDatos = new ArrayList<String>();
 		String linea = null;
 		String[] campos = null;
@@ -151,7 +150,7 @@ public class VentanaSeleccionHabitacion extends JFrame{
     	cambioEleccion.setBorder(cambioEleccionBorder);
     	cambioEleccion.setLayout(new GridLayout(2, 1));
 		
-		
+		//SI ELEGIMOS OTRA HABITACION, GUARDAMOS LOS DATOS DE LA NUEVA HABITACION
 		String textoHabitacion = n + ";" + a + ";" + d;
 		
 		vueltaHabitacion = new JButton("ELEGIR NUEVA HABITACION");
@@ -159,27 +158,14 @@ public class VentanaSeleccionHabitacion extends JFrame{
 		vueltaHabitacion.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {				
-				
-				PrintWriter pw = null;
-				try {
-				    pw = new PrintWriter(new BufferedWriter(new FileWriter("datosFactura.txt", true)));
-				    pw.print(textoHabitacion);
-				    
-				} catch (IOException e1) {
-				    System.err.println(e1);
-				} finally {
-				    if (pw != null) {
-				        pw.close();
-				    }
-				}
-				
+				//ESCRIBIMOS LA NUEVA INFORMACION EN EL FICHERO
+				pw(textoHabitacion);
 				VentanaEleccionHabitacion veh = new VentanaEleccionHabitacion(cliente);
-				
 				dispose();
 			}
 			
 		});
-		
+		//SI ELEGIMOS OTRA FECHA, GUARDAMOS LOS DATOS CON LAS NUEVAS FECHAS
 		String textoCalendario = textoHabitacion + ";" + nomHab + ";" + precHab;
 		
 		vueltaCalendario = new JButton("ELEGIR NUEVA FECHA");
@@ -187,20 +173,8 @@ public class VentanaSeleccionHabitacion extends JFrame{
 		vueltaCalendario.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				
-				PrintWriter pw = null;
-				try {
-				    pw = new PrintWriter(new BufferedWriter(new FileWriter("datosFactura.txt", true)));
-				    pw.print(textoCalendario);
-				    
-				} catch (IOException e1) {
-				    System.err.println(e1);
-				} finally {
-				    if (pw != null) {
-				        pw.close();
-				    }
-				}
-				
+				//ESCRIBIMOS LA NUEVA INFORMACION EN LOS FICHEROS
+				pw(textoCalendario);
 				VentanaCalendario vc = new VentanaCalendario(cliente, dinero, tipo);
 				dispose();
 			}

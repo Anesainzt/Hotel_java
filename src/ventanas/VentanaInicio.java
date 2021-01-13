@@ -69,78 +69,17 @@ public class VentanaInicio extends JFrame{
 				Empleado emp = new Empleado();
 				char[] arrayC = p.getPassword();
 				String password = new String(arrayC);
-				
+				BD bd = new BD();
+				try {
+					bd.connect();
+				} catch (BDException e2) {
+					// TODO Auto-generated catch block
+					e2.printStackTrace();
+				}
 		        //EN CASO DE QUE SEA EMPLEADO
-				try {	
-					Class.forName("org.sqlite.JDBC");
-					String url = "jdbc:sqlite:hotelJava.db";
-					Connection conn = DriverManager.getConnection(url);
-					Statement stmt = (Statement) conn.createStatement();
-					
-					ResultSet empleado = stmt.executeQuery("SELECT nombre, apellido, contraseya, usuario, departamento, salario, usuario_jefe, jefeBit FROM empleado WHERE (usuario = '" + u.getText() + "' AND contraseya = '"+ password +"');");
-					
-					while(empleado.next()) {						
-						String nombreBD = empleado.getString("nombre");
-						String apellidoBD = empleado.getString("apellido");
-						String contraseya = empleado.getString("contraseya");
-						String usuario = empleado.getString("usuario");
-						String departamento = empleado.getString("departamento");
-						double salario = Double.parseDouble(empleado.getString("salario"));
-						boolean jefe = false;
-						if (empleado.getString("jefeBit") == "1") {
-							jefe = true;
-						}
-						String usuarioJefe = empleado.getString("usuario_jefe");
-						
-						emp.setNombre(nombreBD);
-						emp.setApellido(apellidoBD);
-						emp.setPassword(contraseya);
-						emp.setUsuario(usuario);
-						emp.setDepartamento(departamento);
-						emp.setSalario(salario);
-						emp.setJefe(jefe);
-						emp.setUsuarioJefe(usuarioJefe);
-						
-					}
-
-				conn.close();
-				} catch (ClassNotFoundException e2) {
-				 System.out.println("No se ha podido cargar el driver de la base de datos");
-				} catch (SQLException e2) {
-					System.out.println(e2.getMessage());
-				} 
-				
+				emp = bd.empleado(u.getText(), password);
 				//EN CASO DE QUE SEA CLIENTE
-				try {	
-					Class.forName("org.sqlite.JDBC");
-					String url = "jdbc:sqlite:hotelJava.db";
-					Connection conn = DriverManager.getConnection(url);
-					Statement stmt = (Statement) conn.createStatement();
-					
-					ResultSet cliente = stmt.executeQuery("SELECT nombre, apellido, dni, contraseya, usuario FROM cliente WHERE (usuario = '" + u.getText() + "' AND contraseya = '"+ password +"');");
-					while(cliente.next()) {
-						String nombreBD = cliente.getString("nombre");
-						String apellidoBD = cliente.getString("apellido");
-						String dniBD = cliente.getString("dni");
-						String contraseya = cliente.getString("contraseya");
-						String usuario = cliente.getString("usuario");
-						
-						cl.setNombre(nombreBD);
-						cl.setApellido(apellidoBD);
-						cl.setDni(dniBD);
-						cl.setPassword(contraseya);
-						cl.setLogin(usuario);
-						
-					}
-					
-				conn.close();
-				} catch (ClassNotFoundException e2) {
-				 System.out.println("No se ha podido cargar el driver de la base de datos");
-				} catch (SQLException e2) {
-					System.out.println(e2.getMessage());
-				} 
-				
-				
+				cl = bd.cliente(u.getText(), password);
 				
 				if(cl.getLogin().equals(u.getText()) && cl.getLogin() != "") {	
 					PrintWriter pw = null;

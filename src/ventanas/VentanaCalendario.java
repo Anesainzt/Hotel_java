@@ -1,6 +1,9 @@
 package ventanas;
 import javax.swing.*;
 import com.toedter.calendar.JCalendar;
+
+import hotel.BD;
+import hotel.BDException;
 import hotel.Cliente;
 import java.awt.Color;
 import java.awt.GridLayout;
@@ -32,6 +35,8 @@ public class VentanaCalendario extends JFrame{
 	Date hoy;
 	JPanel p;
 	JPanel pfecha;
+	
+	BD bd;
 	
 	
 	static  String fechaInc;
@@ -113,8 +118,7 @@ public class VentanaCalendario extends JFrame{
 		        Date endDate1 = d2;
 		        long diff = endDate1.getTime() - startDate1.getTime();
 		        
-		        //VentanaServicios vs = new VentanaServicios(cliente);
-		        
+		        //ESCRIBIMOS LAS FECHAS ENN UN FICHERO
 		        PrintWriter pw = null;
 				try {
 				    pw = new PrintWriter(new BufferedWriter(new FileWriter("fechas", true)));
@@ -131,7 +135,7 @@ public class VentanaCalendario extends JFrame{
 				
 				//EL DINERO DE LA VARIABLE ANTERIOR LA CONVERTIMOS A INT PARA PODER TRABAJAR CON ELLA
 				String pago = Long.toString((diff / (1000L*60L*60L*24L)));
-				
+				//ESCRIBIMOS LOS DATOS EN UN FICHERO
 				PrintWriter pw2 = null;
 				try {
 				    pw2 = new PrintWriter(new BufferedWriter(new FileWriter("datosFactura.txt", true)));
@@ -152,83 +156,26 @@ public class VentanaCalendario extends JFrame{
 				//LE MOSTRAMOS UNA VENTANA INFORMATIVA PARA QUE SEPA EL DINERO QUE GASTARA POR ESOS DIAS DE LA HABITACION
 				JOptionPane.showMessageDialog(null, "PAGO HABITACION: " + pago + " DIAS " + " = " + pagoHabitacion + "€");
 				
+				BD bd = new BD();
 				try {
-					Class.forName("org.sqlite.JDBC");
-					String url = "jdbc:sqlite:hotelJava.db";
-					Connection conn = DriverManager.getConnection(url);
-					Statement stmt = (Statement) conn.createStatement();
-					String tipo = type;
-					
-					
-					ResultSet res = stmt.executeQuery("SELECT fechaSalida, fechaEntrada, num_habitacion FROM historialregistros WHERE tipo = '"+ tipo +"' AND libre = 1");
-					while(res.next()) {
-						String fechaSalidaBD = res.getString("fechaSalida");
-						String fechaEntradaBD = res.getString("fechaEntrada");
-						int numero = res.getInt("num_habitacion");
-						
-						String[] partSalidaBD = fechaSalidaBD.split("-");
-						
-						String salidaBD = partSalidaBD[0] +partSalidaBD[1] +partSalidaBD[2];
-						int compSalidaBD = Integer.parseInt(salidaBD);
-						
-						String salidaSelect = "";
-						if (Integer.parseInt(mes) < 10 && Integer.parseInt(dia) < 10) {
-							salidaSelect = year + "0" + mes + "0" + dia;
-				    	 } else if (Integer.parseInt(mes) < 10 && Integer.parseInt(dia) >= 10) {
-				    		 salidaSelect = year + "-0" + mes + "-" + dia;
-				    	 } else if (Integer.parseInt(mes) >= 10 && Integer.parseInt(dia) < 10) {
-				    		 salidaSelect = year + "-" + mes + "-0" + dia;
-				    	 } else {
-				    		 salidaSelect = year + "-" + mes + "-" + dia;
-				    	 }
-						
-						int compSalidaSelect = Integer.parseInt(salidaSelect);
-						
-						String[] partEntradaBD = fechaEntradaBD.split("-");
-						
-						String entradaBD = partEntradaBD[0] +partEntradaBD[1] +partEntradaBD[2];
-						int compEntradaBD = Integer.parseInt(entradaBD);
-						
-						String[] partEntrada = fechaInc.split("-");
-						
-						String entradaSelect = partEntrada[0] +partEntrada[1] +partEntrada[2];
-						int compEntradaSelect = Integer.parseInt(entradaSelect);
-						
-						if (compEntradaSelect >= compEntradaBD && compEntradaSelect < compSalidaBD){
-							if (compSalidaSelect >= compEntradaBD && compSalidaSelect < compSalidaBD) {
-								PreparedStatement pstmt = conn.prepareStatement("UPDATE habitacion SET fechaSalida = ?, fechaEntrada = ?, libre = ? WHERE num_habitacion = ?");
-								
-								pstmt.setString(1, fechaSalidaBD);
-								pstmt.setString(2, fechaEntradaBD);
-								pstmt.setInt(3, 1);
-								pstmt.setInt(4, numero);
-								pstmt.executeUpdate();
-							}
-						}
-					}
-					String[] partEntrada = fechaInc.split("-");
-					
-					String entradaSelect = partEntrada[0] +partEntrada[1] +partEntrada[2];
-					
-					conn.close();
-				} catch (Exception e2) {
-					// TODO: handle exception
+					bd.connect();
+				} catch (BDException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
 				}
+				//GUARDAMOS LOS DIAS QUE HA RESERVADO EN LA BASE DE DATOS
+				bd.calendario(type, dia, mes , year, fechaInc);
 				
 				//A CONTINUACION LE LLEVAMOS A LA VENTANA SELECCION HABITACION PARA QUE ELIGA EL NUMERO DE HABITACION EN LA QUE SE ALOJARA ESOS DIAS
 				VentanaSeleccionHabitacion vsh = new VentanaSeleccionHabitacion(cliente, precioHab, type);
-				
 				
 		        dispose();		       
 			}
 		});
 		
-		
 		pfecha.add(new JLabel("Fecha Seleccionada"));
 		pfecha.add(fecha);
-		
 		pfecha.add(fechaInicio);
-	
 		
 		p.add(pfecha);
 		p.add(calendario);
@@ -252,7 +199,6 @@ public class VentanaCalendario extends JFrame{
 		setTitle("Calendario");
 		setSize(800, 600);
 		setVisible(true);
-		
 		
 	}
 }

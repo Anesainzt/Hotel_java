@@ -7,6 +7,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
+import javax.swing.table.DefaultTableModel;
+
 public class BD {
 	private Connection conn = null; 
 	
@@ -89,6 +91,100 @@ public class BD {
 			System.out.println(e2.getMessage());
 		}
 		return cl;
+	}
+	
+	public void historial(Cliente cliente, DefaultTableModel modelo) {
+		try(Statement stmt = (Statement) conn.createStatement()) {	
+			
+			Integer numFilas = 0 ;
+			ResultSet res1 = stmt.executeQuery("SELECT COUNT(usuario) numero FROM historialregistros WHERE usuario = '"+ cliente.getLogin() +"'");
+			
+			while (res1.next()) {
+				numFilas = res1.getInt("numero");
+			}
+			
+			String [] tabla = new String[3];
+			
+			
+			int i = 0;
+			ResultSet res2 = stmt.executeQuery("SELECT fechaEntrada, fechaSalida, tipo FROM historialregistros WHERE usuario = '"+ cliente.getLogin() +"'");
+			while(res2.next()) {
+				
+				String fila = res2.getString("fechaEntrada");
+				tabla[0] = fila;
+				fila = res2.getString("fechaSalida");
+				tabla[1] = fila;
+				fila = res2.getString("tipo");
+				tabla[2] = fila;
+				modelo.addRow(tabla);
+				if (i != numFilas) {
+					i = i + 1;
+				}
+			}
+			
+		} catch (SQLException e2) {
+			System.out.println(e2.getMessage());
+		}
+	}
+	
+	public void calendario(String type, String dia, String mes, String year, String fechaInc) {
+		try(Statement stmt = (Statement) conn.createStatement()) {
+			
+			String tipo = type;
+			
+			ResultSet res = stmt.executeQuery("SELECT fechaSalida, fechaEntrada, num_habitacion FROM historialregistros WHERE tipo = '"+ tipo +"' AND libre = 1");
+			while(res.next()) {
+				String fechaSalidaBD = res.getString("fechaSalida");
+				String fechaEntradaBD = res.getString("fechaEntrada");
+				int numero = res.getInt("num_habitacion");
+				
+				String[] partSalidaBD = fechaSalidaBD.split("-");
+				
+				String salidaBD = partSalidaBD[0] +partSalidaBD[1] +partSalidaBD[2];
+				int compSalidaBD = Integer.parseInt(salidaBD);
+				
+				String salidaSelect = "";
+				if (Integer.parseInt(mes) < 10 && Integer.parseInt(dia) < 10) {
+					salidaSelect = year + "0" + mes + "0" + dia;
+		    	 } else if (Integer.parseInt(mes) < 10 && Integer.parseInt(dia) >= 10) {
+		    		 salidaSelect = year + "-0" + mes + "-" + dia;
+		    	 } else if (Integer.parseInt(mes) >= 10 && Integer.parseInt(dia) < 10) {
+		    		 salidaSelect = year + "-" + mes + "-0" + dia;
+		    	 } else {
+		    		 salidaSelect = year + "-" + mes + "-" + dia;
+		    	 }
+				
+				int compSalidaSelect = Integer.parseInt(salidaSelect);
+				
+				String[] partEntradaBD = fechaEntradaBD.split("-");
+				
+				String entradaBD = partEntradaBD[0] +partEntradaBD[1] +partEntradaBD[2];
+				int compEntradaBD = Integer.parseInt(entradaBD);
+				
+				String[] partEntrada = fechaInc.split("-");
+				
+				String entradaSelect = partEntrada[0] +partEntrada[1] +partEntrada[2];
+				int compEntradaSelect = Integer.parseInt(entradaSelect);
+				
+				if (compEntradaSelect >= compEntradaBD && compEntradaSelect < compSalidaBD){
+					if (compSalidaSelect >= compEntradaBD && compSalidaSelect < compSalidaBD) {
+						PreparedStatement pstmt = conn.prepareStatement("UPDATE habitacion SET fechaSalida = ?, fechaEntrada = ?, libre = ? WHERE num_habitacion = ?");
+						
+						pstmt.setString(1, fechaSalidaBD);
+						pstmt.setString(2, fechaEntradaBD);
+						pstmt.setInt(3, 1);
+						pstmt.setInt(4, numero);
+						pstmt.executeUpdate();
+					}
+				}
+			}
+			String[] partEntrada = fechaInc.split("-");
+			
+			String entradaSelect = partEntrada[0] +partEntrada[1] +partEntrada[2];
+			
+		} catch (Exception e2) {
+			// TODO: handle exception
+		}
 	}
 	
 }

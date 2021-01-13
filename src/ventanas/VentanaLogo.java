@@ -10,12 +10,12 @@ import javax.swing.ImageIcon;
 import javax.swing.JPanel;
 
 public class VentanaLogo extends javax.swing.JFrame{
-	
-	//HACER UN HILO JOIN PARA QUE EMPIECE LA FOTO, LUEGO EL AUDIO Y LUEGO SE TERMINEN LOS 2
-	
+	//FONDO QUE PONEMOS CON LA IMAGEN
 	FondoPanel fondo = new FondoPanel();
 	
 	public VentanaLogo() {
+		
+		//HACEMOS UN HILO PARA PASAR A LA SIGUIENTE VENTANA TRAS ACABAR LA BIENVENIDA
 		
 		Thread t = new Thread(new Runnable() {
 			
@@ -28,15 +28,17 @@ public class VentanaLogo extends javax.swing.JFrame{
         });
 
 		try {
-   		 Clip sonido = AudioSystem.getClip();
-   		 sonido.open(AudioSystem.getAudioInputStream(new File("hotelJava.wav")));
-   		 sonido.start();
-   		 sonido.loop(0);
+			//SONIDO QUE LEEMOS DEL FILE
+			Clip sonido = AudioSystem.getClip();
+			sonido.open(AudioSystem.getAudioInputStream(new File("hotelJava.wav")));
+			//INICIAMOS EL SONIDO
+			sonido.start();
+			//LOOP(0) PARA QUE SOLO SE REPRODUZCA 1 VEZ
+			sonido.loop(0);
             		    
 		} catch (Exception e) {
 		    System.out.println("" + e);
 		}
-        
         
         setContentPane(fondo);
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
@@ -45,20 +47,21 @@ public class VentanaLogo extends javax.swing.JFrame{
 		setVisible(true);
 		
 		try {
-           
-            Thread.sleep(10*1000);
+			//DEJAMOS AL HILO DORMIDO, CUANDO "DEPIERTE", LA BIENVENIDA HABRÁ ACABADO Y PASAMOS A LA SIGUIENTE VENTANA
+			Thread.sleep(10*1000);
          } catch (Exception e) {
             System.out.println(e);
          }
-		
+		//INICIAMOS EL HILO
 		t.start();
 	}
-	
+	//CLASE PARA PONER DE FONDO LA IMAGEN
 	class FondoPanel extends JPanel{
 		private Image imagen;
 		
 		@Override
 		public void paint(Graphics g) {
+			//SELECCIONAMOS LA IMAGEN DEL ARCHIVO QUE ESTA EN EL PAQUETE IMAGEN
 			imagen = new ImageIcon(getClass().getResource("/imagen/hotelJava.jpg")).getImage();
 			
 			g.drawImage(imagen, 0, 0, getWidth(), getHeight(), this);

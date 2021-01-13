@@ -25,6 +25,7 @@ public class VentanaInicio extends JFrame{
 	JButton continuar;
 	Cliente cliente;
 	
+	//METODO PARA LIMPIAR LOS FICHEROS ANTES DE VOLVER A ESCRIBIR EN ELLOS
 	public void limpiezaDeFicheros(String fichero) {
 		BufferedWriter bw;
 		try {
@@ -47,7 +48,7 @@ public class VentanaInicio extends JFrame{
 		p = new JPasswordField();
 		registro = new JButton("REGISTRARSE");
 		continuar = new JButton("CONTINUAR");
-		
+		//LIMPIAMOS LOS FICHEROS
 		limpiezaDeFicheros("fechas");
 		limpiezaDeFicheros("baseDeDatos");
 		limpiezaDeFicheros("datosFactura.txt");
@@ -61,7 +62,7 @@ public class VentanaInicio extends JFrame{
 			}
 		});
 		
-		//Cargamos los drivers de la base de datos
+		
 		continuar.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
@@ -69,6 +70,7 @@ public class VentanaInicio extends JFrame{
 				Empleado emp = new Empleado();
 				char[] arrayC = p.getPassword();
 				String password = new String(arrayC);
+				//CONECTAMOS LA BASE DE DATOS
 				BD bd = new BD();
 				try {
 					bd.connect();
@@ -81,6 +83,7 @@ public class VentanaInicio extends JFrame{
 				//EN CASO DE QUE SEA CLIENTE
 				cl = bd.cliente(u.getText(), password);
 				
+				//EN CASO DE QUE SEA CLIENTE, ESCRIBIMOS SUS DATOS EN EL FICHERO PARA UTILIZARLOS MAS TARDE
 				if(cl.getLogin().equals(u.getText()) && cl.getLogin() != "") {	
 					PrintWriter pw = null;
 					try {
@@ -95,11 +98,12 @@ public class VentanaInicio extends JFrame{
 					        pw.close();
 					    }
 					}
+					//LE LLEVAMOS A VENTANA CLIENTE
 					VentanaCliente vc = new VentanaCliente(cl);
-
+				//EN CASO DE SER EMPLEADO LE LLEVAMOS A VENTANA EMPLEADO
 				} else if (emp.getUsuario().equals(u.getText()) && emp.getUsuario() != "") {
 					VentanaEmpleado ve = new VentanaEmpleado(emp);
-
+				//SI NO CORRESPONDE CON NINGUNA, O SE HA EQUIVOCADO AL ESCRIBIR O DEBE REGISTRARSE
 				} else {
 					JOptionPane.showMessageDialog(null, "USUARIO O CONTRASEÑA INCORRECTO, PRUEBE OTRA VEZ");
 					VentanaInicio vi = new VentanaInicio();

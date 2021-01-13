@@ -11,6 +11,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -192,6 +193,7 @@ public class BD extends JFrame{
 			String entradaSelect = partEntrada[0] +partEntrada[1] +partEntrada[2];
 			
 		} catch (Exception e2) {
+			e2.printStackTrace();
 			// TODO: handle exception
 		}
 	}
@@ -218,6 +220,7 @@ public class BD extends JFrame{
 			
 		} catch (Exception e) {
 			// TODO: handle exception
+			e.printStackTrace();
 		}
 		return b;
 	}
@@ -229,8 +232,33 @@ public class BD extends JFrame{
 			conn.close();
 			
 		} catch (SQLException e2) {
-			
+			e2.printStackTrace();;
 		}
 	}
+	
+	public void updateOcupadasHoy(){
+		Calendar calendario = Calendar.getInstance();
+		int year = calendario.get(calendario.YEAR);
+		int mes = calendario.get(calendario.MONTH);
+		int dia = calendario.get(calendario.DAY_OF_MONTH);
+		
+		
+	};
+	
+	public List<Integer> getHabitacionesOcupadas(){
+		List<Integer> listaHabitacion = null;
+		try (Statement stmt = (Statement) conn.createStatement()){
+			
+			ResultSet num_habitacion = stmt.executeQuery("SELECT num_habitacion FROM habitacion WHERE libre = 1;");
+			while (num_habitacion.next()) {
+				listaHabitacion.add(num_habitacion.getInt("num_habitacion"));
+				
+			}
+		} catch (Exception e) {
+			// TODO: handle exception
+			e.printStackTrace();
+		}
+		return listaHabitacion;
+	};
 	
 }

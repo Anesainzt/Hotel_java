@@ -21,6 +21,21 @@ import javax.swing.table.DefaultTableModel;
 public class BD extends JFrame{
 	private Connection conn = null; 
 	
+	public void escribirFichero(String fichero, String texto) {
+		PrintWriter pw = null;
+		try {
+		    pw = new PrintWriter(new BufferedWriter(new FileWriter(fichero, true)));
+		    pw.print(texto);
+		    
+		} catch (IOException e1) {
+		    System.err.println(e1);
+		} finally {
+		    if (pw != null) {
+		        pw.close();
+		    }
+		}
+	}
+	
 	public void connect() throws BDException {
 		try {
 			Class.forName("org.sqlite.JDBC");

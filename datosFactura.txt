@@ -1,1 +1,1 @@
-usuario2;usuario2;usuario2;DOBLE;100;2
+usuario3;usuario3;usuario3;INDIVIDUAL;80;2

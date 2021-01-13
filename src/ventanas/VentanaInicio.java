@@ -24,6 +24,7 @@ public class VentanaInicio extends JFrame{
 	JButton registro;
 	JButton continuar;
 	Cliente cliente;
+	BD bd;
 	
 	//METODO PARA LIMPIAR LOS FICHEROS ANTES DE VOLVER A ESCRIBIR EN ELLOS
 	public void limpiezaDeFicheros(String fichero) {
@@ -71,7 +72,7 @@ public class VentanaInicio extends JFrame{
 				char[] arrayC = p.getPassword();
 				String password = new String(arrayC);
 				//CONECTAMOS LA BASE DE DATOS
-				BD bd = new BD();
+				bd = new BD();
 				try {
 					bd.connect();
 				} catch (BDException e2) {
@@ -85,21 +86,7 @@ public class VentanaInicio extends JFrame{
 				
 				//EN CASO DE QUE SEA CLIENTE, ESCRIBIMOS SUS DATOS EN EL FICHERO PARA UTILIZARLOS MAS TARDE
 				if(cl.getLogin().equals(u.getText()) && cl.getLogin() != "") {	
-					
-					PrintWriter pw = null;
-					try {
-						String sep = File.separator;
-					    pw = new PrintWriter(new BufferedWriter(new FileWriter("datosFactura.txt", true)));
-					    pw.print(cl.getNombre() + ";" + cl.getApellido() + ";" + cl.getDni());
-					    
-					} catch (IOException e1) {
-					    System.err.println(e1);
-					} finally {
-					    if (pw != null) {
-					        pw.close();
-					    }
-					}
-					
+					bd.escribirFichero("datosFactura.txt", cl.getNombre() + ";" + cl.getApellido() + ";" + cl.getDni());
 					//LE LLEVAMOS A VENTANA CLIENTE
 					VentanaCliente vc = new VentanaCliente(cl);
 				//EN CASO DE SER EMPLEADO LE LLEVAMOS A VENTANA EMPLEADO

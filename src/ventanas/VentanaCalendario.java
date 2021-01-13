@@ -115,7 +115,8 @@ public class VentanaCalendario extends JFrame{
 		        long diff = endDate1.getTime() - startDate1.getTime();
 		        
 		        //ESCRIBIMOS LAS FECHAS ENN UN FICHERO
-		        
+		        bd.escribirFichero("fechas", new SimpleDateFormat("yyyy-MM-dd").format(startDate1) + ";" + new SimpleDateFormat("yyyy-MM-dd").format(endDate1));
+		        /*
 		        PrintWriter pw = null;
 				try {
 				    pw = new PrintWriter(new BufferedWriter(new FileWriter("fechas", true)));
@@ -129,11 +130,12 @@ public class VentanaCalendario extends JFrame{
 				        pw.close();
 				    }
 				}
-				
+				*/
 				//EL DINERO DE LA VARIABLE ANTERIOR LA CONVERTIMOS A INT PARA PODER TRABAJAR CON ELLA
 				String pago = Long.toString((diff / (1000L*60L*60L*24L)));
 				//ESCRIBIMOS LOS DATOS EN UN FICHERO
-				
+				bd.escribirFichero("datosFactura.txt", ";" + pago);
+				/*
 				PrintWriter pw2 = null;
 				try {
 				    pw2 = new PrintWriter(new BufferedWriter(new FileWriter("datosFactura.txt", true)));
@@ -146,7 +148,7 @@ public class VentanaCalendario extends JFrame{
 				        pw2.close();
 				    }
 				}
-				
+				*/
 				//LA VARIABLE STRING PAGO ANTERIOR LA CONVIERTES A INT Y LA MULTIPLICAS POR EL PAGO POR NOCHE DE HABITACION
 				//Y YA TENEMOS LO QUE PAGA POR LA HABITACION TOTAL DE TODOS LOS DIAS
 				int pagoHabitacion = (Integer.parseInt(pago)*precioHab);

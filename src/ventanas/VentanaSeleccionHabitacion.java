@@ -33,21 +33,6 @@ public class VentanaSeleccionHabitacion extends JFrame{
 
 	static String fechaEntrada = null;
 	static String fechaSalida = null;
-	//METODO PARA ESCRIBIR EN EL FICHERO
-	public void pw(String texto) {
-		PrintWriter pw = null;
-		try {
-		    pw = new PrintWriter(new BufferedWriter(new FileWriter("datosFactura.txt", true)));
-		    pw.print(texto);
-		    
-		} catch (IOException e1) {
-		    System.err.println(e1);
-		} finally {
-		    if (pw != null) {
-		        pw.close();
-		    }
-		}
-	}
 	
 	public VentanaSeleccionHabitacion(Cliente cliente, int dinero, String tipo) {
 		
@@ -91,18 +76,7 @@ public class VentanaSeleccionHabitacion extends JFrame{
 					@Override
 					public void actionPerformed(ActionEvent arg0) {
 						//ESCRIBIMOS EL NUMERO DE HABITACION EN EL FICHERO
-						PrintWriter pw2 = null;
-						try {
-						    pw2 = new PrintWriter(new BufferedWriter(new FileWriter("baseDeDatos", true)));
-						    pw2.print(fechaEntrada + ";" + fechaSalida + ";" + tipo + ";" + bu.getText());
-						    
-						} catch (IOException e1) {
-						    System.err.println(e1);
-						} finally {
-						    if (pw2 != null) {
-						        pw2.close();
-						    }
-						}
+						bd.escribirFichero("baseDeDatos", fechaEntrada + ";" + fechaSalida + ";" + tipo + ";" + bu.getText());
 						VentanaServicios vs = new VentanaServicios(cliente);
 						dispose();
 					}
@@ -159,7 +133,7 @@ public class VentanaSeleccionHabitacion extends JFrame{
 			@Override
 			public void actionPerformed(ActionEvent e) {				
 				//ESCRIBIMOS LA NUEVA INFORMACION EN EL FICHERO
-				pw(textoHabitacion);
+				bd.escribirFichero("datosFactura.txt", textoHabitacion);
 				VentanaEleccionHabitacion veh = new VentanaEleccionHabitacion(cliente);
 				dispose();
 			}
@@ -174,7 +148,7 @@ public class VentanaSeleccionHabitacion extends JFrame{
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				//ESCRIBIMOS LA NUEVA INFORMACION EN LOS FICHEROS
-				pw(textoCalendario);
+				bd.escribirFichero("datosFactura.txt", textoCalendario);
 				VentanaCalendario vc = new VentanaCalendario(cliente, dinero, tipo);
 				dispose();
 			}

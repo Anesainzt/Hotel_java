@@ -1,9 +1,9 @@
-		MENÚ DEL DÍA
+		MENU DEL DIA
 PRIMER PLATO:
 	-Ensaladilla rusa
 	-Alubias con chorizo
 	-Revuelto de la casa
-	-Macarrones/Spaguettis a la boloñesa
+	-Macarrones/Spaguettis a la bolognesa
 SEGUNDO PLATO:
 	-Lasaña de carne
 	-Merluza en salsa de marisco

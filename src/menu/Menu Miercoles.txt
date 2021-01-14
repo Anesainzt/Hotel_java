@@ -1,9 +1,9 @@
-		MENÚ DEL DÍA
+		MENU DEL DIA
 PRIMER PLATO:
 	-Guiso de garbanzos con callos
 	-Ensalada de pasta de colores
 	-Gazpacho andaluz
-	-Macarrones/Spaguettis a la boloñesa
+	-Macarrones/Spaguettis a la bolognesa
 SEGUNDO PLATO:
 	-Churrasco a la parrilla con patatas
 	-Pincho moruno adobado a la plancha

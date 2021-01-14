@@ -1,9 +1,9 @@
-		MENÚ DEL DÍA
+		MENU DEL DIA
 PRIMER PLATO:
 	-Lentejas con verduras
 	-Alcachofas salteadas de ibericos
 	-Arroz cremoso de bacalao y puerro
-	-Macarrones/Spaguettis a la boloñesa
+	-Macarrones/Spaguettis a la bolognesa
 SEGUNDO PLATO:
 	-Pavo guisado con verduras y patatas
 	-Pollo al ajillo

@@ -1,9 +1,9 @@
-		MENÚ DEL DÍA
+		MENU DEL DIA
 PRIMER PLATO:
 	-Spaguetti con espinacas y bacon a la nata
 	-Ensalada campera
 	-Pisto de calabacin 
-	-Macarrones/Spaguetti a la boloñesa
+	-Macarrones/Spaguetti a la bolognesa
 SEGUNDO PLATO:
 	-Lomo fresco de cerdo a la plancha con patatas
 	-Higado de ternera a la plancha con cebolla caramelizada

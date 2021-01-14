@@ -35,11 +35,11 @@ public class VentanaEmpleado extends JFrame{
     }
 	
 	public enum DepartamentoTrabajo{
-		Cocina,
-		Deporte,
-		AtencionCliente,
-		Seguridad,
-		Limpieza
+		cocina,
+		deporte,
+		atencionCliente,
+		seguridad,
+		limpieza
 	}
 	
 	JCalendar calendario;
@@ -149,14 +149,12 @@ public class VentanaEmpleado extends JFrame{
     	Border trabajoBorder = BorderFactory.createTitledBorder("DEPARTAMENTO");
     	trabajo.setBorder(trabajoBorder);
     	
-    	
-    	
     	String departamento = empleado.getDepartamento();
     	
     	dpt = DepartamentoTrabajo.valueOf(departamento);
     	switch(dpt) {
     		
-    	case Cocina:
+    	case cocina:
     		lunes = new JLabel("MENU LUNES: ");
     		martes = new JLabel("MENU MARTES: ");
 	    	miercoles = new JLabel("MENU MIERCOLES: ");
@@ -182,7 +180,7 @@ public class VentanaEmpleado extends JFrame{
 	        		try {
 	        			Scanner sc2;
 	    			
-	        			sc2 = new Scanner(new FileInputStream("menus/Menu " + dias[numeroDia -1] + ".txt"));
+	        			sc2 = new Scanner(new FileInputStream("src/menu/Menu " + dias[numeroDia -1] + ".txt"));
 	        			while(sc2.hasNext()) {
 	    				 
 	        				menu = menu + sc2.nextLine();
@@ -207,7 +205,7 @@ public class VentanaEmpleado extends JFrame{
 	        		try {
 	        			Scanner sc2;
 	        			
-	        			sc2 = new Scanner(new FileInputStream("menus/Menu " + dias[numeroDia -1] + ".txt"));
+	        			sc2 = new Scanner(new FileInputStream("src/menu/Menu " + dias[numeroDia -1] + ".txt"));
 	        			while(sc2.hasNext()) {
 	        				 
 	        				 menu = menu + sc2.nextLine();
@@ -232,7 +230,7 @@ public class VentanaEmpleado extends JFrame{
 	        		try {
 	        			Scanner sc2;
 	        			
-	        			sc2 = new Scanner(new FileInputStream("menus/Menu " + dias[numeroDia -1] + ".txt"));
+	        			sc2 = new Scanner(new FileInputStream("src/menu/Menu " + dias[numeroDia -1] + ".txt"));
 	        			while(sc2.hasNext()) {
 	        				 
 	        				 menu = menu + sc2.nextLine();
@@ -257,7 +255,7 @@ public class VentanaEmpleado extends JFrame{
 	        		try {
 	        			Scanner sc2;
 	        			
-	        			sc2 = new Scanner(new FileInputStream("menus/Menu " + dias[numeroDia -1] + ".txt"));
+	        			sc2 = new Scanner(new FileInputStream("src/menu/Menu " + dias[numeroDia -1] + ".txt"));
 	        			while(sc2.hasNext()) {
 	        				 
 	        				 menu = menu + sc2.nextLine();
@@ -282,7 +280,7 @@ public class VentanaEmpleado extends JFrame{
 	        		try {
 	        			Scanner sc2;
 	        			
-	        			sc2 = new Scanner(new FileInputStream("menus/Menu " + dias[numeroDia -1] + ".txt"));
+	        			sc2 = new Scanner(new FileInputStream("src/menu/Menu " + dias[numeroDia -1] + ".txt"));
 	        			while(sc2.hasNext()) {
 	        				 
 	        				 menu = menu + sc2.nextLine();
@@ -307,7 +305,7 @@ public class VentanaEmpleado extends JFrame{
 	        		try {
 	        			Scanner sc2;
 	        			
-	        			sc2 = new Scanner(new FileInputStream("menus/Menu " + dias[numeroDia -1] + ".txt"));
+	        			sc2 = new Scanner(new FileInputStream("src/menu/Menu " + dias[numeroDia -1] + ".txt"));
 	        			while(sc2.hasNext()) {
 	        				 
 	        				 menu = menu + sc2.nextLine();
@@ -332,7 +330,7 @@ public class VentanaEmpleado extends JFrame{
 	        		try {
 	        			Scanner sc2;
 	        			
-	        			sc2 = new Scanner(new FileInputStream("menus/Menu " + dias[numeroDia -1] + ".txt"));
+	        			sc2 = new Scanner(new FileInputStream("src/menu/Menu " + dias[numeroDia -1] + ".txt"));
 	        			while(sc2.hasNext()) {
 	        				 
 	        				 menu = menu + sc2.nextLine();
@@ -353,8 +351,8 @@ public class VentanaEmpleado extends JFrame{
 	        		break;
 	        }
 	        
-    	case Limpieza:
-    		
+    	case limpieza:
+    		limpiezaHabitacion = new JTable();
     		modelo = (DefaultTableModel)limpiezaHabitacion.getModel();
     		modelo.addColumn("Habitacion");
     		modelo.addColumn("Limpiado");

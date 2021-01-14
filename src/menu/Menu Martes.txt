@@ -1,9 +1,9 @@
-		MENÚ DEL DÍA
+		MENU DEL DIA
 PRIMER PLATO:
 	-Arroz con tinta de calamar
 	-Ensalada mixta
 	-Sopa azteca
-	-Macarrones/Spaguettis a la boloñesa
+	-Macarrones/Spaguettis a la bolognesa
 SEGUNDO PLATO:
 	-Burrito de pollo o ternera
 	-Bacalao al pilpil

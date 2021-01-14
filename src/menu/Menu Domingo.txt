@@ -1,9 +1,9 @@
-		MENÚ DEL DÍA
+		MENU DEL DIA
 PRIMER PLATO:
 	-Berengenas rellenas de arroz y espinacas
 	-Arroz a la cubana
 	-Judias verdes con jamos y tomate
-	-Macarrones/Spaguettis a la boloñesa
+	-Macarrones/Spaguettis a la bolognesa
 SEGUNDO PLATO:
 	-Codillo de cerdo al horno
 	-Rabo de toro

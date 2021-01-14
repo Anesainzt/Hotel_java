@@ -135,6 +135,7 @@ public class VentanaSeleccionHabitacion extends JFrame{
 				//ESCRIBIMOS LA NUEVA INFORMACION EN EL FICHERO
 				bd.escribirFichero("datosFactura.txt", textoHabitacion);
 				VentanaEleccionHabitacion veh = new VentanaEleccionHabitacion(cliente);
+				bd.restartHabitacion();
 				dispose();
 			}
 			
@@ -150,6 +151,7 @@ public class VentanaSeleccionHabitacion extends JFrame{
 				//ESCRIBIMOS LA NUEVA INFORMACION EN LOS FICHEROS
 				bd.escribirFichero("datosFactura.txt", textoCalendario);
 				VentanaCalendario vc = new VentanaCalendario(cliente, dinero, tipo);
+				bd.restartHabitacion();
 				dispose();
 			}
 			

@@ -16,7 +16,7 @@ public class VentanaContinuacion extends JFrame{
 	
 	public VentanaContinuacion(Cliente cliente) {
 		
-		setLayout(new GridLayout(3, 1));
+		setLayout(new GridLayout(2, 1));
 		
 		elegirNuevoServicio = new JButton("ELEGIR NUEVO SERVICIO");
 		continuar = new JButton("CONTINUAR");

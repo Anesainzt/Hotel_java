@@ -253,13 +253,7 @@ public class BD extends JFrame{
 				String entradaSelect = partEntrada[0] +partEntrada[1] +partEntrada[2];
 				int compEntradaSelect = Integer.parseInt(entradaSelect);
 				
-				System.out.println(compEntradaSelect + ">");
-				System.out.println(compEntradaBD);
-				System.out.println(compSalidaSelect+ ">");
-				System.out.println(compEntradaBD);
-				System.out.println();
-				
-				if ((compEntradaSelect < compEntradaBD && compSalidaSelect < compEntradaBD) && (compEntradaSelect < compSalidaBD && compSalidaSelect < compSalidaBD)){
+				if ((compEntradaSelect < compEntradaBD && compSalidaSelect < compEntradaBD) || (compEntradaSelect > compSalidaBD && compSalidaSelect > compSalidaBD)){
 				
 					PreparedStatement pstmt = conn.prepareStatement("UPDATE habitacion SET libre = ? WHERE num_habitacion = ?");
 						

@@ -101,6 +101,17 @@ public class BD extends JFrame{
 		}
 	}
 	
+	public void restartHabitacion() {
+		try {
+			PreparedStatement pstmt = conn.prepareStatement("UPDATE habitacion SET libre = ?");
+			
+			pstmt.setInt(1, 0);
+			pstmt.executeUpdate();
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
+	}
+	
 	public Empleado empleado(String usu, String password) {
 		Empleado emp = new Empleado();
 		
@@ -242,14 +253,26 @@ public class BD extends JFrame{
 				String entradaSelect = partEntrada[0] +partEntrada[1] +partEntrada[2];
 				int compEntradaSelect = Integer.parseInt(entradaSelect);
 				
-				if (compEntradaSelect >= compEntradaBD && compEntradaSelect < compSalidaBD){
-					if (compSalidaSelect >= compEntradaBD && compSalidaSelect < compSalidaBD) {
-						PreparedStatement pstmt = conn.prepareStatement("UPDATE habitacion SET libre = ? WHERE num_habitacion = ?");
+				System.out.println(compEntradaSelect + ">");
+				System.out.println(compEntradaBD);
+				System.out.println(compSalidaSelect+ ">");
+				System.out.println(compEntradaBD);
+				System.out.println();
+				
+				if ((compEntradaSelect < compEntradaBD && compSalidaSelect < compEntradaBD) && (compEntradaSelect < compSalidaBD && compSalidaSelect < compSalidaBD)){
+				
+					PreparedStatement pstmt = conn.prepareStatement("UPDATE habitacion SET libre = ? WHERE num_habitacion = ?");
 						
-						pstmt.setInt(1, 1);
-						pstmt.setInt(2, numero);
-						pstmt.executeUpdate();
-					}
+					pstmt.setInt(1, 0);
+					pstmt.setInt(2, numero);
+					pstmt.executeUpdate();
+					
+				} else {
+					PreparedStatement pstmt = conn.prepareStatement("UPDATE habitacion SET libre = ? WHERE num_habitacion = ?");
+					
+					pstmt.setInt(1, 1);
+					pstmt.setInt(2, numero);
+					pstmt.executeUpdate();
 				}
 			}
 			

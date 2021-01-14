@@ -13,7 +13,6 @@ public class VentanaContinuacion extends JFrame{
 	
 	JButton elegirNuevoServicio;
 	JButton continuar;
-	JProgressBar barra;
 	
 	public VentanaContinuacion(Cliente cliente) {
 		
@@ -42,7 +41,6 @@ public class VentanaContinuacion extends JFrame{
 		
 		add(elegirNuevoServicio);
 		add(continuar);
-		add(barra);
 		
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
 		setTitle("Continuacion");

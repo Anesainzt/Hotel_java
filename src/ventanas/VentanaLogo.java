@@ -27,6 +27,7 @@ public class VentanaLogo extends javax.swing.JFrame{
 			e1.printStackTrace();
 		}
 		bd.ponerAlDiaBD();
+		bd.restartHabitacion();
 		Thread t = new Thread(new Runnable() {
 			
             @Override

@@ -1,5 +1,6 @@
 package ventanas;
 
+import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
@@ -7,6 +8,7 @@ import java.awt.event.ActionListener;
 import java.util.List;
 
 import javax.swing.BorderFactory;
+import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
@@ -22,6 +24,7 @@ public class VentanaReservaPista extends JFrame{
 	JButton boton;
 	JButton vueltaDeporte;
 	JButton vueltaFecha;
+	JButton continuarSinPista;
 	JPanel pistas;
 	JPanel cambioEleccion;
 	BD bd;
@@ -40,10 +43,12 @@ public class VentanaReservaPista extends JFrame{
 		
 		bd.eleccionDePistasLibres(fecha, hora, tipo);
 		
+		
 		pistas = new JPanel();
-    	Border pistasBorder = BorderFactory.createTitledBorder("PISATAS");
+    	Border pistasBorder = BorderFactory.createTitledBorder("PISTAS");
     	pistas.setBorder(pistasBorder);
     	pistas.setLayout(new GridLayout(1, 1));
+    	pistas.setSize(100, 100);
 		
 		botones = bd.botonesReservarPista(tipo);
 		
@@ -68,7 +73,8 @@ public class VentanaReservaPista extends JFrame{
 		cambioEleccion = new JPanel();
     	Border cambioEleccionBorder = BorderFactory.createTitledBorder("CAMBIO ELECCION");
     	cambioEleccion.setBorder(cambioEleccionBorder);
-    	cambioEleccion.setLayout(new GridLayout(2, 1));
+    	cambioEleccion.setLayout(new GridLayout(3, 1));
+    	cambioEleccion.setSize(100, 100);
     	
     	vueltaFecha = new JButton("ELEGIR NUEVA FECHA");
 		
@@ -90,7 +96,6 @@ public class VentanaReservaPista extends JFrame{
 			
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
-				// TODO Auto-generated method stub
 				
 				VentanaDeporte vn = new VentanaDeporte(cliente);
 				
@@ -99,16 +104,38 @@ public class VentanaReservaPista extends JFrame{
 				dispose();
 			}
 		});
+    	
+    	continuarSinPista = new JButton("CONTINUAR SIN RESERVAR");
+    	
+    	continuarSinPista.addActionListener(new ActionListener() {
+    		
+    		@Override
+    		public void actionPerformed(ActionEvent arg0) {
+    			
+    			VentanaContinuacion vc = new VentanaContinuacion(cliente);
+    			
+    			bd.escribirFichero("horaPista", "");
+    			
+    			dispose();
+    		}
+    	});
 		
+    	
+    	
     	cambioEleccion.add(vueltaFecha);
     	cambioEleccion.add(vueltaDeporte);
+    	cambioEleccion.add(continuarSinPista);
     	
-    	add(pistas);
-    	add(cambioEleccion);
+    	JPanel main = new JPanel();
+    	main.setLayout(new BoxLayout(main, BoxLayout.Y_AXIS));
+    	main.add(pistas);
+    	main.add(cambioEleccion);
+    	
+    	add(main);
     	
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
 		setTitle("Reserva pista servicio");
-		setSize(1200, 500);
+		setSize(500, 500);
 		setVisible(true);
 	}
 	

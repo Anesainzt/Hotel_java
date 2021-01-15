@@ -61,6 +61,21 @@ public class BD extends JFrame{
 		}
 	}
 	
+	public void registro(Cliente nuevo) {
+		try {			
+			PreparedStatement pstmt = conn.prepareStatement("UPDATE cliente SET nombre = ?, apellido = ?, dni = ?, tarjeta = ? WHERE usuario = '"+ nuevo.getLogin() +"' AND contraseya = '"+ nuevo.getPassword() +"';");
+			
+			pstmt.setString(1, nuevo.getNombre());
+			pstmt.setString(2, nuevo.getApellido());
+			pstmt.setString(3, nuevo.getDni());
+			pstmt.setString(4, nuevo.getTarjeta());
+			pstmt.executeUpdate();
+			conn.close();
+		} catch (SQLException e2) {
+			System.out.println(e2.getMessage());
+		} 	
+	}
+	
 	public void ponerAlDiaBD() {
 		
 		try(Statement stmt = (Statement) conn.createStatement();){

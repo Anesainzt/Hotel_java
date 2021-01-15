@@ -11,6 +11,7 @@ import java.sql.Statement;
 import java.util.*;
 import javax.swing.*;
 
+import hotel.BD;
 import hotel.Cliente;
 
 public class VentanaCreacionRegistro extends JFrame{
@@ -23,6 +24,7 @@ public class VentanaCreacionRegistro extends JFrame{
 	JLabel tarjeta;
 	JTextField t;
 	JButton continuar;
+	BD bd;
 	
 	public VentanaCreacionRegistro(Cliente cliente) {
 		
@@ -37,6 +39,7 @@ public class VentanaCreacionRegistro extends JFrame{
 		tarjeta = new JLabel("TARJETA");
 		t = new JTextField();
 		continuar = new JButton("CONTINUAR");
+		bd = new BD();
 		
 		continuar.addActionListener(new ActionListener() {
 			@Override
@@ -60,43 +63,13 @@ public class VentanaCreacionRegistro extends JFrame{
 					nuevo.setApellido(a.getText());
 					nuevo.setDni(d.getText());
 					nuevo.setTarjeta(t.getText());
-					
-					PrintWriter pw = null;
-					try {
-					    pw = new PrintWriter(new BufferedWriter(new FileWriter("datosFactura.txt", true)));
-					    pw.print(nuevo.getNombre() + ";" + nuevo.getApellido() + ";" + nuevo.getDni());
-					    
-					} catch (IOException e1) {
-					    System.err.println(e1);
-					} finally {
-					    if (pw != null) {
-					        pw.close();
-					    }
-					}
+					bd.escribirFichero("datosFactura.txt", nuevo.getNombre() + ";" + nuevo.getApellido() + ";" + nuevo.getDni());
 					
 					VentanaEleccionHabitacion vcr = new VentanaEleccionHabitacion(nuevo);
 					
-					try {	
-						Class.forName("org.sqlite.JDBC");
-						String url = "jdbc:sqlite:hotelJava.db";
-						Connection conn = DriverManager.getConnection(url);
-						
-						PreparedStatement pstmt = conn.prepareStatement("UPDATE cliente SET nombre = ?, apellido = ?, dni = ?, tarjeta = ? WHERE usuario = '"+ nuevo.getLogin() +"' AND contraseya = '"+ nuevo.getPassword() +"';");
-						
-						pstmt.setString(1, nuevo.getNombre());
-						pstmt.setString(2, nuevo.getApellido());
-						pstmt.setString(3, nuevo.getDni());
-						pstmt.setString(4, nuevo.getTarjeta());
-						pstmt.executeUpdate();
-						conn.close();
-					} catch (ClassNotFoundException e2) {
-					 System.out.println("No se ha podido cargar el driver de la base de datos");
-					} catch (SQLException e2) {
-						System.out.println(e2.getMessage());
-					} 	
+					bd.registro(nuevo);
 						
 					dispose();
-					
 				}
 				
 			}

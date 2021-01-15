@@ -7,12 +7,13 @@ import java.io.File;
 import javax.sound.sampled.AudioSystem;
 import javax.sound.sampled.Clip;
 import javax.swing.ImageIcon;
+import javax.swing.JFrame;
 import javax.swing.JPanel;
 
 import hotel.BD;
 import hotel.BDException;
 
-public class VentanaLogo extends javax.swing.JFrame{
+public class VentanaLogo extends JFrame{
 	//FONDO QUE PONEMOS CON LA IMAGEN
 	FondoPanel fondo = new FondoPanel();
 	BD bd;

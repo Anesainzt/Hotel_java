@@ -1,13 +1,16 @@
 package ventanas;
 
 import java.awt.Desktop;
+import java.awt.Graphics;
 import java.awt.GridLayout;
+import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.Scanner;
@@ -19,6 +22,7 @@ import javax.swing.table.DefaultTableModel;
 import com.toedter.calendar.JCalendar;
 
 import hotel.*;
+import ventanas.VentanaLogo.FondoPanel;
 
 public class VentanaEmpleado extends JFrame{
 	
@@ -43,6 +47,7 @@ public class VentanaEmpleado extends JFrame{
 	}
 	
 	JCalendar calendario;
+	BD bd;
 	
 	//Cocina
 	JLabel lunes;
@@ -135,15 +140,23 @@ public class VentanaEmpleado extends JFrame{
     	documentos.add(salir);
     	
     	JPanel informacion = new JPanel();
-    	Border informacionBorder = BorderFactory.createTitledBorder("DOCUMENTOS");
+    	Border informacionBorder = BorderFactory.createTitledBorder("INFORMACION");
     	informacion.setBorder(informacionBorder);
-    	informacion.setLayout(new GridLayout(1, 5));
+    	informacion.setLayout(new GridLayout(3, 2));
     	
-    	//ASIER
-    	
-    	JLabel nombre = new JLabel("NOMBRE");
+    	JLabel nombre = new JLabel("NOMBRE: ");
+    	JLabel nombreEmpleado = new JLabel(empleado.getNombre());
+    	JLabel apellido = new JLabel("APELLIDO: ");
+    	JLabel apellidoEmpleado = new JLabel(empleado.getApellido());
+    	JLabel dpto = new JLabel("DEPARTAMENTO: ");
+    	JLabel departamentoEmpleado = new JLabel(empleado.getDepartamento());
     	
     	informacion.add(nombre);
+    	informacion.add(nombreEmpleado);
+    	informacion.add(apellido);
+    	informacion.add(apellidoEmpleado);
+    	informacion.add(dpto);
+    	informacion.add(departamentoEmpleado);
     	
     	JPanel trabajo = new JPanel();
     	Border trabajoBorder = BorderFactory.createTitledBorder("DEPARTAMENTO");
@@ -352,14 +365,96 @@ public class VentanaEmpleado extends JFrame{
 	        }
 	        
     	case limpieza:
+    		ArrayList<Integer> numHab = new ArrayList<Integer>();
     		limpiezaHabitacion = new JTable();
+    		//habitaciones que esten ocupadas hoy
+    		bd = new BD();
+    		try {
+				bd.connect();
+			} catch (BDException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
+    		numHab = bd.updateOcupadasHoy();
+    		
     		modelo = (DefaultTableModel)limpiezaHabitacion.getModel();
-    		modelo.addColumn("Habitacion");
-    		modelo.addColumn("Limpiado");
     		
+    		modelo.addColumn("HABITACIONES");
+    		String[] tabla = new String[1];
+    		String[] tabla1 = new String[1];
+    		tabla[0] = "HABITACIONES";
+    		modelo.addRow(tabla);
+    		for(int i = 0; i < numHab.size(); i++) {
+    			tabla1[0] = String.valueOf(numHab.get(i));
+    			modelo.addRow(tabla1);
+    		}
+    		limpiezaHabitacion.setVisible(true);
+    		trabajo.add(limpiezaHabitacion);
+    		break;
 	        
-	    default:
+    	case seguridad:
     		
+    		JButton primeraPlanta = new JButton("PRIMERA PLANTA");
+    		JButton segundaPlanta = new JButton("SEGUNDA PLANTA");
+    		JButton terceraPlanta = new JButton("TERCERA PLANTA");
+    		JButton cuartaPlanta = new JButton("CUARTA PLANTA");
+    		JButton quintaPlanta = new JButton("QUINTA PLANTA");
+    		JButton sextaPlanta = new JButton("SEXTA PLANTA");
+    		
+    		trabajo.setLayout(new GridLayout(2, 3));
+    		trabajo.add(primeraPlanta);
+    		trabajo.add(segundaPlanta);
+    		trabajo.add(terceraPlanta);
+    		trabajo.add(cuartaPlanta);
+    		trabajo.add(quintaPlanta);
+    		trabajo.add(sextaPlanta);
+    		   		
+    		primeraPlanta.addActionListener(new ActionListener() {
+				
+				@Override
+				public void actionPerformed(ActionEvent arg0) {
+					VentanaMapa vm = new VentanaMapa("/imagen/primeraPlanta.jpg", empleado);
+				}
+			});
+    		segundaPlanta.addActionListener(new ActionListener() {
+    			
+    			@Override
+    			public void actionPerformed(ActionEvent arg0) {
+    				VentanaMapa vm = new VentanaMapa("/imagen/segundaPlanta.jpg", empleado);
+    			}
+    		});
+    		terceraPlanta.addActionListener(new ActionListener() {
+    			
+    			@Override
+    			public void actionPerformed(ActionEvent arg0) {
+    				VentanaMapa vm = new VentanaMapa("/imagen/terceraPlanta.jpg", empleado);
+    			}
+    		});
+    		cuartaPlanta.addActionListener(new ActionListener() {
+    			
+    			@Override
+    			public void actionPerformed(ActionEvent arg0) {
+    				VentanaMapa vm = new VentanaMapa("/imagen/cuartaPlanta.jpg", empleado);
+    			}
+    		});
+    		quintaPlanta.addActionListener(new ActionListener() {
+    			
+    			@Override
+    			public void actionPerformed(ActionEvent arg0) {
+    				VentanaMapa vm = new VentanaMapa("/imagen/quintaPlanta.jpg", empleado);
+    			}
+    		});
+    		sextaPlanta.addActionListener(new ActionListener() {
+    			
+    			@Override
+    			public void actionPerformed(ActionEvent arg0) {
+    				VentanaMapa vm = new VentanaMapa("/imagen/sextaPlanta.jpg", empleado);
+    			}
+    		});
+    		
+    		break;
+    		
+	    default:
     		break;
 	    	
 	        
@@ -371,20 +466,11 @@ public class VentanaEmpleado extends JFrame{
 		main.add(trabajo);
     	
     	add(main);
-    	
-    	
-		//nombre = new JLabel(empleado.getNombre());
-		//apellido = new JLabel(empleado.getApellido());
 		
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
 		setTitle("Ventana para empleados");
-		setSize(800, 1000);
+		setSize(800, 500);
 		setVisible(true);
-	}
-	
-	public static void main (String args[]) {
-		Empleado e = new Empleado();
-		VentanaEmpleado ve = new VentanaEmpleado(e);
 	}
 	
 }

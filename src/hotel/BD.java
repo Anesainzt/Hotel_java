@@ -315,14 +315,46 @@ public class BD extends JFrame{
 		}
 	}
 	
-	public void updateOcupadasHoy(){
-		Calendar calendario = Calendar.getInstance();
-		int year = calendario.get(calendario.YEAR);
-		int mes = calendario.get(calendario.MONTH);
-		int dia = calendario.get(calendario.DAY_OF_MONTH);
-		
-		
-	};
+	public ArrayList<Integer> updateOcupadasHoy(){
+		ArrayList<Integer> habitacion = new ArrayList<Integer>();
+		try(Statement stmt = (Statement) conn.createStatement();){
+			JCalendar calendario = new JCalendar();
+			String year = Integer.toString(calendario.getCalendar().get(java.util.Calendar.YEAR));
+	    	String mes = Integer.toString(calendario.getCalendar().get(java.util.Calendar.MONTH) + 1);
+	    	String dia = Integer.toString(calendario.getCalendar().get(java.util.Calendar.DATE));
+	    	String hoy = "";
+			
+			if (Integer.parseInt(mes) < 10 && Integer.parseInt(dia) < 10) {
+				hoy = year + "0" + mes + "0" + dia;
+	    	} else if (Integer.parseInt(mes) < 10 && Integer.parseInt(dia) >= 10) {
+	    		hoy = year + "0" + mes + "" + dia;
+	    	} else if (Integer.parseInt(mes) >= 10 && Integer.parseInt(dia) < 10) {
+	    		hoy = year + "" + mes + "0" + dia;
+	    	} else {
+	    		hoy = year + "" + mes + "" + dia;
+	    	}
+			
+			ResultSet rs = stmt.executeQuery("SELECT fechaEntrada, fechaSalida, num_habitacion FROM historialregistros WHERE libre = 1;");
+			while(rs.next()) {
+				String fechaEntradaBDtext = rs.getString("fechaEntrada");
+				String fechaSalidaBDtext = rs.getString("fechaSalida");
+				String[] campos = fechaSalidaBDtext.split("-");
+				String[] campos1 = fechaEntradaBDtext.split("-");
+				Integer fechaSalidaBD = Integer.parseInt(campos[0] + "" + campos[1] + "" +  campos[2]);
+				Integer fechaEntradaBD = Integer.parseInt(campos1[0] + "" + campos1[1] + "" +  campos1[2]);
+				Integer fechaHoy = Integer.parseInt(hoy);
+				
+				if(fechaHoy > fechaEntradaBD && fechaHoy < fechaSalidaBD) {
+					habitacion.add(Integer.parseInt(rs.getString("num_habitacion")));
+				}
+			}
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+			// TODO: handle exception
+		}
+		return habitacion;		
+	}
 	
 	public List<Integer> getHabitacionesOcupadas(){
 		List<Integer> listaHabitacion = null;
@@ -338,6 +370,6 @@ public class BD extends JFrame{
 			e.printStackTrace();
 		}
 		return listaHabitacion;
-	};
+	}
 	
 }

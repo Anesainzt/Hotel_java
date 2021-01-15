@@ -40,7 +40,6 @@ public class VentanaCliente extends JFrame{
 				try {
 					bd.connect();
 				} catch (BDException e) {
-					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
 				//MIRAMOS EL HISTORIAL

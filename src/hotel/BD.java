@@ -24,6 +24,9 @@ import javax.swing.table.DefaultTableModel;
 
 import com.toedter.calendar.JCalendar;
 
+import ventanas.VentanaContinuacion;
+import ventanas.VentanaReservaPista;
+
 public class BD extends JFrame{
 	private Connection conn = null; 
 	
@@ -405,7 +408,7 @@ public class BD extends JFrame{
 	public void eleccionDePistasLibres(String fecha, String hora, String tipo){
 		
 		try (Statement stmt = (Statement) conn.createStatement()){
-			ResultSet rs = stmt.executeQuery("SELECT num_pista, tipo FROM reservapista WHERE fechaReserva = '"+ fecha +"' AND hora = '"+ hora +"' AND libre = 0");
+			ResultSet rs = stmt.executeQuery("SELECT num_pista, tipo FROM reservapista WHERE fechaReserva = '"+ fecha +"' AND hora = '"+ hora +"' AND libre = 1");
 			while(rs.next()) {
 				int numero = rs.getInt("num_pista");
 				String tipoPista = rs.getString("tipo");
@@ -426,9 +429,19 @@ public class BD extends JFrame{
 	public List<JButton> botonesReservarPista(String tipo){
 		List<JButton> listaBotones = new ArrayList<JButton>();
 		JButton boton;
+		String t = null;
+		if (tipo.contains("PADDLE") == true) {
+    		t = "PADDLE";
+		}else if(tipo.contains("NATACION") == true){
+			t = "NATACION";
+		}else if(tipo.contains("BALONCESTO") == true){
+			t = "BALONCESTO";
+		}else {
+			t = "FUTBOL-SALA";
+		}
 		try (Statement stmt = (Statement) conn.createStatement()){
 			
-			ResultSet rs = stmt.executeQuery("SELECT num_pista, libre FROM pista WHERE tipo = '"+ tipo +"'");
+			ResultSet rs = stmt.executeQuery("SELECT num_pista, libre FROM pista WHERE tipo = '"+ t +"'");
 			
 			while(rs.next()) {
 				int numero = rs.getInt("num_pista");

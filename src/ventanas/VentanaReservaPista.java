@@ -112,6 +112,8 @@ public class VentanaReservaPista extends JFrame{
     		@Override
     		public void actionPerformed(ActionEvent arg0) {
     			
+    			cliente.getHashmap().remove(tipo);
+    			
     			VentanaContinuacion vc = new VentanaContinuacion(cliente);
     			
     			bd.escribirFichero("horaPista", "");

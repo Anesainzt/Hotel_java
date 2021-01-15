@@ -91,7 +91,16 @@ public class VentanaReservaServicio extends JFrame{
 		    	String dia = Integer.toString(calendario.getCalendar().get(java.util.Calendar.DATE));
 		    	fecha.setText(year + "-" + mes + "-" + dia);
 		    	d1 = calendario.getDate();
-		    	fechaRegistro = year + "-" + mes + "-" + dia;
+
+		    	if (Integer.parseInt(mes) < 10 && Integer.parseInt(dia) < 10) {
+		    		fechaRegistro = year + "-0" + mes + "-0" + dia;
+		    	 } else if (Integer.parseInt(mes) < 10 && Integer.parseInt(dia) >= 10) {
+		    		 fechaRegistro = year + "-0" + mes + "-" + dia;
+		    	 } else if (Integer.parseInt(mes) >= 10 && Integer.parseInt(dia) < 10) {
+		    		 fechaRegistro = year + "-" + mes + "-0" + dia;
+		    	 } else {
+		    		 fechaRegistro = year + "-" + mes + "-" + dia;
+		    	 }
 		    	
 		    	//CREAMOS LA RESTRICCION DE NO PODER VOLVER A ESCOGER LA FECHA INICIO PARA LA FECHA FINAL
 		    	int minYear = Integer.parseInt(year);

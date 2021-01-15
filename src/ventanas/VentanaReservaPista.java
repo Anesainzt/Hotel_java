@@ -25,10 +25,17 @@ public class VentanaReservaPista extends JFrame{
 	JPanel pistas;
 	JPanel cambioEleccion;
 	BD bd;
+	List<JButton> botones;
 	
 	public VentanaReservaPista(Cliente cliente, String fecha, String tipo, int precio) {
 		
-		
+		bd= new BD();
+		try {
+			bd.connect();
+		} catch (BDException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
 		
 		String hora = bd.getHoraReserva();
 		
@@ -39,7 +46,7 @@ public class VentanaReservaPista extends JFrame{
     	pistas.setBorder(pistasBorder);
     	pistas.setLayout(new GridLayout(1, 1));
 		
-		List<JButton> botones = bd.botonesReservarPista(tipo);
+		botones = bd.botonesReservarPista(tipo);
 		
 		for (JButton boton : botones) {
 			if(boton.getBackground() == Color.GREEN) {

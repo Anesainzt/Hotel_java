@@ -412,7 +412,7 @@ public String getHoraReserva() {
 	public void eleccionDePistasLibres(String fecha, String hora, String tipo){
 		
 		try (Statement stmt = (Statement) conn.createStatement()){
-			ResultSet rs = stmt.executeQuery("SELECT num_pista, tipo WHERE fechaReserva = '"+ fecha +"' AND hora = '"+ hora +"' AND libre = 1");
+			ResultSet rs = stmt.executeQuery("SELECT num_pista, tipo FROM reservapista WHERE fechaReserva = '"+ fecha +"' AND hora = '"+ hora +"' AND libre = 1");
 			while(rs.next()) {
 				int numero = rs.getInt("num_pista");
 				String tipoPista = rs.getString("tipo");
@@ -436,10 +436,10 @@ public String getHoraReserva() {
 		JButton boton;
 		try (Statement stmt = (Statement) conn.createStatement()){
 			
-			ResultSet rs = stmt.executeQuery("SELECT num_habitacion, libre WHERE tipo = '"+ tipo +"' AND libre = 1");
+			ResultSet rs = stmt.executeQuery("SELECT num_pista, libre FROM pista WHERE tipo = '"+ tipo +"'");
 			
 			while(rs.next()) {
-				String numero = rs.getString("num_habitacion");
+				int numero = rs.getInt("num_habitacion");
 				int libre = rs.getInt("libre");
 				
 				boton = new JButton("" + numero);

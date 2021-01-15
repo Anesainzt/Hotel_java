@@ -465,14 +465,23 @@ public class BD extends JFrame{
 	}
 	
 	public void registrarReservaPista(Cliente cliente, String fecha, String hora, String num, String tipo) {
-		
+		String t = null;
+		if (tipo.contains("PADDLE") == true) {
+    		t = "PADDLE";
+		}else if(tipo.contains("NATACION") == true){
+			t = "NATACION";
+		}else if(tipo.contains("BALONCESTO") == true){
+			t = "BALONCESTO";
+		}else {
+			t = "FUTBOL-SALA";
+		}
 		try {
 			PreparedStatement pstmt = conn.prepareStatement("INSERT INTO reservapista VALUES(?, ?, ?, ?, ?, ?);");
 			
 			pstmt.setString(1, fecha);
 			pstmt.setString(2, hora);
 			pstmt.setInt(3, Integer.parseInt(num));
-			pstmt.setString(4, tipo);
+			pstmt.setString(4, t);
 			pstmt.setInt(5, 1);
 			pstmt.setString(6, cliente.getLogin());
 			pstmt.execute();

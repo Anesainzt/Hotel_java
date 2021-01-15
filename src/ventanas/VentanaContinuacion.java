@@ -3,6 +3,10 @@ package ventanas;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.BufferedWriter;
+import java.io.FileWriter;
+import java.io.IOException;
+
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JProgressBar;
@@ -24,7 +28,15 @@ public class VentanaContinuacion extends JFrame{
 		elegirNuevoServicio.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				VentanaServicios vs = new VentanaServicios(cliente);				
+				VentanaServicios vs = new VentanaServicios(cliente);
+				BufferedWriter bw;
+				try {
+					bw = new BufferedWriter(new FileWriter("horaPista"));
+					bw.write("");
+					bw.close();
+				} catch (IOException e1) {
+					e1.printStackTrace();
+				}
 				dispose();
 			}
 		});

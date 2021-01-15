@@ -11,15 +11,25 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JProgressBar;
 
+import hotel.BD;
+import hotel.BDException;
 import hotel.Cliente;
 
 public class VentanaContinuacion extends JFrame{
+	
+	BD bd;
 	
 	JButton elegirNuevoServicio;
 	JButton continuar;
 	
 	public VentanaContinuacion(Cliente cliente) {
-		
+		bd = new BD();
+		try {
+			bd.connect();
+		} catch (BDException e2) {
+			// TODO Auto-generated catch block
+			e2.printStackTrace();
+		}
 		setLayout(new GridLayout(2, 1));
 		
 		elegirNuevoServicio = new JButton("ELEGIR NUEVO SERVICIO");
@@ -28,7 +38,7 @@ public class VentanaContinuacion extends JFrame{
 		elegirNuevoServicio.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				VentanaServicios vs = new VentanaServicios(cliente);
+				
 				BufferedWriter bw;
 				try {
 					bw = new BufferedWriter(new FileWriter("horaPista"));
@@ -37,6 +47,10 @@ public class VentanaContinuacion extends JFrame{
 				} catch (IOException e1) {
 					e1.printStackTrace();
 				}
+				
+				bd.restartPistas();
+				
+				VentanaServicios vs = new VentanaServicios(cliente);
 				dispose();
 			}
 		});
@@ -46,7 +60,12 @@ public class VentanaContinuacion extends JFrame{
 			public void actionPerformed(ActionEvent e) {
 				VentanaFactura vf = new VentanaFactura(cliente);
 				dispose();
-				
+				try {
+					bd.disconnect();
+				} catch (BDException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
 			}
 		});
 		

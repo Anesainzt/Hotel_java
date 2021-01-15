@@ -491,4 +491,30 @@ public class BD extends JFrame{
 		
 	}
 	
+	public void restartPistas() {
+		try {
+			PreparedStatement pstmt = conn.prepareStatement("UPDATE pista SET libre = ?;");
+			pstmt.setInt(1, 0);
+			pstmt.execute();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+	
+	public void eleccionClaseDeporte(Cliente cliente, String fecha, String tipo) {
+		
+		try {
+			PreparedStatement pstmt = conn.prepareStatement("INSERT INTO clases VALUES(?, ?, ?);");
+			
+			pstmt.setString(1, fecha);
+			pstmt.setString(2, tipo);
+			pstmt.setString(3, cliente.getLogin());
+
+			pstmt.execute();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+	}
+	
 }

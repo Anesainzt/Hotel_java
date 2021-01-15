@@ -2,6 +2,9 @@ package ventanas;
 import javax.swing.*;
 
 import com.toedter.calendar.JCalendar;
+
+import hotel.BD;
+import hotel.BDException;
 import hotel.Cliente;
 import java.awt.Color;
 import java.awt.GridLayout;
@@ -16,6 +19,8 @@ import java.util.*;
 
 public class VentanaReservaServicio extends JFrame{
 	
+	BD bd;
+	
 	JCalendar calendario;
 	JTextField fecha;
 	JButton fechaSeleccion;
@@ -26,7 +31,13 @@ public class VentanaReservaServicio extends JFrame{
 	
 	public VentanaReservaServicio(Cliente cliente, int precio, String tipo) {			
 		Cliente nuevo = cliente;
-			
+		bd = new BD();
+		try {
+			bd.connect();
+		} catch (BDException e2) {
+			// TODO Auto-generated catch block
+			e2.printStackTrace();
+		}
 		HashMap<String, Integer> hashmap = new HashMap<String, Integer>();
 		hashmap = cliente.getHashmap();
 		hashmap.put(tipo, precio);
@@ -112,9 +123,11 @@ public class VentanaReservaServicio extends JFrame{
 		    		VentanaReservaPista vrp = new VentanaReservaPista(nuevo, fechaRegistro, tipo, precio);
 		    		dispose();
 				} else if (tipo == "CLASE PADDLE" || tipo == "CLASE NATACION" || tipo == "CLASE FUTBOL-SALA" || tipo == "CLASE BALONCESTO") {
+					bd.eleccionClaseDeporte(cliente, fechaRegistro, tipo);
 					VentanaContinuacion vc = new VentanaContinuacion(cliente);
 					dispose();
 				}else {
+				
 					VentanaContinuacion vc = new VentanaContinuacion(cliente);
 					dispose();
 				}	    	

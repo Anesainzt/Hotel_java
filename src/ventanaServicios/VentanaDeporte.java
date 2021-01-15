@@ -9,6 +9,7 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 
 import hotel.BD;
+import hotel.BDException;
 import hotel.Cliente;
 import ventanas.VentanaReservaServicio;
 
@@ -22,6 +23,14 @@ public class VentanaDeporte extends JFrame{
 	public VentanaDeporte(Cliente cliente) {
 		setLayout(new GridLayout(3, 1));
 		
+		bd = new BD();
+		
+		try {
+			bd.connect();
+		} catch (BDException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
 		
 		comboDeporte = new JComboBox<String>();
 		

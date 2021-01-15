@@ -22,7 +22,7 @@ public class VentanaReservaServicio extends JFrame{
 	Date d1;
 	Date d2;
 	Date hoy;
-	
+	String fechaRegistro;
 	
 	public VentanaReservaServicio(Cliente cliente, int precio, String tipo) {			
 		Cliente nuevo = cliente;
@@ -91,6 +91,7 @@ public class VentanaReservaServicio extends JFrame{
 		    	String dia = Integer.toString(calendario.getCalendar().get(java.util.Calendar.DATE));
 		    	fecha.setText(year + "-" + mes + "-" + dia);
 		    	d1 = calendario.getDate();
+		    	fechaRegistro = year + "-" + mes + "-" + dia;
 		    	
 		    	//CREAMOS LA RESTRICCION DE NO PODER VOLVER A ESCOGER LA FECHA INICIO PARA LA FECHA FINAL
 		    	int minYear = Integer.parseInt(year);
@@ -101,7 +102,7 @@ public class VentanaReservaServicio extends JFrame{
 		    	//SE RESTA 1 AL MES PORQUE EMPIEZA A CONTAR DESDE 0 Y ANTES LE HEMOS SUMADO 1 PARA ESCRIBIR BIEN LA FECHA
 		    	Date minNoche = new Date(Date.UTC(minYear-1900, minMes-1, minDia +1, 0, 0, 0));
 		    	
-		    	VentanaContinuacion vc = new VentanaContinuacion(nuevo);
+		    	VentanaReservaPista vc = new VentanaReservaPista(nuevo, fechaRegistro, tipo, precio);
 		    	
 		    	dispose();
 			}

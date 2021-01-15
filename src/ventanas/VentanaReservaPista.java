@@ -13,6 +13,7 @@ import javax.swing.JPanel;
 import javax.swing.border.Border;
 
 import hotel.BD;
+import hotel.BDException;
 import hotel.Cliente;
 import ventanaServicios.VentanaDeporte;
 
@@ -26,6 +27,8 @@ public class VentanaReservaPista extends JFrame{
 	BD bd;
 	
 	public VentanaReservaPista(Cliente cliente, String fecha, String tipo, int precio) {
+		
+		
 		
 		String hora = bd.getHoraReserva();
 		

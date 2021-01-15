@@ -1,6 +1,8 @@
 package hotel;
 import java.awt.Color;
 import java.io.BufferedWriter;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -13,6 +15,8 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
+import java.util.Scanner;
+
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
@@ -370,6 +374,92 @@ public class BD extends JFrame{
 			e.printStackTrace();
 		}
 		return listaHabitacion;
+	}
+	
+public String getHoraReserva() {
+		
+    	String linea = null;
+		Scanner sc1 = null;
+		String hora = "";
+		try {
+			sc1 = new Scanner(new FileInputStream("horaPista"));
+
+			while(sc1.hasNext()) {
+				linea = sc1.nextLine();
+			}
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return linea;
+	}
+	
+	public void eleccionDePistasLibres(String fecha, String hora, String tipo){
+		
+		try (Statement stmt = (Statement) conn.createStatement()){
+			ResultSet rs = stmt.executeQuery("SELECT num_pista, tipo WHERE fechaReserva = '"+ fecha +"' AND hora = '"+ hora +"' AND libre = 1");
+			while(rs.next()) {
+				int numero = rs.getInt("num_pista");
+				String tipoPista = rs.getString("tipo");
+				
+				PreparedStatement pstmt = conn.prepareStatement("UPDATE pista SET libre = ? WHERE num_pista = ? AND tipo = ?");
+				pstmt.setInt(1, 1);
+				pstmt.setInt(2, numero);
+				pstmt.setString(3, tipoPista);
+				pstmt.execute();
+			}
+			
+		} catch (Exception e) {
+			// TODO: handle exception
+			e.printStackTrace();
+		}
+		
+	}
+	
+	public List<JButton> botonesReservarPista(String tipo){
+		List<JButton> listaBotones = null;
+		JButton boton;
+		try (Statement stmt = (Statement) conn.createStatement()){
+			
+			ResultSet rs = stmt.executeQuery("SELECT num_habitacion, libre WHERE tipo = '"+ tipo +"' AND libre = 1");
+			
+			while(rs.next()) {
+				String numero = rs.getString("num_habitacion");
+				int libre = rs.getInt("libre");
+				
+				boton = new JButton("" + numero);
+				if (libre == 0) {
+					boton.setBackground(Color.GREEN);
+					boton.setEnabled(true);
+					
+				} else {
+					boton.setBackground(Color.RED);
+					boton.setEnabled(false);	
+				}
+				listaBotones.add(boton);
+			}	
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
+		return listaBotones;
+	}
+	
+	public void registrarReservaPista(Cliente cliente, String fecha, String hora, String num, String tipo) {
+		
+		try {
+			PreparedStatement pstmt = conn.prepareStatement("INSERT INTO reservapista VALUES(?, ?, ?, ?, ?, ?);");
+			
+			pstmt.setString(1, fecha);
+			pstmt.setString(2, hora);
+			pstmt.setInt(3, Integer.parseInt(num));
+			pstmt.setString(4, tipo);
+			pstmt.setInt(5, 1);
+			pstmt.setString(6, cliente.getLogin());
+			pstmt.execute();
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
+		
 	}
 	
 }

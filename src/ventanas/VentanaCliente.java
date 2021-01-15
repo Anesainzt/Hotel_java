@@ -15,6 +15,7 @@ public class VentanaCliente extends JFrame{
 	JTable historia;
 	DefaultTableModel modelo;
 	JPanel panel;
+	JScrollPane scroll;
 	BD bd;
 	
 	public VentanaCliente(Cliente cliente) { 
@@ -26,10 +27,12 @@ public class VentanaCliente extends JFrame{
 		salir = new JButton("SALIR");
 		nuevaReserva = new JButton("NUEVA RESERVA");
 		historia = new JTable();
+		scroll = new JScrollPane(historia);
 		modelo = (DefaultTableModel)historia.getModel();
 		modelo.addColumn("Entrada");
 		modelo.addColumn("Salida");
 		modelo.addColumn("Tipo de habitacion");
+		
 		//MUESTRA EL HISTORIAL DE LAS FECHAS Y LA HABITACION EN LAS QUE SE HA QUEDADO EN OTRAS OCASIONES
 		historial.addActionListener(new ActionListener() {
 			
@@ -71,7 +74,7 @@ public class VentanaCliente extends JFrame{
 		add(historial);
 		add(nuevaReserva);
 		add(salir);
-		add(historia);
+		add(scroll);
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
 		setTitle("Identificación del cliente");
 		setSize(800, 200);

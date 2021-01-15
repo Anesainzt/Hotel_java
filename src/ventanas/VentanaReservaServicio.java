@@ -66,14 +66,12 @@ public class VentanaReservaServicio extends JFrame{
 		try {
 			fi = new SimpleDateFormat("yyyy-MM-dd").parse(fechaInicio);
 		} catch (ParseException e1) {
-			// TODO Auto-generated catch block
 			e1.printStackTrace();
 		}
     	Date ff = null;
 		try {
 			ff = new SimpleDateFormat("yyyy-MM-dd").parse(fechaFin);
 		} catch (ParseException e1) {
-			// TODO Auto-generated catch block
 			e1.printStackTrace();
 		}
 		

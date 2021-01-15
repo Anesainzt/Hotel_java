@@ -116,7 +116,6 @@ public class BD extends JFrame{
 			
 		} catch (Exception e) {
 			e.printStackTrace();
-			// TODO: handle exception
 		}
 	}
 	
@@ -127,7 +126,7 @@ public class BD extends JFrame{
 			pstmt.setInt(1, 0);
 			pstmt.executeUpdate();
 		} catch (Exception e) {
-			// TODO: handle exception
+			e.printStackTrace();
 		}
 	}
 	
@@ -221,7 +220,6 @@ public class BD extends JFrame{
 					i = i + 1;
 				}
 			}
-			//JScrollPane historial = new JScrollPane(tabla);
 			
 		} catch (SQLException e2) {
 			System.out.println(e2.getMessage());
@@ -292,7 +290,6 @@ public class BD extends JFrame{
 			
 		} catch (Exception e2) {
 			e2.printStackTrace();
-			// TODO: handle exception
 		}
 	}
 	
@@ -317,7 +314,6 @@ public class BD extends JFrame{
 			}
 			
 		} catch (Exception e) {
-			// TODO: handle exception
 			e.printStackTrace();
 		}
 		return b;
@@ -370,7 +366,6 @@ public class BD extends JFrame{
 			
 		} catch (Exception e) {
 			e.printStackTrace();
-			// TODO: handle exception
 		}
 		return habitacion;		
 	}
@@ -385,13 +380,12 @@ public class BD extends JFrame{
 				
 			}
 		} catch (Exception e) {
-			// TODO: handle exception
 			e.printStackTrace();
 		}
 		return listaHabitacion;
 	}
 	
-public String getHoraReserva() {
+	public String getHoraReserva() {
 		
     	String linea = null;
 		Scanner sc1 = null;
@@ -403,7 +397,6 @@ public String getHoraReserva() {
 				linea = sc1.nextLine();
 			}
 		} catch (FileNotFoundException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		return linea;
@@ -425,21 +418,20 @@ public String getHoraReserva() {
 			}
 			
 		} catch (Exception e) {
-			// TODO: handle exception
 			e.printStackTrace();
 		}
 		
 	}
 	
 	public List<JButton> botonesReservarPista(String tipo){
-		List<JButton> listaBotones = null;
+		List<JButton> listaBotones = new ArrayList<JButton>();
 		JButton boton;
 		try (Statement stmt = (Statement) conn.createStatement()){
 			
 			ResultSet rs = stmt.executeQuery("SELECT num_pista, libre FROM pista WHERE tipo = '"+ tipo +"'");
 			
 			while(rs.next()) {
-				int numero = rs.getInt("num_habitacion");
+				int numero = rs.getInt("num_pista");
 				int libre = rs.getInt("libre");
 				
 				boton = new JButton("" + numero);
@@ -454,7 +446,7 @@ public String getHoraReserva() {
 				listaBotones.add(boton);
 			}	
 		} catch (Exception e) {
-			// TODO: handle exception
+			e.printStackTrace();
 		}
 		return listaBotones;
 	}
@@ -472,7 +464,7 @@ public String getHoraReserva() {
 			pstmt.setString(6, cliente.getLogin());
 			pstmt.execute();
 		} catch (Exception e) {
-			// TODO: handle exception
+			e.printStackTrace();
 		}
 		
 	}

@@ -28,7 +28,6 @@ public class VentanaDeporte extends JFrame{
 		try {
 			bd.connect();
 		} catch (BDException e1) {
-			// TODO Auto-generated catch block
 			e1.printStackTrace();
 		}
 		

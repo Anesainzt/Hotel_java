@@ -33,7 +33,6 @@ public class VentanaReservaPista extends JFrame{
 		try {
 			bd.connect();
 		} catch (BDException e1) {
-			// TODO Auto-generated catch block
 			e1.printStackTrace();
 		}
 		
@@ -54,7 +53,6 @@ public class VentanaReservaPista extends JFrame{
 					
 					@Override
 					public void actionPerformed(ActionEvent arg0) {
-						// TODO Auto-generated method stub
 						String num = boton.getText();
 						bd.registrarReservaPista(cliente, fecha, hora, num, tipo);
 						

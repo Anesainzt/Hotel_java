@@ -34,7 +34,6 @@ public class VentanaInicio extends JFrame{
 			bw.write("");
 			bw.close();
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
@@ -53,6 +52,7 @@ public class VentanaInicio extends JFrame{
 		limpiezaDeFicheros("fechas");
 		limpiezaDeFicheros("baseDeDatos");
 		limpiezaDeFicheros("datosFactura.txt");
+		limpiezaDeFicheros("horaPista");
 		
 		//EL BOTON REGISTRO TE LLEVA A LA VENTANA REGISTRO PARA RECOGER TUS DATOS DE REGISTRO
 		registro.addActionListener(new ActionListener() {
@@ -76,7 +76,6 @@ public class VentanaInicio extends JFrame{
 				try {
 					bd.connect();
 				} catch (BDException e2) {
-					// TODO Auto-generated catch block
 					e2.printStackTrace();
 				}
 		        //EN CASO DE QUE SEA EMPLEADO

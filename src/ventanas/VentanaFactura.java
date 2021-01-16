@@ -235,6 +235,36 @@ public class VentanaFactura extends JFrame {
 			}
 		}
 		
+		int convencion = 0;
+		int junta = 0;
+		int petitcomite = 0;
+		int convencionequipada = 0;
+		int juntaequipada = 0;
+		int petitcomiteequipada = 0;
+		
+		int pconvencion = 0;
+		int pjunta = 0;
+		int ppetitcomite = 0;
+		int pconvencionequipada = 0;
+		int pjuntaequipada = 0;
+		int ppetitcomiteequipada = 0;
+		
+		for(int i = 0; i < salaReunion.size(); i++) {
+			if(salaReunion.get(i).equals("SALA CONVENCION")) {
+				convencion += 1;
+			}else if(salaReunion.get(i).equals("SALA JUNTA")) {
+				junta += 1;
+			}else if(salaReunion.get(i).equals("SALA PETIT COMITÉ")) {
+				petitcomite += 1;
+			}else if(salaReunion.get(i).equals("SALA CONVENCION EQUIPADA")) {
+				convencionequipada += 1;
+			}else if(salaReunion.get(i).equals("SALA JUNTA EQUIPADA")) {
+				juntaequipada += 1;
+			}else {
+				petitcomiteequipada += 1;
+			}
+		}
+		
 		for (Entry<String, Integer> entry : hashmap.entrySet()) {
             if(entry.getKey().equals("MASAJE FACIAL") || entry.getKey().equals("MASAJE CORPORAL") || entry.getKey().equals("MASAJE TOTAL") || entry.getKey().equals("JACUZZI") || entry.getKey().equals("SALES MINERALES") || entry.getKey().equals("MASAJE PIEDRAS") || entry.getKey().equals("TRATAMIENTO ESTÉTICO")) {
             	if(entry.getKey().equals("MASAJE FACIAL")) {
@@ -253,7 +283,19 @@ public class VentanaFactura extends JFrame {
             		ptratamientoestetico = entry.getValue();
             	}
             }else if(entry.getKey().equals("SALA CONVENCION") || entry.getKey().equals("SALA JUNTA") || entry.getKey().equals("SALA PETIT COMITÉ") || entry.getKey().equals("SALA CONVENCION EQUIPADA") || entry.getKey().equals("SALA JUNTA EQUIPADA") || entry.getKey().equals("SALA PETIT COMITÉ EQUIPADA")) {
-            	
+            	if(entry.getKey().equals("SALA CONVENCION")) {
+    				pconvencion = entry.getValue();
+    			}else if(entry.getKey().equals("SALA JUNTA")) {
+    				pjunta = entry.getValue();
+    			}else if(entry.getKey().equals("SALA PETIT COMITÉ")) {
+    				ppetitcomite = entry.getValue();
+    			}else if(entry.getKey().equals("SALA CONVENCION EQUIPADA")) {
+    				pconvencionequipada = entry.getValue();
+    			}else if(entry.getKey().equals("SALA JUNTA EQUIPADA")) {
+    				pjuntaequipada = entry.getValue();
+    			}else {
+    				ppetitcomiteequipada = entry.getValue();
+    			}
             }else if(entry.getKey().equals("VODKA") || entry.getKey().equals("GINEBRA") || entry.getKey().equals("WHISKEY") || entry.getKey().equals("TEQUILA") || entry.getKey().equals("RON") || entry.getKey().equals("ELECCION DE DOS") || entry.getKey().equals("ELECCION DE TRES") || entry.getKey().equals("TODOS")) {
             	if(entry.getKey().equals("VODKA")) {
     				pvodka = entry.getValue();
@@ -298,7 +340,7 @@ public class VentanaFactura extends JFrame {
 		int precComida = mcdonalds*pmcdonalds + burgerking*pburgerking + fostershollywood*pfostershollywood + pomodoro*ppomodoro + foodoo*pfoodoo + donga*pdonga + menudeldiahotel*pmenudeldiahotel + buffethotel*pbuffethotel;
 		int precDeporte = 0;
 		int precMiniBar = vodka*pvodka + ginebra*pginebra + whiskey*pwhiskey + tequila*ptequila + ron*pron + dos*pdos + tres*ptres + todos*ptodos;
-		int precSalaReunion = 0;
+		int precSalaReunion = convencion*pconvencion + junta*pjunta + petitcomite*ppetitcomite + convencionequipada*pconvencionequipada + juntaequipada*pjuntaequipada + petitcomiteequipada*ppetitcomiteequipada;
 		int precSpa = masajefacial*pmasajefacial + masajecorporal*pmasajecorporal + masajetotal*pmasajetotal + jacuzzi*pjacuzzi + salesminerales*psalesminerales + masajepiedras*pmasajepiedras + tratamientoestetico*ptratamientoestetico;
 		
         JLabel cantidadComida = new JLabel("" + comida.size());
@@ -323,7 +365,7 @@ public class VentanaFactura extends JFrame {
     	Border datosServiciosExtraBorder = BorderFactory.createTitledBorder("SERVICIOS");
     	datosServiciosExtra.setBorder(datosServiciosExtraBorder);
     	datosServiciosExtra.setBackground(Color.WHITE);
-    	datosServiciosExtra.setLayout(new GridLayout(29, 3));
+    	datosServiciosExtra.setLayout(new GridLayout(35, 3));
     	
     	datosServiciosExtra.add(cantidad);
     	datosServiciosExtra.add(productos);
@@ -520,6 +562,72 @@ public class VentanaFactura extends JFrame {
     	datosServiciosExtra.add(cantidadSalaReunion);
     	datosServiciosExtra.add(descripcionSalaReunion);
     	datosServiciosExtra.add(pSalaReunion);
+    	
+    	JLabel cantConvencion = new JLabel("" + convencion);
+    	cantConvencion.setForeground(Color.GRAY);
+    	JLabel nomConvencion = new JLabel("Sala convencion");
+    	nomConvencion.setForeground(Color.GRAY);
+    	JLabel precConvencion = new JLabel("" + convencion*80);
+    	precConvencion.setForeground(Color.GRAY);
+    	
+    	datosServiciosExtra.add(cantConvencion);
+    	datosServiciosExtra.add(nomConvencion);
+    	datosServiciosExtra.add(precConvencion);
+    	
+    	JLabel cantJunta = new JLabel("" + junta);
+    	cantJunta.setForeground(Color.GRAY);
+    	JLabel nomJunta = new JLabel("Sala junta");
+    	nomJunta.setForeground(Color.GRAY);
+    	JLabel precJunta = new JLabel("" + junta*50);
+    	precJunta.setForeground(Color.GRAY);
+    	
+    	datosServiciosExtra.add(cantJunta);
+    	datosServiciosExtra.add(nomJunta);
+    	datosServiciosExtra.add(precJunta);
+    	
+    	JLabel cantPetitComite = new JLabel("" + petitcomite);
+    	cantPetitComite.setForeground(Color.GRAY);
+    	JLabel nomPetitComite = new JLabel("Sala petit comité");
+    	nomPetitComite.setForeground(Color.GRAY);
+    	JLabel precPetitComite = new JLabel("" + petitcomite*30);
+    	precPetitComite.setForeground(Color.GRAY);
+    	
+    	datosServiciosExtra.add(cantPetitComite);
+    	datosServiciosExtra.add(nomPetitComite);
+    	datosServiciosExtra.add(precPetitComite);
+    	
+    	JLabel cantConvencionEquipada = new JLabel("" + convencionequipada);
+    	cantConvencionEquipada.setForeground(Color.GRAY);
+    	JLabel nomConvencionEquipada = new JLabel("Sala convencion (E)");
+    	nomConvencionEquipada.setForeground(Color.GRAY);
+    	JLabel precConvencionEquipada = new JLabel("" + convencionequipada*120);
+    	precConvencionEquipada.setForeground(Color.GRAY);
+    	
+    	datosServiciosExtra.add(cantConvencionEquipada);
+    	datosServiciosExtra.add(nomConvencionEquipada);
+    	datosServiciosExtra.add(precConvencionEquipada);
+    	
+    	JLabel cantJuntaEquipada = new JLabel("" + juntaequipada);
+    	cantJuntaEquipada.setForeground(Color.GRAY);
+    	JLabel nomJuntaEquipada = new JLabel("Sala junta (E)");
+    	nomJuntaEquipada.setForeground(Color.GRAY);
+    	JLabel precJuntaEquipada = new JLabel("" + juntaequipada*70);
+    	precJuntaEquipada.setForeground(Color.GRAY);
+    	
+    	datosServiciosExtra.add(cantJuntaEquipada);
+    	datosServiciosExtra.add(nomJuntaEquipada);
+    	datosServiciosExtra.add(precJuntaEquipada);
+    	
+    	JLabel cantPetitComiteEquipada = new JLabel("" + petitcomiteequipada);
+    	cantPetitComiteEquipada.setForeground(Color.GRAY);
+    	JLabel nomPetitComiteEquipada = new JLabel("Sala petit comite (E)");
+    	nomPetitComiteEquipada.setForeground(Color.GRAY);
+    	JLabel precPetitComiteEquipada = new JLabel("" + petitcomiteequipada*50);
+    	precPetitComiteEquipada.setForeground(Color.GRAY);
+    	
+    	datosServiciosExtra.add(cantPetitComiteEquipada);
+    	datosServiciosExtra.add(nomPetitComiteEquipada);
+    	datosServiciosExtra.add(precPetitComiteEquipada);
     	
     	datosServiciosExtra.add(cantidadSpa);
     	datosServiciosExtra.add(descripcionSpa);

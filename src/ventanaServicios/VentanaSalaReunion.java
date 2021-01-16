@@ -37,9 +37,9 @@ public class VentanaSalaReunion extends JFrame{
 				if(comboSalaReunion.getSelectedItem().equals("SALA CONVENCION (100 personas) ---> 80€")) {
 				    VentanaReservaServicio vrs = new VentanaReservaServicio(cliente, 80, "SALA CONVENCION");
 				}else if(comboSalaReunion.getSelectedItem().equals("SALA JUNTA (15 personas) ---> 50€")) {
-				    VentanaReservaServicio vrs = new VentanaReservaServicio(cliente, 50, "SALA JUNTA (15 personas)");
+				    VentanaReservaServicio vrs = new VentanaReservaServicio(cliente, 50, "SALA JUNTA");
 				}else if(comboSalaReunion.getSelectedItem().equals("SALA PETIT COMITÉ (3 personas) ---> 30€")) {
-				    VentanaReservaServicio vrs = new VentanaReservaServicio(cliente, 30, "SALA PETIT COMITÉ (3 personas)");
+				    VentanaReservaServicio vrs = new VentanaReservaServicio(cliente, 30, "SALA PETIT COMITÉ");
 				}else if(comboSalaReunion.getSelectedItem().equals("SALA CONVENCION EQUIPADA ---> 120€")) {
 				    VentanaReservaServicio vrs = new VentanaReservaServicio(cliente, 120, "SALA CONVENCION EQUIPADA");
 				}else if(comboSalaReunion.getSelectedItem().equals("SALA JUNTA EQUIPADA ---> 70€")) {

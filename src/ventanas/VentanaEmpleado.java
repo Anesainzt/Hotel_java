@@ -72,6 +72,7 @@ public class VentanaEmpleado extends JFrame{
 	//Limpieza
 	JTable limpiezaHabitacion;
 	DefaultTableModel modelo;
+	DefaultTableModel modelo2;
 	
 	public VentanaEmpleado(Empleado empleado) {
 		
@@ -468,7 +469,6 @@ public class VentanaEmpleado extends JFrame{
     		JPanel drch = new JPanel();
     		Border pnlIzqBorder = BorderFactory.createTitledBorder("PISTAS RESERVADAS");
     		Border pnlDrchBorder = BorderFactory.createTitledBorder("CLASES DE HOY");
-    		drch.setLayout(new GridLayout(2,4));
         	izq.setBorder(pnlIzqBorder);
         	drch.setBorder(pnlDrchBorder);
     		JTable reservas  = new JTable();
@@ -478,35 +478,21 @@ public class VentanaEmpleado extends JFrame{
     		modelo.addColumn("Hora");
     		modelo.addColumn("Numero de pista");
     		modelo.addColumn("Tipo de pista");
-    		
     		bd.pistasReservadasHoy(modelo);
+    		izq.add(scroll);
     		
-    		izq.add(reservas);
-    		
-    		JTextArea paddel = new JTextArea();
-    		JLabel paddelTitulo = new JLabel("PADDEL");
-    		JTextArea natacion = new JTextArea();
-    		JLabel natacionTitulo = new JLabel("NATACION");
-    		JTextArea baloncesto = new JTextArea();
-    		JLabel baloncestoTitulo = new JLabel("BALONCESTO");
-    		JTextArea futbolSala = new JTextArea();
-    		JLabel futbolSalaTitulo = new JLabel("  FUTBOL-SALA");
-    		
-    		List<JTextArea> lista = bd.clasesHoy(paddel, natacion, futbolSala, baloncesto);
-
-    		drch.add(paddelTitulo);
-    		drch.add(natacionTitulo);
-    		drch.add(baloncestoTitulo);
-    		drch.add(futbolSalaTitulo);
-    		
-    		for (JTextArea text : lista) {
-				drch.add(text);
-			}
-    		
+    		JTable clases  = new JTable();
+    		JScrollPane scroll2 = new JScrollPane(clases);
+    		modelo2 = (DefaultTableModel)clases.getModel();
+    		modelo2.addColumn("Usuario");
+    		modelo2.addColumn("Tipo de clase");
+    		bd.clasesHoy(modelo2);
+    		drch.add(scroll2);
     		
     		
     		trabajo.add(izq);
     		trabajo.add(drch);
+    		trabajo.setLayout(new BoxLayout(trabajo, BoxLayout.X_AXIS));
     		break;
     		
 	    default:
@@ -524,7 +510,7 @@ public class VentanaEmpleado extends JFrame{
 		
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
 		setTitle("Ventana para empleados");
-		setSize(800, 500);
+		setSize(1000, 700);
 		setVisible(true);
 	}
 	

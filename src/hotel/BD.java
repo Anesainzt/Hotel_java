@@ -581,10 +581,8 @@ public void pistasReservadasHoy(DefaultTableModel modelo) {
 		
 	}
 	
-	public List<JTextArea> clasesHoy(JTextArea paddel, JTextArea natacion, JTextArea futbolSala, JTextArea baloncesto) {
-		
-		List<JTextArea> textosClases = new ArrayList<JTextArea>();
-		
+	public void clasesHoy(DefaultTableModel modelo2) {
+	
 		JCalendar calendario = new JCalendar();
 		String year = Integer.toString(calendario.getCalendar().get(java.util.Calendar.YEAR));
     	String mes = Integer.toString(calendario.getCalendar().get(java.util.Calendar.MONTH) + 1);
@@ -600,43 +598,23 @@ public void pistasReservadasHoy(DefaultTableModel modelo) {
     	} else {
     		hoy = year + "-" + mes + "-" + dia;
     	}
-		try (Statement stmt = (Statement) conn.createStatement()){
+    	try(Statement stmt = (Statement) conn.createStatement()) {	
 			
-			ResultSet res1 = stmt.executeQuery("SELECT usuario FROM clases WHERE fechaClase = '"+ hoy +"' AND tipo = 'CLASE PADDEL'");
-			while(res1.next()) {
-				text =  text + res1.getString("usuario");
-				text = text + "\n";
+			String [] tabla = new String[2];
+			
+			ResultSet res = stmt.executeQuery("SELECT usuario, tipo FROM clases WHERE fechaClase = '"+ hoy +"'");
+			while (res.next()) {
+				
+				String fila =  res.getString("usuario");
+				tabla[0] = fila;
+				fila = res.getString("tipo");
+				tabla[1] = fila;
+				modelo2.addRow(tabla);
+				
 			}
-			paddel.setText(text);
-			text = "";
-			textosClases.add(paddel);
-			ResultSet res2 = stmt.executeQuery("SELECT usuario FROM clases WHERE fechaClase = '"+ hoy +"' AND tipo = 'CLASE NATACION'");
-			while(res1.next()) {
-				text =  text + res1.getString("usuario");
-				text = text + "\n";
-			}
-			natacion.setText(text);
-			text = "";
-			textosClases.add(natacion);
-			ResultSet res3 = stmt.executeQuery("SELECT usuario FROM clases WHERE fechaClase = '"+ hoy +"' AND tipo = 'CLASE BALONCESTO'");
-			while(res1.next()) {
-				text =  text + res1.getString("usuario");
-				text = text + "\n";
-			}
-			baloncesto.setText(text);
-			text = "";
-			textosClases.add(baloncesto);
-			ResultSet res4 = stmt.executeQuery("SELECT usuario FROM clases WHERE fechaClase = '"+ hoy +"' AND tipo = 'CLASE FUTBOL_SALA'");
-			while(res1.next()) {
-				text =  text + res1.getString("usuario");
-				text = text + "\n";
-			}
-			futbolSala.setText(text);
-			textosClases.add(futbolSala);
 		}catch (Exception e) {
 			e.printStackTrace();
 		}
-		return textosClases;
 		
 	}
 }

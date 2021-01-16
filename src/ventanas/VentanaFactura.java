@@ -16,6 +16,7 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
 import javax.swing.border.Border;
 import hotel.Cliente;
 
@@ -265,6 +266,44 @@ public class VentanaFactura extends JFrame {
 			}
 		}
 		
+		int paddle = 0;
+		int natacion = 0;
+		int baloncesto = 0;
+		int futbolsala = 0;
+		int clasepaddle = 0;
+		int clasenatacion = 0;
+		int clasebaloncesto = 0;
+		int clasefutbolsala = 0;
+		
+		int ppaddle = 0;
+		int pnatacion = 0;
+		int pbaloncesto = 0;
+		int pfutbolsala = 0;
+		int pclasepaddle = 0;
+		int pclasenatacion = 0;
+		int pclasebaloncesto = 0;
+		int pclasefutbolsala = 0;
+		
+		for(int i = 0; i < deporte.size(); i++) {
+			if(deporte.get(i).equals("PADDLE1") || deporte.get(i).equals("PADDLE2") || deporte.get(i).equals("PADDLE3") || deporte.get(i).equals("PADDLE4")) {
+				paddle += 1;
+			}else if(deporte.get(i).equals("NATACION1") || deporte.get(i).equals("NATACION2") || deporte.get(i).equals("NATACION3") || deporte.get(i).equals("NATACION4")) {
+				natacion += 1;
+			}else if(deporte.get(i).equals("BALONCESTO1") || deporte.get(i).equals("BALONCESTO2") || deporte.get(i).equals("BALONCESTO3") || deporte.get(i).equals("BALONCESTO4")) {
+				baloncesto += 1;
+			}else if(deporte.get(i).equals("FUTBOL-SALA1") || deporte.get(i).equals("FUTBOL-SALA2") || deporte.get(i).equals("FUTBOL-SALA3") || deporte.get(i).equals("FUTBOL-SALA4")) {
+				futbolsala += 1;
+			}else if(deporte.get(i).equals("CLASE PADDLE")) {
+				clasepaddle += 1;
+			}else if(deporte.get(i).equals("CLASE NATACION")) {
+				clasenatacion += 1;
+			}else if(deporte.get(i).equals("CLASE BALONCESTO")) {
+				clasebaloncesto += 1;
+			}else {
+				clasefutbolsala += 1;
+			}
+		}
+		
 		for (Entry<String, Integer> entry : hashmap.entrySet()) {
             if(entry.getKey().equals("MASAJE FACIAL") || entry.getKey().equals("MASAJE CORPORAL") || entry.getKey().equals("MASAJE TOTAL") || entry.getKey().equals("JACUZZI") || entry.getKey().equals("SALES MINERALES") || entry.getKey().equals("MASAJE PIEDRAS") || entry.getKey().equals("TRATAMIENTO ESTÉTICO")) {
             	if(entry.getKey().equals("MASAJE FACIAL")) {
@@ -333,12 +372,28 @@ public class VentanaFactura extends JFrame {
             		pbuffethotel = entry.getValue();
             	}
             }else{
-            	
+            	if(entry.getKey().equals("PADDLE1") || entry.getKey().equals("PADDLE2") || entry.getKey().equals("PADDLE3") || entry.getKey().equals("PADDLE4")) {
+    				ppaddle = entry.getValue();
+    			}else if(entry.getKey().equals("NATACION1") || entry.getKey().equals("NATACION2") || entry.getKey().equals("NATACION3") || entry.getKey().equals("NATACION4")) {
+    				pnatacion = entry.getValue();
+    			}else if(entry.getKey().equals("BALONCESTO1") || entry.getKey().equals("BALONCESTO2") || entry.getKey().equals("BALONCESTO3") || entry.getKey().equals("BALONCESTO4")) {
+    				pbaloncesto = entry.getValue();
+    			}else if(entry.getKey().equals("CLASE FUTBOL-SALA")) {
+    				pclasefutbolsala = entry.getValue();
+    			}else if(entry.getKey().equals("CLASE PADDLE")) {
+    				pclasepaddle = entry.getValue();
+    			}else if(entry.getKey().equals("CLASE NATACION")) {
+    				pclasenatacion = entry.getValue();
+    			}else if(entry.getKey().equals("CLASE BALONCESTO")) {
+    				pclasebaloncesto = entry.getValue();
+    			}else {
+    				pfutbolsala = entry.getValue();
+    			}
             }
         }
 		
 		int precComida = mcdonalds*pmcdonalds + burgerking*pburgerking + fostershollywood*pfostershollywood + pomodoro*ppomodoro + foodoo*pfoodoo + donga*pdonga + menudeldiahotel*pmenudeldiahotel + buffethotel*pbuffethotel;
-		int precDeporte = 0;
+		int precDeporte = paddle*ppaddle + natacion*pnatacion + baloncesto*pbaloncesto + futbolsala*pfutbolsala + clasepaddle*pclasepaddle + clasenatacion*pclasenatacion + clasebaloncesto*pclasebaloncesto + clasefutbolsala*pclasefutbolsala;
 		int precMiniBar = vodka*pvodka + ginebra*pginebra + whiskey*pwhiskey + tequila*ptequila + ron*pron + dos*pdos + tres*ptres + todos*ptodos;
 		int precSalaReunion = convencion*pconvencion + junta*pjunta + petitcomite*ppetitcomite + convencionequipada*pconvencionequipada + juntaequipada*pjuntaequipada + petitcomiteequipada*ppetitcomiteequipada;
 		int precSpa = masajefacial*pmasajefacial + masajecorporal*pmasajecorporal + masajetotal*pmasajetotal + jacuzzi*pjacuzzi + salesminerales*psalesminerales + masajepiedras*pmasajepiedras + tratamientoestetico*ptratamientoestetico;
@@ -365,7 +420,7 @@ public class VentanaFactura extends JFrame {
     	Border datosServiciosExtraBorder = BorderFactory.createTitledBorder("SERVICIOS");
     	datosServiciosExtra.setBorder(datosServiciosExtraBorder);
     	datosServiciosExtra.setBackground(Color.WHITE);
-    	datosServiciosExtra.setLayout(new GridLayout(35, 3));
+    	datosServiciosExtra.setLayout(new GridLayout(43, 3));
     	
     	datosServiciosExtra.add(cantidad);
     	datosServiciosExtra.add(productos);
@@ -466,6 +521,98 @@ public class VentanaFactura extends JFrame {
     	datosServiciosExtra.add(cantidadDeporte);
     	datosServiciosExtra.add(descripcionDeporte);
     	datosServiciosExtra.add(pDeporte);
+    	
+    	JLabel cantPaddle = new JLabel("" + paddle);
+    	cantPaddle.setForeground(Color.GRAY);
+    	JLabel nomPaddle = new JLabel("Paddle");
+    	nomPaddle.setForeground(Color.GRAY);
+    	JLabel precPaddle = new JLabel("" + paddle*15);
+    	precPaddle.setForeground(Color.GRAY);
+    	
+    	datosServiciosExtra.add(cantPaddle);
+    	datosServiciosExtra.add(nomPaddle);
+    	datosServiciosExtra.add(precPaddle);
+    	
+    	JLabel cantNatacion = new JLabel("" + natacion);
+    	cantNatacion.setForeground(Color.GRAY);
+    	JLabel nomNatacion = new JLabel("Natacion");
+    	nomNatacion.setForeground(Color.GRAY);
+    	JLabel precNatacion = new JLabel("" + natacion*10);
+    	precNatacion.setForeground(Color.GRAY);
+    	
+    	datosServiciosExtra.add(cantNatacion);
+    	datosServiciosExtra.add(nomNatacion);
+    	datosServiciosExtra.add(precNatacion);
+    	
+    	JLabel cantBaloncesto = new JLabel("" + baloncesto);
+    	cantBaloncesto.setForeground(Color.GRAY);
+    	JLabel nomBaloncesto = new JLabel("Natacion");
+    	nomBaloncesto.setForeground(Color.GRAY);
+    	JLabel precBaloncesto = new JLabel("" + baloncesto*20);
+    	precBaloncesto.setForeground(Color.GRAY);
+    	
+    	datosServiciosExtra.add(cantBaloncesto);
+    	datosServiciosExtra.add(nomBaloncesto);
+    	datosServiciosExtra.add(precBaloncesto);
+    	
+    	JLabel cantFutbolSala = new JLabel("" + futbolsala);
+    	cantFutbolSala.setForeground(Color.GRAY);
+    	JLabel nomFutbolSala = new JLabel("Futbol-Sala");
+    	nomFutbolSala.setForeground(Color.GRAY);
+    	JLabel precFutbolSala = new JLabel("" + futbolsala*15);
+    	precFutbolSala.setForeground(Color.GRAY);
+    	
+    	datosServiciosExtra.add(cantFutbolSala);
+    	datosServiciosExtra.add(nomFutbolSala);
+    	datosServiciosExtra.add(precFutbolSala);
+    	
+    	JLabel cantClasePadle = new JLabel("" + clasepaddle);
+    	cantClasePadle.setForeground(Color.GRAY);
+    	JLabel nomClasePadle = new JLabel("Clase Paddle");
+    	nomClasePadle.setForeground(Color.GRAY);
+    	JLabel precClasePadle = new JLabel("" + clasepaddle*30);
+    	precClasePadle.setForeground(Color.GRAY);
+    	
+    	datosServiciosExtra.add(cantClasePadle);
+    	datosServiciosExtra.add(nomClasePadle);
+    	datosServiciosExtra.add(precClasePadle);
+    	
+    	datosServiciosExtra.add(cantidadMiniBar);
+    	datosServiciosExtra.add(descripcionMiniBar);
+    	datosServiciosExtra.add(pMiniBar);
+    	
+    	JLabel cantClaseNatacion = new JLabel("" + clasenatacion);
+    	cantClaseNatacion.setForeground(Color.GRAY);
+    	JLabel nomClaseNatacion = new JLabel("Clase Natacion");
+    	nomClaseNatacion.setForeground(Color.GRAY);
+    	JLabel precClaseNatacion = new JLabel("" + clasenatacion*15);
+    	precClaseNatacion.setForeground(Color.GRAY);
+    	
+    	datosServiciosExtra.add(cantClaseNatacion);
+    	datosServiciosExtra.add(nomClaseNatacion);
+    	datosServiciosExtra.add(precClaseNatacion);
+    	
+    	JLabel cantClaseBaloncesto = new JLabel("" + clasebaloncesto);
+    	cantClaseBaloncesto.setForeground(Color.GRAY);
+    	JLabel nomClaseBaloncesto = new JLabel("Clase Baloncesto");
+    	nomClaseBaloncesto.setForeground(Color.GRAY);
+    	JLabel precClaseBaloncesto = new JLabel("" + clasebaloncesto*30);
+    	precClaseBaloncesto.setForeground(Color.GRAY);
+    	
+    	datosServiciosExtra.add(cantClaseBaloncesto);
+    	datosServiciosExtra.add(nomClaseBaloncesto);
+    	datosServiciosExtra.add(precClaseBaloncesto);
+    	
+    	JLabel cantClaseFutbolSala = new JLabel("" + clasefutbolsala);
+    	cantClaseFutbolSala.setForeground(Color.GRAY);
+    	JLabel nomClaseFutbolSala = new JLabel("Clase Futbol-Sala");
+    	nomClaseFutbolSala.setForeground(Color.GRAY);
+    	JLabel precClaseFutbolSala = new JLabel("" + clasefutbolsala*20);
+    	precClaseFutbolSala.setForeground(Color.GRAY);
+    	
+    	datosServiciosExtra.add(cantClaseFutbolSala);
+    	datosServiciosExtra.add(nomClaseFutbolSala);
+    	datosServiciosExtra.add(precClaseFutbolSala);
     	
     	datosServiciosExtra.add(cantidadMiniBar);
     	datosServiciosExtra.add(descripcionMiniBar);
@@ -722,11 +869,13 @@ public class VentanaFactura extends JFrame {
 			}
 		});
 		
+		JScrollPane scroll = new JScrollPane(datosServiciosExtra);
+		
     	JPanel main = new JPanel();
     	main.setLayout(new BoxLayout(main, BoxLayout.Y_AXIS));
 		main.add(datosCliente);
 		main.add(datosHabitacion);
-		main.add(datosServiciosExtra);
+		main.add(scroll);
 		main.add(total);
 		main.add(salir);	
 
@@ -734,7 +883,7 @@ public class VentanaFactura extends JFrame {
 		
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
 		setTitle("Factura");
-		pack();
+		setSize(500, 600);
 		setVisible(true);
 	}
 		

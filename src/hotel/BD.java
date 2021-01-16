@@ -20,6 +20,7 @@ import java.util.Scanner;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
+import javax.swing.JTextArea;
 import javax.swing.table.DefaultTableModel;
 
 import com.toedter.calendar.JCalendar;
@@ -117,6 +118,24 @@ public class BD extends JFrame{
 				
 			}
 			
+			ResultSet rs2 = stmt.executeQuery("SELECT fechaReserva FROM reservapista WHERE libre = 1;");
+			while(rs.next()) {
+				
+				String fechaBDtext = rs2.getString("fechaReserva");
+				String[] campos = fechaBDtext.split("-");
+				Integer fechaBD = Integer.parseInt(campos[0] + "" + campos[1] + "" +  campos[2]);
+				Integer fechaHoy = Integer.parseInt(hoy);
+
+				if (fechaBD < fechaHoy) {
+					PreparedStatement pstmt = conn.prepareStatement("UPDATE reservapista SET libre = ? WHERE fechaReserva = ?");
+					
+					pstmt.setInt(1, 0);
+					pstmt.setString(2, fechaBDtext);
+					pstmt.executeUpdate();
+				}
+				
+			}
+			
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -167,6 +186,51 @@ public class BD extends JFrame{
 			System.out.println(e2.getMessage());
 		} 
 		return emp;
+	}
+	
+public void pistasReservadasHoy(DefaultTableModel modelo) {
+		
+		JCalendar calendario = new JCalendar();
+		String year = Integer.toString(calendario.getCalendar().get(java.util.Calendar.YEAR));
+    	String mes = Integer.toString(calendario.getCalendar().get(java.util.Calendar.MONTH) + 1);
+    	String dia = Integer.toString(calendario.getCalendar().get(java.util.Calendar.DATE));
+    	String hoy = "";
+		
+    	if (Integer.parseInt(mes) < 10 && Integer.parseInt(dia) < 10) {
+			hoy = year + "-0" + mes + "-0" + dia;
+    	} else if (Integer.parseInt(mes) < 10 && Integer.parseInt(dia) >= 10) {
+    		hoy = year + "-0" + mes + "-" + dia;
+    	} else if (Integer.parseInt(mes) >= 10 && Integer.parseInt(dia) < 10) {
+    		hoy = year + "-" + mes + "-0" + dia;
+    	} else {
+    		hoy = year + "-" + mes + "-" + dia;
+    	}
+    	
+		try(Statement stmt = (Statement) conn.createStatement()) {	
+			
+			String [] tabla = new String[5];
+			
+			ResultSet res = stmt.executeQuery("SELECT fechaReserva, hora, num_pista, usuario, tipo FROM reservapista WHERE fechaReserva = '"+ hoy +"'");
+			while (res.next()) {
+				
+				String fila = res.getString("fechaReserva");
+				tabla[0] = fila;
+				fila = res.getString("hora");
+				tabla[1] = fila;
+				fila = res.getString("num_pista");
+				tabla[2] = fila;
+				fila = res.getString("usuario");
+				tabla[3] = fila;
+				fila = res.getString("tipo");
+				tabla[4] = fila;
+				modelo.addRow(tabla);
+				
+			}
+			
+			
+		} catch (SQLException e2) {
+			System.out.println(e2.getMessage());
+		}
 	}
 	
 	public Cliente cliente(String usu, String password) {
@@ -514,6 +578,65 @@ public class BD extends JFrame{
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+		
+	}
+	
+	public List<JTextArea> clasesHoy(JTextArea paddel, JTextArea natacion, JTextArea futbolSala, JTextArea baloncesto) {
+		
+		List<JTextArea> textosClases = new ArrayList<JTextArea>();
+		
+		JCalendar calendario = new JCalendar();
+		String year = Integer.toString(calendario.getCalendar().get(java.util.Calendar.YEAR));
+    	String mes = Integer.toString(calendario.getCalendar().get(java.util.Calendar.MONTH) + 1);
+    	String dia = Integer.toString(calendario.getCalendar().get(java.util.Calendar.DATE));
+    	String hoy = "";
+		String text = "";
+    	if (Integer.parseInt(mes) < 10 && Integer.parseInt(dia) < 10) {
+			hoy = year + "-0" + mes + "-0" + dia;
+    	} else if (Integer.parseInt(mes) < 10 && Integer.parseInt(dia) >= 10) {
+    		hoy = year + "-0" + mes + "-" + dia;
+    	} else if (Integer.parseInt(mes) >= 10 && Integer.parseInt(dia) < 10) {
+    		hoy = year + "-" + mes + "-0" + dia;
+    	} else {
+    		hoy = year + "-" + mes + "-" + dia;
+    	}
+		try (Statement stmt = (Statement) conn.createStatement()){
+			
+			ResultSet res1 = stmt.executeQuery("SELECT usuario FROM clases WHERE fechaClase = '"+ hoy +"' AND tipo = 'CLASE PADDEL'");
+			while(res1.next()) {
+				text =  text + res1.getString("usuario");
+				text = text + "\n";
+			}
+			paddel.setText(text);
+			text = "";
+			textosClases.add(paddel);
+			ResultSet res2 = stmt.executeQuery("SELECT usuario FROM clases WHERE fechaClase = '"+ hoy +"' AND tipo = 'CLASE NATACION'");
+			while(res1.next()) {
+				text =  text + res1.getString("usuario");
+				text = text + "\n";
+			}
+			natacion.setText(text);
+			text = "";
+			textosClases.add(natacion);
+			ResultSet res3 = stmt.executeQuery("SELECT usuario FROM clases WHERE fechaClase = '"+ hoy +"' AND tipo = 'CLASE BALONCESTO'");
+			while(res1.next()) {
+				text =  text + res1.getString("usuario");
+				text = text + "\n";
+			}
+			baloncesto.setText(text);
+			text = "";
+			textosClases.add(baloncesto);
+			ResultSet res4 = stmt.executeQuery("SELECT usuario FROM clases WHERE fechaClase = '"+ hoy +"' AND tipo = 'CLASE FUTBOL_SALA'");
+			while(res1.next()) {
+				text =  text + res1.getString("usuario");
+				text = text + "\n";
+			}
+			futbolSala.setText(text);
+			textosClases.add(futbolSala);
+		}catch (Exception e) {
+			e.printStackTrace();
+		}
+		return textosClases;
 		
 	}
 	

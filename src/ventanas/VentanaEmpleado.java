@@ -13,6 +13,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.List;
 import java.util.Scanner;
 
 import javax.swing.*;
@@ -452,6 +453,52 @@ public class VentanaEmpleado extends JFrame{
     			}
     		});
     		
+    		break;
+    		
+    	case deporte:
+    		JPanel izq = new JPanel();
+    		JPanel drch = new JPanel();
+    		Border pnlIzqBorder = BorderFactory.createTitledBorder("PISTAS RESERVADAS");
+    		Border pnlDrchBorder = BorderFactory.createTitledBorder("CLASES DE HOY");
+    		drch.setLayout(new GridLayout(2,4));
+        	izq.setBorder(pnlIzqBorder);
+        	drch.setBorder(pnlDrchBorder);
+    		JTable reservas  = new JTable();
+    		JScrollPane scroll = new JScrollPane(reservas);
+    		modelo = (DefaultTableModel)reservas.getModel();
+    		modelo.addColumn("Fecha Reserva");
+    		modelo.addColumn("Hora");
+    		modelo.addColumn("Numero de pista");
+    		modelo.addColumn("Tipo de pista");
+    		
+    		bd.pistasReservadasHoy(modelo);
+    		
+    		izq.add(reservas);
+    		
+    		JTextArea paddel = new JTextArea();
+    		JLabel paddelTitulo = new JLabel("PADDEL");
+    		JTextArea natacion = new JTextArea();
+    		JLabel natacionTitulo = new JLabel("NATACION");
+    		JTextArea baloncesto = new JTextArea();
+    		JLabel baloncestoTitulo = new JLabel("BALONCESTO");
+    		JTextArea futbolSala = new JTextArea();
+    		JLabel futbolSalaTitulo = new JLabel("  FUTBOL-SALA");
+    		
+    		List<JTextArea> lista = bd.clasesHoy(paddel, natacion, futbolSala, baloncesto);
+
+    		drch.add(paddelTitulo);
+    		drch.add(natacionTitulo);
+    		drch.add(baloncestoTitulo);
+    		drch.add(futbolSalaTitulo);
+    		
+    		for (JTextArea text : lista) {
+				drch.add(text);
+			}
+    		
+    		
+    		
+    		trabajo.add(izq);
+    		trabajo.add(drch);
     		break;
     		
 	    default:

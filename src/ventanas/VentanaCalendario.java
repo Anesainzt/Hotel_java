@@ -132,7 +132,6 @@ public class VentanaCalendario extends JFrame{
 				try {
 					bd.connect();
 				} catch (BDException e1) {
-					// TODO Auto-generated catch block
 					e1.printStackTrace();
 				}
 				//GUARDAMOS LOS DIAS QUE HA RESERVADO EN LA BASE DE DATOS

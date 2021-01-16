@@ -197,6 +197,44 @@ public class VentanaFactura extends JFrame {
 			}
 		}
 		
+		int vodka = 0;
+		int ginebra = 0;
+		int whiskey = 0;
+		int tequila = 0;
+		int ron = 0;
+		int dos = 0;
+		int tres = 0;
+		int todos = 0;
+		
+		int pvodka = 0;
+		int pginebra = 0;
+		int pwhiskey = 0;
+		int ptequila = 0;
+		int pron = 0;
+		int pdos = 0;
+		int ptres = 0;
+		int ptodos = 0;
+		
+		for(int i = 0; i < miniBar.size(); i++) {
+			if(miniBar.get(i).equals("VODKA")) {
+				vodka += 1;
+			}else if(miniBar.get(i).equals("GINEBRA")) {
+				ginebra += 1;
+			}else if(miniBar.get(i).equals("WHISKEY")) {
+				whiskey += 1;
+			}else if(miniBar.get(i).equals("TEQUILA")) {
+				tequila += 1;
+			}else if(miniBar.get(i).equals("RON")) {
+				ron += 1;
+			}else if(miniBar.get(i).equals("ELECCION DE DOS")) {
+				dos += 1;
+			}else if(miniBar.get(i).equals("ELECCION DE TRES")) {
+				tres += 1;
+			}else {
+				todos += 1;
+			}
+		}
+		
 		for (Entry<String, Integer> entry : hashmap.entrySet()) {
             if(entry.getKey().equals("MASAJE FACIAL") || entry.getKey().equals("MASAJE CORPORAL") || entry.getKey().equals("MASAJE TOTAL") || entry.getKey().equals("JACUZZI") || entry.getKey().equals("SALES MINERALES") || entry.getKey().equals("MASAJE PIEDRAS") || entry.getKey().equals("TRATAMIENTO ESTÉTICO")) {
             	if(entry.getKey().equals("MASAJE FACIAL")) {
@@ -217,7 +255,23 @@ public class VentanaFactura extends JFrame {
             }else if(entry.getKey().equals("SALA CONVENCION") || entry.getKey().equals("SALA JUNTA") || entry.getKey().equals("SALA PETIT COMITÉ") || entry.getKey().equals("SALA CONVENCION EQUIPADA") || entry.getKey().equals("SALA JUNTA EQUIPADA") || entry.getKey().equals("SALA PETIT COMITÉ EQUIPADA")) {
             	
             }else if(entry.getKey().equals("VODKA") || entry.getKey().equals("GINEBRA") || entry.getKey().equals("WHISKEY") || entry.getKey().equals("TEQUILA") || entry.getKey().equals("RON") || entry.getKey().equals("ELECCION DE DOS") || entry.getKey().equals("ELECCION DE TRES") || entry.getKey().equals("TODOS")) {
-            	
+            	if(entry.getKey().equals("VODKA")) {
+    				pvodka = entry.getValue();
+    			}else if(entry.getKey().equals("GINEBRA")) {
+    				pginebra = entry.getValue();
+    			}else if(entry.getKey().equals("WHISKEY")) {
+    				pwhiskey = entry.getValue();
+    			}else if(entry.getKey().equals("TEQUILA")) {
+    				ptequila = entry.getValue();
+    			}else if(entry.getKey().equals("RON")) {
+    				pron = entry.getValue();
+    			}else if(entry.getKey().equals("ELECCION DE DOS")) {
+    				pdos = entry.getValue();
+    			}else if(entry.getKey().equals("ELECCION DE TRES")) {
+    				ptres = entry.getValue();
+    			}else {
+    				ptodos = entry.getValue();
+    			}
             }else if(entry.getKey().equals("MCDONALDS") || entry.getKey().equals("BURGER KING") || entry.getKey().equals("FOSTERS HOLLYWOOD") || entry.getKey().equals("POMODORO") || entry.getKey().equals("FOODOO") || entry.getKey().equals("DONGA") || entry.getKey().equals("MENU DEL DIA HOTEL") || entry.getKey().equals("BUFFET HOTEL")) {
             	if(entry.getKey().equals("MCDONALDS")) {
             		pmcdonalds = entry.getValue();
@@ -243,7 +297,7 @@ public class VentanaFactura extends JFrame {
 		
 		int precComida = mcdonalds*pmcdonalds + burgerking*pburgerking + fostershollywood*pfostershollywood + pomodoro*ppomodoro + foodoo*pfoodoo + donga*pdonga + menudeldiahotel*pmenudeldiahotel + buffethotel*pbuffethotel;
 		int precDeporte = 0;
-		int precMiniBar = 0;
+		int precMiniBar = vodka*pvodka + ginebra*pginebra + whiskey*pwhiskey + tequila*ptequila + ron*pron + dos*pdos + tres*ptres + todos*ptodos;
 		int precSalaReunion = 0;
 		int precSpa = masajefacial*pmasajefacial + masajecorporal*pmasajecorporal + masajetotal*pmasajetotal + jacuzzi*pjacuzzi + salesminerales*psalesminerales + masajepiedras*pmasajepiedras + tratamientoestetico*ptratamientoestetico;
 		
@@ -269,7 +323,7 @@ public class VentanaFactura extends JFrame {
     	Border datosServiciosExtraBorder = BorderFactory.createTitledBorder("SERVICIOS");
     	datosServiciosExtra.setBorder(datosServiciosExtraBorder);
     	datosServiciosExtra.setBackground(Color.WHITE);
-    	datosServiciosExtra.setLayout(new GridLayout(21, 3));
+    	datosServiciosExtra.setLayout(new GridLayout(29, 3));
     	
     	datosServiciosExtra.add(cantidad);
     	datosServiciosExtra.add(productos);
@@ -374,6 +428,94 @@ public class VentanaFactura extends JFrame {
     	datosServiciosExtra.add(cantidadMiniBar);
     	datosServiciosExtra.add(descripcionMiniBar);
     	datosServiciosExtra.add(pMiniBar);
+    	
+    	JLabel cantVodka = new JLabel("" + vodka);
+    	cantVodka.setForeground(Color.GRAY);
+    	JLabel nomVodka = new JLabel("Vodka");
+    	nomVodka.setForeground(Color.GRAY);
+    	JLabel precVodka = new JLabel("" + vodka*30);
+    	precVodka.setForeground(Color.GRAY);
+    	
+    	datosServiciosExtra.add(cantVodka);
+    	datosServiciosExtra.add(nomVodka);
+    	datosServiciosExtra.add(precVodka);
+    	
+    	JLabel cantGinebra = new JLabel("" + ginebra);
+    	cantGinebra.setForeground(Color.GRAY);
+    	JLabel nomGinebra = new JLabel("Ginebra");
+    	nomGinebra.setForeground(Color.GRAY);
+    	JLabel precGinebra = new JLabel("" + ginebra*30);
+    	precGinebra.setForeground(Color.GRAY);
+    	
+    	datosServiciosExtra.add(cantGinebra);
+    	datosServiciosExtra.add(nomGinebra);
+    	datosServiciosExtra.add(precGinebra);
+    	
+    	JLabel cantWhiskey = new JLabel("" + whiskey);
+    	cantWhiskey.setForeground(Color.GRAY);
+    	JLabel nomWhiskey = new JLabel("Whiskey");
+    	nomWhiskey.setForeground(Color.GRAY);
+    	JLabel precWhiskey = new JLabel("" + whiskey*50);
+    	precWhiskey.setForeground(Color.GRAY);
+    	
+    	datosServiciosExtra.add(cantWhiskey);
+    	datosServiciosExtra.add(nomWhiskey);
+    	datosServiciosExtra.add(precWhiskey);
+    	
+    	JLabel cantTequila = new JLabel("" + tequila);
+    	cantTequila.setForeground(Color.GRAY);
+    	JLabel nomTequila = new JLabel("Tequila");
+    	nomTequila.setForeground(Color.GRAY);
+    	JLabel precTequila = new JLabel("" + tequila*45);
+    	precTequila.setForeground(Color.GRAY);
+    	
+    	datosServiciosExtra.add(cantTequila);
+    	datosServiciosExtra.add(nomTequila);
+    	datosServiciosExtra.add(precTequila);
+    	
+    	JLabel cantRon = new JLabel("" + ron);
+    	cantRon.setForeground(Color.GRAY);
+    	JLabel nomRon = new JLabel("Ron");
+    	nomRon.setForeground(Color.GRAY);
+    	JLabel precRon = new JLabel("" + ron*30);
+    	precRon.setForeground(Color.GRAY);
+    	
+    	datosServiciosExtra.add(cantRon);
+    	datosServiciosExtra.add(nomRon);
+    	datosServiciosExtra.add(precRon);
+    	
+    	JLabel cantDos = new JLabel("" + dos);
+    	cantDos.setForeground(Color.GRAY);
+    	JLabel nomDos = new JLabel("Eleccion de 2");
+    	nomDos.setForeground(Color.GRAY);
+    	JLabel precDos = new JLabel("" + dos*90);
+    	precDos.setForeground(Color.GRAY);
+    	
+    	datosServiciosExtra.add(cantDos);
+    	datosServiciosExtra.add(nomDos);
+    	datosServiciosExtra.add(precDos);
+    	
+    	JLabel cantTres = new JLabel("" + tres);
+    	cantTres.setForeground(Color.GRAY);
+    	JLabel nomTres = new JLabel("Eleccion de 3");
+    	nomTres.setForeground(Color.GRAY);
+    	JLabel precTres = new JLabel("" + tres*140);
+    	precTres.setForeground(Color.GRAY);
+    	
+    	datosServiciosExtra.add(cantTres);
+    	datosServiciosExtra.add(nomTres);
+    	datosServiciosExtra.add(precTres);
+    	
+    	JLabel cantTodos = new JLabel("" + todos);
+    	cantTodos.setForeground(Color.GRAY);
+    	JLabel nomTodos = new JLabel("Todos");
+    	nomTodos.setForeground(Color.GRAY);
+    	JLabel precTodos = new JLabel("" + todos*180);
+    	precTres.setForeground(Color.GRAY);
+    	
+    	datosServiciosExtra.add(cantTodos);
+    	datosServiciosExtra.add(nomTodos);
+    	datosServiciosExtra.add(precTodos);
     	
     	datosServiciosExtra.add(cantidadSalaReunion);
     	datosServiciosExtra.add(descripcionSalaReunion);

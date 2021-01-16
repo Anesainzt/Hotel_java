@@ -47,9 +47,9 @@ public class VentanaMiniBar extends JFrame{
 				}else if (comboMiniBar.getSelectedItem().equals("RON ---> 30€")){
 			    	VentanaReservaServicio vrs = new VentanaReservaServicio(cliente, 30, "RON");
 				}else if (comboMiniBar.getSelectedItem().equals("ELECCION DE DOS (DIFERENTES) ---> 90€")){
-			    	VentanaReservaServicio vrs = new VentanaReservaServicio(cliente, 90, "ELECCION DE DOS (DIFERENTES)");
+			    	VentanaReservaServicio vrs = new VentanaReservaServicio(cliente, 90, "ELECCION DE DOS");
 				}else if (comboMiniBar.getSelectedItem().equals("ELECCION DE TRES (DIFERENTES) ---> 140€")){
-			    	VentanaReservaServicio vrs = new VentanaReservaServicio(cliente, 140, "ELECCION DE TRES (DIFERENTES)");
+			    	VentanaReservaServicio vrs = new VentanaReservaServicio(cliente, 140, "ELECCION DE TRES");
 				}else if (comboMiniBar.getSelectedItem().equals("TODOS ---> 180€")){
 			    	VentanaReservaServicio vrs = new VentanaReservaServicio(cliente, 180, "TODOS");
 				}else {

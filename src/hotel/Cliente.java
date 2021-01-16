@@ -1,5 +1,6 @@
 package hotel;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 
 public class Cliente{
@@ -12,8 +13,9 @@ public class Cliente{
 	protected static String password;
 	protected static String newPassword;
 	protected static HashMap<String, Integer> hashmap = new HashMap<String, Integer>();
+	protected static ArrayList<String> comida = new ArrayList<String>();
 	
-	public Cliente(String nombre, String apellido, String dni, String fecha_ncto, String tarjeta, String login, String password, String newPassword, HashMap<String, Integer> hashmap) {
+	public Cliente(String nombre, String apellido, String dni, String fecha_ncto, String tarjeta, String login, String password, String newPassword, HashMap<String, Integer> hashmap, ArrayList<String> comida) {
 		
 		Cliente.nombre = nombre;
 		Cliente.apellido = apellido;
@@ -24,6 +26,7 @@ public class Cliente{
 		Cliente.password = password;
 		Cliente.newPassword = newPassword;
 		Cliente.hashmap = hashmap;
+		Cliente.comida = comida;
 	}
 
 
@@ -38,6 +41,7 @@ public class Cliente{
 		Cliente.password = "";
 		Cliente.newPassword = "";
 		Cliente.hashmap = new HashMap <String, Integer>();
+		Cliente.comida = new ArrayList <String>();
 	}
 	
 
@@ -109,9 +113,16 @@ public class Cliente{
 		return hashmap;
 	}
 
-
 	public static void setHashmap(HashMap<String, Integer> hashmap) {
 		Cliente.hashmap = hashmap;
+	}
+	
+	public static ArrayList<String> getComida() {
+		return comida;
+	}
+	
+	public static void setComida(ArrayList<String> comida) {
+		Cliente.comida = comida;
 	}
 		
 }

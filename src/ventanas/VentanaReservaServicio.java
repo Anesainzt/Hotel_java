@@ -35,9 +35,14 @@ public class VentanaReservaServicio extends JFrame{
 		try {
 			bd.connect();
 		} catch (BDException e2) {
-			// TODO Auto-generated catch block
 			e2.printStackTrace();
 		}
+		
+		ArrayList<String> comida = new ArrayList<String>();
+		comida = cliente.getComida();
+		comida.add(tipo);
+		cliente.setComida(comida);
+		
 		HashMap<String, Integer> hashmap = new HashMap<String, Integer>();
 		hashmap = cliente.getHashmap();
 		hashmap.put(tipo, precio);

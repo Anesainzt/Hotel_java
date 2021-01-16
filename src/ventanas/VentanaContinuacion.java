@@ -27,7 +27,6 @@ public class VentanaContinuacion extends JFrame{
 		try {
 			bd.connect();
 		} catch (BDException e2) {
-			// TODO Auto-generated catch block
 			e2.printStackTrace();
 		}
 		setLayout(new GridLayout(2, 1));
@@ -63,12 +62,10 @@ public class VentanaContinuacion extends JFrame{
 				try {
 					bd.disconnect();
 				} catch (BDException e1) {
-					// TODO Auto-generated catch block
 					e1.printStackTrace();
 				}
 			}
 		});
-		
 		
 		add(elegirNuevoServicio);
 		add(continuar);

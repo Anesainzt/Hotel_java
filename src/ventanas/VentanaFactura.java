@@ -284,13 +284,13 @@ public class VentanaFactura extends JFrame {
 		int pclasefutbolsala = 0;
 		//RECORREMOS EL ARRAY DE DEPORTE PARA CALCULAR CUANTAS PISTAS/CLASES QUIERE
 		for(int i = 0; i < deporte.size(); i++) {
-			if(deporte.get(i).equals("PADDLE1") || deporte.get(i).equals("PADDLE2") || deporte.get(i).equals("PADDLE3") || deporte.get(i).equals("PADDLE4")) {
+			if(deporte.get(i).equals("PADDLE")) {
 				paddle += 1;
-			}else if(deporte.get(i).equals("NATACION1") || deporte.get(i).equals("NATACION2") || deporte.get(i).equals("NATACION3") || deporte.get(i).equals("NATACION4")) {
+			}else if(deporte.get(i).equals("NATACION")) {
 				natacion += 1;
-			}else if(deporte.get(i).equals("BALONCESTO1") || deporte.get(i).equals("BALONCESTO2") || deporte.get(i).equals("BALONCESTO3") || deporte.get(i).equals("BALONCESTO4")) {
+			}else if(deporte.get(i).equals("BALONCESTO")) {
 				baloncesto += 1;
-			}else if(deporte.get(i).equals("FUTBOL-SALA1") || deporte.get(i).equals("FUTBOL-SALA2") || deporte.get(i).equals("FUTBOL-SALA3") || deporte.get(i).equals("FUTBOL-SALA4")) {
+			}else if(deporte.get(i).equals("FUTBOL-SALA")) {
 				futbolsala += 1;
 			}else if(deporte.get(i).equals("CLASE PADDLE")) {
 				clasepaddle += 1;
@@ -371,11 +371,11 @@ public class VentanaFactura extends JFrame {
             		pbuffethotel = entry.getValue();
             	}
             }else{
-            	if(entry.getKey().equals("PADDLE1") || entry.getKey().equals("PADDLE2") || entry.getKey().equals("PADDLE3") || entry.getKey().equals("PADDLE4")) {
+            	if(entry.getKey().equals("PADDLE")) {
     				ppaddle = entry.getValue();
-    			}else if(entry.getKey().equals("NATACION1") || entry.getKey().equals("NATACION2") || entry.getKey().equals("NATACION3") || entry.getKey().equals("NATACION4")) {
+    			}else if(entry.getKey().equals("NATACION")) {
     				pnatacion = entry.getValue();
-    			}else if(entry.getKey().equals("BALONCESTO1") || entry.getKey().equals("BALONCESTO2") || entry.getKey().equals("BALONCESTO3") || entry.getKey().equals("BALONCESTO4")) {
+    			}else if(entry.getKey().equals("BALONCESTO")) {
     				pbaloncesto = entry.getValue();
     			}else if(entry.getKey().equals("CLASE FUTBOL-SALA")) {
     				pclasefutbolsala = entry.getValue();

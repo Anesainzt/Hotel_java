@@ -63,52 +63,52 @@ public class VentanaDeporte extends JFrame{
 			public void actionPerformed(ActionEvent e) {
 				if (comboDeporte.getSelectedItem().equals("(15€) PISTA PADDLE ---> 09:00-09:50")){
 					bd.escribirFichero("horaPista", "09:00-09:50");
-			    	VentanaReservaServicio vrs = new VentanaReservaServicio(cliente, 15, "PADDLE1");
+			    	VentanaReservaServicio vrs = new VentanaReservaServicio(cliente, 15, "PADDLE");
 				}else if (comboDeporte.getSelectedItem().equals("(15€) PISTA PADDLE ---> 10:00-10:50")){
 					bd.escribirFichero("horaPista", "10:00-10:50");
-			    	VentanaReservaServicio vrs = new VentanaReservaServicio(cliente, 15, "PADDLE2");
+			    	VentanaReservaServicio vrs = new VentanaReservaServicio(cliente, 15, "PADDLE");
 				}else if (comboDeporte.getSelectedItem().equals("(15€) PISTA PADDLE ---> 11:00-11:50")){
 					bd.escribirFichero("horaPista", "11:00-11:50");
-			    	VentanaReservaServicio vrs = new VentanaReservaServicio(cliente, 15, "PADDLE3");
+			    	VentanaReservaServicio vrs = new VentanaReservaServicio(cliente, 15, "PADDLE");
 				}else if (comboDeporte.getSelectedItem().equals("(15€) PISTA PADDLE ---> 12:00-12:50")){
 					bd.escribirFichero("horaPista", "12:00-12:50");
-			    	VentanaReservaServicio vrs = new VentanaReservaServicio(cliente, 15, "PADDLE4");
+			    	VentanaReservaServicio vrs = new VentanaReservaServicio(cliente, 15, "PADDLE");
 				} else if (comboDeporte.getSelectedItem().equals("(10€) PISCINA NATACION ---> 09:00-09:50")){
 					bd.escribirFichero("horaPista", "09:00-09:50");
-			    	VentanaReservaServicio vrs = new VentanaReservaServicio(cliente, 10, "NATACION1");
+			    	VentanaReservaServicio vrs = new VentanaReservaServicio(cliente, 10, "NATACION");
 				}else if (comboDeporte.getSelectedItem().equals("(10€) PISCINA NATACION ---> 10:00-10:50")){
 					bd.escribirFichero("horaPista", "10:00-10:50");
-			    	VentanaReservaServicio vrs = new VentanaReservaServicio(cliente, 10, "NATACION2");
+			    	VentanaReservaServicio vrs = new VentanaReservaServicio(cliente, 10, "NATACION");
 				}else if (comboDeporte.getSelectedItem().equals("(10€) PISCINA NATACION ---> 11:00-11:50")){
 					bd.escribirFichero("horaPista", "11:00-11:50");
-			    	VentanaReservaServicio vrs = new VentanaReservaServicio(cliente, 10, "NATACION3");
+			    	VentanaReservaServicio vrs = new VentanaReservaServicio(cliente, 10, "NATACION");
 				}else if (comboDeporte.getSelectedItem().equals("(10€) PISCINA NATACION ---> 12:00-12:50")){
 					bd.escribirFichero("horaPista", "12:00-12:50");
-			    	VentanaReservaServicio vrs = new VentanaReservaServicio(cliente, 10, "NATACION4");
+			    	VentanaReservaServicio vrs = new VentanaReservaServicio(cliente, 10, "NATACION");
 				}else if (comboDeporte.getSelectedItem().equals("(20€) CAMPO BALONCESTO ---> 09:00-09:50")){
 					bd.escribirFichero("horaPista", "09:00-09:50");
-			    	VentanaReservaServicio vrs = new VentanaReservaServicio(cliente, 20, "BALONCESTO1");
+			    	VentanaReservaServicio vrs = new VentanaReservaServicio(cliente, 20, "BALONCESTO");
 				}else if (comboDeporte.getSelectedItem().equals("(20€) CAMPO BALONCESTO ---> 10:00-10:50")){
 					bd.escribirFichero("horaPista", "10:00-10:50");
-			    	VentanaReservaServicio vrs = new VentanaReservaServicio(cliente, 20, "BALONCESTO2");
+			    	VentanaReservaServicio vrs = new VentanaReservaServicio(cliente, 20, "BALONCESTO");
 				}else if (comboDeporte.getSelectedItem().equals("(20€) CAMPO BALONCESTO ---> 11:00-11:50")){
 					bd.escribirFichero("horaPista", "11:00-11:50");
-			    	VentanaReservaServicio vrs = new VentanaReservaServicio(cliente, 20, "BALONCESTO3");
+			    	VentanaReservaServicio vrs = new VentanaReservaServicio(cliente, 20, "BALONCESTO");
 				}else if (comboDeporte.getSelectedItem().equals("(20€) CAMPO BALONCESTO ---> 12:00-12:50")){
 					bd.escribirFichero("horaPista", "12:00-12:50");
-			    	VentanaReservaServicio vrs = new VentanaReservaServicio(cliente, 20, "BALONCESTO4");
+			    	VentanaReservaServicio vrs = new VentanaReservaServicio(cliente, 20, "BALONCESTO");
 				}else if (comboDeporte.getSelectedItem().equals("(15€) CAMPO FUTBOL-SALA ---> 09:00-09:50")){
 					bd.escribirFichero("horaPista", "09:00-09:50");
-			    	VentanaReservaServicio vrs = new VentanaReservaServicio(cliente, 15, "FUTBOL-SALA1");
+			    	VentanaReservaServicio vrs = new VentanaReservaServicio(cliente, 15, "FUTBOL-SALA");
 				}else if (comboDeporte.getSelectedItem().equals("(15€) CAMPO FUTBOL-SALA ---> 10:00-10:50")){
 					bd.escribirFichero("horaPista", "10:00-10:50");
-			    	VentanaReservaServicio vrs = new VentanaReservaServicio(cliente, 15, "FUTBOL-SALA2");
+			    	VentanaReservaServicio vrs = new VentanaReservaServicio(cliente, 15, "FUTBOL-SALA");
 				}else if (comboDeporte.getSelectedItem().equals("(15€) CAMPO FUTBOL-SALA ---> 11:00-11:50")){
 					bd.escribirFichero("horaPista", "11:00-11:50");
-			    	VentanaReservaServicio vrs = new VentanaReservaServicio(cliente, 15, "FUTBOL-SALA3");
+			    	VentanaReservaServicio vrs = new VentanaReservaServicio(cliente, 15, "FUTBOL-SALA");
 				}else if (comboDeporte.getSelectedItem().equals("(15€) CAMPO FUTBOL-SALA ---> 12:00-12:50")){
 					bd.escribirFichero("horaPista", "12:00-12:50");
-			    	VentanaReservaServicio vrs = new VentanaReservaServicio(cliente, 15, "FUTBOL-SALA4");	
+			    	VentanaReservaServicio vrs = new VentanaReservaServicio(cliente, 15, "FUTBOL-SALA");	
 				}
 				//SIEMPRE HAY UNA CLASE CADA DIA SIN LIMITE DE PARTICIPANTES
 				else if (comboDeporte.getSelectedItem().equals("(30€) CLASE PADDLE ---> 17:00-19:00")){

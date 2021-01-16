@@ -493,21 +493,9 @@ public void pistasReservadasHoy(DefaultTableModel modelo) {
 	public List<JButton> botonesReservarPista(String tipo){
 		List<JButton> listaBotones = new ArrayList<JButton>();
 		JButton boton;
-		String t = null;
-		if (tipo.contains("PADDLE") == true) {
-    		t = "PADDLE";
-		}else if(tipo.contains("NATACION") == true){
-			t = "NATACION";
-		}else if(tipo.contains("BALONCESTO") == true){
-			t = "BALONCESTO";
-		}else if(tipo.contains("FUTBOL-SALA") == true){
-			t = "FUTBOL-SALA";
-		}else {
-			t = tipo;
-		}
 		try (Statement stmt = (Statement) conn.createStatement()){
 			
-			ResultSet rs = stmt.executeQuery("SELECT num_pista, libre FROM pista WHERE tipo = '"+ t +"'");
+			ResultSet rs = stmt.executeQuery("SELECT num_pista, libre FROM pista WHERE tipo = '"+ tipo +"'");
 			
 			while(rs.next()) {
 				int numero = rs.getInt("num_pista");
@@ -559,25 +547,13 @@ public void pistasReservadasHoy(DefaultTableModel modelo) {
 	}
 	
 	public void registrarReservaPista(Cliente cliente, String fecha, String hora, String num, String tipo) {
-		String t = null;
-		if (tipo.contains("PADDLE") == true) {
-    		t = "PADDLE";
-		}else if(tipo.contains("NATACION") == true){
-			t = "NATACION";
-		}else if(tipo.contains("BALONCESTO") == true){
-			t = "BALONCESTO";
-		}else if(tipo.contains("FUTBOL-SALA") == true){
-			t = "FUTBOL-SALA";
-		}else {
-			t = tipo;
-		}
 		try {
 			PreparedStatement pstmt = conn.prepareStatement("INSERT INTO reservapista VALUES(?, ?, ?, ?, ?, ?);");
 			
 			pstmt.setString(1, fecha);
 			pstmt.setString(2, hora);
 			pstmt.setInt(3, Integer.parseInt(num));
-			pstmt.setString(4, t);
+			pstmt.setString(4, tipo);
 			pstmt.setInt(5, 1);
 			pstmt.setString(6, cliente.getLogin());
 			pstmt.execute();
@@ -668,7 +644,7 @@ public void pistasReservadasHoy(DefaultTableModel modelo) {
 				int numero = rs.getInt("num_pista");
 				String tipoPista = rs.getString("tipo");
 				
-				PreparedStatement pstmt = conn.prepareStatement("UPDATE spa SET libre = ? WHERE num_pista = ? AND tipo = ?");
+				PreparedStatement pstmt = conn.prepareStatement("UPDATE spa SET libre = ? WHERE num_spa = ? AND tipo = ?");
 				pstmt.setInt(1, 1);
 				pstmt.setInt(2, numero);
 				pstmt.setString(3, tipoPista);

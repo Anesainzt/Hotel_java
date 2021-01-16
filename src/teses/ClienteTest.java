@@ -6,9 +6,12 @@ import java.util.HashMap;
 
 import org.junit.jupiter.api.Test;
 
+import hotel.BD;
+import hotel.BDException;
 import hotel.Cliente;
 
 class ClienteTest {
+	BD bd = new BD();
 
 	Cliente c1 = new Cliente();
 	Cliente c2 = new Cliente("Alazne", "Parra", "22764839Z", "1999-03-17", "1234567890", "alazne.parra", "Armagedom", "Armagedom", null, null, null, null, null, null);
@@ -16,6 +19,11 @@ class ClienteTest {
 	
 	@Test
 	void getNombre() {
+		try {
+			bd.connect();
+		} catch (BDException e) {
+			e.printStackTrace();
+		}
 		assertEquals("Alazne", Cliente.getNombre());
 	}
 	@Test
@@ -109,7 +117,7 @@ class ClienteTest {
 		assertEquals(hashmap.put("COMIDA", 30), Cliente.getHashmap());
 		assertEquals(hashmap.put("MASAJE CORPORAL", 90), Cliente.getHashmap());
 		assertEquals(hashmap.put("SALA PETIT COMITÉ EQUIPADA", 50), Cliente.getHashmap());
-		assertEquals(hashmap.put("ELECCION DE TRES (DIFERENTES)", 140), Cliente.getHashmap());
+		assertEquals(hashmap.put("ELECCION DE TRES", 140), Cliente.getHashmap());
 	}
 	@Test
 	void setHashMap() {
@@ -117,7 +125,7 @@ class ClienteTest {
 		hashmap.put("COMIDA", 30);
 		hashmap.put("MASAJE CORPORAL", 90);
 		hashmap.put("SALA PETIT COMITÉ EQUIPADA", 50);
-		hashmap.put("ELECCION DE TRES (DIFERENTES)", 140);
+		hashmap.put("ELECCION DE TRES", 140);
 	    c1.setHashmap(c2.getHashmap());
 	    assertEquals(c1.getHashmap(), null);
 	}

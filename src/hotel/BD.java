@@ -639,5 +639,4 @@ public void pistasReservadasHoy(DefaultTableModel modelo) {
 		return textosClases;
 		
 	}
-	
 }

@@ -23,7 +23,7 @@ import hotel.Cliente;
 public class VentanaFactura extends JFrame {
 	
 	public VentanaFactura(Cliente cliente) {
-		
+		//LEEMOS LOS DATOS DEL CLIENTE DEL FICHERO
 		ArrayList<String> nuevosDatos = new ArrayList<String>();
 		String linea = null;
 		String[] campos = null;
@@ -65,7 +65,7 @@ public class VentanaFactura extends JFrame {
     	JLabel nombre = new JLabel("    " + n);
 		JLabel apellidos = new JLabel("    " + a);
 		JLabel dni = new JLabel("    " + d);
-    	
+    	//PANEL DEL CLIENTE
     	JPanel datosCliente = new JPanel();
     	Border datosClienteBorder = BorderFactory.createTitledBorder("CLIENTE");
     	datosCliente.setBorder(datosClienteBorder);
@@ -84,7 +84,6 @@ public class VentanaFactura extends JFrame {
     	
     	JLabel cantDias = new JLabel("     " + dias);
     	JLabel habitacion = new JLabel("    " + nomHab);
-		JLabel precioHabitacion = new JLabel("    " + precHab);
 		int diasEstancia = Integer.parseInt(dias);
 		int precioHabitacion1 = Integer.parseInt(precHab);
 		int t = diasEstancia*precioHabitacion1;
@@ -96,7 +95,7 @@ public class VentanaFactura extends JFrame {
 		JLabel precioTotal = new JLabel("PRECIO TOTAL");
 		JLabel hab = new JLabel("HABITACION");
 		JLabel di = new JLabel("DIAS");
-		
+		//PANEL DE LA HABITACION
 		JPanel datosHabitacion = new JPanel();
     	Border datosHabitacionBorder = BorderFactory.createTitledBorder("HABITACION");
     	datosHabitacion.setBorder(datosHabitacionBorder);
@@ -143,7 +142,7 @@ public class VentanaFactura extends JFrame {
 		int pdonga = 0;
 		int pmenudeldiahotel = 0;
 		int pbuffethotel = 0;
-		
+		//RECORREMOS EL ARRAY DE COMIDA PARA CALCULAR CUANTAS QUIERE DE CADA ALIMENTO
 		for(int i = 0; i < comida.size(); i++) {
 			if(comida.get(i).equals("MCDONALDS")) {
 				mcdonalds += 1;
@@ -179,7 +178,7 @@ public class VentanaFactura extends JFrame {
 		int psalesminerales = 0;
 		int pmasajepiedras = 0;
 		int ptratamientoestetico = 0;
-		
+		//RECORREMOS EL ARRAY DE SPA PARA CALCULAR CUANTAS SESIONES QUIERE
 		for(int i = 0; i < spa.size(); i++) {
 			if(spa.get(i).equals("MASAJE FACIAL")) {
 				masajefacial += 1;
@@ -215,7 +214,7 @@ public class VentanaFactura extends JFrame {
 		int pdos = 0;
 		int ptres = 0;
 		int ptodos = 0;
-		
+		//RECORREMOS EL ARRAY DEL MINIBAR PARA CALCULAR CUANTAS BOTELLAS QUIERE
 		for(int i = 0; i < miniBar.size(); i++) {
 			if(miniBar.get(i).equals("VODKA")) {
 				vodka += 1;
@@ -249,7 +248,7 @@ public class VentanaFactura extends JFrame {
 		int pconvencionequipada = 0;
 		int pjuntaequipada = 0;
 		int ppetitcomiteequipada = 0;
-		
+		//RECORREMOS EL ARRAY DE SALAREUNION PARA CALCULAR CUANTAS SALAS QUIERE
 		for(int i = 0; i < salaReunion.size(); i++) {
 			if(salaReunion.get(i).equals("SALA CONVENCION")) {
 				convencion += 1;
@@ -283,7 +282,7 @@ public class VentanaFactura extends JFrame {
 		int pclasenatacion = 0;
 		int pclasebaloncesto = 0;
 		int pclasefutbolsala = 0;
-		
+		//RECORREMOS EL ARRAY DE DEPORTE PARA CALCULAR CUANTAS PISTAS/CLASES QUIERE
 		for(int i = 0; i < deporte.size(); i++) {
 			if(deporte.get(i).equals("PADDLE1") || deporte.get(i).equals("PADDLE2") || deporte.get(i).equals("PADDLE3") || deporte.get(i).equals("PADDLE4")) {
 				paddle += 1;
@@ -303,7 +302,7 @@ public class VentanaFactura extends JFrame {
 				clasefutbolsala += 1;
 			}
 		}
-		
+		//RECORREMOS EL HASHMAP PARA METER EN CADA LUGAR EL PRECIO CORRESPONDIENTE
 		for (Entry<String, Integer> entry : hashmap.entrySet()) {
             if(entry.getKey().equals("MASAJE FACIAL") || entry.getKey().equals("MASAJE CORPORAL") || entry.getKey().equals("MASAJE TOTAL") || entry.getKey().equals("JACUZZI") || entry.getKey().equals("SALES MINERALES") || entry.getKey().equals("MASAJE PIEDRAS") || entry.getKey().equals("TRATAMIENTO ESTÉTICO")) {
             	if(entry.getKey().equals("MASAJE FACIAL")) {
@@ -391,7 +390,7 @@ public class VentanaFactura extends JFrame {
     			}
             }
         }
-		
+		//CALCULAMOS EL PRECIO TOTAL
 		int precComida = mcdonalds*pmcdonalds + burgerking*pburgerking + fostershollywood*pfostershollywood + pomodoro*ppomodoro + foodoo*pfoodoo + donga*pdonga + menudeldiahotel*pmenudeldiahotel + buffethotel*pbuffethotel;
 		int precDeporte = paddle*ppaddle + natacion*pnatacion + baloncesto*pbaloncesto + futbolsala*pfutbolsala + clasepaddle*pclasepaddle + clasenatacion*pclasenatacion + clasebaloncesto*pclasebaloncesto + clasefutbolsala*pclasefutbolsala;
 		int precMiniBar = vodka*pvodka + ginebra*pginebra + whiskey*pwhiskey + tequila*ptequila + ron*pron + dos*pdos + tres*ptres + todos*ptodos;
@@ -415,7 +414,7 @@ public class VentanaFactura extends JFrame {
         JLabel pMiniBar = new JLabel("" + precMiniBar);
         JLabel pSalaReunion = new JLabel("" + precSalaReunion);
         JLabel pSpa = new JLabel("" + precSpa);
-        
+        //PANEL DE SERVICIOS
     	JPanel datosServiciosExtra = new JPanel();
     	Border datosServiciosExtraBorder = BorderFactory.createTitledBorder("SERVICIOS");
     	datosServiciosExtra.setBorder(datosServiciosExtraBorder);
@@ -872,19 +871,32 @@ public class VentanaFactura extends JFrame {
 		JScrollPane scroll = new JScrollPane(datosServiciosExtra);
 		
     	JPanel main = new JPanel();
-    	main.setLayout(new BoxLayout(main, BoxLayout.Y_AXIS));
-		main.add(datosCliente);
-		main.add(datosHabitacion);
-		main.add(scroll);
-		main.add(total);
-		main.add(salir);	
-
-		add(main);
+    	//EN CASO DE QUE NO HAYA COGIDO SERVICIOS EXTRAS, NO SE LOS MOSTRAREMOS
+		if(comida.isEmpty() && deporte.isEmpty() && miniBar.isEmpty() && salaReunion.isEmpty() && spa.isEmpty()) {
+			main.setLayout(new BoxLayout(main, BoxLayout.Y_AXIS));
+			main.add(datosCliente);
+			main.add(datosHabitacion);
+			main.add(total);
+			main.add(salir);	
+			add(main);
+			setDefaultCloseOperation(EXIT_ON_CLOSE);
+			setTitle("Factura");
+			pack();
+			setVisible(true);
+		}else {
+			main.setLayout(new BoxLayout(main, BoxLayout.Y_AXIS));
+			main.add(datosCliente);
+			main.add(datosHabitacion);
+			main.add(scroll);
+			main.add(total);
+			main.add(salir);	
+			add(main);
+			setDefaultCloseOperation(EXIT_ON_CLOSE);
+			setTitle("Factura");
+			setSize(500, 600);
+			setVisible(true);
+		}
 		
-		setDefaultCloseOperation(EXIT_ON_CLOSE);
-		setTitle("Factura");
-		setSize(500, 600);
-		setVisible(true);
 	}
 		
 }

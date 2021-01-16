@@ -32,7 +32,6 @@ public class VentanaServicios extends JFrame {
 	JRadioButton spa, buffet, deportes, miniBar, salaReunion, sinServicioExtra;
 	ButtonGroup bg;
 	JButton contratar;
-	BD bd;
 	
 	public VentanaServicios(Cliente cliente) {
 		
@@ -54,43 +53,6 @@ public class VentanaServicios extends JFrame {
 		bg.add(salaReunion);
 		bg.add(sinServicioExtra);
 		
-		ArrayList<String> nuevosDatos = new ArrayList<String>();
-		String linea = null;
-		String[] campos = null;
-		String fechaEntrada = null;
-		String fechaSalida = null;
-		String tipo = null;
-		String numero = null;
-    	
-    	try {
-			Scanner sc1 = new Scanner(new FileInputStream("baseDeDatos"));
-			
-			while(sc1.hasNext()) {
-				linea = sc1.nextLine();
-				campos = linea.split(";");
-				nuevosDatos.add(linea);
-				fechaEntrada = campos[0];
-				fechaSalida = campos[1];
-				tipo = campos[2];
-				numero = campos[3];
-			}
-			
-		}catch(FileNotFoundException e1) {
-			System.err.println("ERROR");
-		}finally{
-			//borrar fichero
-
-		}
-		
-    	bd = new BD();
-    	try {
-			bd.connect();
-		} catch (BDException e1) {
-			// TODO Auto-generated catch block
-			e1.printStackTrace();
-		}
-    	bd.servicio(fechaEntrada, fechaSalida, tipo, numero, cliente);
-    	
 		contratar = new JButton("CONTINUAR");
 		
 		contratar.addActionListener(new ActionListener() {
@@ -126,7 +88,7 @@ public class VentanaServicios extends JFrame {
 		add(contratar);
 		
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
-		setTitle("Registro del cliente");
+		setTitle("Servicio");
 		setSize(800, 200);
 		setVisible(true);
 		

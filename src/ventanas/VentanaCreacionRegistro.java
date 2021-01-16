@@ -12,6 +12,7 @@ import java.util.*;
 import javax.swing.*;
 
 import hotel.BD;
+import hotel.BDException;
 import hotel.Cliente;
 
 public class VentanaCreacionRegistro extends JFrame{
@@ -40,7 +41,12 @@ public class VentanaCreacionRegistro extends JFrame{
 		t = new JTextField();
 		continuar = new JButton("CONTINUAR");
 		bd = new BD();
-		
+		try {
+			bd.connect();
+		} catch (BDException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
 		continuar.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {

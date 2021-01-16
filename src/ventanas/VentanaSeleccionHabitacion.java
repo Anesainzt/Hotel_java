@@ -77,6 +77,7 @@ public class VentanaSeleccionHabitacion extends JFrame{
 					public void actionPerformed(ActionEvent arg0) {
 						//ESCRIBIMOS EL NUMERO DE HABITACION EN EL FICHERO
 						bd.escribirFichero("baseDeDatos", fechaEntrada + ";" + fechaSalida + ";" + tipo + ";" + bu.getText());
+						bd.servicio(fechaEntrada, fechaSalida, tipo, bu.getText(), cliente);
 						VentanaServicios vs = new VentanaServicios(cliente);
 						dispose();
 					}

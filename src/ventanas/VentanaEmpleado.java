@@ -108,6 +108,7 @@ public class VentanaEmpleado extends JFrame{
     	nomina.addActionListener(new ActionListener() {
     		@Override
     		public void actionPerformed(ActionEvent e) {
+    			VentanaMapa vm = new VentanaMapa("/imagen/Nomina.png", empleado);
     			dispose();
     		}
     	});
@@ -116,7 +117,14 @@ public class VentanaEmpleado extends JFrame{
     	justificante.addActionListener(new ActionListener() {
     		@Override
     		public void actionPerformed(ActionEvent e) {
-    			dispose();
+    			if (Desktop.isDesktopSupported()) {
+				    try {
+				        File myFile = new File("JustificanteEnfermedad.pdf");
+				        Desktop.getDesktop().open(myFile);
+				    } catch (IOException ex) {
+				        // no application registered for PDFs
+				    }
+				}
     		}
     	});
     	

@@ -1,1 +1,1 @@
-alex;pozas;84736261P;INDIVIDUAL;80;5
+alex;pozas;84736261P;DOBLE;100;1

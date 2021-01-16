@@ -4,11 +4,8 @@ import java.awt.Color;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.io.BufferedWriter;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
-import java.io.FileWriter;
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map.Entry;
@@ -123,6 +120,10 @@ public class VentanaFactura extends JFrame {
 		ArrayList<String> salaReunion = new ArrayList<String>();
 		ArrayList<String> spa = new ArrayList<String>();
 		comida = cliente.getComida();
+		deporte = cliente.getDeporte();
+		miniBar = cliente.getMiniBar();
+		salaReunion = cliente.getSalaReunion();
+		spa = cliente.getSpa();
 		
 		int mcdonalds = 0;
 		int burgerking = 0;
@@ -162,9 +163,57 @@ public class VentanaFactura extends JFrame {
 			}
 		}
 		
+		int masajefacial = 0;
+		int masajecorporal = 0;
+		int masajetotal = 0;
+		int jacuzzi = 0;
+		int salesminerales = 0;
+		int masajepiedras = 0;
+		int tratamientoestetico = 0;
+		
+		int pmasajefacial = 0;
+		int pmasajecorporal = 0;
+		int pmasajetotal = 0;
+		int pjacuzzi = 0;
+		int psalesminerales = 0;
+		int pmasajepiedras = 0;
+		int ptratamientoestetico = 0;
+		
+		for(int i = 0; i < spa.size(); i++) {
+			if(spa.get(i).equals("MASAJE FACIAL")) {
+				masajefacial += 1;
+			}else if(spa.get(i).equals("MASAJE CORPORAL")) {
+				masajecorporal += 1;
+			}else if(spa.get(i).equals("MASAJE TOTAL")) {
+				masajetotal += 1;
+			}else if(spa.get(i).equals("JACUZZI")) {
+				jacuzzi += 1;
+			}else if(spa.get(i).equals("SALES MINERALES")) {
+				salesminerales += 1;
+			}else if(spa.get(i).equals("MASAJE PIEDRAS")) {
+				masajepiedras += 1;
+			}else {
+				tratamientoestetico += 1;
+			}
+		}
+		
 		for (Entry<String, Integer> entry : hashmap.entrySet()) {
             if(entry.getKey().equals("MASAJE FACIAL") || entry.getKey().equals("MASAJE CORPORAL") || entry.getKey().equals("MASAJE TOTAL") || entry.getKey().equals("JACUZZI") || entry.getKey().equals("SALES MINERALES") || entry.getKey().equals("MASAJE PIEDRAS") || entry.getKey().equals("TRATAMIENTO ESTÉTICO")) {
-            	
+            	if(entry.getKey().equals("MASAJE FACIAL")) {
+            		pmasajefacial = entry.getValue();
+            	}else if(entry.getKey().equals("MASAJE CORPORAL")) {
+            		pmasajecorporal = entry.getValue();
+            	}else if(entry.getKey().equals("MASAJE TOTAL")) {
+            		pmasajetotal = entry.getValue();
+            	}else if(entry.getKey().equals("JACUZZI")) {
+            		pjacuzzi = entry.getValue();
+            	}else if(entry.getKey().equals("SALES MINERALES")) {
+            		psalesminerales = entry.getValue();
+            	}else if(entry.getKey().equals("MASAJE PIEDRAS")) {
+            		pmasajepiedras = entry.getValue();
+            	}else {
+            		ptratamientoestetico = entry.getValue();
+            	}
             }else if(entry.getKey().equals("SALA CONVENCION") || entry.getKey().equals("SALA JUNTA") || entry.getKey().equals("SALA PETIT COMITÉ") || entry.getKey().equals("SALA CONVENCION EQUIPADA") || entry.getKey().equals("SALA JUNTA EQUIPADA") || entry.getKey().equals("SALA PETIT COMITÉ EQUIPADA")) {
             	
             }else if(entry.getKey().equals("VODKA") || entry.getKey().equals("GINEBRA") || entry.getKey().equals("WHISKEY") || entry.getKey().equals("TEQUILA") || entry.getKey().equals("RON") || entry.getKey().equals("ELECCION DE DOS") || entry.getKey().equals("ELECCION DE TRES") || entry.getKey().equals("TODOS")) {
@@ -191,12 +240,12 @@ public class VentanaFactura extends JFrame {
             	
             }
         }
-    	
+		
 		int precComida = mcdonalds*pmcdonalds + burgerking*pburgerking + fostershollywood*pfostershollywood + pomodoro*ppomodoro + foodoo*pfoodoo + donga*pdonga + menudeldiahotel*pmenudeldiahotel + buffethotel*pbuffethotel;
 		int precDeporte = 0;
 		int precMiniBar = 0;
 		int precSalaReunion = 0;
-		int precSpa = 0;
+		int precSpa = masajefacial*pmasajefacial + masajecorporal*pmasajecorporal + masajetotal*pmasajetotal + jacuzzi*pjacuzzi + salesminerales*psalesminerales + masajepiedras*pmasajepiedras + tratamientoestetico*ptratamientoestetico;
 		
         JLabel cantidadComida = new JLabel("" + comida.size());
         JLabel cantidadDeporte = new JLabel("" + deporte.size());
@@ -220,7 +269,7 @@ public class VentanaFactura extends JFrame {
     	Border datosServiciosExtraBorder = BorderFactory.createTitledBorder("SERVICIOS");
     	datosServiciosExtra.setBorder(datosServiciosExtraBorder);
     	datosServiciosExtra.setBackground(Color.WHITE);
-    	datosServiciosExtra.setLayout(new GridLayout(14, 3));
+    	datosServiciosExtra.setLayout(new GridLayout(21, 3));
     	
     	datosServiciosExtra.add(cantidad);
     	datosServiciosExtra.add(productos);
@@ -314,9 +363,9 @@ public class VentanaFactura extends JFrame {
     	JLabel precBuffet = new JLabel("" + buffethotel*110);
     	precBuffet.setForeground(Color.GRAY);
     	
-    	datosServiciosExtra.add(cantMcDonalds);
-    	datosServiciosExtra.add(nomMcDonalds);
-    	datosServiciosExtra.add(precMcDonalds);
+    	datosServiciosExtra.add(cantBuffet);
+    	datosServiciosExtra.add(nomBuffet);
+    	datosServiciosExtra.add(precBuffet);
     	
     	datosServiciosExtra.add(cantidadDeporte);
     	datosServiciosExtra.add(descripcionDeporte);
@@ -333,6 +382,83 @@ public class VentanaFactura extends JFrame {
     	datosServiciosExtra.add(cantidadSpa);
     	datosServiciosExtra.add(descripcionSpa);
     	datosServiciosExtra.add(pSpa);
+    	
+    	JLabel cantMasajeFacial = new JLabel("" + masajefacial);
+    	cantMasajeFacial.setForeground(Color.GRAY);
+    	JLabel nomMasajeFacial = new JLabel("Masaje facial");
+    	nomMasajeFacial.setForeground(Color.GRAY);
+    	JLabel precMasajeFacial = new JLabel("" + masajefacial*50);
+    	precMasajeFacial.setForeground(Color.GRAY);
+    	
+    	datosServiciosExtra.add(cantMasajeFacial);
+    	datosServiciosExtra.add(nomMasajeFacial);
+    	datosServiciosExtra.add(precMasajeFacial);
+    	
+    	JLabel cantMasajeCorporal = new JLabel("" + masajecorporal);
+    	cantMasajeCorporal.setForeground(Color.GRAY);
+    	JLabel nomMasajeCorporal = new JLabel("Masaje corporal");
+    	nomMasajeCorporal.setForeground(Color.GRAY);
+    	JLabel precMasajeCorporal = new JLabel("" + masajecorporal*90);
+    	precMasajeCorporal.setForeground(Color.GRAY);
+    	
+    	datosServiciosExtra.add(cantMasajeCorporal);
+    	datosServiciosExtra.add(nomMasajeCorporal);
+    	datosServiciosExtra.add(precMasajeCorporal);
+    	
+    	JLabel cantMasajeTotal = new JLabel("" + masajetotal);
+    	cantMasajeTotal.setForeground(Color.GRAY);
+    	JLabel nomMasajeTotal = new JLabel("Masaje total");
+    	nomMasajeTotal.setForeground(Color.GRAY);
+    	JLabel precMasajeTotal = new JLabel("" + masajetotal*130);
+    	precMasajeTotal.setForeground(Color.GRAY);
+    	
+    	datosServiciosExtra.add(cantMasajeTotal);
+    	datosServiciosExtra.add(nomMasajeTotal);
+    	datosServiciosExtra.add(precMasajeTotal);
+		
+		JLabel cantJacuzzi = new JLabel("" + jacuzzi);
+    	cantJacuzzi.setForeground(Color.GRAY);
+    	JLabel nomJacuzzi = new JLabel("Jacuzzi");
+    	nomJacuzzi.setForeground(Color.GRAY);
+    	JLabel precJacuzzi = new JLabel("" + jacuzzi*150);
+    	precJacuzzi.setForeground(Color.GRAY);
+    	
+    	datosServiciosExtra.add(cantJacuzzi);
+    	datosServiciosExtra.add(nomJacuzzi);
+    	datosServiciosExtra.add(precJacuzzi);
+		
+    	JLabel cantSalesMinerales = new JLabel("" + salesminerales);
+    	cantSalesMinerales.setForeground(Color.GRAY);
+    	JLabel nomSalesMinerales = new JLabel("Sales Minerales");
+    	nomSalesMinerales.setForeground(Color.GRAY);
+    	JLabel precSalesMinerales = new JLabel("" + salesminerales*60);
+    	precSalesMinerales.setForeground(Color.GRAY);
+    	
+    	datosServiciosExtra.add(cantSalesMinerales);
+    	datosServiciosExtra.add(nomSalesMinerales);
+    	datosServiciosExtra.add(precSalesMinerales);
+    	
+    	JLabel cantMasajePiedras = new JLabel("" + masajepiedras);
+    	cantMasajePiedras.setForeground(Color.GRAY);
+    	JLabel nomMasajePiedras = new JLabel("Masaje Piedras");
+    	nomMasajePiedras.setForeground(Color.GRAY);
+    	JLabel precMasajePiedras = new JLabel("" + masajepiedras*80);
+    	precMasajePiedras.setForeground(Color.GRAY);
+    	
+    	datosServiciosExtra.add(cantMasajePiedras);
+    	datosServiciosExtra.add(nomMasajePiedras);
+    	datosServiciosExtra.add(precMasajePiedras);
+    	
+    	JLabel cantTratamientoEstetico = new JLabel("" + tratamientoestetico);
+    	cantTratamientoEstetico.setForeground(Color.GRAY);
+    	JLabel nomTratamientoEstetico = new JLabel("Tratamiento estetico");
+    	nomTratamientoEstetico.setForeground(Color.GRAY);
+    	JLabel precTratamientoEstetico = new JLabel("" + tratamientoestetico*90);
+    	precTratamientoEstetico.setForeground(Color.GRAY);
+    	
+    	datosServiciosExtra.add(cantTratamientoEstetico);
+    	datosServiciosExtra.add(nomTratamientoEstetico);
+    	datosServiciosExtra.add(precTratamientoEstetico);
     	
 		int precioSalida = precioHabitacion1* diasEstancia + precComida + precDeporte + precMiniBar + precSalaReunion + precSpa;
     	JLabel total = new JLabel("PRECIO TOTAL: " + precioSalida);

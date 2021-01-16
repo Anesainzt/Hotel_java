@@ -14,8 +14,12 @@ public class Cliente{
 	protected static String newPassword;
 	protected static HashMap<String, Integer> hashmap = new HashMap<String, Integer>();
 	protected static ArrayList<String> comida = new ArrayList<String>();
+	protected static ArrayList<String> deporte = new ArrayList<String>();
+	protected static ArrayList<String> miniBar = new ArrayList<String>();
+	protected static ArrayList<String> salaReunion = new ArrayList<String>();
+	protected static ArrayList<String> spa = new ArrayList<String>();
 	
-	public Cliente(String nombre, String apellido, String dni, String fecha_ncto, String tarjeta, String login, String password, String newPassword, HashMap<String, Integer> hashmap, ArrayList<String> comida) {
+	public Cliente(String nombre, String apellido, String dni, String fecha_ncto, String tarjeta, String login, String password, String newPassword, HashMap<String, Integer> hashmap, ArrayList<String> comida, ArrayList<String> deporte, ArrayList<String> miniBar, ArrayList<String> salaReunion, ArrayList<String> spa) {
 		
 		Cliente.nombre = nombre;
 		Cliente.apellido = apellido;
@@ -27,6 +31,10 @@ public class Cliente{
 		Cliente.newPassword = newPassword;
 		Cliente.hashmap = hashmap;
 		Cliente.comida = comida;
+		Cliente.deporte = deporte;
+		Cliente.miniBar = miniBar;
+		Cliente.salaReunion = salaReunion;
+		Cliente.spa = spa;
 	}
 
 
@@ -42,6 +50,10 @@ public class Cliente{
 		Cliente.newPassword = "";
 		Cliente.hashmap = new HashMap <String, Integer>();
 		Cliente.comida = new ArrayList <String>();
+		Cliente.deporte = new ArrayList <String>();
+		Cliente.miniBar = new ArrayList <String>();
+		Cliente.salaReunion = new ArrayList <String>();
+		Cliente.spa = new ArrayList <String>();
 	}
 	
 
@@ -125,4 +137,36 @@ public class Cliente{
 		Cliente.comida = comida;
 	}
 		
+	public static ArrayList<String> getDeporte() {
+		return deporte;
+	}
+	
+	public static void setDeporte(ArrayList<String> deporte) {
+		Cliente.deporte = deporte;
+	}
+	
+	public static ArrayList<String> getMiniBar() {
+		return miniBar;
+	}
+	
+	public static void setMiniBar(ArrayList<String> miniBar) {
+		Cliente.miniBar = miniBar;
+	}
+	
+	public static ArrayList<String> getSalaReunion() {
+		return salaReunion;
+	}
+	
+	public static void setSalaReunion(ArrayList<String> salaReunion) {
+		Cliente.salaReunion = salaReunion;
+	}
+	
+	public static ArrayList<String> getSpa() {
+		return spa;
+	}
+	
+	public static void setSpa(ArrayList<String> spa) {
+		Cliente.spa = spa;
+	}
+	
 }

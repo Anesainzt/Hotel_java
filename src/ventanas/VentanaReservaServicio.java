@@ -38,10 +38,32 @@ public class VentanaReservaServicio extends JFrame{
 			e2.printStackTrace();
 		}
 		
-		ArrayList<String> comida = new ArrayList<String>();
-		comida = cliente.getComida();
-		comida.add(tipo);
-		cliente.setComida(comida);
+		if(tipo.equals("MASAJE FACIAL") || tipo.equals("MASAJE CORPORAL") || tipo.equals("MASAJE TOTAL") || tipo.equals("JACUZZI") || tipo.equals("SALES MINERALES") || tipo.equals("MASAJE PIEDRAS") || tipo.equals("TRATAMIENTO ESTÉTICO")) {
+			ArrayList<String> spa = new ArrayList<String>();
+			spa = cliente.getSpa();
+			spa.add(tipo);
+			cliente.setSpa(spa);
+        }else if(tipo.equals("SALA CONVENCION") || tipo.equals("SALA JUNTA") || tipo.equals("SALA PETIT COMITÉ") || tipo.equals("SALA CONVENCION EQUIPADA") || tipo.equals("SALA JUNTA EQUIPADA") || tipo.equals("SALA PETIT COMITÉ EQUIPADA")) {
+        	ArrayList<String> salaReunion = new ArrayList<String>();
+    		salaReunion = cliente.getSalaReunion();
+    		salaReunion.add(tipo);
+    		cliente.setSalaReunion(salaReunion);
+        }else if(tipo.equals("VODKA") || tipo.equals("GINEBRA") || tipo.equals("WHISKEY") || tipo.equals("TEQUILA") || tipo.equals("RON") || tipo.equals("ELECCION DE DOS") || tipo.equals("ELECCION DE TRES") || tipo.equals("TODOS")) {
+        	ArrayList<String> miniBar = new ArrayList<String>();
+    		miniBar = cliente.getMiniBar();
+    		miniBar.add(tipo);
+    		cliente.setMiniBar(miniBar);
+        }else if(tipo.equals("MCDONALDS") || tipo.equals("BURGER KING") || tipo.equals("FOSTERS HOLLYWOOD") || tipo.equals("POMODORO") || tipo.equals("FOODOO") || tipo.equals("DONGA") || tipo.equals("MENU DEL DIA HOTEL") || tipo.equals("BUFFET HOTEL")) {
+        	ArrayList<String> comida = new ArrayList<String>();
+    		comida = cliente.getComida();
+    		comida.add(tipo);
+    		cliente.setComida(comida);
+        }else{
+        	ArrayList<String> deporte = new ArrayList<String>();
+    		deporte = cliente.getDeporte();
+    		deporte.add(tipo);
+    		cliente.setDeporte(deporte);
+        }
 		
 		HashMap<String, Integer> hashmap = new HashMap<String, Integer>();
 		hashmap = cliente.getHashmap();

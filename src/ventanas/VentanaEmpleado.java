@@ -75,6 +75,14 @@ public class VentanaEmpleado extends JFrame{
 	
 	public VentanaEmpleado(Empleado empleado) {
 		
+		bd = new BD();
+		try {
+			bd.connect();
+		} catch (BDException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+		
 		JPanel documentos = new JPanel();
     	Border documentosBorder = BorderFactory.createTitledBorder("DOCUMENTOS");
     	documentos.setBorder(documentosBorder);
@@ -164,6 +172,12 @@ public class VentanaEmpleado extends JFrame{
     	trabajo.setBorder(trabajoBorder);
     	
     	String departamento = empleado.getDepartamento();
+    	
+    	if (departamento.contains("deporte")) {
+			departamento = "deporte";
+		} else if (departamento.contains("atencion")) {
+			departamento = "atencionCliente";
+		}
     	
     	dpt = DepartamentoTrabajo.valueOf(departamento);
     	switch(dpt) {
@@ -369,13 +383,7 @@ public class VentanaEmpleado extends JFrame{
     		ArrayList<Integer> numHab = new ArrayList<Integer>();
     		limpiezaHabitacion = new JTable();
     		//habitaciones que esten ocupadas hoy
-    		bd = new BD();
-    		try {
-				bd.connect();
-			} catch (BDException e1) {
-				// TODO Auto-generated catch block
-				e1.printStackTrace();
-			}
+    		
     		numHab = bd.updateOcupadasHoy();
     		
     		modelo = (DefaultTableModel)limpiezaHabitacion.getModel();

@@ -424,6 +424,7 @@ public class VentanaEmpleado extends JFrame{
 				@Override
 				public void actionPerformed(ActionEvent arg0) {
 					VentanaMapa vm = new VentanaMapa("/imagen/primeraPlanta.jpg", empleado);
+					dispose();
 				}
 			});
     		segundaPlanta.addActionListener(new ActionListener() {
@@ -431,6 +432,7 @@ public class VentanaEmpleado extends JFrame{
     			@Override
     			public void actionPerformed(ActionEvent arg0) {
     				VentanaMapa vm = new VentanaMapa("/imagen/segundaPlanta.jpg", empleado);
+    				dispose();
     			}
     		});
     		terceraPlanta.addActionListener(new ActionListener() {
@@ -438,6 +440,7 @@ public class VentanaEmpleado extends JFrame{
     			@Override
     			public void actionPerformed(ActionEvent arg0) {
     				VentanaMapa vm = new VentanaMapa("/imagen/terceraPlanta.jpg", empleado);
+    				dispose();
     			}
     		});
     		cuartaPlanta.addActionListener(new ActionListener() {
@@ -445,6 +448,7 @@ public class VentanaEmpleado extends JFrame{
     			@Override
     			public void actionPerformed(ActionEvent arg0) {
     				VentanaMapa vm = new VentanaMapa("/imagen/cuartaPlanta.jpg", empleado);
+    				dispose();
     			}
     		});
     		quintaPlanta.addActionListener(new ActionListener() {
@@ -452,6 +456,7 @@ public class VentanaEmpleado extends JFrame{
     			@Override
     			public void actionPerformed(ActionEvent arg0) {
     				VentanaMapa vm = new VentanaMapa("/imagen/quintaPlanta.jpg", empleado);
+    				dispose();
     			}
     		});
     		sextaPlanta.addActionListener(new ActionListener() {
@@ -459,6 +464,7 @@ public class VentanaEmpleado extends JFrame{
     			@Override
     			public void actionPerformed(ActionEvent arg0) {
     				VentanaMapa vm = new VentanaMapa("/imagen/sextaPlanta.jpg", empleado);
+    				dispose();
     			}
     		});
     		

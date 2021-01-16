@@ -22,6 +22,17 @@ public class VentanaContinuacion extends JFrame{
 	JButton elegirNuevoServicio;
 	JButton continuar;
 	
+	public void limpiezaDeFicheros(String fichero) {
+		BufferedWriter bw;
+		try {
+			bw = new BufferedWriter(new FileWriter(fichero));
+			bw.write("");
+			bw.close();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+	
 	public VentanaContinuacion(Cliente cliente) {
 		bd = new BD();
 		try {
@@ -38,16 +49,11 @@ public class VentanaContinuacion extends JFrame{
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				
-				BufferedWriter bw;
-				try {
-					bw = new BufferedWriter(new FileWriter("horaPista"));
-					bw.write("");
-					bw.close();
-				} catch (IOException e1) {
-					e1.printStackTrace();
-				}
+				limpiezaDeFicheros("horaPista");
+				limpiezaDeFicheros("horaSpa");
 				
 				bd.restartPistas();
+				bd.restartSpa();
 				
 				VentanaServicios vs = new VentanaServicios(cliente);
 				dispose();

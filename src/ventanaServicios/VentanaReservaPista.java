@@ -1,4 +1,4 @@
-package ventanas;
+package ventanaServicios;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
@@ -17,7 +17,8 @@ import javax.swing.border.Border;
 import hotel.BD;
 import hotel.BDException;
 import hotel.Cliente;
-import ventanaServicios.VentanaDeporte;
+import ventanas.VentanaContinuacion;
+import ventanas.VentanaReservaServicio;
 
 public class VentanaReservaPista extends JFrame{
 
@@ -39,7 +40,7 @@ public class VentanaReservaPista extends JFrame{
 			e1.printStackTrace();
 		}
 		
-		String hora = bd.getHoraReserva();
+		String hora = bd.getHoraReserva("horaPista");
 		
 		bd.eleccionDePistasLibres(fecha, hora, tipo);
 		
@@ -113,6 +114,7 @@ public class VentanaReservaPista extends JFrame{
     		public void actionPerformed(ActionEvent arg0) {
     			
     			cliente.getHashmap().remove(tipo);
+    			cliente.getDeporte().remove(cliente.getDeporte().lastIndexOf(tipo));
     			
     			VentanaContinuacion vc = new VentanaContinuacion(cliente);
     			

@@ -25,8 +25,8 @@ import javax.swing.table.DefaultTableModel;
 
 import com.toedter.calendar.JCalendar;
 
+import ventanaServicios.VentanaReservaPista;
 import ventanas.VentanaContinuacion;
-import ventanas.VentanaReservaPista;
 
 public class BD extends JFrame{
 	private Connection conn = null; 
@@ -452,13 +452,13 @@ public void pistasReservadasHoy(DefaultTableModel modelo) {
 		return listaHabitacion;
 	}
 	
-	public String getHoraReserva() {
+	public String getHoraReserva(String fichero) {
 		
     	String linea = null;
 		Scanner sc1 = null;
 		String hora = "";
 		try {
-			sc1 = new Scanner(new FileInputStream("horaPista"));
+			sc1 = new Scanner(new FileInputStream(fichero));
 
 			while(sc1.hasNext()) {
 				linea = sc1.nextLine();
@@ -472,7 +472,7 @@ public void pistasReservadasHoy(DefaultTableModel modelo) {
 	public void eleccionDePistasLibres(String fecha, String hora, String tipo){
 		
 		try (Statement stmt = (Statement) conn.createStatement()){
-			ResultSet rs = stmt.executeQuery("SELECT num_pista, tipo FROM reservapista WHERE fechaReserva = '"+ fecha +"' AND hora = '"+ hora +"' AND libre = 1");
+			ResultSet rs = stmt.executeQuery("SELECT num_pista, tipo FROM reservapista WHERE fechaReserva = '"+ fecha +"' AND tipo = '"+ tipo +"' AND hora = '"+ hora +"' AND libre = 1");
 			while(rs.next()) {
 				int numero = rs.getInt("num_pista");
 				String tipoPista = rs.getString("tipo");
@@ -500,8 +500,10 @@ public void pistasReservadasHoy(DefaultTableModel modelo) {
 			t = "NATACION";
 		}else if(tipo.contains("BALONCESTO") == true){
 			t = "BALONCESTO";
-		}else {
+		}else if(tipo.contains("FUTBOL-SALA") == true){
 			t = "FUTBOL-SALA";
+		}else {
+			t = tipo;
 		}
 		try (Statement stmt = (Statement) conn.createStatement()){
 			
@@ -509,6 +511,34 @@ public void pistasReservadasHoy(DefaultTableModel modelo) {
 			
 			while(rs.next()) {
 				int numero = rs.getInt("num_pista");
+				int libre = rs.getInt("libre");
+				
+				boton = new JButton("" + numero);
+				if (libre == 0) {
+					boton.setBackground(Color.GREEN);
+					boton.setEnabled(true);
+					
+				} else {
+					boton.setBackground(Color.RED);
+					boton.setEnabled(false);	
+				}
+				listaBotones.add(boton);
+			}	
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return listaBotones;
+	}
+	
+	public List<JButton> botonesReservarSpa(String tipo){
+		List<JButton> listaBotones = new ArrayList<JButton>();
+		JButton boton;
+		try (Statement stmt = (Statement) conn.createStatement()){
+			
+			ResultSet rs = stmt.executeQuery("SELECT num_spa, libre FROM spa WHERE tipo = '"+ tipo +"'");
+			
+			while(rs.next()) {
+				int numero = rs.getInt("num_spa");
 				int libre = rs.getInt("libre");
 				
 				boton = new JButton("" + numero);
@@ -536,8 +566,10 @@ public void pistasReservadasHoy(DefaultTableModel modelo) {
 			t = "NATACION";
 		}else if(tipo.contains("BALONCESTO") == true){
 			t = "BALONCESTO";
-		}else {
+		}else if(tipo.contains("FUTBOL-SALA") == true){
 			t = "FUTBOL-SALA";
+		}else {
+			t = tipo;
 		}
 		try {
 			PreparedStatement pstmt = conn.prepareStatement("INSERT INTO reservapista VALUES(?, ?, ?, ?, ?, ?);");
@@ -613,6 +645,37 @@ public void pistasReservadasHoy(DefaultTableModel modelo) {
 				
 			}
 		}catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+	}
+	
+	public void restartSpa() {
+		try {
+			PreparedStatement pstmt = conn.prepareStatement("UPDATE spa SET libre = ?;");
+			pstmt.setInt(1, 0);
+			pstmt.execute();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+	
+	public void eleccionDeSpaLibre(String fecha, String hora, String tipo){
+		
+		try (Statement stmt = (Statement) conn.createStatement()){
+			ResultSet rs = stmt.executeQuery("SELECT num_pista, tipo FROM reservapista WHERE fechaReserva = '"+ fecha +"' AND tipo = '"+ tipo +"' AND hora = '"+ hora +"' AND libre = 1");
+			while(rs.next()) {
+				int numero = rs.getInt("num_pista");
+				String tipoPista = rs.getString("tipo");
+				
+				PreparedStatement pstmt = conn.prepareStatement("UPDATE spa SET libre = ? WHERE num_pista = ? AND tipo = ?");
+				pstmt.setInt(1, 1);
+				pstmt.setInt(2, numero);
+				pstmt.setString(3, tipoPista);
+				pstmt.execute();
+			}
+			
+		} catch (Exception e) {
 			e.printStackTrace();
 		}
 		

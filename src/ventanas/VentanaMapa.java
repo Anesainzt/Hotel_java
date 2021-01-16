@@ -55,10 +55,10 @@ public class VentanaMapa extends JFrame{
 			}
 		});
 		  emptyLabel.setPreferredSize(new Dimension(250, 100));
-		  frame.getContentPane().add(emptyLabel, BorderLayout.CENTER);
-		  frame.getContentPane().add(volver, BorderLayout.SOUTH);
-		  frame.setSize(800,  800);
-		  frame.setVisible(true);
+		  getContentPane().add(emptyLabel, BorderLayout.CENTER);
+		  getContentPane().add(volver, BorderLayout.SOUTH);
+		  setSize(800,  800);
+		  setVisible(true);
 		 
 	}
 

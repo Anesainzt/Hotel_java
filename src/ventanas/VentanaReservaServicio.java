@@ -6,6 +6,9 @@ import com.toedter.calendar.JCalendar;
 import hotel.BD;
 import hotel.BDException;
 import hotel.Cliente;
+import ventanaServicios.VentanaReservaPista;
+import ventanaServicios.VentanaReservaSpa;
+
 import java.awt.Color;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
@@ -153,10 +156,12 @@ public class VentanaReservaServicio extends JFrame{
 					dispose();
 		    	
 				} else if (tipo.contains("PADDLE") == true || tipo.contains("NATACION") == true  || tipo.contains("FUTBOL-SALA") == true || tipo.contains("BALONCESTO") == true) {
-		    		VentanaReservaPista vrp = new VentanaReservaPista(nuevo, fechaRegistro, tipo, precio);
+		    		VentanaReservaPista vrp = new VentanaReservaPista(cliente, fechaRegistro, tipo, precio);
 		    		dispose();
-				}else {
-				
+				}else if(tipo.contains("MASAJE FACIAL") == true || tipo.contains("MASAJE CORPORAL") == true || tipo.contains("MASAJE TOTAL") == true || tipo.contains("JACUZZI") == true || tipo.contains("SALES MINERALES") == true || tipo.contains("MASAJE PIEDRAS") == true || tipo.contains("TRATAMIENTO ESTÉTICO") == true) {
+					VentanaReservaSpa vrs = new VentanaReservaSpa(cliente, fechaRegistro, tipo, precio);
+		    		dispose();
+				}else{
 					VentanaContinuacion vc = new VentanaContinuacion(cliente);
 					dispose();
 				}	    	

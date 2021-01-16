@@ -1,5 +1,7 @@
 package hotel;
 
+
+
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -12,7 +14,7 @@ public class Cliente{
 	protected static String login;
 	protected static String password;
 	protected static String newPassword;
-	protected static HashMap<String, Integer> hashmap = new HashMap<String, Integer>();
+	public static HashMap<String, Integer> hashmap = new HashMap<String, Integer>();
 	protected static ArrayList<String> comida = new ArrayList<String>();
 	protected static ArrayList<String> deporte = new ArrayList<String>();
 	protected static ArrayList<String> miniBar = new ArrayList<String>();
@@ -129,7 +131,7 @@ public class Cliente{
 		Cliente.hashmap = hashmap;
 	}
 	
-	public static ArrayList<String> getComida() {
+	public ArrayList<String> getComida() {
 		return comida;
 	}
 	

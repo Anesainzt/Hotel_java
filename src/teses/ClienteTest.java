@@ -1,29 +1,68 @@
 package teses;
-
 import static org.junit.Assert.assertEquals;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 
 import org.junit.jupiter.api.Test;
 
-import hotel.BD;
-import hotel.BDException;
 import hotel.Cliente;
 
 class ClienteTest {
-	BD bd = new BD();
-
+	public HashMap<String,Integer> hash(HashMap<String,Integer> hashmap1) {
+		hashmap1.put("COMIDA", 30);
+		hashmap1.put("MASAJE CORPORAL", 90);
+		hashmap1.put("SALA PETIT COMITÉ EQUIPADA", 50);
+		hashmap1.put("ELECCION DE TRES", 140);
+		return hashmap1;
+	}
+	static HashMap<String,Integer> hashmap1 =  new HashMap<String,Integer>();
+	
+	public ArrayList<String> arraycomida( ArrayList<String> arraycomida ){
+		arraycomida.add("POMODORO");
+		return arraycomida;	
+	}
+	static ArrayList<String> arraycomida = new ArrayList<String>();
+	
+	
+	public ArrayList<String> arraydeportes( ArrayList<String> arraydeportes ){
+		arraydeportes.add("CAMPO BALONCESTO");
+		return arraydeportes;	
+	}
+	static ArrayList<String> arraydeportes = new ArrayList<String>();
+	
+	
+	public ArrayList<String> arrayminibar( ArrayList<String> arrayminibar ){
+		arrayminibar.add("RON");
+		arrayminibar.add("TEQUILA");
+		return arrayminibar;	
+	}
+	static ArrayList<String> arrayminibar = new ArrayList<String>();
+	
+	
+	public ArrayList<String> arraysalareunion( ArrayList<String> arraysalareunion ){
+		arraysalareunion.add("SALA PETIT COMITÉ EQUIPADA");
+		arraysalareunion.add("SALA PETIT COMITÉ EQUIPADA");
+		return arraysalareunion;	
+	}
+	static ArrayList<String> arraysalareunion = new ArrayList<String>();
+	
+	public ArrayList<String> arrayspa( ArrayList<String> arrayspa ){
+		arrayspa.add("JACUZZI");
+		arrayspa.add("SALES MINERALES");
+		arrayspa.add("TRATAMIENTO ESTÉTICO");
+		return arrayspa;	
+	}
+	static ArrayList<String> arrayspa = new ArrayList<String>();
+	
+	
 	Cliente c1 = new Cliente();
-	Cliente c2 = new Cliente("Alazne", "Parra", "22764839Z", "1999-03-17", "1234567890", "alazne.parra", "Armagedom", "Armagedom", null, null, null, null, null, null);
+	Cliente c2 = new Cliente("Alazne", "Parra", "22764839Z", "1999-03-17", "1234567890", "alazne.parra", "Armagedom", "Armagedom", hash(hashmap1), arraycomida(arraycomida), arraydeportes(arraydeportes), arrayminibar(arrayminibar), arraysalareunion(arraysalareunion), arrayspa(arrayspa));
 	
 	
 	@Test
 	void getNombre() {
-		try {
-			bd.connect();
-		} catch (BDException e) {
-			e.printStackTrace();
-		}
 		assertEquals("Alazne", Cliente.getNombre());
 	}
 	@Test
@@ -113,11 +152,13 @@ class ClienteTest {
 	
 	@Test 
 	void getHashMap() {
-		HashMap<String,Integer> hashmap = new HashMap<String,Integer>();
-		assertEquals(hashmap.put("COMIDA", 30), Cliente.getHashmap());
-		assertEquals(hashmap.put("MASAJE CORPORAL", 90), Cliente.getHashmap());
-		assertEquals(hashmap.put("SALA PETIT COMITÉ EQUIPADA", 50), Cliente.getHashmap());
-		assertEquals(hashmap.put("ELECCION DE TRES", 140), Cliente.getHashmap());
+		HashMap<String,Integer> hashmap =  new HashMap<String,Integer>();
+		hashmap.put("COMIDA", 30);
+		hashmap.put("MASAJE CORPORAL", 90);
+		hashmap.put("SALA PETIT COMITÉ EQUIPADA", 50);
+		hashmap.put("ELECCION DE TRES", 140);
+		assertEquals(hashmap, c2.getHashmap());
+		
 	}
 	@Test
 	void setHashMap() {
@@ -127,7 +168,199 @@ class ClienteTest {
 		hashmap.put("SALA PETIT COMITÉ EQUIPADA", 50);
 		hashmap.put("ELECCION DE TRES", 140);
 	    c1.setHashmap(c2.getHashmap());
-	    assertEquals(c1.getHashmap(), null);
+	    assertEquals(c1.getHashmap(), hashmap);
+	}
+	
+	@Test 
+	void getComida() {
+		ArrayList<String> getcomida = new ArrayList<String>();
+		getcomida.add("POMODORO");
+		List<String> lista1 = new ArrayList<String>();
+		List<String> lista2 = new ArrayList<String>();
+		for (String string : getcomida) {
+			lista1.add(string);
+		}
+		for (String string : c2.getComida()) {
+			lista2.add(string);
+		}
+		for (int i = 0; i < lista1.size(); i++) {
+			assertEquals(lista1.get(i), lista2.get(i));	
+		}
+
+	}
+	
+	@Test 
+	void setComida() {
+		ArrayList<String> setcomida = new ArrayList<String>();
+		setcomida.add("POMODORO");
+		c1.setComida(c2.getComida());
+		
+		List<String> lista1 = new ArrayList<String>();
+		List<String> lista2 = new ArrayList<String>();
+		for (String string : setcomida) {
+			lista1.add(string);
+		}
+		for (String string : c1.getComida()) {
+			lista2.add(string);
+		}
+		for (int i = 0; i < lista1.size(); i++) {
+			assertEquals(lista1.get(i), lista2.get(i));	
+		}
+		
+	}
+	
+	@Test
+	void getDeporte() {
+		ArrayList<String> getdeporte = new ArrayList<String>();
+		getdeporte.add("CAMPO BALONCESTO");
+		List<String> lista1 = new ArrayList<String>();
+		List<String> lista2 = new ArrayList<String>();
+		for (String string : getdeporte) {
+			lista1.add(string);
+		}
+		for (String string : c2.getDeporte()) {
+			lista2.add(string);
+		}
+		for (int i = 0; i < lista1.size(); i++) {
+			assertEquals(lista1.get(i), lista2.get(i));	
+		}
+
+	}
+	@Test 
+	void setDeporte() {
+		ArrayList<String> setdeporte = new ArrayList<String>();
+		setdeporte.add("CAMPO BALONCESTO");
+		c1.setDeporte(c2.getDeporte());
+		
+		List<String> lista1 = new ArrayList<String>();
+		List<String> lista2 = new ArrayList<String>();
+		for (String string : setdeporte) {
+			lista1.add(string);
+		}
+		for (String string : c1.getDeporte()) {
+			lista2.add(string);
+		}
+		for (int i = 0; i < lista1.size(); i++) {
+			assertEquals(lista1.get(i), lista2.get(i));	
+		}
+	}
+	
+	@Test
+	void getMinibar() {
+		ArrayList<String> getminibar = new ArrayList<String>();
+		getminibar.add("RON");
+		getminibar.add("TEQUILA");
+		List<String> lista1 = new ArrayList<String>();
+		List<String> lista2 = new ArrayList<String>();
+		for (String string : getminibar) {
+			lista1.add(string);
+		}
+		for (String string : c2.getMiniBar()) {
+			lista2.add(string);
+		}
+		for (int i = 0; i < lista1.size(); i++) {
+			assertEquals(lista1.get(i), lista2.get(i));	
+		}
+
+	}
+	@Test
+	void setMinibar() {
+		ArrayList<String> setminibar = new ArrayList<String>();
+		setminibar.add("RON");
+		setminibar.add("TEQUILA");
+		c1.setMiniBar(c2.getMiniBar());
+		
+		List<String> lista1 = new ArrayList<String>();
+		List<String> lista2 = new ArrayList<String>();
+		for (String string : setminibar) {
+			lista1.add(string);
+		}
+		for (String string : c1.getMiniBar()) {
+			lista2.add(string);
+		}
+		for (int i = 0; i < lista1.size(); i++) {
+			assertEquals(lista1.get(i), lista2.get(i));	
+		}
+		
+	}
+	@Test
+	void getSalaReunion() {
+		ArrayList<String> getsalareunion = new ArrayList<String>();
+		getsalareunion.add("SALA PETIT COMITÉ EQUIPADA");
+		getsalareunion.add("SALA PETIT COMITÉ EQUIPADA");
+		List<String> lista1 = new ArrayList<String>();
+		List<String> lista2 = new ArrayList<String>();
+		for (String string : getsalareunion) {
+			lista1.add(string);
+		}
+		for (String string : c2.getSalaReunion()) {
+			lista2.add(string);
+		}
+		for (int i = 0; i < lista1.size(); i++) {
+			assertEquals(lista1.get(i), lista2.get(i));	
+		}
+
+	}
+	@Test
+	void setSalaReunion() {
+		ArrayList<String> setsalareunion = new ArrayList<String>();
+		setsalareunion.add("SALA PETIT COMITÉ EQUIPADA");
+		setsalareunion.add("SALA PETIT COMITÉ EQUIPADA");
+		c1.setSalaReunion(c2.getSalaReunion());
+		
+		List<String> lista1 = new ArrayList<String>();
+		List<String> lista2 = new ArrayList<String>();
+		for (String string : setsalareunion) {
+			lista1.add(string);
+		}
+		for (String string : c1.getSalaReunion()) {
+			lista2.add(string);
+		}
+		for (int i = 0; i < lista1.size(); i++) {
+			assertEquals(lista1.get(i), lista2.get(i));	
+		}
+		
+	}
+	
+	@Test
+	void getSpa() {
+		ArrayList<String> getspa = new ArrayList<String>();
+		getspa.add("JACUZZI");
+		getspa.add("SALES MINERALES");
+		getspa.add("TRATAMIENTO ESTÉTICO");
+		List<String> lista1 = new ArrayList<String>();
+		List<String> lista2 = new ArrayList<String>();
+		for (String string : getspa) {
+			lista1.add(string);
+		}
+		for (String string : c2.getSpa()) {
+			lista2.add(string);
+		}
+		for (int i = 0; i < lista1.size(); i++) {
+			assertEquals(lista1.get(i), lista2.get(i));	
+		}
+
+	}
+	@Test
+	void setSpa() {
+		ArrayList<String> setspa = new ArrayList<String>();
+		setspa.add("JACUZZI");
+		setspa.add("SALES MINERALES");
+		setspa.add("TRATAMIENTO ESTÉTICO");
+		c1.setSpa(c2.getSpa());
+		
+		List<String> lista1 = new ArrayList<String>();
+		List<String> lista2 = new ArrayList<String>();
+		for (String string : setspa) {
+			lista1.add(string);
+		}
+		for (String string : c1.getSpa()) {
+			lista2.add(string);
+		}
+		for (int i = 0; i < lista1.size(); i++) {
+			assertEquals(lista1.get(i), lista2.get(i));	
+		}
+		
 	}
 	
 }

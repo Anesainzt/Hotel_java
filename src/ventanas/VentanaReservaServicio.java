@@ -165,13 +165,13 @@ public class VentanaReservaServicio extends JFrame{
 				}else if(tipo.equals("MASAJE FACIAL") || tipo.equals("MASAJE CORPORAL") || tipo.equals("MASAJE TOTAL") || tipo.equals("JACUZZI") || tipo.equals("SALES MINERALES") || tipo.equals("MASAJE PIEDRAS") || tipo.equals("TRATAMIENTO ESTÉTICO")) {
 					VentanaReservaSpa vrs = new VentanaReservaSpa(cliente, fechaRegistro, tipo, precio);
 		    		dispose();
-				}else if(tipo.equals("VODKA") || tipo.equals("GINEBRA") || tipo.equals("WHISKEY") || tipo.equals("TEQUILA") || tipo.equals("RON") || tipo.equals("ELECCION DE DOS") || tipo.equals("ELECCION DE TRES") || tipo.equals("TODOS")) {
-					VentanaContinuacion vc = new VentanaContinuacion(cliente);
-					dispose();
-				}else{
+				}else if(tipo.contains("SALA")) {
 					VentanaReservaReunion vrr = new VentanaReservaReunion(cliente, fechaRegistro, tipo, precio);
 					dispose();
-				}	    	
+				}else{
+					VentanaContinuacion vc = new VentanaContinuacion(cliente);
+					dispose();
+				}    	
 		    	
 			}
 		});

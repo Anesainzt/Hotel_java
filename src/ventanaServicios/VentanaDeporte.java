@@ -112,7 +112,7 @@ public class VentanaDeporte extends JFrame{
 			    	VentanaReservaServicio vrs = new VentanaReservaServicio(cliente, 15, "CLASE NATACION");
 				}else if (comboDeporte.getSelectedItem().equals("(30€) CLASE BALONCESTO ---> 17:00-19:00")){
 			    	VentanaReservaServicio vrs = new VentanaReservaServicio(cliente, 30, "CLASE BALONCESTO");
-				}else if (comboDeporte.getSelectedItem().equals("(30€) CLASE FUTBOL-SALA ---> 17:00-19:00")){
+				}else if (comboDeporte.getSelectedItem().equals("(20€) CLASE FUTBOL-SALA ---> 17:00-19:00")){
 			    	VentanaReservaServicio vrs = new VentanaReservaServicio(cliente, 20, "CLASE FUTBOL-SALA");
 				}else {
 					logger.info("TIENES QUE ELEGIR UN SERVICIO");

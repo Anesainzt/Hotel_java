@@ -8,6 +8,8 @@ import javax.swing.ButtonGroup;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JRadioButton;
+
+import hotel.BD;
 import hotel.Cliente;
 import ventanaServicios.VentanaComida;
 import ventanaServicios.VentanaDeporte;
@@ -21,8 +23,12 @@ public class VentanaServicios extends JFrame {
 	JRadioButton spa, buffet, deportes, miniBar, salaReunion, sinServicioExtra;
 	ButtonGroup bg;
 	JButton contratar;
+	BD bd;
 	
 	public VentanaServicios(Cliente cliente) {
+		
+		bd = new BD();
+		bd.connect();
 		
 		setLayout(new GridLayout(7, 1));
 		

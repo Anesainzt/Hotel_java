@@ -4,17 +4,12 @@ import java.awt.Color;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.io.BufferedWriter;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
-import java.io.FileWriter;
-import java.io.IOException;
-import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 import java.util.logging.Logger;
-
 import javax.swing.BorderFactory;
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
@@ -22,7 +17,6 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.Border;
 import hotel.BD;
-import hotel.BDException;
 import hotel.Cliente;
 
 public class VentanaSeleccionHabitacion extends JFrame{
@@ -63,11 +57,7 @@ public class VentanaSeleccionHabitacion extends JFrame{
 		}
 		//CONECTAMOS LA BASE DE DATOS
 		bd = new BD();
-		try {
-			bd.connect();
-		} catch (BDException e2) {
-			e2.printStackTrace();
-		}
+		bd.connect();
 		//ELEGIMOS LA HABITACION QUE QUEREMOS Y LA GUARDAMOS
 		List <JButton> b = bd.habitacion(boton, fechaEntrada, fechaSalida, tipo, habitaciones, cliente);
 		for(JButton bu: b ) {

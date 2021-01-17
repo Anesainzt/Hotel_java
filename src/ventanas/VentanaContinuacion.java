@@ -6,13 +6,10 @@ import java.awt.event.ActionListener;
 import java.io.BufferedWriter;
 import java.io.FileWriter;
 import java.io.IOException;
-
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JProgressBar;
-
 import hotel.BD;
-import hotel.BDException;
 import hotel.Cliente;
 
 public class VentanaContinuacion extends JFrame{
@@ -24,11 +21,7 @@ public class VentanaContinuacion extends JFrame{
 	
 	public VentanaContinuacion(Cliente cliente) {
 		bd = new BD();
-		try {
-			bd.connect();
-		} catch (BDException e2) {
-			e2.printStackTrace();
-		}
+		bd.connect();
 		setLayout(new GridLayout(2, 1));
 		
 		elegirNuevoServicio = new JButton("ELEGIR NUEVO SERVICIO");
@@ -60,11 +53,7 @@ public class VentanaContinuacion extends JFrame{
 			public void actionPerformed(ActionEvent e) {
 				VentanaFactura vf = new VentanaFactura(cliente);
 				dispose();
-				try {
-					bd.disconnect();
-				} catch (BDException e1) {
-					e1.printStackTrace();
-				}
+				bd.disconnect();
 			}
 		});
 		

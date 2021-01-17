@@ -1,10 +1,7 @@
 package ventanas;
 
-import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.List;
-
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import hotel.*;
@@ -46,11 +43,7 @@ public class VentanaCliente extends JFrame{
 			public void actionPerformed(ActionEvent arg0) {
 				//NOS CONECTAMOS A LA BASE DE DATOS
 				bd = new BD();
-				try {
-					bd.connect();
-				} catch (BDException e) {
-					e.printStackTrace();
-				}
+				bd.connect();
 				//MIRAMOS EL HISTORIAL
 				bd.historial(cliente, modelo);
 				//LO HACEMOS VISIBLE

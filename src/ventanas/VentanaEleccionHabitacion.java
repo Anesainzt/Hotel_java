@@ -8,10 +8,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.logging.Logger;
-
 import javax.swing.*;
-
-import hotel.BD;
 import hotel.Cliente;
 
 public class VentanaEleccionHabitacion extends JFrame{

@@ -1,21 +1,17 @@
 package ventanaServicios;
 
-import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.List;
-
 import javax.swing.BorderFactory;
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.Border;
-
 import hotel.BD;
-import hotel.BDException;
 import hotel.Cliente;
 import ventanas.VentanaContinuacion;
 import ventanas.VentanaReservaServicio;
@@ -34,11 +30,7 @@ public class VentanaReservaPista extends JFrame{
 	public VentanaReservaPista(Cliente cliente, String fecha, String tipo, int precio) {
 		//CONECTAMOS CON LA BASE DE DATOS
 		bd= new BD();
-		try {
-			bd.connect();
-		} catch (BDException e1) {
-			e1.printStackTrace();
-		}
+		bd.connect();
 		//OBTENEMOS LA HORA A LA QUE HA ESCOGIDO LA PISTA
 		String hora = bd.getHoraReserva("horaPista");
 		//LE MOSTRAMOS LAS PISTAS PARA QUE SELECCIONE ALGUNA LIBRE

@@ -2,17 +2,8 @@ package ventanas;
 
 import java.awt.*;
 import java.awt.event.*;
-import java.io.*;
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.PreparedStatement;
-import java.sql.SQLException;
-import java.sql.Statement;
-import java.util.*;
 import javax.swing.*;
-
 import hotel.BD;
-import hotel.BDException;
 import hotel.Cliente;
 
 public class VentanaCreacionRegistro extends JFrame{
@@ -41,12 +32,7 @@ public class VentanaCreacionRegistro extends JFrame{
 		t = new JTextField();
 		continuar = new JButton("CONTINUAR");
 		bd = new BD();
-		try {
-			bd.connect();
-		} catch (BDException e1) {
-			// TODO Auto-generated catch block
-			e1.printStackTrace();
-		}
+		bd.connect();
 		continuar.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {

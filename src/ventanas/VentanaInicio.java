@@ -3,15 +3,8 @@ package ventanas;
 import java.awt.*;
 import java.awt.event.*;
 import java.io.BufferedWriter;
-import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.io.PrintWriter;
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
 import javax.swing.*;
 import hotel.*;
 
@@ -73,11 +66,7 @@ public class VentanaInicio extends JFrame{
 				String password = new String(arrayC);
 				//CONECTAMOS LA BASE DE DATOS
 				bd = new BD();
-				try {
-					bd.connect();
-				} catch (BDException e2) {
-					e2.printStackTrace();
-				}
+				bd.connect();
 		        //EN CASO DE QUE SEA EMPLEADO
 				emp = bd.empleado(u.getText(), password);
 				//EN CASO DE QUE SEA CLIENTE

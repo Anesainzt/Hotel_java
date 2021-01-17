@@ -3,24 +3,11 @@ package ventanas;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.SQLException;
-import java.sql.Statement;
-import java.util.ArrayList;
-import java.util.Scanner;
 import java.util.logging.Logger;
-
 import javax.swing.ButtonGroup;
 import javax.swing.JButton;
 import javax.swing.JFrame;
-import javax.swing.JOptionPane;
 import javax.swing.JRadioButton;
-
-import hotel.BD;
-import hotel.BDException;
 import hotel.Cliente;
 import ventanaServicios.VentanaComida;
 import ventanaServicios.VentanaDeporte;

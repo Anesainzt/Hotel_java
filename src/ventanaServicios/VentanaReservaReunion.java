@@ -5,16 +5,13 @@ import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.List;
-
 import javax.swing.BorderFactory;
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.Border;
-
 import hotel.BD;
-import hotel.BDException;
 import hotel.Cliente;
 import ventanas.VentanaContinuacion;
 import ventanas.VentanaReservaServicio;
@@ -33,11 +30,7 @@ public class VentanaReservaReunion extends JFrame{
 	public VentanaReservaReunion(Cliente cliente, String fecha, String tipo, int precio) {
 		//CONECTAMOS CON LA BASE DE DATOS
 		bd= new BD();
-		try {
-			bd.connect();
-		} catch (BDException e1) {
-			e1.printStackTrace();
-		}
+		bd.connect();
 		//GUARDAMOS LA HORA DE LA RESERVA ELEGIDA ANTERIORMENTE
 		String hora = bd.getHoraReserva("horaPista");
 		//LE MOSTRAMOS LAS SALAS DE REUNION QUE HAY LIBRES

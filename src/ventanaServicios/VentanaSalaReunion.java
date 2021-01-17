@@ -4,14 +4,11 @@ import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.logging.Logger;
-
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
-
 import hotel.BD;
-import hotel.BDException;
 import hotel.Cliente;
 import ventanas.VentanaReservaServicio;
 
@@ -26,12 +23,7 @@ public class VentanaSalaReunion extends JFrame{
 		setLayout(new GridLayout(3, 1));
 		//CONECTAMOS CON LA BASE DE DATOS
 		bd = new BD();
-		
-		try {
-			bd.connect();
-		} catch (BDException e1) {
-			e1.printStackTrace();
-		}
+		bd.connect();
 		
 		comboSalaReunion = new JComboBox<String>();
 		

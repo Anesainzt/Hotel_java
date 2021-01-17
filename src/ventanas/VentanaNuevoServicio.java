@@ -2,25 +2,18 @@ package ventanas;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.io.BufferedWriter;
-import java.io.FileWriter;
-import java.io.IOException;
-import java.io.PrintWriter;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.logging.Logger;
-
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
-
 import hotel.BD;
-import hotel.BDException;
 import hotel.Cliente;
 
 public class VentanaNuevoServicio extends JFrame{
@@ -51,12 +44,7 @@ public class VentanaNuevoServicio extends JFrame{
 		
 		bd = new BD();
 		pnl = new JPanel();
-		try {
-			bd.connect();
-		} catch (BDException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		bd.connect();
 		
 		comboReservas = new JComboBox<String>();
 		reservas = new ArrayList<String>();

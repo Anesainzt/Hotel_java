@@ -4,12 +4,10 @@ import javax.swing.*;
 import com.toedter.calendar.JCalendar;
 
 import hotel.BD;
-import hotel.BDException;
 import hotel.Cliente;
 import ventanaServicios.VentanaReservaPista;
 import ventanaServicios.VentanaReservaReunion;
 import ventanaServicios.VentanaReservaSpa;
-
 import java.awt.Color;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
@@ -39,11 +37,7 @@ public class VentanaReservaServicio extends JFrame{
 	public VentanaReservaServicio(Cliente cliente, int precio, String tipo) {			
 		Cliente nuevo = cliente;
 		bd = new BD();
-		try {
-			bd.connect();
-		} catch (BDException e2) {
-			e2.printStackTrace();
-		}
+		bd.connect();
 		
 		if(tipo.equals("MASAJE FACIAL") || tipo.equals("MASAJE CORPORAL") || tipo.equals("MASAJE TOTAL") || tipo.equals("JACUZZI") || tipo.equals("SALES MINERALES") || tipo.equals("MASAJE PIEDRAS") || tipo.equals("TRATAMIENTO ESTÉTICO")) {
 			ArrayList<String> spa = new ArrayList<String>();

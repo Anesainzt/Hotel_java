@@ -3,22 +3,11 @@ import javax.swing.*;
 import com.toedter.calendar.JCalendar;
 
 import hotel.BD;
-import hotel.BDException;
 import hotel.Cliente;
 import java.awt.Color;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.io.BufferedWriter;
-import java.io.FileWriter;
-import java.io.IOException;
-import java.io.PrintWriter;
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
 import java.text.SimpleDateFormat;
 import java.util.*;
 import java.util.logging.Logger;
@@ -129,11 +118,7 @@ public class VentanaCalendario extends JFrame{
 				//LE MOSTRAMOS UNA VENTANA INFORMATIVA PARA QUE SEPA EL DINERO QUE GASTARA POR ESOS DIAS DE LA HABITACION
 				JOptionPane.showMessageDialog(null, "PAGO HABITACION: " + pago + " DIAS " + " = " + pagoHabitacion + "€");
 				
-				try {
-					bd.connect();
-				} catch (BDException e1) {
-					e1.printStackTrace();
-				}
+				bd.connect();
 				//GUARDAMOS LOS DIAS QUE HA RESERVADO EN LA BASE DE DATOS
 				bd.calendario(type, dia, mes , year, fechaInc);
 				

@@ -4,15 +4,12 @@ import java.awt.Graphics;
 import java.awt.Image;
 import java.io.File;
 import java.util.logging.Logger;
-
 import javax.sound.sampled.AudioSystem;
 import javax.sound.sampled.Clip;
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
-
 import hotel.BD;
-import hotel.BDException;
 
 public class VentanaLogo extends JFrame{
 	//FONDO QUE PONEMOS CON LA IMAGEN
@@ -23,11 +20,7 @@ public class VentanaLogo extends JFrame{
 		
 		//HACEMOS UN HILO PARA PASAR A LA SIGUIENTE VENTANA TRAS ACABAR LA BIENVENIDA
 		bd = new BD();
-		try {
-			bd.connect();
-		} catch (BDException e1) {
-			e1.printStackTrace();
-		}
+		bd.connect();
 		bd.ponerAlDiaBD();
 		bd.restartHabitacion();
 		Thread t = new Thread(new Runnable() {

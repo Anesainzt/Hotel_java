@@ -1,9 +1,7 @@
 package ventanas;
 
 import java.awt.Desktop;
-import java.awt.Graphics;
 import java.awt.GridLayout;
-import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
@@ -13,17 +11,12 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
-import java.util.List;
 import java.util.Scanner;
-
 import javax.swing.*;
 import javax.swing.border.Border;
 import javax.swing.table.DefaultTableModel;
-
 import com.toedter.calendar.JCalendar;
-
 import hotel.*;
-import ventanas.VentanaLogo.FondoPanel;
 
 public class VentanaEmpleado extends JFrame{
 	
@@ -78,12 +71,7 @@ public class VentanaEmpleado extends JFrame{
 	public VentanaEmpleado(Empleado empleado) {
 		
 		bd = new BD();
-		try {
-			bd.connect();
-		} catch (BDException e1) {
-			// TODO Auto-generated catch block
-			e1.printStackTrace();
-		}
+		bd.connect();
 		
 		//CREAMSO LA PRIMERA PARTE DE VENTANAEMPLEADO, LA CUAL TIENEN TODOS LOS EMPLEADOS
 		JPanel documentos = new JPanel();

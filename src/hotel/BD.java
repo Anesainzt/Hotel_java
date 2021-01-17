@@ -13,21 +13,14 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.List;
 import java.util.Scanner;
 import java.util.logging.Logger;
-
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
-import javax.swing.JTextArea;
 import javax.swing.table.DefaultTableModel;
-
 import com.toedter.calendar.JCalendar;
-
-import ventanaServicios.VentanaReservaPista;
-import ventanas.VentanaContinuacion;
 
 public class BD extends JFrame{
 	private Connection conn = null;
@@ -50,22 +43,22 @@ public class BD extends JFrame{
 	}
 	
 	//CONECTA Y DESCONECTAR LA BD
-	public void connect() throws BDException {
+	public void connect() {
 		try {
 			Class.forName("org.sqlite.JDBC");
 			conn = DriverManager.getConnection("jdbc:sqlite:hotelJava.db");
 		} catch (ClassNotFoundException e) {
-			throw new BDException("Error cargando el driver de la BD", e);
+			logger.warning("Error cargando el driver de la BD");
 		} catch (SQLException e) {
-			throw new BDException("Error conectando a la BD", e);
+			logger.warning("Error conectando a la BD");
 		}
 	}
 	
-	public void disconnect() throws BDException {
+	public void disconnect() {
 		try {
 			conn.close();
 		} catch (SQLException e) {
-			throw new BDException("Error cerrando la conexión con la BD", e);
+			logger.warning(e.getMessage());
 		}
 	}
 	

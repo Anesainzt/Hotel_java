@@ -6,13 +6,17 @@ import hotel.HabitacionIndividual;
 
 class HabitacionIndividualTest {
 
+	//CREAS DOS CLIENTES UNO VACIO(SETTERS) Y OTRO LLENO(GETTERS)
 	HabitacionIndividual i1 = new HabitacionIndividual();
 	HabitacionIndividual i2 = new HabitacionIndividual(113, 10);
 	
+	//COMPRUEBAS LOS GETTERS Y SETTERS
+	//COMPARA LOS DATOS DE I2 CON EL DATO QUE LE METES
 	@Test
 	void getNumHab() {
 		assertEquals("113", "" + HabitacionIndividual.getNumHab());
 	}
+	//PARA TESTEAR UN SET PASA EL VALOR DE I2 A I1 Y LO COMPARA CON EL DATO QUE LE METES
 	@Test
 	void setNumHab() {
 	    int numhab = 113;

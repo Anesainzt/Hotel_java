@@ -10,6 +10,8 @@ import org.junit.jupiter.api.Test;
 import hotel.Cliente;
 
 class ClienteTest {
+	
+	//PARA RELLENAR EL HASHMAP DENTRO DEL CLIENTE C2 TIENES QUE METERLE VALORES
 	public HashMap<String,Integer> hash(HashMap<String,Integer> hashmap1) {
 		hashmap1.put("COMIDA", 30);
 		hashmap1.put("MASAJE CORPORAL", 90);
@@ -19,20 +21,22 @@ class ClienteTest {
 	}
 	static HashMap<String,Integer> hashmap1 =  new HashMap<String,Integer>();
 	
+	//EL ARRAYLIST FUNCIONA PARECIDO A UN HASHMAP 
+	//PRIMERO LE METES VALORES Y LUEGO LE METES EL ARRAYCOMIDA A CLIENTE C2
 	public ArrayList<String> arraycomida( ArrayList<String> arraycomida ){
 		arraycomida.add("POMODORO");
 		return arraycomida;	
 	}
 	static ArrayList<String> arraycomida = new ArrayList<String>();
 	
-	
+	//LE METES DENTRO DE CLIENTE LOS VALORES QUE LE HAYAS AÑADIDO A ARRAYDEPORTES
 	public ArrayList<String> arraydeportes( ArrayList<String> arraydeportes ){
 		arraydeportes.add("CAMPO BALONCESTO");
 		return arraydeportes;	
 	}
 	static ArrayList<String> arraydeportes = new ArrayList<String>();
 	
-	
+	//LE METES DENTRO DE CLIENTE LOS VALORES QUE LE HAYAS AÑADIDO A ARRAYMINIBAR
 	public ArrayList<String> arrayminibar( ArrayList<String> arrayminibar ){
 		arrayminibar.add("RON");
 		arrayminibar.add("TEQUILA");
@@ -40,7 +44,7 @@ class ClienteTest {
 	}
 	static ArrayList<String> arrayminibar = new ArrayList<String>();
 	
-	
+	//LE METES DENTRO DE CLIENTE LOS VALORES QUE LE HAYAS AÑADIDO A ARRAYSALAREUNION
 	public ArrayList<String> arraysalareunion( ArrayList<String> arraysalareunion ){
 		arraysalareunion.add("SALA PETIT COMITÉ EQUIPADA");
 		arraysalareunion.add("SALA PETIT COMITÉ EQUIPADA");
@@ -48,6 +52,7 @@ class ClienteTest {
 	}
 	static ArrayList<String> arraysalareunion = new ArrayList<String>();
 	
+	//LE METES DENTRO DE CLIENTE LOS VALORES QUE LE HAYAS AÑADIDO A ARRAYSPA
 	public ArrayList<String> arrayspa( ArrayList<String> arrayspa ){
 		arrayspa.add("JACUZZI");
 		arrayspa.add("SALES MINERALES");
@@ -57,14 +62,18 @@ class ClienteTest {
 	static ArrayList<String> arrayspa = new ArrayList<String>();
 	
 	
+	//CREAS DOS CLIENTES UNO VACIO Y OTRO LLENO
 	Cliente c1 = new Cliente();
 	Cliente c2 = new Cliente("Alazne", "Parra", "22764839Z", "1999-03-17", "1234567890", "alazne.parra", "Armagedom", "Armagedom", hash(hashmap1), arraycomida(arraycomida), arraydeportes(arraydeportes), arrayminibar(arrayminibar), arraysalareunion(arraysalareunion), arrayspa(arrayspa));
 	
 	
+	//COMPRUEBAS LOS GETTERS Y SETTERS
+	//COMPARA LOS DATOS DE C2 CON EL DATO QUE LE METES
 	@Test
 	void getNombre() {
 		assertEquals("Alazne", Cliente.getNombre());
 	}
+	//PARA TESTEAR UN SET PASA EL VALOR DE C2 A C1 Y LO COMPARA CON EL DATO QUE LE METES
 	@Test
 	void setNombre() {
 	    String nombre = "Alazne";
@@ -150,6 +159,7 @@ class ClienteTest {
 	    assertEquals(c1.getNewPassword(), newpassword);
 	}
 	
+	//COMPRUEBA SI COINCIDE EL HASHMAP QUE TIENE DENTRO CLIENTE C2 CON UN HASMAP CREADO
 	@Test 
 	void getHashMap() {
 		HashMap<String,Integer> hashmap =  new HashMap<String,Integer>();
@@ -160,6 +170,7 @@ class ClienteTest {
 		assertEquals(hashmap, c2.getHashmap());
 		
 	}
+	//COMPRUEBA CON EL CLIENTE VACIO PASANDOLE VALORES DEL CLIENTE LLENO SI COINCIDE CON EL HASHMAP QUE SE HA CREADO ABAJO
 	@Test
 	void setHashMap() {
 		HashMap<String,Integer> hashmap =  new HashMap<String,Integer>();
@@ -171,6 +182,7 @@ class ClienteTest {
 	    assertEquals(c1.getHashmap(), hashmap);
 	}
 	
+	//COMPARA DOS LISTAS DE ARRAYLIST LA QUE ESTÁ EN CLIENTE C2 Y LA QUE ESTÁ CREADA ABAJO
 	@Test 
 	void getComida() {
 		ArrayList<String> getcomida = new ArrayList<String>();
@@ -189,6 +201,7 @@ class ClienteTest {
 
 	}
 	
+	//COMPARA DOS LISTAS DE ARRAYLIST PASANDO EL ARRAYLIST DE C2 A C1 Y LO COMPARA CON EL DE ABAJO
 	@Test 
 	void setComida() {
 		ArrayList<String> setcomida = new ArrayList<String>();

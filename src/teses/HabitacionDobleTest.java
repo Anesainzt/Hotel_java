@@ -7,13 +7,17 @@ import org.junit.jupiter.api.Test;
 import hotel.HabitacionDoble;
 class HabitacionDobleTest{
 
+	//CREAS DOS CLIENTES UNO VACIO(SETTERS) Y OTRO LLENO(GETTERS)
 	HabitacionDoble d1 = new HabitacionDoble();
 	HabitacionDoble d2 = new HabitacionDoble(201, 4, false);
 
+	//COMPRUEBAS LOS GETTERS Y SETTERS
+	//COMPARA LOS DATOS DE D2 CON EL DATO QUE LE METES
 	@Test
 	void getNumHab() {
 		assertEquals("201", "" + HabitacionDoble.getNumHab());
 	}
+	//PARA TESTEAR UN SET PASA EL VALOR DE D2 A D1 Y LO COMPARA CON EL DATO QUE LE METES
 	@Test
 	void setNumHab() {
 	    int numhab = 201;

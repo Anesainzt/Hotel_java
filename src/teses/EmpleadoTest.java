@@ -6,9 +6,11 @@ import hotel.Empleado;
 
 class EmpleadoTest {
 
+	//CREAS DOS CLIENTES UNO VACIO (SETTERS) Y OTRO LLENO (GETTERS)
 	Empleado empleado1 = new Empleado();
 	Empleado empleado2 = new Empleado("Asier", "Martinez", "12345678S", 987.04, "10:00", "17:00", "asier.mm@opendeusto.es", "Asierm27", "Cocina", false, "Ander");
 	
+	//COMPRUEBAS LOS GETTERS Y SETTERS
 	@Test
 	void getNombre() {
 		assertEquals("Asier", Empleado.getNombre());

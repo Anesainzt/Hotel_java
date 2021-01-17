@@ -11,11 +11,14 @@ class HabitacionFamiliarTest {
 	HabitacionFamiliar f1 = new HabitacionFamiliar();
 	HabitacionFamiliar f2 = new HabitacionFamiliar(409, 2, 1, 1, true);
 
+	//COMPRUEBAS LOS GETTERS Y SETTERS
+	//COMPARA LOS DATOS DE C2 CON EL DATO QUE LE METES
 	@Test
 	void getNumHab() {
 		assertEquals(409, HabitacionFamiliar.getNumHab());
 	}
 	
+	//PARA TESTEAR UN SET PASA EL VALOR DE F2 A F1 Y LO COMPARA CON EL DATO QUE LE METES
 	@Test
 	void setNumHab() {
 	    int numhab = 409;

@@ -7,6 +7,7 @@ import java.io.BufferedWriter;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.logging.Logger;
 
 import javax.swing.*;
 
@@ -18,7 +19,7 @@ public class VentanaEleccionHabitacion extends JFrame{
 	JComboBox<String> comboHabitaciones;
 	JLabel habitaciones;
 	JButton elegir;
-	
+	static Logger logger = Logger.getLogger(VentanaEleccionHabitacion.class.getName());
 	//METODO QUE ESCRIBE LOS DATOS EN EL FICHERO PARA UTILIZARLOS MAS TARDE
 	public static void fichero(String tipo, int precio) {
 		
@@ -28,7 +29,7 @@ public class VentanaEleccionHabitacion extends JFrame{
 		    pw.print(";" + tipo + ";" + precio);
 		    
 		} catch (IOException e1) {
-		    System.err.println(e1);
+			logger.warning(e1.getMessage());
 		} finally {
 		    if (pw != null) {
 		        pw.close();

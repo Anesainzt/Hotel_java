@@ -6,6 +6,8 @@ import java.awt.event.ActionListener;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.net.URL;
+import java.util.logging.Logger;
+
 import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -17,6 +19,7 @@ import hotel.Empleado;
 
 
 public class VentanaMapa extends JFrame{
+	static Logger logger = Logger.getLogger(VentanaMapa.class.getName());
 	public VentanaMapa(String imagen, Empleado empleado) {
 		 //Creamos el frame con un titulo
 		  JFrame frame = new JFrame("FrameDemo");
@@ -43,7 +46,7 @@ public class VentanaMapa extends JFrame{
 		   //Setear la imagen al JLabel
 		   emptyLabel.setIcon(new ImageIcon(image));
 		  } catch (IOException ioexception) {
-		   System.err.println(ioexception);
+			  logger.warning(ioexception.getMessage());
 		  }
 		  JButton volver = new JButton("VOLVER");
 		  volver.addActionListener(new ActionListener() {

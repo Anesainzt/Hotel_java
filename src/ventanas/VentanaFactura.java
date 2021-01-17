@@ -10,6 +10,8 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map.Entry;
 import java.util.Scanner;
+import java.util.logging.Logger;
+
 import javax.swing.BorderFactory;
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
@@ -21,6 +23,7 @@ import javax.swing.border.Border;
 import hotel.Cliente;
 
 public class VentanaFactura extends JFrame {
+	static Logger logger = Logger.getLogger(VentanaFactura.class.getName());
 	
 	public VentanaFactura(Cliente cliente) {
 		//LEEMOS LOS DATOS DEL CLIENTE DEL FICHERO
@@ -50,7 +53,7 @@ public class VentanaFactura extends JFrame {
 			}
 			
 		}catch(FileNotFoundException e1) {
-			System.err.println("ERROR");
+			logger.warning("ERROR");
 		}finally{
 			//borrar fichero
 

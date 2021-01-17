@@ -40,7 +40,7 @@ public class VentanaCalendario extends JFrame{
 	
 	
 	static  String fechaInc;
-	private static Logger logger = Logger.getLogger(VentanaCalendario.class.getName());
+	static Logger logger = Logger.getLogger(VentanaCalendario.class.getName());
 	
 	public VentanaCalendario(Cliente cliente, int precioHab, String type) {
 		

@@ -13,6 +13,8 @@ import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
+import java.util.logging.Logger;
+
 import javax.swing.BorderFactory;
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
@@ -33,6 +35,7 @@ public class VentanaSeleccionHabitacion extends JFrame{
 
 	static String fechaEntrada = null;
 	static String fechaSalida = null;
+	static Logger logger = Logger.getLogger(VentanaSeleccionHabitacion.class.getName());
 	
 	public VentanaSeleccionHabitacion(Cliente cliente, int dinero, String tipo) {
 		
@@ -111,7 +114,7 @@ public class VentanaSeleccionHabitacion extends JFrame{
 			}
 			
 		}catch(FileNotFoundException e1) {
-			System.err.println("ERROR");
+			logger.warning("ERROR");
 		}finally{
 			//borrar fichero
 

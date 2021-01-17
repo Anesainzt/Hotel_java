@@ -10,6 +10,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.Scanner;
+import java.util.logging.Logger;
+
 import javax.swing.*;
 
 import hotel.Cliente;
@@ -22,7 +24,7 @@ public class VentanaRegistro extends JFrame{
 	JLabel newPassword;
 	JTextField np;
 	JButton continuar;
-	
+	static Logger logger = Logger.getLogger(VentanaRegistro.class.getName());
 	public VentanaRegistro(Cliente cliente) {
 		
 		setLayout(new GridLayout(4, 2));
@@ -74,7 +76,7 @@ public class VentanaRegistro extends JFrame{
 							VentanaCreacionRegistro veh = new VentanaCreacionRegistro(nuevo);
 							dispose();
 						} catch (ClassNotFoundException e2) {
-						 System.out.println("No se ha podido cargar el driver de la base de datos");
+							logger.warning("No se ha podido cargar el driver de la base de datos");
 						} catch (SQLException e2) {
 							JOptionPane.showMessageDialog(null, "EL USUARIO YA EXISTE");
 							VentanaRegistro vcr = new VentanaRegistro(cliente);

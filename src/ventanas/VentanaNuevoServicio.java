@@ -11,6 +11,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.logging.Logger;
 
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
@@ -31,6 +32,7 @@ public class VentanaNuevoServicio extends JFrame{
 	JButton elegir;
 	
 	static int precio = 0;
+	static Logger logger = Logger.getLogger(VentanaNuevoServicio.class.getName());
 	
 	public static Date ParseFecha(String fecha){
         SimpleDateFormat formato = new SimpleDateFormat("yyyy-MM-dd");
@@ -40,7 +42,7 @@ public class VentanaNuevoServicio extends JFrame{
         } 
         catch (ParseException ex) 
         {
-            System.out.println(ex);
+        	logger.warning(ex.getMessage());
         }
         return fechaDate;
     }

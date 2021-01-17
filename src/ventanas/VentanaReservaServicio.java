@@ -19,6 +19,7 @@ import java.io.FileNotFoundException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.*;
+import java.util.logging.Logger;
 
 
 public class VentanaReservaServicio extends JFrame{
@@ -32,6 +33,8 @@ public class VentanaReservaServicio extends JFrame{
 	Date d2;
 	Date hoy;
 	String fechaRegistro;
+	
+	static Logger logger = Logger.getLogger(VentanaReservaServicio.class.getName());
 	
 	public VentanaReservaServicio(Cliente cliente, int precio, String tipo) {			
 		Cliente nuevo = cliente;
@@ -99,7 +102,7 @@ public class VentanaReservaServicio extends JFrame{
 			}
 			
 		}catch(FileNotFoundException e1) {
-			System.err.println("ERROR");
+			logger.warning(e1 + "");
 		}finally{
 			//borrar fichero
 		}

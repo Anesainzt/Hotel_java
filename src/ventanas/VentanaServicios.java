@@ -11,6 +11,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.Scanner;
+import java.util.logging.Logger;
 
 import javax.swing.ButtonGroup;
 import javax.swing.JButton;
@@ -29,6 +30,7 @@ import ventanaServicios.VentanaSpa;
 
 public class VentanaServicios extends JFrame {
 	
+	static Logger logger = Logger.getLogger(VentanaServicios.class.getName());
 	JRadioButton spa, buffet, deportes, miniBar, salaReunion, sinServicioExtra;
 	ButtonGroup bg;
 	JButton contratar;
@@ -71,7 +73,7 @@ public class VentanaServicios extends JFrame {
 				}else if(sinServicioExtra.isSelected()) {
 					VentanaContinuacion vc = new VentanaContinuacion(cliente);
 				}else {
-					System.out.println("TIENES QUE ELEGIR");
+					logger.info("TIENES QUE ELEGIR");
 					VentanaServicios vs = new VentanaServicios(cliente);
 				}
 				dispose();

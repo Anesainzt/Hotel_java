@@ -16,6 +16,7 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 import java.util.Scanner;
+import java.util.logging.Logger;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -29,8 +30,10 @@ import ventanaServicios.VentanaReservaPista;
 import ventanas.VentanaContinuacion;
 
 public class BD extends JFrame{
-	private Connection conn = null; 
+	private Connection conn = null;
+	private static Logger logger = Logger.getLogger(BD.class.getName());
 	
+	//ESCRIBIR EN LOS FICHEROS
 	public void escribirFichero(String fichero, String texto) {
 		PrintWriter pw = null;
 		try {
@@ -38,7 +41,7 @@ public class BD extends JFrame{
 		    pw.print(texto);
 		    
 		} catch (IOException e1) {
-		    System.err.println(e1);
+			logger.warning(e1.getMessage());
 		} finally {
 		    if (pw != null) {
 		        pw.close();
@@ -46,6 +49,7 @@ public class BD extends JFrame{
 		}
 	}
 	
+	//CONECTA Y DESCONECTAR LA BD
 	public void connect() throws BDException {
 		try {
 			Class.forName("org.sqlite.JDBC");
@@ -65,6 +69,7 @@ public class BD extends JFrame{
 		}
 	}
 	
+	//REGISTRAR EN LA BD UN CLIENTE NUEVO
 	public void registro(Cliente nuevo) {
 		try {			
 			PreparedStatement pstmt = conn.prepareStatement("UPDATE cliente SET nombre = ?, apellido = ?, dni = ?, tarjeta = ? WHERE usuario = '"+ nuevo.getLogin() +"' AND contraseya = '"+ nuevo.getPassword() +"';");
@@ -76,13 +81,14 @@ public class BD extends JFrame{
 			pstmt.executeUpdate();
 			conn.close();
 		} catch (SQLException e2) {
-			System.out.println(e2.getMessage());
+			logger.warning(e2.getMessage());
 		} 	
 	}
 	
 	public void ponerAlDiaBD() {
 		
 		try(Statement stmt = (Statement) conn.createStatement();){
+			//CAMBIAR CADA DIA LA FECHA
 			JCalendar calendario = new JCalendar();
 			String year = Integer.toString(calendario.getCalendar().get(java.util.Calendar.YEAR));
 	    	String mes = Integer.toString(calendario.getCalendar().get(java.util.Calendar.MONTH) + 1);
@@ -99,7 +105,7 @@ public class BD extends JFrame{
 	    		hoy = year + "" + mes + "" + dia;
 	    	}
 			
-			
+			//COMPROBAR QUE FECHA DE SALIDA ESTA LIBRE
 			ResultSet rs = stmt.executeQuery("SELECT fechaSalida FROM historialregistros WHERE libre = 1;");
 			while(rs.next()) {
 				
@@ -109,6 +115,7 @@ public class BD extends JFrame{
 				Integer fechaHoy = Integer.parseInt(hoy);
 
 				if (fechaBD < fechaHoy) {
+					//SI LA FECHA ES MENOS A LA DE HOY SIGNIFICA QUE ESTARIA LIBRE
 					PreparedStatement pstmt = conn.prepareStatement("UPDATE historialregistros SET libre = ? WHERE fechaSalida = ?");
 					
 					pstmt.setInt(1, 0);
@@ -118,6 +125,7 @@ public class BD extends JFrame{
 				
 			}
 			
+			//COMPROBAR QUE PISTA ESTA LIBRE
 			ResultSet rs2 = stmt.executeQuery("SELECT fechaReserva FROM reservapista WHERE libre = 1;");
 			while(rs.next()) {
 				
@@ -141,6 +149,7 @@ public class BD extends JFrame{
 		}
 	}
 	
+	//UNA VEZ SE DESOCUPE LA HABITACION QUEDARÁ LIBRE
 	public void restartHabitacion() {
 		try {
 			PreparedStatement pstmt = conn.prepareStatement("UPDATE habitacion SET libre = ?");
@@ -156,7 +165,7 @@ public class BD extends JFrame{
 		Empleado emp = new Empleado();
 		
 		try(Statement stmt = (Statement) conn.createStatement()) {	
-			
+			//SELECIONAR DE LA BD A QUE EMPLEADO CORRESPONDE EL USUARIO Y CONTRASEÑA ESCRITOS
 			ResultSet empleado = stmt.executeQuery("SELECT nombre, apellido, contraseya, usuario, departamento, salario, usuario_jefe, jefeBit FROM empleado WHERE (usuario = '" + usu + "' AND contraseya = '"+ password +"');");
 			
 			while(empleado.next()) {						
@@ -183,7 +192,7 @@ public class BD extends JFrame{
 				
 			}
 		} catch (SQLException e2) {
-			System.out.println(e2.getMessage());
+			logger.warning(e2.getMessage());
 		} 
 		return emp;
 	}
@@ -209,7 +218,8 @@ public class BD extends JFrame{
 		try(Statement stmt = (Statement) conn.createStatement()) {	
 			
 			String [] tabla = new String[5];
-			
+			 
+			//SACAR DE LA BD QUE PISTAS ESTAN RESERVADAS HOY
 			ResultSet res = stmt.executeQuery("SELECT fechaReserva, hora, num_pista, usuario, tipo FROM reservapista WHERE fechaReserva = '"+ hoy +"'");
 			while (res.next()) {
 				
@@ -226,17 +236,15 @@ public class BD extends JFrame{
 				modelo.addRow(tabla);
 				
 			}
-			
-			
 		} catch (SQLException e2) {
-			System.out.println(e2.getMessage());
+			logger.warning(e2.getMessage());
 		}
 	}
 	
 	public Cliente cliente(String usu, String password) {
 		Cliente cl = new Cliente();
 		try(Statement stmt = (Statement) conn.createStatement()) {
-			
+			//SELECIONAR A QUE CLIENTE CORRESPONDE EL USUARIO Y CONTRASEÑA ESCRITOS
 			ResultSet cliente = stmt.executeQuery("SELECT nombre, apellido, dni, contraseya, usuario FROM cliente WHERE (usuario = '" + usu + "' AND contraseya = '"+ password +"');");
 			while(cliente.next()) {
 				String nombreBD = cliente.getString("nombre");
@@ -254,11 +262,12 @@ public class BD extends JFrame{
 			}
 			
 		} catch (SQLException e2) {
-			System.out.println(e2.getMessage());
+			logger.warning(e2.getMessage());
 		}
 		return cl;
 	}
 	
+	//MIRAR EN LA BD CUALES HAN SIDO SUS RESERVAS ANTERIORES
 	public void historial(Cliente cliente, DefaultTableModel modelo) {
 		try(Statement stmt = (Statement) conn.createStatement()) {	
 			
@@ -289,7 +298,7 @@ public class BD extends JFrame{
 			}
 			
 		} catch (SQLException e2) {
-			System.out.println(e2.getMessage());
+			logger.warning(e2.getMessage());
 		}
 	}
 	
@@ -360,6 +369,8 @@ public class BD extends JFrame{
 		}
 	}
 	
+	//MUESTRA TODAS LAS HABITACIONES LIBRES EN VERDE Y LAS QUE NO EN ROJO 
+	//GUARDA LA HABITACION ESCOGIDA EN LA BD PARA QUE OTRA PERSONA NO LA PUEDA COGER HASTA QUE QUEDE LIBRE
 	public List<JButton> habitacion(JButton boton, String fechaEntrada, String fechaSalida, String tipo, JPanel habitaciones, Cliente cliente) {
 		List<JButton> b = new ArrayList<JButton>();
 		try(Statement stmt = (Statement) conn.createStatement()) {
@@ -386,17 +397,16 @@ public class BD extends JFrame{
 		return b;
 	}
 	
+	//MIRA QUE DIAS SE QUEDA EL CLIENTE EN EL HOTEL Y SOLO DEJA COGER EL SEVICIO DENTRO DE ESOS DIAS
 	public void servicio(String fechaEntrada, String fechaSalida, String tipo, String numero, Cliente cliente) {
 		try(Statement stmt = (Statement) conn.createStatement()) {	
-			
 			int res2 = stmt.executeUpdate("INSERT INTO historialregistros VALUES('"+ fechaEntrada +"', '"+ fechaSalida +"', '"+ tipo +"', "+ Integer.parseInt(numero) +", '"+ cliente.getLogin() +"', 1);");
-			
-			
 		} catch (SQLException e2) {
 			e2.printStackTrace();;
 		}
 	}
 	
+	//SI LA FECHA DE HOY COINCIDE CON UNA RESERVA LA HABITACION ESTARÁ OCUPADA
 	public ArrayList<Integer> updateOcupadasHoy(){
 		ArrayList<Integer> habitacion = new ArrayList<Integer>();
 		try(Statement stmt = (Statement) conn.createStatement();){
@@ -437,6 +447,7 @@ public class BD extends JFrame{
 		return habitacion;		
 	}
 	
+	//MUESTRA QUE HABITACIONES ESTAN OCUPADAS
 	public List<Integer> getHabitacionesOcupadas(){
 		List<Integer> listaHabitacion = null;
 		try (Statement stmt = (Statement) conn.createStatement()){
@@ -452,6 +463,7 @@ public class BD extends JFrame{
 		return listaHabitacion;
 	}
 	
+	//MUESTRA CUANDO SE HA HECHO LA RESERVA
 	public String getHoraReserva(String fichero) {
 		
     	String linea = null;
@@ -469,8 +481,8 @@ public class BD extends JFrame{
 		return linea;
 	}
 	
+	//MIRAR QUE PISTAS ESTAN LIBRES O NO Y ACTUALIZAR LA TABLA PISTAS CON EL ESTADO
 	public void eleccionDePistasLibres(String fecha, String hora, String tipo){
-		
 		try (Statement stmt = (Statement) conn.createStatement()){
 			ResultSet rs = stmt.executeQuery("SELECT num_pista, tipo FROM reservapista WHERE fechaReserva = '"+ fecha +"' AND tipo = '"+ tipo +"' AND hora = '"+ hora +"' AND libre = 1");
 			while(rs.next()) {
@@ -483,13 +495,13 @@ public class BD extends JFrame{
 				pstmt.setString(3, tipoPista);
 				pstmt.execute();
 			}
-			
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 		
 	}
 	
+	//MIRA EL ESTADO DE LA PISTA SI ESTA LIBRE SE PONE VERDE Y SE PUEDE SELECCIONAR Y SI ESTA ROJO ESTA OCUPADA
 	public List<JButton> botonesReservarPista(String tipo){
 		List<JButton> listaBotones = new ArrayList<JButton>();
 		JButton boton;
@@ -518,6 +530,7 @@ public class BD extends JFrame{
 		return listaBotones;
 	}
 	
+	//MIRA EL ESTADO DEL SPA SI ESTA LIBRE SE PONE VERDE Y SE PUEDE SELECCIONAR Y SI ESTA ROJO ESTA OCUPADA
 	public List<JButton> botonesReservarSpa(String tipo){
 		List<JButton> listaBotones = new ArrayList<JButton>();
 		JButton boton;
@@ -546,6 +559,8 @@ public class BD extends JFrame{
 		return listaBotones;
 	}
 	
+	
+	//MIRA EL ESTADO DE LA SALA SI ESTA LIBRE SE PONE VERDE Y SE PUEDE SELECCIONAR Y SI ESTA ROJO ESTA OCUPADA
 	public List<JButton> botonesReservarReunion(String tipo){
 		List<JButton> listaBotones = new ArrayList<JButton>();
 		JButton boton;
@@ -574,6 +589,7 @@ public class BD extends JFrame{
 		return listaBotones;
 	}
 	
+	//EN EL CASO DE QUE RESERVES UNA PISTA INTRODUCIR EN LA TABLA RESERVAPISTA LOS DATOS
 	public void registrarReservaPista(Cliente cliente, String fecha, String hora, String num, String tipo) {
 		try {
 			PreparedStatement pstmt = conn.prepareStatement("INSERT INTO reservapista VALUES(?, ?, ?, ?, ?, ?);");
@@ -591,6 +607,7 @@ public class BD extends JFrame{
 		
 	}
 	
+	//ACTUALIZAR LOS DATOS DE PISTA CAMBIANDO EL ESTADO A LIBRE
 	public void restartPistas() {
 		try {
 			PreparedStatement pstmt = conn.prepareStatement("UPDATE pista SET libre = ?;");
@@ -601,6 +618,7 @@ public class BD extends JFrame{
 		}
 	}
 	
+	//ACTUALIZAR LOS DATOS DE REUNION CAMBIANDO EL ESTADO A LIBRE
 	public void restartReunion() {
 		try {
 			PreparedStatement pstmt = conn.prepareStatement("UPDATE reunion SET libre = ?;");
@@ -611,6 +629,7 @@ public class BD extends JFrame{
 		}
 	}
 	
+	//EN EL CASO DE QUE RESERVES UNA CLASE DE ALGÚN DEPORTE INTRODUCIR EN LA TABLA CLASES LOS DATOS
 	public void eleccionClaseDeporte(Cliente cliente, String fecha, String tipo) {
 		
 		try {
@@ -627,6 +646,7 @@ public class BD extends JFrame{
 		
 	}
 	
+	//MIRAR QUE CLASES ESTÁN RESEVADAS PARA HOY
 	public void clasesHoy(DefaultTableModel modelo2) {
 	
 		JCalendar calendario = new JCalendar();
@@ -664,6 +684,7 @@ public class BD extends JFrame{
 		
 	}
 	
+	//ACTUALIZAR LOS DATOS DE SPA CAMBIANDO EL ESTADO A LIBRE
 	public void restartSpa() {
 		try {
 			PreparedStatement pstmt = conn.prepareStatement("UPDATE spa SET libre = ?;");
@@ -674,6 +695,7 @@ public class BD extends JFrame{
 		}
 	}
 	
+	//MIRAR CUANDO ESTÁ EL SPA LIBRE O NO Y ACTUALIZAR LA TABLA SPA CON EL ESTADO
 	public void eleccionDeSpaLibre(String fecha, String hora, String tipo){
 		
 		try (Statement stmt = (Statement) conn.createStatement()){
@@ -694,7 +716,7 @@ public class BD extends JFrame{
 		}
 		
 	}
-	
+	//MIRAR QUE SALAS ESTAN LIBRES O NO Y ACTUALIZAR LA TABLA REUNION CON EL ESTADO
 	public void eleccionDeReunionLibre(String fecha, String hora, String tipo){
 		
 		try (Statement stmt = (Statement) conn.createStatement()){
@@ -716,6 +738,7 @@ public class BD extends JFrame{
 		
 	}
 	
+	//MIRAR CUALES ESTAN OCUPADAS Y GUARDAR EN EL FICHERO
 	public List<String> reservasHabitacionPosibles(Cliente cliente){
 		List<String> reservas = new ArrayList<String>();
 		try (Statement stmt = (Statement) conn.createStatement()){

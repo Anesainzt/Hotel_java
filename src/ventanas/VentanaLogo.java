@@ -3,6 +3,7 @@ package ventanas;
 import java.awt.Graphics;
 import java.awt.Image;
 import java.io.File;
+import java.util.logging.Logger;
 
 import javax.sound.sampled.AudioSystem;
 import javax.sound.sampled.Clip;
@@ -17,6 +18,7 @@ public class VentanaLogo extends JFrame{
 	//FONDO QUE PONEMOS CON LA IMAGEN
 	FondoPanel fondo = new FondoPanel();
 	BD bd;
+	static Logger logger = Logger.getLogger(VentanaLogo.class.getName());
 	public VentanaLogo() {
 		
 		//HACEMOS UN HILO PARA PASAR A LA SIGUIENTE VENTANA TRAS ACABAR LA BIENVENIDA
@@ -49,7 +51,7 @@ public class VentanaLogo extends JFrame{
 			sonido.loop(0);
             		    
 		} catch (Exception e) {
-		    System.out.println("" + e);
+			logger.warning("" + e);
 		}
 		
         setContentPane(fondo);
@@ -62,7 +64,7 @@ public class VentanaLogo extends JFrame{
 			//DEJAMOS AL HILO DORMIDO, CUANDO "DESPIERTE", LA BIENVENIDA HABRÁ ACABADO Y PASAMOS A LA SIGUIENTE VENTANA
 			Thread.sleep(10*1000);
          } catch (Exception e) {
-            System.out.println(e);
+        	 logger.warning(e.getMessage());
          }
 		//INICIAMOS EL HILO
 		t.start();

@@ -715,4 +715,27 @@ public class BD extends JFrame{
 		}
 		
 	}
+	
+	public List<String> reservasHabitacionPosibles(Cliente cliente){
+		List<String> reservas = new ArrayList<String>();
+		try (Statement stmt = (Statement) conn.createStatement()){
+			
+			ResultSet rs = stmt.executeQuery("SELECT fechaEntrada, fechaSalida, tipo, num_habitacion FROM historialregistros WHERE usuario = '"+ cliente.getLogin() +"' AND libre = 1");
+			while (rs.next()) {
+				String fechaEntrada = rs.getString("fechaEntrada");
+				String fechaSalida = rs.getString("fechaSalida");
+				String tipo = rs.getString("tipo");
+				int num = rs.getInt("num_habitacion");
+				
+				String text = fechaEntrada + "; " + fechaSalida + "; " + tipo + "; " + num;
+				reservas.add(text);
+				
+			}
+		}catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return reservas;
+	}
+	
 }

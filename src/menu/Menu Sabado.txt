@@ -5,7 +5,7 @@ PRIMER PLATO:
 	-Revuelto de la casa
 	-Macarrones/Spaguettis a la bolognesa
 SEGUNDO PLATO:
-	-Lasaña de carne
+	-Lasagna de carne
 	-Merluza en salsa de marisco
 	-Cordero a la brasa
 POSTRES:

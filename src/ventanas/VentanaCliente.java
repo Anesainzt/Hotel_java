@@ -3,6 +3,8 @@ package ventanas;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.List;
+
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import hotel.*;
@@ -12,17 +14,21 @@ public class VentanaCliente extends JFrame{
 	JButton historial;
 	JButton nuevaReserva;
 	JButton salir;
+	JButton newServicio;
 	JTable historia;
 	DefaultTableModel modelo;
-	JPanel panel;
+	JPanel panelBotones;
+	JPanel panelTabla;
+	JPanel main;
 	JScrollPane scroll;
 	BD bd;
+
 	
 	public VentanaCliente(Cliente cliente) { 
 		
-		setLayout(new GridLayout(2,2));
 		
-		panel = new JPanel();
+		panelBotones = new JPanel();
+		panelTabla = new JPanel();
 		historial = new JButton("HISTORIAL DE RESERVA");
 		salir = new JButton("SALIR");
 		nuevaReserva = new JButton("NUEVA RESERVA");
@@ -50,7 +56,8 @@ public class VentanaCliente extends JFrame{
 				//LO HACEMOS VISIBLE
 				historia.setVisible(true);
 				historial.setVisible(false);
-				
+				main.add(panelTabla);
+				setSize(600, 500);
 			}
 		});
 		//LE LLEVAMOS A LA VENTANA DE ELECCION HABITACION PARA QUE HAGA UNA NUEVA RESERVA
@@ -62,6 +69,20 @@ public class VentanaCliente extends JFrame{
 				dispose();
 			}
 		});
+		
+		//LE DAMOS LA OPORTUNIDAD DE ELEGIR SERVICIOS EN HABITACIONES YA RESERVADAS
+		newServicio = new JButton("NUEVO SERVICIO");
+		
+		newServicio.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				// TODO Auto-generated method stub
+				
+				VentanaNuevoServicio ven = new VentanaNuevoServicio(cliente);
+				dispose();
+			}
+		});
 		//SI SOLO QUIERE VER SU HISTORIAL Y NADA MAS, PUEDE DARLE A SALIR Y TERMINAR
 		salir.addActionListener(new ActionListener() {
 			
@@ -70,14 +91,19 @@ public class VentanaCliente extends JFrame{
 				dispose();
 			}
 		});
-		
-		add(historial);
-		add(nuevaReserva);
-		add(salir);
-		add(scroll);
+		main = new JPanel();
+		main.setLayout(new BoxLayout(main, BoxLayout.Y_AXIS));
+		panelBotones.setLayout(new BoxLayout(panelBotones, BoxLayout.X_AXIS));
+		panelBotones.add(historial);
+		panelBotones.add(nuevaReserva);
+		panelBotones.add(newServicio);
+		panelBotones.add(salir);
+		panelTabla.add(scroll);
+		main.add(panelBotones);
+		add(main);
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
 		setTitle("Identificación del cliente");
-		setSize(800, 200);
+		setSize(600, 100);
 		setVisible(true);
 		historia.setVisible(false);
 	}

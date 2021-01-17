@@ -3,6 +3,8 @@ package ventanaServicios;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.logging.Logger;
+
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
@@ -19,7 +21,7 @@ public class VentanaSalaReunion extends JFrame{
 	JLabel salaReunion;
 	JButton continuar;
 	BD bd;
-	
+	static Logger logger = Logger.getLogger(VentanaSalaReunion.class.getName());
 	public VentanaSalaReunion(Cliente cliente) {
 		setLayout(new GridLayout(3, 1));
 		
@@ -118,7 +120,7 @@ public class VentanaSalaReunion extends JFrame{
 					bd.escribirFichero("horaPista", "11:00-11:50");
 				    VentanaReservaServicio vrs = new VentanaReservaServicio(cliente, 50, "SALA PETIT COMITÉ EQUIPADA");
 				}else {
-					System.out.println("TIENES QUE ELEGIR UN SERVICIO");
+					logger.info("TIENES QUE ELEGIR UN SERVICIO");
 					VentanaDeporte vd = new VentanaDeporte(cliente);
 				}
 				

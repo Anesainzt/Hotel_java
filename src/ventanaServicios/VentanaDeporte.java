@@ -3,6 +3,8 @@ package ventanaServicios;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.logging.Logger;
+
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
@@ -18,7 +20,7 @@ public class VentanaDeporte extends JFrame{
 	JComboBox<String> comboDeporte;
 	JLabel deporte;
 	JButton elegir;
-	
+	static Logger logger = Logger.getLogger(VentanaDeporte.class.getName());
 	BD bd;
 	public VentanaDeporte(Cliente cliente) {
 		setLayout(new GridLayout(3, 1));
@@ -120,7 +122,7 @@ public class VentanaDeporte extends JFrame{
 				}else if (comboDeporte.getSelectedItem().equals("(30€) CLASE FUTBOL-SALA ---> 17:00-19:00")){
 			    	VentanaReservaServicio vrs = new VentanaReservaServicio(cliente, 20, "CLASE FUTBOL-SALA");
 				}else {
-					System.out.println("TIENES QUE ELEGIR UN SERVICIO");
+					logger.info("TIENES QUE ELEGIR UN SERVICIO");
 					VentanaDeporte vd = new VentanaDeporte(cliente);
 				}
 				

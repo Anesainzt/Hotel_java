@@ -3,6 +3,8 @@ package ventanaServicios;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.logging.Logger;
+
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
@@ -15,7 +17,7 @@ public class VentanaMiniBar extends JFrame{
 	JComboBox<String> comboMiniBar;
 	JLabel miniBar;
 	JButton continuar;
-	
+	static Logger logger = Logger.getLogger(VentanaMiniBar.class.getName());
 	public VentanaMiniBar(Cliente cliente) {
 		setLayout(new GridLayout(3, 1));
 		
@@ -53,7 +55,7 @@ public class VentanaMiniBar extends JFrame{
 				}else if (comboMiniBar.getSelectedItem().equals("TODOS ---> 180€")){
 			    	VentanaReservaServicio vrs = new VentanaReservaServicio(cliente, 180, "TODOS");
 				}else {
-					System.out.println("TIENES QUE ELEGIR UN SERVICIO");
+					logger.info("TIENES QUE ELEGIR UN SERVICIO");
 					VentanaDeporte vd = new VentanaDeporte(cliente);
 				}
 				

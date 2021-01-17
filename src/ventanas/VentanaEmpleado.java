@@ -387,7 +387,7 @@ public class VentanaEmpleado extends JFrame{
 	        		}
 	        		break;
 	        }
-	        
+	        break;
     	case limpieza:
     		ArrayList<Integer> numHab = new ArrayList<Integer>();
     		limpiezaHabitacion = new JTable();

@@ -1,9 +1,9 @@
 package ventanas;
 
 import java.awt.Desktop;
-
+import java.awt.Graphics;
 import java.awt.GridLayout;
-
+import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
@@ -13,9 +13,8 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
-
+import java.util.List;
 import java.util.Scanner;
-import java.util.logging.Logger;
 
 import javax.swing.*;
 import javax.swing.border.Border;
@@ -24,12 +23,12 @@ import javax.swing.table.DefaultTableModel;
 import com.toedter.calendar.JCalendar;
 
 import hotel.*;
-
+import ventanas.VentanaLogo.FondoPanel;
 
 public class VentanaEmpleado extends JFrame{
 	
 	
-	
+	//HACEMOS UN ENUM PARA CADA CASO DE LA DIA DE LA SEMANA EN Cocina
 	public enum DiaSemana {
         Lunes,
         Martes,
@@ -39,7 +38,7 @@ public class VentanaEmpleado extends JFrame{
         Sabado,
         Domingo
     }
-	
+	//HACEMSO UN ENUM PARA CADA DEPARTAMENTO DE EMPLEADOS
 	public enum DepartamentoTrabajo{
 		cocina,
 		deporte,
@@ -51,7 +50,7 @@ public class VentanaEmpleado extends JFrame{
 	JCalendar calendario;
 	BD bd;
 	
-	//Cocina
+	//MENUS QUE TIENEN LOS COCINEROS
 	JLabel lunes;
 	JLabel lunesMenu;
 	JLabel martes;
@@ -73,8 +72,9 @@ public class VentanaEmpleado extends JFrame{
 	//Limpieza
 	JTable limpiezaHabitacion;
 	DefaultTableModel modelo;
+	//DEPORTE
 	DefaultTableModel modelo2;
-	Logger logger = Logger.getLogger(VentanaEmpleado.class.getName());
+	
 	public VentanaEmpleado(Empleado empleado) {
 		
 		bd = new BD();
@@ -85,6 +85,7 @@ public class VentanaEmpleado extends JFrame{
 			e1.printStackTrace();
 		}
 		
+		//CREAMSO LA PRIMERA PARTE DE VENTANAEMPLEADO, LA CUAL TIENEN TODOS LOS EMPLEADOS
 		JPanel documentos = new JPanel();
     	Border documentosBorder = BorderFactory.createTitledBorder("DOCUMENTOS");
     	documentos.setBorder(documentosBorder);
@@ -99,7 +100,6 @@ public class VentanaEmpleado extends JFrame{
 				        File myFile = new File("BOE.pdf");
 				        Desktop.getDesktop().open(myFile);
 				    } catch (IOException ex) {
-				    	logger.warning(ex + "");
 				        // no application registered for PDFs
 				    }
 				}
@@ -124,7 +124,6 @@ public class VentanaEmpleado extends JFrame{
 				        File myFile = new File("JustificanteEnfermedad.pdf");
 				        Desktop.getDesktop().open(myFile);
 				    } catch (IOException ex) {
-				    	logger.warning(ex + "");
 				        // no application registered for PDFs
 				    }
 				}
@@ -140,7 +139,6 @@ public class VentanaEmpleado extends JFrame{
     					File myFile = new File("calendarioAnual.pdf");
     					Desktop.getDesktop().open(myFile);
     				} catch (IOException ex) {
-    					logger.warning(ex + "");
     					// no application registered for PDFs
     				}
     			}
@@ -161,10 +159,12 @@ public class VentanaEmpleado extends JFrame{
     	documentos.add(calendarioAnual);
     	documentos.add(salir);
     	
+    	//INFORMACION DEL EMPLEADO
+    	
     	JPanel informacion = new JPanel();
     	Border informacionBorder = BorderFactory.createTitledBorder("INFORMACION");
     	informacion.setBorder(informacionBorder);
-    	informacion.setLayout(new GridLayout(4, 2));
+    	informacion.setLayout(new GridLayout(3, 2));
     	
     	JLabel nombre = new JLabel("NOMBRE: ");
     	JLabel nombreEmpleado = new JLabel(empleado.getNombre());
@@ -172,8 +172,6 @@ public class VentanaEmpleado extends JFrame{
     	JLabel apellidoEmpleado = new JLabel(empleado.getApellido());
     	JLabel dpto = new JLabel("DEPARTAMENTO: ");
     	JLabel departamentoEmpleado = new JLabel(empleado.getDepartamento());
-    	JLabel jefe = new JLabel("JEFE: ");
-    	JLabel jefeEmpleado = new JLabel(empleado.getUsuarioJefe());
     	
     	informacion.add(nombre);
     	informacion.add(nombreEmpleado);
@@ -181,8 +179,8 @@ public class VentanaEmpleado extends JFrame{
     	informacion.add(apellidoEmpleado);
     	informacion.add(dpto);
     	informacion.add(departamentoEmpleado);
-    	informacion.add(jefe);
-    	informacion.add(jefeEmpleado);
+    	
+    	//DEPENDE DE QUE DEPARTAMENTO SEA SE ANYADIRAN DISTINTAS COSAS
     	
     	JPanel trabajo = new JPanel();
     	Border trabajoBorder = BorderFactory.createTitledBorder("DEPARTAMENTO");
@@ -240,6 +238,7 @@ public class VentanaEmpleado extends JFrame{
 	        				menuDia.setEditable(true);
 	        			}
 	        		} catch (FileNotFoundException e2) {
+	        			// 	TODO Auto-generated catch block
 	        			e2.printStackTrace();
 	        		}
 	        		break;
@@ -398,8 +397,7 @@ public class VentanaEmpleado extends JFrame{
     	case limpieza:
     		ArrayList<Integer> numHab = new ArrayList<Integer>();
     		limpiezaHabitacion = new JTable();
-    		//habitaciones que esten ocupadas hoy
-    		
+    		//NUMERO DE LAS HABITACION QUE ESTEN OCUPADAS HOY
     		numHab = bd.updateOcupadasHoy();
     		
     		modelo = (DefaultTableModel)limpiezaHabitacion.getModel();
@@ -499,6 +497,7 @@ public class VentanaEmpleado extends JFrame{
     		modelo.addColumn("Hora");
     		modelo.addColumn("Numero de pista");
     		modelo.addColumn("Tipo de pista");
+    		//NOS DEVUELVE LAS PISTAS CON SU NUMERO Y MODELO QUE ESTAN RESERVADAS HOY
     		bd.pistasReservadasHoy(modelo);
     		izq.add(scroll);
     		
@@ -507,6 +506,7 @@ public class VentanaEmpleado extends JFrame{
     		modelo2 = (DefaultTableModel)clases.getModel();
     		modelo2.addColumn("Usuario");
     		modelo2.addColumn("Tipo de clase");
+    		//NOS DEVUELVE LOS USUARIOS QUE SE AHN APUNTADO A UNA CLASE Y DE QUÉ VA ESA CLASE
     		bd.clasesHoy(modelo2);
     		drch.add(scroll2);
     		
@@ -516,10 +516,93 @@ public class VentanaEmpleado extends JFrame{
     		trabajo.setLayout(new BoxLayout(trabajo, BoxLayout.X_AXIS));
     		break;
     		
+    	case atencionCliente:
+    		
+    		JButton pricipios = new JButton("PRINCIPIOS DE \nATENCION AL CLIENTE");
+    		pricipios.addActionListener(new ActionListener() {
+    			@Override
+    			public void actionPerformed(ActionEvent e) {
+    				if (Desktop.isDesktopSupported()) {
+    				    try {
+    				        File myFile = new File("AtencionAlCliente.pdf");
+    				        Desktop.getDesktop().open(myFile);
+    				    } catch (IOException ex) {
+    				        // no application registered for PDFs
+    				    }
+    				}
+    			}
+    		});
+    		trabajo.add(pricipios);
+    		
+    		JButton primeraPlanta2 = new JButton("PRIMERA PLANTA");
+    		JButton segundaPlanta2 = new JButton("SEGUNDA PLANTA");
+    		JButton terceraPlanta2 = new JButton("TERCERA PLANTA");
+    		JButton cuartaPlanta2 = new JButton("CUARTA PLANTA");
+    		JButton quintaPlanta2 = new JButton("QUINTA PLANTA");
+    		JButton sextaPlanta2 = new JButton("SEXTA PLANTA");
+    		
+    		trabajo.add(primeraPlanta2);
+    		trabajo.add(segundaPlanta2);
+    		trabajo.add(terceraPlanta2);
+    		trabajo.add(cuartaPlanta2);
+    		trabajo.add(quintaPlanta2);
+    		trabajo.add(sextaPlanta2);
+    		   		
+    		primeraPlanta2.addActionListener(new ActionListener() {
+				
+				@Override
+				public void actionPerformed(ActionEvent arg0) {
+					VentanaMapa vm = new VentanaMapa("/imagen/primeraPlanta.jpg", empleado);
+					dispose();
+				}
+			});
+    		segundaPlanta2.addActionListener(new ActionListener() {
+    			
+    			@Override
+    			public void actionPerformed(ActionEvent arg0) {
+    				VentanaMapa vm = new VentanaMapa("/imagen/segundaPlanta.jpg", empleado);
+    				dispose();
+    			}
+    		});
+    		terceraPlanta2.addActionListener(new ActionListener() {
+    			
+    			@Override
+    			public void actionPerformed(ActionEvent arg0) {
+    				VentanaMapa vm = new VentanaMapa("/imagen/terceraPlanta.jpg", empleado);
+    				dispose();
+    			}
+    		});
+    		cuartaPlanta2.addActionListener(new ActionListener() {
+    			
+    			@Override
+    			public void actionPerformed(ActionEvent arg0) {
+    				VentanaMapa vm = new VentanaMapa("/imagen/cuartaPlanta.jpg", empleado);
+    				dispose();
+    			}
+    		});
+    		quintaPlanta2.addActionListener(new ActionListener() {
+    			
+    			@Override
+    			public void actionPerformed(ActionEvent arg0) {
+    				VentanaMapa vm = new VentanaMapa("/imagen/quintaPlanta.jpg", empleado);
+    				dispose();
+    			}
+    		});
+    		sextaPlanta2.addActionListener(new ActionListener() {
+    			
+    			@Override
+    			public void actionPerformed(ActionEvent arg0) {
+    				VentanaMapa vm = new VentanaMapa("/imagen/sextaPlanta.jpg", empleado);
+    				dispose();
+    			}
+    		});
+    		
+    		
+    		break;
+    		
 	    default:
     		break;
 	    	
-	        
     	}
     	JPanel main = new JPanel();
     	main.setLayout(new BoxLayout(main, BoxLayout.Y_AXIS));

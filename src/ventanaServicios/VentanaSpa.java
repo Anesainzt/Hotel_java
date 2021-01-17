@@ -16,7 +16,7 @@ import hotel.Cliente;
 import ventanas.VentanaReservaServicio;
 
 public class VentanaSpa extends JFrame{
-	
+	//VENTANA PARA ELECCION DE RESERVA DE SPA
 	JComboBox<String> comboSpa;
 	JLabel spa;
 	JButton continuar;
@@ -24,7 +24,7 @@ public class VentanaSpa extends JFrame{
 	static Logger logger = Logger.getLogger(VentanaSpa.class.getName());
 	public VentanaSpa(Cliente cliente) {
 		setLayout(new GridLayout(3, 1));
-		
+		//CONECTAMOS CON LA BASE DE DATOS
 		bd = new BD();
 		
 		try {
@@ -37,7 +37,7 @@ public class VentanaSpa extends JFrame{
 		
 		spa = new JLabel("SPA: ");
 		continuar = new JButton("CONTINUAR");
-				
+		//AGREGAMOS TODAS LAS POSIBLES ELECCIONES
 		comboSpa.addItem("(50€) MASAJE FACIAL ---> 09:00-09:50");
 		comboSpa.addItem("(50€) MASAJE FACIAL ---> 10:00-10:50");
 		comboSpa.addItem("(50€) MASAJE FACIAL ---> 11:00-11:50");
@@ -64,7 +64,7 @@ public class VentanaSpa extends JFrame{
 		comboSpa.addItem("(90€) TRATAMIENTO ESTÉTICO ---> 10:00-10:50");
 		comboSpa.addItem("(90€) TRATAMIENTO ESTÉTICO ---> 11:00-11:50");
 		comboSpa.addItem("(90€) TRATAMIENTO ESTÉTICO ---> 12:00-12:50");
-		
+		//AL ELEGIR UNA SE GUARDA LA HORA EN UN FICHERO Y CONTINUAMOS CON LA RESERVA
 		continuar.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {

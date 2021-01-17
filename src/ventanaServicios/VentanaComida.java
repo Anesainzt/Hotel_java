@@ -14,7 +14,7 @@ import ventanas.VentanaMapa;
 import ventanas.VentanaReservaServicio;
 
 public class VentanaComida extends JFrame{
-
+	//VENTANA QUE MUESTRA EL COMBO DE COMIDAS PARA QUE EL USUARIO ELIJA
 	JComboBox<String> comboComida;
 	JLabel comida;
 	JButton continuar;
@@ -26,7 +26,7 @@ public class VentanaComida extends JFrame{
 		
 		comida = new JLabel("COMIDA: ");
 		continuar = new JButton("ELEGIR RESTAURANTE");
-		
+		//AÑADIMOS LOS RESTAURANTES CON SUS PRECIOS AL COMBO
 		comboComida.addItem("MCDONALDS ---> 30€");
 		comboComida.addItem("BURGER KING ---> 30€");
 		comboComida.addItem("FOSTERS HOLLYWOOD ---> 40€");
@@ -35,7 +35,7 @@ public class VentanaComida extends JFrame{
 		comboComida.addItem("DONGA ---> 60€");
 		comboComida.addItem("MENU DEL DIA HOTEL ---> 150€");
 		comboComida.addItem("BUFFET HOTEL ---> 110€");
-		
+		//AL SELECCIONAR UNO LE LLEVAMOS A OTRA VENTANA PARA QUE RESERVE EL DIA
 		continuar.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
@@ -56,6 +56,7 @@ public class VentanaComida extends JFrame{
 				}else if(comboComida.getSelectedItem().equals("BUFFET HOTEL ---> 110€")){
 			    	VentanaReservaServicio vrs = new VentanaReservaServicio(cliente, 110, "BUFFET HOTEL");
 				}else {
+					//SI NO ELIGE NINGUNO, PUEDE DARLE A QUE NO QUIERE NINGUN SERVICIO, DE MODO QUE LE VOLVEMOS A PONER LA VENTANA
 					logger.info("TIENES QUE ELEGIR UN SERVICIO");
 					VentanaComida vc = new VentanaComida(cliente);
 				}

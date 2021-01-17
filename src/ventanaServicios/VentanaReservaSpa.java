@@ -20,6 +20,7 @@ import ventanas.VentanaContinuacion;
 import ventanas.VentanaReservaServicio;
 
 public class VentanaReservaSpa extends JFrame{
+	//VETANA PARA RESRVAR LA SESION DE SPA
 	JButton boton;
 	JButton vueltaSpa;
 	JButton vueltaFecha;
@@ -30,16 +31,16 @@ public class VentanaReservaSpa extends JFrame{
 	List<JButton> botones;
 	
 	public VentanaReservaSpa(Cliente cliente, String fecha, String tipo, int precio) {
-		
+		//CONECTAMOS CON LA BASE DE DATOS
 		bd= new BD();
 		try {
 			bd.connect();
 		} catch (BDException e1) {
 			e1.printStackTrace();
 		}
-		
+		//RECUPERAMOS EL HORARIO QUE HA ELEGIDO ANTERIORMENTE
 		String hora = bd.getHoraReserva("horaPista");
-		
+		//MOSTRAMOS LAS SESIONES LIBRES DE SPA
 		bd.eleccionDeSpaLibre(fecha, hora, tipo);
 		
 		
@@ -48,7 +49,7 @@ public class VentanaReservaSpa extends JFrame{
     	pistas.setBorder(pistasBorder);
     	pistas.setLayout(new GridLayout(1, 1));
     	pistas.setSize(100, 100);
-		
+		//AL ELEGIR UNA SESION SE GUARDA EN LA BASE DE DATOS
 		botones = bd.botonesReservarSpa(tipo);
 		
 		for (JButton boton : botones) {
@@ -74,7 +75,7 @@ public class VentanaReservaSpa extends JFrame{
     	cambioEleccion.setBorder(cambioEleccionBorder);
     	cambioEleccion.setLayout(new GridLayout(3, 1));
     	cambioEleccion.setSize(100, 100);
-    	
+    	//PUEDE ELEGIR OTRA FECHA PARA LA SESION EN CASO DE QUE ESTEN TODAS OCUPADAS
     	vueltaFecha = new JButton("ELEGIR NUEVA FECHA");
 		
     	vueltaFecha.addActionListener(new ActionListener() {
@@ -88,7 +89,7 @@ public class VentanaReservaSpa extends JFrame{
 			}
 			
 		});
-    	
+    	//PUEDE ELEGIR OTRO TIPO DE SERVICIO DE SPA
     	vueltaSpa = new JButton("ELEGIR OTRA SESION");
     	
     	vueltaSpa.addActionListener(new ActionListener() {
@@ -103,7 +104,7 @@ public class VentanaReservaSpa extends JFrame{
 				dispose();
 			}
 		});
-    	
+    	//PUEDE CONTINUAR SIN HACER LA RESERVA
     	continuarSinPista = new JButton("CONTINUAR SIN RESERVAR");
     	
     	continuarSinPista.addActionListener(new ActionListener() {

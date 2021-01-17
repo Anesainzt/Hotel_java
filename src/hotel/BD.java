@@ -33,7 +33,7 @@ public class BD extends JFrame{
 	private Connection conn = null;
 	private static Logger logger = Logger.getLogger(BD.class.getName());
 	
-	//ESCRIBIR EN LOS FICHEROS
+	//METODO PARA ESCRIBIR EN LOS FICHEROS
 	public void escribirFichero(String fichero, String texto) {
 		PrintWriter pw = null;
 		try {
@@ -84,7 +84,7 @@ public class BD extends JFrame{
 			logger.warning(e2.getMessage());
 		} 	
 	}
-	
+	//PONEMOS AL DIA LAS HABITACIONES PARA SABER CUALES QUEDAN DISPONIBLES
 	public void ponerAlDiaBD() {
 		
 		try(Statement stmt = (Statement) conn.createStatement();){
@@ -160,7 +160,7 @@ public class BD extends JFrame{
 			e.printStackTrace();
 		}
 	}
-	
+	//OBTENEMOS LA INFORMACION DE LOS EMPLEADOS
 	public Empleado empleado(String usu, String password) {
 		Empleado emp = new Empleado();
 		
@@ -196,7 +196,7 @@ public class BD extends JFrame{
 		} 
 		return emp;
 	}
-	
+	//VEMOS LAS PISTAS QUE ESTAN RESERVADAS PARA EL DIA DE HOY
 	public void pistasReservadasHoy(DefaultTableModel modelo) {
 		
 		JCalendar calendario = new JCalendar();
@@ -240,7 +240,7 @@ public class BD extends JFrame{
 			logger.warning(e2.getMessage());
 		}
 	}
-	
+	//OBTENEMOS LOS DATOS DEL CLIENTE
 	public Cliente cliente(String usu, String password) {
 		Cliente cl = new Cliente();
 		try(Statement stmt = (Statement) conn.createStatement()) {
@@ -301,7 +301,7 @@ public class BD extends JFrame{
 			logger.warning(e2.getMessage());
 		}
 	}
-	
+	//PONEMOS AL DIA LAS HABITACIONES
 	public void calendario(String type, String dia, String mes, String year, String fechaInc) {
 		try(Statement stmt = (Statement) conn.createStatement()) {
 			
@@ -312,10 +312,11 @@ public class BD extends JFrame{
 				String fechaSalidaBD = res.getString("fechaSalida");
 				String fechaEntradaBD = res.getString("fechaEntrada");
 				int numero = res.getInt("num_habitacion");
-				
+				//se mira la fecha de salida separada con el -
 				String[] partSalidaBD = fechaSalidaBD.split("-");
-				
+				//se quita el guion
 				String salidaBD = partSalidaBD[0] +partSalidaBD[1] +partSalidaBD[2];
+				//lo pasamos a integer
 				int compSalidaBD = Integer.parseInt(salidaBD);
 				
 				String salidaSelect = "";
@@ -345,7 +346,7 @@ public class BD extends JFrame{
 				
 				String entradaSelect = partEntrada[0] +partEntrada[1] +partEntrada[2];
 				int compEntradaSelect = Integer.parseInt(entradaSelect);
-				
+				//se mira si la fecha es mayor o menos a la de hoy para dejar la habitacion libre u ocupada
 				if ((compEntradaSelect < compEntradaBD && compSalidaSelect < compEntradaBD) || (compEntradaSelect > compSalidaBD && compSalidaSelect > compSalidaBD)){
 				
 					PreparedStatement pstmt = conn.prepareStatement("UPDATE habitacion SET libre = ? WHERE num_habitacion = ?");
@@ -560,7 +561,7 @@ public class BD extends JFrame{
 	}
 	
 	
-	//MIRA EL ESTADO DE LA SALA SI ESTA LIBRE SE PONE VERDE Y SE PUEDE SELECCIONAR Y SI ESTA ROJO ESTA OCUPADA
+	//MIRA EL ESTADO DE LA SALA SI ESTA LIBRE SE PONE VERDE Y SE PUEDE SELECCIONAR; SI ESTA ROJO ESTA OCUPADA
 	public List<JButton> botonesReservarReunion(String tipo){
 		List<JButton> listaBotones = new ArrayList<JButton>();
 		JButton boton;
@@ -738,7 +739,7 @@ public class BD extends JFrame{
 		
 	}
 	
-	//MIRAR CUALES ESTAN OCUPADAS Y GUARDAR EN EL FICHERO
+	//MIRAR LAS HABITACIONES QUE ESTAN OCUPADAS Y GUARDAR EN EL FICHERO
 	public List<String> reservasHabitacionPosibles(Cliente cliente){
 		List<String> reservas = new ArrayList<String>();
 		try (Statement stmt = (Statement) conn.createStatement()){

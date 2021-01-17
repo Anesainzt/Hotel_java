@@ -16,7 +16,7 @@ import hotel.Cliente;
 import ventanas.VentanaReservaServicio;
 
 public class VentanaDeporte extends JFrame{
-
+	//VENTANA PARA MOSTRAR LAS CLASES Y PISTAS QUE PUEDE RESERVAR Y SUS RESPECTIVOS PRECIOS Y HORAS
 	JComboBox<String> comboDeporte;
 	JLabel deporte;
 	JButton elegir;
@@ -24,7 +24,7 @@ public class VentanaDeporte extends JFrame{
 	BD bd;
 	public VentanaDeporte(Cliente cliente) {
 		setLayout(new GridLayout(3, 1));
-		
+		//NOS CONECTAMOS A LA BASE DE DATOS PARA PODER ESCRIBIR EN EL METODO DE LOS FICHEROS
 		bd = new BD();
 		
 		try {
@@ -37,7 +37,7 @@ public class VentanaDeporte extends JFrame{
 		
 		deporte = new JLabel("DEPORTE: ");
 		elegir = new JButton("ELEGIR PISTA");
-		
+		//AÑADIMOS AL COMBO LAS SELECCIONES
 		comboDeporte.addItem("(15€) PISTA PADDLE ---> 09:00-09:50");
 		comboDeporte.addItem("(15€) PISTA PADDLE ---> 10:00-10:50");
 		comboDeporte.addItem("(15€) PISTA PADDLE ---> 11:00-11:50");
@@ -59,7 +59,7 @@ public class VentanaDeporte extends JFrame{
 		comboDeporte.addItem("(15€) CLASE NATACION ---> 17:00-19:00");
 		comboDeporte.addItem("(30€) CLASE BALONCESTO ---> 17:00-19:00");
 		comboDeporte.addItem("(20€) CLASE FUTBOL-SALA ---> 17:00-19:00");
-		
+		//AL ELEGIR UNA, SE ESCRIBE EL HORARIO EN EL FICHERO Y SE LE LLEVA A UNA VENTANA PARA RESERVAR
 		elegir.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {

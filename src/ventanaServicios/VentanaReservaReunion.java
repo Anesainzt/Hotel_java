@@ -20,6 +20,7 @@ import ventanas.VentanaContinuacion;
 import ventanas.VentanaReservaServicio;
 
 public class VentanaReservaReunion extends JFrame{
+	//VENTANA PARA RESERVAR LA SALA DE LA REUNION
 	JButton boton;
 	JButton vueltaReunion;
 	JButton vueltaFecha;
@@ -30,16 +31,16 @@ public class VentanaReservaReunion extends JFrame{
 	List<JButton> botones;
 	
 	public VentanaReservaReunion(Cliente cliente, String fecha, String tipo, int precio) {
-		
+		//CONECTAMOS CON LA BASE DE DATOS
 		bd= new BD();
 		try {
 			bd.connect();
 		} catch (BDException e1) {
 			e1.printStackTrace();
 		}
-		
+		//GUARDAMOS LA HORA DE LA RESERVA ELEGIDA ANTERIORMENTE
 		String hora = bd.getHoraReserva("horaPista");
-		
+		//LE MOSTRAMOS LAS SALAS DE REUNION QUE HAY LIBRES
 		bd.eleccionDeReunionLibre(fecha, hora, tipo);
 		
 		pistas = new JPanel();
@@ -47,7 +48,7 @@ public class VentanaReservaReunion extends JFrame{
     	pistas.setBorder(pistasBorder);
     	pistas.setLayout(new GridLayout(1, 1));
     	pistas.setSize(100, 100);
-		
+		//AL CLICAR EN UNA REUNIOIN SE GUARDA LA RESERVA EN LA BASE DE DATOS
 		botones = bd.botonesReservarReunion(tipo);
 		
 		for (JButton boton : botones) {
@@ -73,7 +74,7 @@ public class VentanaReservaReunion extends JFrame{
     	cambioEleccion.setBorder(cambioEleccionBorder);
     	cambioEleccion.setLayout(new GridLayout(3, 1));
     	cambioEleccion.setSize(100, 100);
-    	
+    	//SI NO HAY SALAS LIBRES EN ESA FECHA PUEDE CAMBIAR DE FECHA PARA ELEGIR OTRO DIA QUE SI HAYA LIBRES
     	vueltaFecha = new JButton("ELEGIR NUEVA FECHA");
 		
     	vueltaFecha.addActionListener(new ActionListener() {
@@ -87,7 +88,7 @@ public class VentanaReservaReunion extends JFrame{
 			}
 			
 		});
-    	
+    	//SI HA DECIDIDO CAMBIAR DE SALA PUEDE VOLVER ATRAS Y RESERVAR OTRA SALA
     	vueltaReunion = new JButton("ELEGIR OTRA SALA");
     	
     	vueltaReunion.addActionListener(new ActionListener() {
@@ -102,7 +103,7 @@ public class VentanaReservaReunion extends JFrame{
 				dispose();
 			}
 		});
-    	
+    	//SI HA DECIDIDO QUE YA NO QUIERE RESERVAR LA SALA, PUEDE CONTINUAR SIN HACER LA RESERVA
     	continuarSinPista = new JButton("CONTINUAR SIN RESERVAR");
     	
     	continuarSinPista.addActionListener(new ActionListener() {

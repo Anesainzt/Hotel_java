@@ -16,7 +16,7 @@ import hotel.Cliente;
 import ventanas.VentanaReservaServicio;
 
 public class VentanaSalaReunion extends JFrame{
-
+	//VENTANA PARA MOSTRAR LOS SERVICIOS SE SALA DE REUNIONES
 	JComboBox<String> comboSalaReunion;
 	JLabel salaReunion;
 	JButton continuar;
@@ -24,7 +24,7 @@ public class VentanaSalaReunion extends JFrame{
 	static Logger logger = Logger.getLogger(VentanaSalaReunion.class.getName());
 	public VentanaSalaReunion(Cliente cliente) {
 		setLayout(new GridLayout(3, 1));
-		
+		//CONECTAMOS CON LA BASE DE DATOS
 		bd = new BD();
 		
 		try {
@@ -37,7 +37,7 @@ public class VentanaSalaReunion extends JFrame{
 		
 		salaReunion = new JLabel("SALA REUNION: ");
 		continuar = new JButton("ELEGIR SALA");
-		
+		//AGREGAMOS AL COMBO TODAS LAS  POSIBLES ELECCIONES
 		comboSalaReunion.addItem("(80€) SALA CONVENCION (100 personas) ---> 09:00-09:50");
 		comboSalaReunion.addItem("(80€) SALA CONVENCION (100 personas) ---> 10:00-10:50");
 		comboSalaReunion.addItem("(80€) SALA CONVENCION (100 personas) ---> 11:00-11:50");
@@ -56,7 +56,7 @@ public class VentanaSalaReunion extends JFrame{
 		comboSalaReunion.addItem("(50€) SALA PETIT COMITÉ EQUIPADA ---> 09:00-09:50");
 		comboSalaReunion.addItem("(50€) SALA PETIT COMITÉ EQUIPADA ---> 10:00-10:50");
 		comboSalaReunion.addItem("(50€) SALA PETIT COMITÉ EQUIPADA ---> 11:00-11:50");
-		
+		//AL ELEGIR UNA SE GUARDA LA HORA EN UN FICHERO Y CONTINUAMOS CON LA RESERVA
 		continuar.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {

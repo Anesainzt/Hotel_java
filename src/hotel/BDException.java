@@ -1,5 +1,5 @@
 package hotel;
-
+//CLASE PARA LAS EXCEPCIOINES DE LA BASE DE DATOS
 public class BDException extends Exception {
 	private static final long serialVersionUID = 1L;
 

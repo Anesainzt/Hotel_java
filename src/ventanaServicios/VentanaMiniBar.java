@@ -13,7 +13,7 @@ import hotel.Cliente;
 import ventanas.VentanaReservaServicio;
 
 public class VentanaMiniBar extends JFrame{
-
+	//VENTANA PARA ELEGIR EL SERVICIO DE MINIBAR
 	JComboBox<String> comboMiniBar;
 	JLabel miniBar;
 	JButton continuar;
@@ -25,7 +25,7 @@ public class VentanaMiniBar extends JFrame{
 		
 		miniBar = new JLabel("MINI BAR: ");
 		continuar = new JButton("CONTINUAR");
-		
+		//AGREGAMOS LAS BOTELLAS QUE PUEDE ELEGIR
 		comboMiniBar.addItem("VODKA ---> 30€");
 		comboMiniBar.addItem("GINEBRA ---> 30€");
 		comboMiniBar.addItem("WHISKEY ---> 50€");
@@ -34,7 +34,7 @@ public class VentanaMiniBar extends JFrame{
 		comboMiniBar.addItem("ELECCION DE DOS (DIFERENTES) ---> 90€");
 		comboMiniBar.addItem("ELECCION DE TRES (DIFERENTES) ---> 140€");
 		comboMiniBar.addItem("TODOS ---> 180€");
-		
+		//AL ELEGIR UNA LE LLEVAMOS A UNA VENTANA PARA QUE RESERVE EL DIA QUE LA QUIERE
 		continuar.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {

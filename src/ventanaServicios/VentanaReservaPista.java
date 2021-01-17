@@ -21,7 +21,7 @@ import ventanas.VentanaContinuacion;
 import ventanas.VentanaReservaServicio;
 
 public class VentanaReservaPista extends JFrame{
-
+	//VENTANA PARA RESERVAR LA PISTA DEL DEPORTE QUE HA SELECCIONADO
 	JButton boton;
 	JButton vueltaDeporte;
 	JButton vueltaFecha;
@@ -32,16 +32,16 @@ public class VentanaReservaPista extends JFrame{
 	List<JButton> botones;
 	
 	public VentanaReservaPista(Cliente cliente, String fecha, String tipo, int precio) {
-		
+		//CONECTAMOS CON LA BASE DE DATOS
 		bd= new BD();
 		try {
 			bd.connect();
 		} catch (BDException e1) {
 			e1.printStackTrace();
 		}
-		
+		//OBTENEMOS LA HORA A LA QUE HA ESCOGIDO LA PISTA
 		String hora = bd.getHoraReserva("horaPista");
-		
+		//LE MOSTRAMOS LAS PISTAS PARA QUE SELECCIONE ALGUNA LIBRE
 		bd.eleccionDePistasLibres(fecha, hora, tipo);
 		
 		
@@ -50,7 +50,7 @@ public class VentanaReservaPista extends JFrame{
     	pistas.setBorder(pistasBorder);
     	pistas.setLayout(new GridLayout(1, 1));
     	pistas.setSize(100, 100);
-		
+		//AL ELEGIR LA PISTA, SE GUARDA LA RESERVA Y CONTINUAMOS CON LA RESERVA
 		botones = bd.botonesReservarPista(tipo);
 		
 		for (JButton boton : botones) {
@@ -76,7 +76,7 @@ public class VentanaReservaPista extends JFrame{
     	cambioEleccion.setBorder(cambioEleccionBorder);
     	cambioEleccion.setLayout(new GridLayout(3, 1));
     	cambioEleccion.setSize(100, 100);
-    	
+    	//SI ESTAN TODAS LAS PISTAS OCUPADAS PARA ESE DIA PUEDE VOLVER A ELEGIR OTRA FECHA
     	vueltaFecha = new JButton("ELEGIR NUEVA FECHA");
 		
     	vueltaFecha.addActionListener(new ActionListener() {
@@ -90,7 +90,7 @@ public class VentanaReservaPista extends JFrame{
 			}
 			
 		});
-    	
+    	//SI NO HAY PISTAS LIBRES O HA DECIDIDO CAMBIAR DE DEPORTE, PUEDE DARLE A ESTE BOTON PARA ELEGIR UNO NUEVO
     	vueltaDeporte = new JButton("ELEGIR OTRA PISTA");
     	
     	vueltaDeporte.addActionListener(new ActionListener() {
@@ -105,7 +105,7 @@ public class VentanaReservaPista extends JFrame{
 				dispose();
 			}
 		});
-    	
+    	//SI AL FINAL HA DECIDIDO NO QUERE RESERVARLO, PUEDE CONTINUAR SIN HACER LA RESERVA
     	continuarSinPista = new JButton("CONTINUAR SIN RESERVAR");
     	
     	continuarSinPista.addActionListener(new ActionListener() {

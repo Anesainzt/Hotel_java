@@ -7,6 +7,7 @@ import hotel.BD;
 import hotel.BDException;
 import hotel.Cliente;
 import ventanaServicios.VentanaReservaPista;
+import ventanaServicios.VentanaReservaReunion;
 import ventanaServicios.VentanaReservaSpa;
 
 import java.awt.Color;
@@ -162,7 +163,7 @@ public class VentanaReservaServicio extends JFrame{
 					VentanaReservaSpa vrs = new VentanaReservaSpa(cliente, fechaRegistro, tipo, precio);
 		    		dispose();
 				}else{
-					VentanaContinuacion vc = new VentanaContinuacion(cliente);
+					VentanaReservaReunion vrr = new VentanaReservaReunion(cliente, fechaRegistro, tipo, precio);
 					dispose();
 				}	    	
 		    	

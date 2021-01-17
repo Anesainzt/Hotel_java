@@ -56,7 +56,6 @@ public class VentanaSeleccionHabitacion extends JFrame{
 				 
 			 }
 		} catch (FileNotFoundException e2) {
-			// TODO Auto-generated catch block
 			e2.printStackTrace();
 		}
 		//CONECTAMOS LA BASE DE DATOS
@@ -64,7 +63,6 @@ public class VentanaSeleccionHabitacion extends JFrame{
 		try {
 			bd.connect();
 		} catch (BDException e2) {
-			// TODO Auto-generated catch block
 			e2.printStackTrace();
 		}
 		//ELEGIMOS LA HABITACION QUE QUEREMOS Y LA GUARDAMOS

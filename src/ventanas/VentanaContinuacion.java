@@ -46,17 +46,9 @@ public class VentanaContinuacion extends JFrame{
 					e2.printStackTrace();
 				}
 				
-				BufferedWriter bw2;
-				try {
-					bw2 = new BufferedWriter(new FileWriter("horaSpa"));
-					bw2.write("");
-					bw2.close();
-				} catch (IOException e1) {
-					e1.printStackTrace();
-				}
-				
 				bd.restartPistas();
 				bd.restartSpa();
+				bd.restartReunion();
 				
 				VentanaServicios vs = new VentanaServicios(cliente);
 				dispose();

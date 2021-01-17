@@ -188,7 +188,7 @@ public class BD extends JFrame{
 		return emp;
 	}
 	
-public void pistasReservadasHoy(DefaultTableModel modelo) {
+	public void pistasReservadasHoy(DefaultTableModel modelo) {
 		
 		JCalendar calendario = new JCalendar();
 		String year = Integer.toString(calendario.getCalendar().get(java.util.Calendar.YEAR));
@@ -546,6 +546,34 @@ public void pistasReservadasHoy(DefaultTableModel modelo) {
 		return listaBotones;
 	}
 	
+	public List<JButton> botonesReservarReunion(String tipo){
+		List<JButton> listaBotones = new ArrayList<JButton>();
+		JButton boton;
+		try (Statement stmt = (Statement) conn.createStatement()){
+			
+			ResultSet rs = stmt.executeQuery("SELECT num_reunion, libre FROM reunion WHERE tipo = '"+ tipo +"'");
+			
+			while(rs.next()) {
+				int numero = rs.getInt("num_reunion");
+				int libre = rs.getInt("libre");
+				
+				boton = new JButton("" + numero);
+				if (libre == 0) {
+					boton.setBackground(Color.GREEN);
+					boton.setEnabled(true);
+					
+				} else {
+					boton.setBackground(Color.RED);
+					boton.setEnabled(false);	
+				}
+				listaBotones.add(boton);
+			}	
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return listaBotones;
+	}
+	
 	public void registrarReservaPista(Cliente cliente, String fecha, String hora, String num, String tipo) {
 		try {
 			PreparedStatement pstmt = conn.prepareStatement("INSERT INTO reservapista VALUES(?, ?, ?, ?, ?, ?);");
@@ -566,6 +594,16 @@ public void pistasReservadasHoy(DefaultTableModel modelo) {
 	public void restartPistas() {
 		try {
 			PreparedStatement pstmt = conn.prepareStatement("UPDATE pista SET libre = ?;");
+			pstmt.setInt(1, 0);
+			pstmt.execute();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+	
+	public void restartReunion() {
+		try {
+			PreparedStatement pstmt = conn.prepareStatement("UPDATE reunion SET libre = ?;");
 			pstmt.setInt(1, 0);
 			pstmt.execute();
 		} catch (Exception e) {
@@ -645,6 +683,27 @@ public void pistasReservadasHoy(DefaultTableModel modelo) {
 				String tipoPista = rs.getString("tipo");
 				
 				PreparedStatement pstmt = conn.prepareStatement("UPDATE spa SET libre = ? WHERE num_spa = ? AND tipo = ?");
+				pstmt.setInt(1, 1);
+				pstmt.setInt(2, numero);
+				pstmt.setString(3, tipoPista);
+				pstmt.execute();
+			}
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+	}
+	
+	public void eleccionDeReunionLibre(String fecha, String hora, String tipo){
+		
+		try (Statement stmt = (Statement) conn.createStatement()){
+			ResultSet rs = stmt.executeQuery("SELECT num_pista, tipo FROM reservapista WHERE fechaReserva = '"+ fecha +"' AND tipo = '"+ tipo +"' AND hora = '"+ hora +"' AND libre = 1");
+			while(rs.next()) {
+				int numero = rs.getInt("num_pista");
+				String tipoPista = rs.getString("tipo");
+				
+				PreparedStatement pstmt = conn.prepareStatement("UPDATE reunion SET libre = ? WHERE num_reunion = ? AND tipo = ?");
 				pstmt.setInt(1, 1);
 				pstmt.setInt(2, numero);
 				pstmt.setString(3, tipoPista);

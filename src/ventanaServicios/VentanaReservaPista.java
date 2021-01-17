@@ -138,7 +138,7 @@ public class VentanaReservaPista extends JFrame{
     	add(main);
     	
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
-		setTitle("Reserva pista servicio");
+		setTitle("Reserva servicio");
 		setSize(500, 500);
 		setVisible(true);
 	}

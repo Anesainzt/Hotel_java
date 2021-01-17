@@ -38,7 +38,7 @@ public class VentanaReservaSpa extends JFrame{
 			e1.printStackTrace();
 		}
 		
-		String hora = bd.getHoraReserva("horaSpa");
+		String hora = bd.getHoraReserva("horaPista");
 		
 		bd.eleccionDeSpaLibre(fecha, hora, tipo);
 		
@@ -98,7 +98,7 @@ public class VentanaReservaSpa extends JFrame{
 				
 				VentanaSpa vs = new VentanaSpa(cliente);
 				
-				bd.escribirFichero("horaSpa", "");
+				bd.escribirFichero("horaPista", "");
 				
 				dispose();
 			}
@@ -116,7 +116,7 @@ public class VentanaReservaSpa extends JFrame{
     			
     			VentanaContinuacion vc = new VentanaContinuacion(cliente);
     			
-    			bd.escribirFichero("horaSpa", "");
+    			bd.escribirFichero("horaPista", "");
     			
     			dispose();
     		}
@@ -136,7 +136,7 @@ public class VentanaReservaSpa extends JFrame{
     	add(main);
     	
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
-		setTitle("Reserva pista servicio");
+		setTitle("Reserva servicio");
 		setSize(500, 500);
 		setVisible(true);
 	}

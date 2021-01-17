@@ -164,7 +164,7 @@ public class VentanaEmpleado extends JFrame{
     	JPanel informacion = new JPanel();
     	Border informacionBorder = BorderFactory.createTitledBorder("INFORMACION");
     	informacion.setBorder(informacionBorder);
-    	informacion.setLayout(new GridLayout(3, 2));
+    	informacion.setLayout(new GridLayout(4, 2));
     	
     	JLabel nombre = new JLabel("NOMBRE: ");
     	JLabel nombreEmpleado = new JLabel(empleado.getNombre());
@@ -172,6 +172,8 @@ public class VentanaEmpleado extends JFrame{
     	JLabel apellidoEmpleado = new JLabel(empleado.getApellido());
     	JLabel dpto = new JLabel("DEPARTAMENTO: ");
     	JLabel departamentoEmpleado = new JLabel(empleado.getDepartamento());
+    	JLabel jefe = new JLabel("JEFE: ");
+    	JLabel jefeEmpleado = new JLabel(empleado.getUsuarioJefe());
     	
     	informacion.add(nombre);
     	informacion.add(nombreEmpleado);
@@ -179,6 +181,8 @@ public class VentanaEmpleado extends JFrame{
     	informacion.add(apellidoEmpleado);
     	informacion.add(dpto);
     	informacion.add(departamentoEmpleado);
+    	informacion.add(jefe);
+    	informacion.add(jefeEmpleado);
     	
     	JPanel trabajo = new JPanel();
     	Border trabajoBorder = BorderFactory.createTitledBorder("DEPARTAMENTO");
